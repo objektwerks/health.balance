@@ -54,8 +54,8 @@ Features
 
 Use Cases
 ---------
-1. log energy events
-2. view dashboard summeries
+1. log events
+2. view dashboard
 3. view charts
 
 Events
