@@ -50,7 +50,6 @@ Features
 1. events
 2. dashboard
 3. charts
-4. database
 
 Use Cases
 ---------
