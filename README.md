@@ -58,36 +58,6 @@ Use Cases
 2. view dashboard summeries
 3. view charts
 
-Measurements
-------------
->Measured in ppm ( parts per million ).
-
-| Measurement                       | Range     | Good        | Ideal |
-|-----------------------------------|-----------|-------------|-------|
-| total chlorine (tc = fc + cc)     | 0 - 10    | 1 - 5       | 3     |
-| free chlorine (fc)                | 0 - 10    | 1 - 5       | 3     |
-| combinded chlorine (cc = tc - fc) | 0.0 - 0.5 | 0.0 - 0.2   | 0.0   |
-| ph                                | 6.2 - 8.4 | 7.2 - 7.6   | 7.4   |
-| calcium hardness                  | 0 - 1000  | 250 - 500   | 375   |
-| total alkalinity                  | 0 - 240   | 80 - 120    | 100   |
-| cyanuric acid                     | 0 - 300   | 30 - 100    | 50    |
-| total bromine                     | 0 - 20    | 2 - 10      | 5     |
-| salt                              | 0 - 3600  | 2700 - 3400 | 3200  |
-| temperature                       | 50 - 100  | 75 - 85     | 82    |
-
-Chemicals
----------
-* Liquids measured in: gallons ( gl ) and liters ( l ).
-* Granules measured in: pounds ( lbs ) and kilograms ( kg ).
-1. LiquidChlorine ( gl/l )
-2. Trichlor ( tablet )
-3. Dichlor ( lbs/kg )
-4. CalciumHypochlorite ( lbs/kg )
-5. Stabilizer ( lbs/kg )
-6. Algaecide ( gl/l )
-7. MuriaticAcid ( gl/l )
-8. Salt ( lbs/kg )
-
 Entity
 ------
 * Pool 1 --> * Cleaning | Measurement | Chemical
