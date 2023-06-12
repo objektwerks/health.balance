@@ -67,18 +67,6 @@ Entity
 ------
 * Profile 1 --> * Event
 
-UI
---
-1. Top: dashboard(total chlorine, free chlorine, ph, calcium hardness, total alkalinity, cyanuric acid, total bromine)
-2. Left: pane(pools)
-3. Right: tabbedpane(cleanings, measurements, chemicals)
-
-Charts
-------
-* cleanings - line chart ( x = cleaned, y = ? )
-* measurements - line chart ( x = measured, y = measurement )
-* chemicals - bar chart ( x = added, y = amount/typeof )
-
 Postgresql
 ----------
 1. config:
