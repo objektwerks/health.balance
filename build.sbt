@@ -15,7 +15,7 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   )
 )
 
-lazy val poolbalance = (project in file("."))
+lazy val healthbalance = (project in file("."))
   .aggregate(client, shared, server)
   .settings(common)
   .settings(
