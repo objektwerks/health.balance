@@ -13,7 +13,7 @@ CREATE TABLE profile (
 
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
-  license BIGSERIAL REFERENCES profile(id),
+  pid BIGINT REFERENCES profile(id),
   cause VARCHAR NOT NULL,
-  occurred VARCHAR NOT NULL
+  occurred BIGINT NOT NULL
 );
