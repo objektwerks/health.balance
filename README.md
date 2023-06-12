@@ -63,12 +63,9 @@ Events
 * Meal
 * Exercise
 
-Model
------
-* Client 1 --> 1 Context
-* Conext 1 --> 1 Model | View
-* Model 1 --> 1 Proxy
-* View 1 --> 1 Context
+Entity
+------
+* Profile 1 --> * Event
 
 UI
 --
