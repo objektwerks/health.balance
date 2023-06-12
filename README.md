@@ -47,12 +47,10 @@ Deploy
 
 Features
 --------
-1. dashboard
-2. cleanings
-3. measurements
-4. chemicals
-5. charts
-6. database
+1. events
+2. dashboard
+3. charts
+4. database
 
 Use Cases
 ---------
