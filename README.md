@@ -82,27 +82,27 @@ Postgresql
 
 Database
 --------
->Example database url: postgresql://localhost:5432/poolbalance?user=mycomputername&password=poolbalance"
+>Example database url: postgresql://localhost:5432/healthbalance?user=mycomputername&password=healthbalance"
 1. psql postgres
-2. CREATE DATABASE poolbalance OWNER [your computer name];
-3. GRANT ALL PRIVILEGES ON DATABASE poolbalance TO [your computer name];
+2. CREATE DATABASE healthbalance OWNER [your computer name];
+3. GRANT ALL PRIVILEGES ON DATABASE healthbalance TO [your computer name];
 4. \l
 5. \q
-6. psql poolbalance
+6. psql healthbalance
 7. \i ddl.sql
 8. \q
 
 DDL
 ---
->Alternatively run: psql -d poolbalance -f ddl.sql
-1. psql poolbalance
+>Alternatively run: psql -d healthbalance -f ddl.sql
+1. psql healthbalance
 2. \i ddl.sql
 3. \q
 
 Drop
 ----
 1. psql postgres
-2. drop database poolbalance;
+2. drop database healthbalance;
 3. \q
 
 Environment
@@ -111,11 +111,11 @@ Environment
 * export POOL_BALANCE_HOST="127.0.0.1"
 * export POOL_BALANCE_PORT=7272
 
-* export POOL_BALANCE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/poolbalance"
+* export POOL_BALANCE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/healthbalance"
 * export POOL_BALANCE_POSTGRESQL_USER="yourusername"
-* export POOL_BALANCE_POSTGRESQL_PASSWORD="poolbalance"
+* export POOL_BALANCE_POSTGRESQL_PASSWORD="healthbalance"
 * export POOL_BALANCE_POSTGRESQL_DRIVER="org.postgresql.ds.PGSimpleDataSource"
-* export POOL_BALANCE_POSTGRESQL_DB_NAME="poolbalance"
+* export POOL_BALANCE_POSTGRESQL_DB_NAME="healthbalance"
 * export POOL_BALANCE_POSTGRESQL_HOST="127.0.0.1"
 * export POOL_BALANCE_POSTGRESQL_PORT=5432
 
