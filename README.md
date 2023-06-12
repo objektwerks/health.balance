@@ -54,9 +54,9 @@ Features
 
 Use Cases
 ---------
-1. clean pool and components
-2. measure pool chemical content
-3. add chemicals to pool
+1. log energy events
+2. view dashboard summeries
+3. view charts
 
 Measurements
 ------------
