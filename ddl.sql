@@ -6,14 +6,9 @@ CREATE TABLE account (
   license VARCHAR(36) UNIQUE NOT NULL,
   email_address VARCHAR UNIQUE NOT NULL,
   pin VARCHAR(7) NOT NULL,
+  name VARCHAR NOT NULL
   activated BIGINT NOT NULL,
   deactivated BIGINT NOT NULL
-);
-
-CREATE TABLE profile (
-  id BIGSERIAL PRIMARY KEY,
-  license VARCHAR(36) REFERENCES account(license),
-  name VARCHAR NOT NULL
 );
 
 CREATE TABLE fault (
