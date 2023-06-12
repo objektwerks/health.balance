@@ -53,7 +53,7 @@ Features
 
 Use Cases
 ---------
-1. log events
+1. add | update events
 2. view dashboard
 3. view charts
 
