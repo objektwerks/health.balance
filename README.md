@@ -62,11 +62,12 @@ Events
 ------
 * Meal
 * Exercise
+* Sleep
+* Stress
+* Blood Pressure
 * Pulse
 * Weight
 * Glucose
-* Sleep
-* Stress
 
 Entity
 ------
