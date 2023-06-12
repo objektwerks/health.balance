@@ -58,9 +58,10 @@ Use Cases
 2. view dashboard summeries
 3. view charts
 
-Entity
+Events
 ------
-* Pool 1 --> * Cleaning | Measurement | Chemical
+* Meal
+* Exercise
 
 Model
 -----
