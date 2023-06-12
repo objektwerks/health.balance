@@ -62,6 +62,8 @@ Events
 ------
 * Meal
 * Exercise
+* Sleep
+* Stress
 
 Entity
 ------
