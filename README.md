@@ -62,6 +62,7 @@ Events
 ------
 * Meal
 * Exercise
+* Measurement
 * Sleep
 * Stress
 
