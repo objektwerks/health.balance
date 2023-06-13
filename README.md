@@ -66,7 +66,7 @@ Entity
 * Profile 1 --> * Consumable, Expendable, Measurable, Observable
 * Consumable <-- Food, Liquid, Sunshine, FreshAir
 * Expendable <-- Exercise, Sleep
-* Measurable <-- BloodPressure, Pulse, Weight, Glucose
+* Measurable <-- BloodPressure, Pulse, Height, Weight, Glucose
 * Observable <-- Mood, Stress
 
 Postgresql
