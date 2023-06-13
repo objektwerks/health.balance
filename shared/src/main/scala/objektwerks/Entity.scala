@@ -67,8 +67,7 @@ final case class Exposable(id: Long = 0,
                            from: Long = 0,
                            to: Long = 1) extends Entity
 
-sealed trait Observable extends Entity:
-  val id: Long = 0
-  val kind: String = "" // Mood, Stress
-  val level: Int = 0
-  val observed: Long = Instant.now.getEpochSecond
+final case class Observable(id: Long = 0,
+                            kind: String = "", // Mood, Stress
+                            level: Int = 0,
+                            observed: Long = Instant.now.getEpochSecond) extends Entity
