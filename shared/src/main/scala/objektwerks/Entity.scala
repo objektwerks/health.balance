@@ -46,9 +46,16 @@ object Account:
     deactivated = 0
   )
 
+final case class Editable(id: Long = 0,
+                          kind: String = "", // Food
+                          number: Int = 0,
+                          unit: String = "",
+                          calories: Int = 0,
+                          consumed: Long = Instant.now.getEpochSecond) extends Entity
+
 final case class Consumable(id: Long = 0,
-                            kind: String = "", // Food, Liquid
-                            size: Int = 0,
+                            kind: String = "", // Liquid
+                            volume: Int = 0,
                             unit: String = "",
                             calories: Int = 0,
                             consumed: Long = Instant.now.getEpochSecond) extends Entity
