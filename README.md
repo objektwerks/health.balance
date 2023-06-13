@@ -59,7 +59,7 @@ Use Cases
 
 Entity
 ------
-* Profile 1 --> * Event
+* Profile 1 --> * Consumable, Expendable, Measurable, Observable
 * Consumable <-- Food, Liquid
 * Expendable <-- Exercise, Sleep
 * Measurable <-- BloodPressure, Pulse, Weight, Glucose
