@@ -62,11 +62,10 @@ final case class Measurable(id: Long = 0,
                             value: Int = 0,
                             measured: Long = Instant.now.getEpochSecond) extends Entity
 
-sealed trait Exposable extends Entity:
-  val id: Long = 0
-  val kind: String = "" // Sunshine, FreshAir
-  val from: Long = 0
-  val to: Long = 1
+final case class Exposable(id: Long = 0,
+                           kind: String = "", // Sunshine, FreshAir
+                           from: Long = 0,
+                           to: Long = 1) extends Entity
 
 sealed trait Observable extends Entity:
   val id: Long = 0
