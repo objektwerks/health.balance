@@ -63,6 +63,7 @@ Use Cases
 
 Entity
 ------
+* Account 1 --> * Profile
 * Profile 1 --> * Consumable, Expendable, Measurable, Observable
 * Consumable <-- Food, Liquid, Sunshine, FreshAir
 * Expendable <-- Exercise, Sleep
