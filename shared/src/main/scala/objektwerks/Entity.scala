@@ -48,6 +48,8 @@ object Account:
 
 final case class Consumable(id: Long = 0,
                             kind: String = "", // Food, Liquid
+                            value: Int = 0,
+                            unit: String = "",
                             calories: Int = 0,
                             consumed: Long = Instant.now.getEpochSecond) extends Entity
 
