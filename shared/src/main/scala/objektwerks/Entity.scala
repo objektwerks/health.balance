@@ -57,9 +57,9 @@ final case class Liquid() extends Consumable
 
 sealed trait Expendable extends Entity:
   val id: Long = 0
-  val duration: Long = 0
+  val from: Long = 0
+  val to: Long = 1
   val calories: Int = 0
-  val expended: Long = Instant.now.getEpochSecond
 
 final case class Exercise(kind: String) extends Expendable
 final case class Sleep() extends Expendable
