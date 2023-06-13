@@ -49,10 +49,10 @@ object Account:
 sealed trait Consumable extends Entity:
   val id: Long = 0L
 
-final case class Food(kind: String)
-final case class Liquid(kind: String)
-final case class Sunshine(duration: Long)
-final case class FreshAir(duration: Long)
+final case class Food(kind: String) extends Consumable
+final case class Liquid(kind: String) extends Consumable
+final case class Sunshine(duration: Long) extends Consumable
+final case class FreshAir(duration: Long) extends Consumable
 
 sealed trait Expendable extends Entity:
   val id: Long = 0L
