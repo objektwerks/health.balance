@@ -64,8 +64,9 @@ Use Cases
 Entity
 ------
 * Account 1 --> * Profile, Fault
-* Profile 1 --> * Consumable, Expendable, Measurable, Exposable, Observable
-* Consumable <-- Food, Liquid
+* Profile 1 --> * Edible, Consumable, Expendable, Measurable, Exposable, Observable
+* Edible <-- Food
+* Consumable <-- Liquid
 * Expendable <-- Exercise, Sleep
 * Measurable <-- BloodPressure, Pulse, Glucose, Height, Weight
 * Exposable <-- Sunshine, FreshAir
