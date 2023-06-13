@@ -70,4 +70,8 @@ final case class Glucose(level: Int) extends Measurable
 final case class Height(value: Int) extends Measurable
 final case class Weight(value: Int) extends Measurable
 
-sealed trait Observable extends Entity
+sealed trait Observable extends Entity:
+  val id: Long = 0
+
+final case class Mood(level: Int) extends Observable
+final case class Stress(level: Int) extends Observable
