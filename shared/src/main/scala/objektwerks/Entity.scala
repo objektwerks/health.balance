@@ -51,7 +51,7 @@ final case class Edible(id: Long = 0,
                         number: Int = 0,
                         unit: String = "",
                         calories: Int = 0,
-                        eaten: Long = Instant.now.getEpochSecond) extends Entity
+                        ate: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Consumable(id: Long = 0,
                             kind: String = "", // Liquid
