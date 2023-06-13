@@ -48,43 +48,31 @@ object Account:
 
 sealed trait Consumable extends Entity:
   val id: Long = 0
-  val kind: String = ""
+  val kind: String = "" // Food, Liquid
   val calories: Int = 0
   val consumed: Long = Instant.now.getEpochSecond
 
-final case class Food() extends Consumable
-final case class Liquid() extends Consumable
-
 sealed trait Expendable extends Entity:
   val id: Long = 0
+  val kind: String = "" // Exercise, Sleep
   val from: Long = 0
   val to: Long = 1
   val calories: Int = 0
 
-final case class Exercise(kind: String) extends Expendable
-final case class Sleep() extends Expendable
-
 sealed trait Measurable extends Entity:
   val id: Long = 0
+  val kind: String = "" // Pulse, Glucose, Height, Weight
+  val value: Int = 0
   val measured: Long = Instant.now.getEpochSecond
-
-final case class Pulse(beatsPerMinute: Int) extends Measurable
-final case class Glucose(level: Int) extends Measurable
-final case class Height(value: Int) extends Measurable
-final case class Weight(value: Int) extends Measurable
 
 sealed trait Exposable extends Entity:
   val id: Long = 0
+  val kind: String = "" // Sunshine, FreshAir
   val from: Long = 0
   val to: Long = 1
 
-final case class Sunshine() extends Exposable
-final case class FreshAir() extends Exposable
-
 sealed trait Observable extends Entity:
   val id: Long = 0
+  val kind: String = "" // Mood, Stress
   val level: Int = 0
   val observed: Long = Instant.now.getEpochSecond
-
-final case class Mood() extends Observable
-final case class Stress() extends Observable
