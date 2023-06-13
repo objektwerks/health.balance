@@ -47,7 +47,7 @@ Deploy
 
 Use Cases
 ---------
-1. add | update edibles, drinkables, expendables, measurables, exposables, observables
+1. add | update | list edibles, drinkables, expendables, measurables, exposables, observables
 2. view dashboard
 
 Entity
