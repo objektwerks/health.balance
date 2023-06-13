@@ -47,3 +47,5 @@ object Account:
   )
 
 sealed trait Consumable extends Entity
+
+sealed trait Expendable extends Entity
