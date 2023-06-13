@@ -72,5 +72,5 @@ final case class Exposable(id: Long = 0,
 
 final case class Observable(id: Long = 0,
                             kind: String = "", // Mood, Stress
-                            level: Int = 0,
+                            level: String = "",
                             observed: Long = Instant.now.getEpochSecond) extends Entity
