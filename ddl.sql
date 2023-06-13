@@ -6,7 +6,6 @@ CREATE TABLE account (
   license VARCHAR(36) UNIQUE NOT NULL,
   email_address VARCHAR UNIQUE NOT NULL,
   pin VARCHAR(7) NOT NULL,
-  name VARCHAR NOT NULL,
   activated BIGINT NOT NULL,
   deactivated BIGINT NOT NULL
 );
@@ -14,6 +13,7 @@ CREATE TABLE account (
 CREATE TABLE profile (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES account(id),
+  name VARCHAR NOT NULL,
   created BIGINT NOT NULL
 );
 
