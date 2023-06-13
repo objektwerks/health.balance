@@ -62,12 +62,6 @@ Entity
 ------
 * Account 1 --> * Profile, Fault
 * Profile 1 --> * Edible, Drinkable, Expendable, Measurable, Exposable, Observable
-* Edible <-- Food
-* Drinkable <-- Liquid
-* Expendable <-- Exercise, Sleep
-* Measurable <-- BloodPressure, Pulse, Glucose, Height, Weight
-* Exposable <-- Sunshine, FreshAir
-* Observable <-- Mood, Stress
 
 Postgresql
 ----------
