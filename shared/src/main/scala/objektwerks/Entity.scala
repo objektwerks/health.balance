@@ -68,7 +68,6 @@ sealed trait Measurable extends Entity:
   val id: Long = 0
   val measured: Long = Instant.now.getEpochSecond
 
-final case class BloodPressure(systolic: Int, diastolic: Int) extends Measurable
 final case class Pulse(beatsPerMinute: Int) extends Measurable
 final case class Glucose(level: Int) extends Measurable
 final case class Height(value: Int) extends Measurable
