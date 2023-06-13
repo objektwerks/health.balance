@@ -51,3 +51,5 @@ sealed trait Consumable extends Entity
 sealed trait Expendable extends Entity
 
 sealed trait Measurable extends Entity
+
+sealed trait Observable extends Entity
