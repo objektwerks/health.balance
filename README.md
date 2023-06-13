@@ -47,15 +47,19 @@ Deploy
 
 Features
 --------
-1. events
-2. dashboard
-3. charts
+1. consumables
+2. expendables
+3. measurables
+4. observables
+5. dashboard
 
 Use Cases
 ---------
-1. add | update events
-2. view dashboard
-3. view charts
+1. add | update consumables
+2. add | update expendables
+3. add | update measurables
+4. add | update observables
+5. view dashboard
 
 Entity
 ------
