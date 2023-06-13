@@ -55,10 +55,12 @@ final case class Sunshine(duration: Long) extends Consumable
 final case class FreshAir(duration: Long) extends Consumable
 
 sealed trait Expendable extends Entity:
-  val id: Long = 0L
+  val id: Long = 0
+  val duration: Long = 0
+  val calories: Int = 0
 
-final case class Exercise(kind: String, duration: Long) extends Expendable
-final case class Sleep(duration: Long) extends Expendable
+final case class Exercise(kind: String) extends Expendable
+final case class Sleep() extends Expendable
 
 sealed trait Measurable extends Entity:
   val id: Long = 0
