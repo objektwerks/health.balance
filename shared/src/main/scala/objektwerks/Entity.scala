@@ -74,6 +74,8 @@ final case class Weight(value: Int) extends Measurable
 
 sealed trait Observable extends Entity:
   val id: Long = 0
+  val level: Int = 0
+  val observed: Long = Instant.now.getEpochSecond
 
-final case class Mood(level: Int) extends Observable
-final case class Stress(level: Int) extends Observable
+final case class Mood() extends Observable
+final case class Stress() extends Observable
