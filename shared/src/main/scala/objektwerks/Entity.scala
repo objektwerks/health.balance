@@ -60,6 +60,7 @@ final case class Expendable(id: Long = 0,
 final case class Measurable(id: Long = 0,
                             kind: String = "", // Pulse, Glucose, Height, Weight
                             value: Int = 0,
+                            unit: String = "",
                             measured: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Exposable(id: Long = 0,
