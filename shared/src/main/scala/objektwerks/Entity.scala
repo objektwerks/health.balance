@@ -53,12 +53,12 @@ final case class Edible(id: Long = 0,
                         calories: Int = 0,
                         ate: Long = Instant.now.getEpochSecond) extends Entity
 
-final case class Consumable(id: Long = 0,
-                            kind: String = "", // Liquid
-                            volume: Int = 0,
-                            unit: String = "",
-                            calories: Int = 0,
-                            consumed: Long = Instant.now.getEpochSecond) extends Entity
+final case class Drinkable(id: Long = 0,
+                           kind: String = "", // Liquid
+                           volume: Int = 0,
+                           unit: String = "",
+                           calories: Int = 0,
+                           drank: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Expendable(id: Long = 0,
                             kind: String = "", // Exercise, Sleep
