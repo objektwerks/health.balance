@@ -51,12 +51,11 @@ final case class Consumable(id: Long = 0,
                             calories: Int = 0,
                             consumed: Long = Instant.now.getEpochSecond) extends Entity
 
-sealed trait Expendable extends Entity:
-  val id: Long = 0
-  val kind: String = "" // Exercise, Sleep
-  val from: Long = 0
-  val to: Long = 1
-  val calories: Int = 0
+final case class Expendable(id: Long = 0,
+                            kind: String = "", // Exercise, Sleep
+                            from: Long = 0,
+                            to: Long = 1,
+                            calories: Int = 0) extends Entity
 
 sealed trait Measurable extends Entity:
   val id: Long = 0
