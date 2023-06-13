@@ -1,7 +1,7 @@
 DROP SCHEMA PUBLIC CASCADE;
 CREATE SCHEMA PUBLIC;
 
-CREATE TABLE profile (
+CREATE TABLE account (
   id BIGSERIAL PRIMARY KEY,
   license VARCHAR(36) UNIQUE NOT NULL,
   email_address VARCHAR UNIQUE NOT NULL,
@@ -11,9 +11,15 @@ CREATE TABLE profile (
   deactivated BIGINT NOT NULL
 );
 
+CREATE TABLE profile (
+  id BIGSERIAL PRIMARY KEY,
+  profile_id BIGINT REFERENCES account(id),
+  created BIGINT NOT NULL
+);
+
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
-  profile_id BIGINT REFERENCES profile(id),
+  profile_id BIGINT REFERENCES account(id),
   cause VARCHAR NOT NULL,
   occurred BIGINT NOT NULL
 );
