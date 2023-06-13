@@ -1,4 +1,4 @@
 package objektwerks
 
-trait Entity:
-  def id: Long
+sealed trait Entity:
+  val id: Long
