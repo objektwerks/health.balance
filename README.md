@@ -45,11 +45,6 @@ Deploy
 1. [jDeploy](https://www.npmjs.com/package/jdeploy)
 2. [Conveyor](https://hydraulic.software/index.html)
 
-Features
---------
-1. Edible, Drinkable, Expendable, Measurable, Exposable, Observable
-2. Dashboard
-
 Use Cases
 ---------
 1. add | update edibles, drinkables, expendables, measurables, exposables, observables
