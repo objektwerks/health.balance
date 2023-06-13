@@ -63,7 +63,7 @@ Entity
 * Consumable <-- Food, Liquid
 * Expendable <-- Exercise, Sleep
 * Measurable <-- BloodPressure, Pulse, Weight, Glucose
-* Observable <-- Stress
+* Observable <-- Mood, Stress
 
 Postgresql
 ----------
