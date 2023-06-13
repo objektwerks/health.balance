@@ -47,11 +47,8 @@ Deploy
 
 Features
 --------
-1. consumables
-2. expendables
-3. measurables
-4. observables
-5. dashboard
+1. Edible, Drinkable, Expendable, Measurable, Exposable, Observable
+2. Dashboard
 
 Use Cases
 ---------
