@@ -57,20 +57,13 @@ Use Cases
 2. view dashboard
 3. view charts
 
-Events
-------
-* Meal
-* Exercise
-* Sleep
-* Stress
-* Blood Pressure
-* Pulse
-* Weight
-* Glucose
-
 Entity
 ------
 * Profile 1 --> * Event
+* Consumable <-- Food, Liquid
+* Expendable <-- Exercise, Sleep
+* Measurable <-- BloodPressure, Pulse, Weight, Glucose
+* Observable <-- Stress
 
 Postgresql
 ----------
