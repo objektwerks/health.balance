@@ -46,7 +46,13 @@ object Account:
     deactivated = 0
   )
 
-sealed trait Consumable extends Entity
+sealed trait Consumable extends Entity:
+  val id: Long = 0L
+
+final case class Food(kind: String)
+final case class Liquid(kind: String)
+final case class Sunshine(duration: Long)
+final case class FreshAir(duration: Long)
 
 sealed trait Expendable extends Entity
 
