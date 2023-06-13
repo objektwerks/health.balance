@@ -48,10 +48,12 @@ object Account:
 
 sealed trait Consumable extends Entity:
   val id: Long = 0
+  val kind: String = ""
+  val calories: Int = 0
   val consumed: Long = Instant.now.getEpochSecond
 
-final case class Food(kind: String) extends Consumable
-final case class Liquid(kind: String) extends Consumable
+final case class Food() extends Consumable
+final case class Liquid() extends Consumable
 
 sealed trait Expendable extends Entity:
   val id: Long = 0
