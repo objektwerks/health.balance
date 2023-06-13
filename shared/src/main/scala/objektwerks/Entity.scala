@@ -1,6 +1,6 @@
 package objektwerks
 
-import java.time.LocalDate
+import java.time.Instant
 import java.util.UUID
 
 import scala.util.Random
@@ -12,7 +12,7 @@ final case class Account(id: Long = 0,
                          license: String = newLicense,
                          emailAddress: String = "",
                          pin: String = newPin,
-                         activated: Long = LocalDate.now.toEpochDay,
+                         activated: Long = Instant.now.getEpochSecond,
                          deactivated: Long = 0) extends Entity:
   def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
 
@@ -60,6 +60,14 @@ sealed trait Expendable extends Entity:
 final case class Exercise(kind: String, duration: Long) extends Expendable
 final case class Sleep(duration: Long) extends Expendable
 
-sealed trait Measurable extends Entity
+sealed trait Measurable extends Entity:
+  val id: Long = 0
+  val measured: Long = Instant.now.getEpochSecond
+
+final case class BloodPressure(systolic: Int, diastolic: Int) extends Measurable
+final case class Pulse(beatsPerMinute: Int) extends Measurable
+final case class Glucose(level: Int) extends Measurable
+final case class Height(value: Int) extends Measurable
+final case class Weight(value: Int) extends Measurable
 
 sealed trait Observable extends Entity
