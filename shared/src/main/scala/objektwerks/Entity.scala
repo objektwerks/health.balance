@@ -52,8 +52,6 @@ sealed trait Consumable extends Entity:
 
 final case class Food(kind: String) extends Consumable
 final case class Liquid(kind: String) extends Consumable
-final case class Sunshine(duration: Long) extends Consumable
-final case class FreshAir(duration: Long) extends Consumable
 
 sealed trait Expendable extends Entity:
   val id: Long = 0
@@ -73,6 +71,14 @@ final case class Pulse(beatsPerMinute: Int) extends Measurable
 final case class Glucose(level: Int) extends Measurable
 final case class Height(value: Int) extends Measurable
 final case class Weight(value: Int) extends Measurable
+
+sealed trait Exposable extends Entity:
+  val id: Long = 0
+  val from: Long = 0
+  val to: Long = 1
+
+final case class Sunshine() extends Exposable
+final case class FreshAir() extends Exposable
 
 sealed trait Observable extends Entity:
   val id: Long = 0
