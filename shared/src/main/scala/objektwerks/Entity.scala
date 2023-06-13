@@ -54,7 +54,11 @@ final case class Liquid(kind: String)
 final case class Sunshine(duration: Long)
 final case class FreshAir(duration: Long)
 
-sealed trait Expendable extends Entity
+sealed trait Expendable extends Entity:
+  val id: Long = 0L
+
+final case class Exercise(kind: String, duration: Long) extends Expendable
+final case class Sleep(duration: Long) extends Expendable
 
 sealed trait Measurable extends Entity
 
