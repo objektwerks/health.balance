@@ -45,3 +45,5 @@ object Account:
     activated = 0,
     deactivated = 0
   )
+
+sealed trait Consumable extends Entity
