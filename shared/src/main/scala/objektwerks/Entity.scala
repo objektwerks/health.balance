@@ -46,11 +46,10 @@ object Account:
     deactivated = 0
   )
 
-sealed trait Consumable extends Entity:
-  val id: Long = 0
-  val kind: String = "" // Food, Liquid
-  val calories: Int = 0
-  val consumed: Long = Instant.now.getEpochSecond
+final case class Consumable(id: Long = 0,
+                            kind: String = "", // Food, Liquid
+                            calories: Int = 0,
+                            consumed: Long = Instant.now.getEpochSecond) extends Entity
 
 sealed trait Expendable extends Entity:
   val id: Long = 0
