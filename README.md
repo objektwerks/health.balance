@@ -2,6 +2,16 @@ Health Balance
 --------------
 >Health balance distributed app using Scala3, ScalaFX, Jsoniter and PostgreSql.
 
+Use Cases
+---------
+1. add | update | list edibles, drinkables, expendables, measurables, exposables, observables
+2. view dashboard
+
+Entity
+------
+* Account 1 --> * Profile, Fault
+* Profile 1 --> * Edible, Drinkable, Expendable, Measurable, Exposable, Observable
+
 Build
 -----
 1. sbt clean compile
@@ -44,16 +54,6 @@ Deploy
 >Consider these options:
 1. [jDeploy](https://www.npmjs.com/package/jdeploy)
 2. [Conveyor](https://hydraulic.software/index.html)
-
-Use Cases
----------
-1. add | update | list edibles, drinkables, expendables, measurables, exposables, observables
-2. view dashboard
-
-Entity
-------
-* Account 1 --> * Profile, Fault
-* Profile 1 --> * Edible, Drinkable, Expendable, Measurable, Exposable, Observable
 
 Postgresql
 ----------
