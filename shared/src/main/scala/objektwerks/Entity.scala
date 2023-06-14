@@ -4,6 +4,7 @@ import java.time.Instant
 import java.util.UUID
 
 import scala.util.Random
+import scalafx.beans.property.ObjectProperty
 
 sealed trait Entity:
   val id: Long
@@ -56,9 +57,13 @@ final case class Edible(id: Long = 0,
                         kind: String = "", // Food
                         organic: Boolean = true,
                         count: Int = 1,
-                        unit: String = "",
                         calories: Int = 1,
-                        ate: Long = Instant.now.getEpochSecond) extends Entity
+                        ate: Long = Instant.now.getEpochSecond) extends Entity:
+  val kindProperty = ObjectProperty[String](this, "kind", kind)
+  val organicProperty = ObjectProperty[Boolean](this, "organic", organic)
+  val countProperty = ObjectProperty[Int](this, "count", count)
+  val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
+  val ateProperty = ObjectProperty[String](this, "ate", Instant.ofEpochSecond(ate).toString)
 
 final case class Drinkable(id: Long = 0,
                            profileId: Long,
