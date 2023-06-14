@@ -96,7 +96,7 @@ final case class Edible(id: Long = 0,
 
 final case class Drinkable(id: Long = 0,
                            entryId: Long,
-                           kind: String = "", // Alcoholic, Nonalcoholic
+                           kind: String = DrinkableKind.Nonalcoholic.toString,
                            organic: Boolean = true,
                            count: Int = 1,
                            calories: Int = 0,
@@ -107,6 +107,12 @@ final case class Drinkable(id: Long = 0,
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
   val drankProperty = ObjectProperty[String](this, "drank", Instant.ofEpochSecond(drank).toString)
   val drinkable = this
+
+enum DrinkableKind:
+  case Nonalcoholic, Alcoholic
+
+object DrinkableKind:
+  def toList: List[String] = DrinkableKind.values.map(_.toString).toList
 
 final case class Expendable(id: Long = 0,
                             entryId: Long,
@@ -128,7 +134,7 @@ enum ExpendableKind:
   case Aerobic, Anaerobic, Sleep
 
 object ExpendableKind:
-  def toList: List[String] = MeasurableKind.values.map(_.toString).toList
+  def toList: List[String] = ExpendableKind.values.map(_.toString).toList
 
 final case class Measurable(id: Long = 0,
                             entryId: Long,
