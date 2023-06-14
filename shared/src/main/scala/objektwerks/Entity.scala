@@ -9,6 +9,10 @@ import scalafx.beans.property.ObjectProperty
 sealed trait Entity:
   val id: Long
 
+object Entity:
+  given entryOrdering: Ordering[Entry] = Ordering.by[Entry, Long](e => e.created).reverse
+
+
 final case class Account(id: Long = 0,
                          license: String = newLicense,
                          emailAddress: String = "",
