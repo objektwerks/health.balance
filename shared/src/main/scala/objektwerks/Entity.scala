@@ -46,7 +46,10 @@ object Account:
     deactivated = 0
   )
 
-final case class Profile(id: Long = 0, accountId: Long = 0) extends Entity
+final case class Profile(id: Long = 0,
+                         accountId: Long = 0,
+                         name: String = "",
+                         created: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Edible(id: Long = 0,
                         kind: String = "", // Food
