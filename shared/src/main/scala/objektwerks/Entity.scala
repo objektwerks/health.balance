@@ -13,6 +13,7 @@ object Entity:
   given profileOrdering: Ordering[Profile] = Ordering.by[Profile, Long](p => p.created)
   given entryOrdering: Ordering[Entry] = Ordering.by[Entry, Long](e => e.created).reverse
   given edibleOrdering: Ordering[Edible] = Ordering.by[Edible, Long](e => e.ate).reverse
+  given drinkableOrdering: Ordering[Drinkable] = Ordering.by[Drinkable, Long](e => e.drank).reverse
 
 
 final case class Account(id: Long = 0,
