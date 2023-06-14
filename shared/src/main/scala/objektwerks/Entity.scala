@@ -93,7 +93,7 @@ final case class Edible(id: Long = 0,
 
 final case class Drinkable(id: Long = 0,
                            entryId: Long,
-                           kind: String = "", // Liquid
+                           kind: String = "", // Alcoholic, Nonalcoholic
                            organic: Boolean = true,
                            calories: Int = 0,
                            drank: Long = Instant.now.getEpochSecond) extends Entity:
@@ -105,7 +105,7 @@ final case class Drinkable(id: Long = 0,
 
 final case class Expendable(id: Long = 0,
                             entryId: Long,
-                            kind: String = "", // Exercise, Sleep
+                            kind: String = "", // Aerobic, Anaerobic, Sleep
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
                             calories: Int = 0,
