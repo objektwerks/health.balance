@@ -90,6 +90,7 @@ final case class Drinkable(id: Long = 0,
   val organicProperty = ObjectProperty[Boolean](this, "organic", organic)
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
   val drankProperty = ObjectProperty[String](this, "drank", Instant.ofEpochSecond(drank).toString)
+  val drinkable = this
 
 final case class Expendable(id: Long = 0,
                             entryId: Long,
