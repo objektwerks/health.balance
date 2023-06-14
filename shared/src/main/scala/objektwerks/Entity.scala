@@ -10,6 +10,7 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
+  given profileOrdering: Ordering[Profile] = Ordering.by[Profile, Long](e => e.created)
   given entryOrdering: Ordering[Entry] = Ordering.by[Entry, Long](e => e.created).reverse
 
 
