@@ -4,13 +4,13 @@ Health Balance
 
 Use Cases
 ---------
-1. add | update | list edibles, drinkables, expendables, measurables, exposables, observables
+1. add | update | list edibles, drinkables, expendables, measurables
 2. view dashboard
 
 Entity
 ------
 * Account 1 --> * Profile, Fault
-* Profile 1 --> * Edible, Drinkable, Expendable, Measurable, Exposable, Observable
+* Profile 1 --> * Edible, Drinkable, Expendable, Measurable
 
 Build
 -----
