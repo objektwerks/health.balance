@@ -72,9 +72,9 @@ final case class Drinkable(id: Long = 0,
 final case class Expendable(id: Long = 0,
                             profileId: Long,
                             kind: String = "", // Exercise, Sleep
-                            calories: Int = 1,
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
+                            calories: Int = 1,
                             from: Long = Instant.now.getEpochSecond,
                             to: Long = Instant.now.getEpochSecond + 1) extends Entity
 
