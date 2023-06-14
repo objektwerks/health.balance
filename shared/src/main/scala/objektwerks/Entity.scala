@@ -54,7 +54,7 @@ final case class Profile(id: Long = 0,
 final case class Edible(id: Long = 0,
                         profileId: Long,
                         kind: String = "", // Food
-                        number: Int = 1,
+                        count: Int = 1,
                         unit: String = "",
                         calories: Int = 1,
                         ate: Long = Instant.now.getEpochSecond) extends Entity
@@ -64,7 +64,7 @@ final case class Drinkable(id: Long = 0,
                            kind: String = "", // Liquid
                            volume: Int = 1,
                            unit: String = "",
-                           calories: Int = 1,
+                           calories: Int = 0,
                            drank: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Expendable(id: Long = 0,
@@ -72,12 +72,12 @@ final case class Expendable(id: Long = 0,
                             kind: String = "", // Exercise, Sleep
                             from: Long = Instant.now.getEpochSecond,
                             to: Long = Instant.now.getEpochSecond + 1,
-                            calories: Int = 0) extends Entity
+                            calories: Int = 1) extends Entity
 
 final case class Measurable(id: Long = 0,
-                            profileId: Long = 0,
+                            profileId: Long,
                             kind: String = "", // Pulse, Glucose, Height, Weight
-                            value: Int = 0,
+                            value: Int = 1,
                             unit: String = "",
                             measured: Long = Instant.now.getEpochSecond) extends Entity
 
