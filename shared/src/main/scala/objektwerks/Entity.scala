@@ -15,6 +15,12 @@ final case class Account(id: Long = 0,
                          pin: String = newPin,
                          activated: Long = Instant.now.getEpochSecond,
                          deactivated: Long = 0) extends Entity:
+  val licenseProperty = ObjectProperty[String](this, "license", license)
+  val emailAddressProperty = ObjectProperty[String](this, "emailAddress", emailAddress)
+  val pinProperty = ObjectProperty[String](this, "pin", pin)
+  val activatedProperty = ObjectProperty[String](this, "activated", Instant.ofEpochSecond(activated).toString)
+  val deactivatedProperty = ObjectProperty[String](this, "deactivated", Instant.ofEpochSecond(deactivated).toString)
+
   def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
 
 object Account:
@@ -53,7 +59,6 @@ final case class Profile(id: Long = 0,
                          created: Long = Instant.now.getEpochSecond) extends Entity:
   val nameProperty = ObjectProperty[String](this, "name", name)
   val createdProperty = ObjectProperty[String](this, "created", Instant.ofEpochSecond(created).toString)
-
 
 final case class Entry(id: Long = 0,
                        profileId: Long = 0,
