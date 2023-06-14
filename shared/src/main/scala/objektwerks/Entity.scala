@@ -47,8 +47,8 @@ object Account:
   )
 
 final case class Profile(id: Long = 0,
-                         accountId: Long = 0,
-                         name: String = "",
+                         accountId: Long,
+                         name: String,
                          created: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Edible(id: Long = 0,
