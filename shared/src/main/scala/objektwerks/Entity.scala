@@ -20,6 +20,7 @@ final case class Account(id: Long = 0,
   val pinProperty = ObjectProperty[String](this, "pin", pin)
   val activatedProperty = ObjectProperty[String](this, "activated", Instant.ofEpochSecond(activated).toString)
   val deactivatedProperty = ObjectProperty[String](this, "deactivated", Instant.ofEpochSecond(deactivated).toString)
+  val account = this
 
   def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
 
