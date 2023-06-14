@@ -132,5 +132,5 @@ final case class Measurable(id: Long = 0,
 enum MeasurableType:
   case Height, Weight, Pulse, Glucose
 
-object Colors:
+object MeasurableType:
   def toList: List[String] = MeasurableType.values.map(_.toString).toList
