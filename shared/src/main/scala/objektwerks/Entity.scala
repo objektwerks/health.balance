@@ -60,6 +60,7 @@ final case class Edible(id: Long = 0,
                         ate: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Drinkable(id: Long = 0,
+                           profileId: Long = 0,
                            kind: String = "", // Liquid
                            volume: Int = 0,
                            unit: String = "",
