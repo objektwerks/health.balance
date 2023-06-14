@@ -93,14 +93,14 @@ final case class Expendable(id: Long = 0,
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
                             calories: Int = 1,
-                            from: Long = Instant.now.getEpochSecond,
-                            to: Long = Instant.now.getEpochSecond + 1) extends Entity:
+                            start: Long = Instant.now.getEpochSecond,
+                            finish: Long = Instant.now.getEpochSecond + 1) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val sunshineProperty = ObjectProperty[Boolean](this, "sunshine", sunshine)
   val freshairProperty = ObjectProperty[Boolean](this, "freshair", freshair)
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
-  val fromProperty = ObjectProperty[String](this, "from", Instant.ofEpochSecond(from).toString)
-  val toProperty = ObjectProperty[String](this, "to", Instant.ofEpochSecond(to).toString)
+  val startProperty = ObjectProperty[String](this, "start", Instant.ofEpochSecond(start).toString)
+  val finishProperty = ObjectProperty[String](this, "finish", Instant.ofEpochSecond(finish).toString)
 
 final case class Measurable(id: Long = 0,
                             entryId: Long,
