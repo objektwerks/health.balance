@@ -72,11 +72,11 @@ final case class Drinkable(id: Long = 0,
 final case class Expendable(id: Long = 0,
                             profileId: Long,
                             kind: String = "", // Exercise, Sleep
-                            from: Long = Instant.now.getEpochSecond,
-                            to: Long = Instant.now.getEpochSecond + 1,
                             calories: Int = 1,
                             sunshine: Boolean = true,
-                            freshair: Boolean = true) extends Entity
+                            freshair: Boolean = true,
+                            from: Long = Instant.now.getEpochSecond,
+                            to: Long = Instant.now.getEpochSecond + 1) extends Entity
 
 final case class Measurable(id: Long = 0,
                             profileId: Long,
@@ -84,15 +84,3 @@ final case class Measurable(id: Long = 0,
                             value: Int = 1,
                             unit: String = "",
                             measured: Long = Instant.now.getEpochSecond) extends Entity
-
-final case class Exposable(id: Long = 0,
-                           profileId: Long,
-                           kind: String = "", // Sunshine, FreshAir
-                           from: Long = Instant.now.getEpochSecond,
-                           to: Long = Instant.now.getEpochSecond + 1) extends Entity
-
-final case class Observable(id: Long = 0,
-                            profileId: Long,
-                            kind: String = "", // Mood, Stress
-                            level: String = "",
-                            observed: Long = Instant.now.getEpochSecond) extends Entity
