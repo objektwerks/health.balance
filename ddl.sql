@@ -37,6 +37,7 @@ CREATE TABLE drinkable (
   entry_id BIGINT REFERENCES entry(id),
   kind VARCHAR NOT NULL,
   organic BOOL NOT NULL,
+  count INT NOT NULL,
   calories INT NOT NULL,
   drank BIGINT NOT NULL
 );
