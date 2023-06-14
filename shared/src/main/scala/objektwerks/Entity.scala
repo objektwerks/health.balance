@@ -52,7 +52,7 @@ final case class Profile(id: Long = 0,
                          created: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Edible(id: Long = 0,
-                        profileId: Long = 0,
+                        profileId: Long,
                         kind: String = "", // Food
                         number: Int = 0,
                         unit: String = "",
