@@ -68,7 +68,11 @@ final case class Drinkable(id: Long = 0,
                            kind: String = "", // Liquid
                            organic: Boolean = true,
                            calories: Int = 0,
-                           drank: Long = Instant.now.getEpochSecond) extends Entity
+                           drank: Long = Instant.now.getEpochSecond) extends Entity:
+  val kindProperty = ObjectProperty[String](this, "kind", kind)
+  val organicProperty = ObjectProperty[Boolean](this, "organic", organic)
+  val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
+  val drankProperty = ObjectProperty[String](this, "drank", Instant.ofEpochSecond(drank).toString)
 
 final case class Expendable(id: Long = 0,
                             profileId: Long,
