@@ -23,6 +23,15 @@ CREATE TABLE entry (
   created BIGINT NOT NULL
 );
 
+CREATE TABLE edible (
+  id BIGSERIAL PRIMARY KEY,
+  entry_id BIGINT REFERENCES entry(id),
+  kind VARCHAR NOT NULL,
+  organic BOOL NOT NULL,
+  calories INT NOT NULL,
+  ate BIGINT NOT NULL
+);
+
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES account(id),
