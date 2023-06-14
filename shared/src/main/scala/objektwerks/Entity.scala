@@ -66,6 +66,7 @@ final case class Drinkable(id: Long = 0,
                            volume: Int = 1,
                            unit: String = "",
                            calories: Int = 0,
+                           organic: Boolean = true,
                            drank: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Expendable(id: Long = 0,
