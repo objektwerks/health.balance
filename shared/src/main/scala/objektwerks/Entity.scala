@@ -81,7 +81,7 @@ final case class Entry(id: Long = 0,
 
 final case class Edible(id: Long = 0,
                         entryId: Long,
-                        kind: String = "", // Food
+                        kind: String = "", // Fruits, Vegetables, Grains, Protein Foods, and Dairy
                         organic: Boolean = true,
                         calories: Int = 0,
                         ate: Long = Instant.now.getEpochSecond) extends Entity:
