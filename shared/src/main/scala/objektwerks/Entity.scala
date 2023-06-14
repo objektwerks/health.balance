@@ -74,7 +74,9 @@ final case class Expendable(id: Long = 0,
                             kind: String = "", // Exercise, Sleep
                             from: Long = Instant.now.getEpochSecond,
                             to: Long = Instant.now.getEpochSecond + 1,
-                            calories: Int = 1) extends Entity
+                            calories: Int = 1,
+                            sunshine: Boolean = true,
+                            freshair: Boolean = true) extends Entity
 
 final case class Measurable(id: Long = 0,
                             profileId: Long,
