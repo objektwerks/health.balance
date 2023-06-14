@@ -110,7 +110,7 @@ final case class Drinkable(id: Long = 0,
 
 final case class Expendable(id: Long = 0,
                             entryId: Long,
-                            kind: String = "", // Aerobic, Anaerobic, Sleep
+                            kind: String = ExpendableKind.Aerobic.toString,
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
                             calories: Int = 0,
@@ -123,6 +123,12 @@ final case class Expendable(id: Long = 0,
   val startProperty = ObjectProperty[String](this, "start", Instant.ofEpochSecond(start).toString)
   val finishProperty = ObjectProperty[String](this, "finish", Instant.ofEpochSecond(finish).toString)
   val expendable = this
+
+enum ExpendableKind:
+  case Aerobic, Anaerobic, Sleep
+
+object ExpendableKind:
+  def toList: List[String] = MeasurableKind.values.map(_.toString).toList
 
 final case class Measurable(id: Long = 0,
                             entryId: Long,
