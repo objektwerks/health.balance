@@ -57,7 +57,7 @@ final case class Entry(id: Long = 0,
                        created: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Edible(id: Long = 0,
-                        profileId: Long,
+                        entryId: Long,
                         kind: String = "", // Food
                         organic: Boolean = true,
                         calories: Int = 1,
@@ -68,7 +68,7 @@ final case class Edible(id: Long = 0,
   val ateProperty = ObjectProperty[String](this, "ate", Instant.ofEpochSecond(ate).toString)
 
 final case class Drinkable(id: Long = 0,
-                           profileId: Long,
+                           entryId: Long,
                            kind: String = "", // Liquid
                            organic: Boolean = true,
                            calories: Int = 0,
@@ -79,7 +79,7 @@ final case class Drinkable(id: Long = 0,
   val drankProperty = ObjectProperty[String](this, "drank", Instant.ofEpochSecond(drank).toString)
 
 final case class Expendable(id: Long = 0,
-                            profileId: Long,
+                            entryId: Long,
                             kind: String = "", // Exercise, Sleep
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
@@ -95,7 +95,7 @@ final case class Expendable(id: Long = 0,
 
 
 final case class Measurable(id: Long = 0,
-                            profileId: Long,
+                            entryId: Long,
                             kind: String = "", // Pulse, Glucose, Height, Weight
                             measurement: Int = 1,
                             measured: Long = Instant.now.getEpochSecond) extends Entity:
