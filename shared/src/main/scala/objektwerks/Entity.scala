@@ -75,6 +75,7 @@ final case class Expendable(id: Long = 0,
                             calories: Int = 0) extends Entity
 
 final case class Measurable(id: Long = 0,
+                            profileId: Long = 0,
                             kind: String = "", // Pulse, Glucose, Height, Weight
                             value: Int = 0,
                             unit: String = "",
