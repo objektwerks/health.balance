@@ -106,6 +106,7 @@ final case class Expendable(id: Long = 0,
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
   val startProperty = ObjectProperty[String](this, "start", Instant.ofEpochSecond(start).toString)
   val finishProperty = ObjectProperty[String](this, "finish", Instant.ofEpochSecond(finish).toString)
+  val expendable = this
 
 final case class Measurable(id: Long = 0,
                             entryId: Long,
