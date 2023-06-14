@@ -12,6 +12,14 @@ Entity
 * Account 1 --> * Profile, Fault
 * Profile 1 --> * Edible, Drinkable, Expendable, Measurable
 
+DateTimePicker
+--------------
+>Required entity support:
+1. Edible
+2. Drinkable
+3. Expendable
+4. Measureable
+
 Build
 -----
 1. sbt clean compile
