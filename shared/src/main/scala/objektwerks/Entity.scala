@@ -84,7 +84,7 @@ final case class Entry(id: Long = 0,
 
 final case class Edible(id: Long = 0,
                         entryId: Long,
-                        kind: String = "", // Fruits, Vegetables, Grains, Meat, and Dairy
+                        kind: String = EdibleKind.Fruit.toString,
                         organic: Boolean = true,
                         calories: Int = 0,
                         ate: Long = Instant.now.getEpochSecond) extends Entity:
@@ -93,6 +93,12 @@ final case class Edible(id: Long = 0,
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
   val ateProperty = ObjectProperty[String](this, "ate", Instant.ofEpochSecond(ate).toString)
   val edible = this
+
+enum EdibleKind:
+  case Fruit, Vegetable, Grain, Dairy, Meat
+
+object EdibleKind:
+  def toList: List[String] = EdibleKind.values.map(_.toString).toList
 
 final case class Drinkable(id: Long = 0,
                            entryId: Long,
