@@ -50,7 +50,10 @@ object Account:
 final case class Profile(id: Long = 0,
                          accountId: Long,
                          name: String,
-                         created: Long = Instant.now.getEpochSecond) extends Entity
+                         created: Long = Instant.now.getEpochSecond) extends Entity:
+  val nameProperty = ObjectProperty[String](this, "name", name)
+  val createdProperty = ObjectProperty[String](this, "created", Instant.ofEpochSecond(created).toString)
+
 
 final case class Entry(id: Long = 0,
                        profileId: Long = 0,
