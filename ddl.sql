@@ -41,6 +41,17 @@ CREATE TABLE drinkable (
   drank BIGINT NOT NULL
 );
 
+CREATE TABLE expendable (
+  id BIGSERIAL PRIMARY KEY,
+  entry_id BIGINT REFERENCES entry(id),
+  kind VARCHAR NOT NULL,
+  sunshine BOOL NOT NULL,
+  freshair BOOL NOT NULL,
+  calories INT NOT NULL,
+  from BIGINT NOT NULL,
+  to BIGINT NOT NULL
+);
+
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES account(id),
