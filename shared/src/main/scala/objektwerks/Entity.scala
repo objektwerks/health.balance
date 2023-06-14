@@ -67,8 +67,6 @@ final case class Drinkable(id: Long = 0,
                            profileId: Long,
                            kind: String = "", // Liquid
                            organic: Boolean = true,
-                           volume: Int = 1,
-                           unit: String = "",
                            calories: Int = 0,
                            drank: Long = Instant.now.getEpochSecond) extends Entity
 
