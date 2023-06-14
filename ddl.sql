@@ -17,6 +17,12 @@ CREATE TABLE profile (
   created BIGINT NOT NULL
 );
 
+CREATE TABLE entry (
+  id BIGSERIAL PRIMARY KEY,
+  profile_id BIGINT REFERENCES profile(id),
+  created BIGINT NOT NULL
+);
+
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES account(id),

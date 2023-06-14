@@ -54,7 +54,9 @@ final case class Profile(id: Long = 0,
 
 final case class Entry(id: Long = 0,
                        profileId: Long = 0,
-                       created: Long = Instant.now.getEpochSecond) extends Entity
+                       created: Long = Instant.now.getEpochSecond) extends Entity:
+  val createdProperty = ObjectProperty[String](this, "created", Instant.ofEpochSecond(created).toString)
+
 
 final case class Edible(id: Long = 0,
                         entryId: Long,
