@@ -52,6 +52,13 @@ CREATE TABLE expendable (
   to BIGINT NOT NULL
 );
 
+CREATE TABLE measurable (
+  id BIGSERIAL PRIMARY KEY,
+  entry_id BIGINT REFERENCES entry(id),
+  measurement INT NOT NULL,
+  measured BIGINT NOT NULL
+);
+
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES account(id),
