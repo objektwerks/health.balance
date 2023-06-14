@@ -54,17 +54,17 @@ final case class Profile(id: Long = 0,
 final case class Edible(id: Long = 0,
                         profileId: Long,
                         kind: String = "", // Food
-                        number: Int = 0,
+                        number: Int = 1,
                         unit: String = "",
-                        calories: Int = 0,
+                        calories: Int = 1,
                         ate: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Drinkable(id: Long = 0,
-                           profileId: Long = 0,
+                           profileId: Long,
                            kind: String = "", // Liquid
-                           volume: Int = 0,
+                           volume: Int = 1,
                            unit: String = "",
-                           calories: Int = 0,
+                           calories: Int = 1,
                            drank: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Expendable(id: Long = 0,
