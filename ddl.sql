@@ -48,8 +48,8 @@ CREATE TABLE expendable (
   sunshine BOOL NOT NULL,
   freshair BOOL NOT NULL,
   calories INT NOT NULL,
-  from BIGINT NOT NULL,
-  to BIGINT NOT NULL
+  start BIGINT NOT NULL,
+  finish BIGINT NOT NULL
 );
 
 CREATE TABLE measurable (
