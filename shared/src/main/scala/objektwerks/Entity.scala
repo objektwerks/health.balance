@@ -93,6 +93,8 @@ final case class Expendable(id: Long = 0,
 final case class Measurable(id: Long = 0,
                             profileId: Long,
                             kind: String = "", // Pulse, Glucose, Height, Weight
-                            value: Int = 1,
-                            unit: String = "",
-                            measured: Long = Instant.now.getEpochSecond) extends Entity
+                            measurement: Int = 1,
+                            measured: Long = Instant.now.getEpochSecond) extends Entity:
+  val kindProperty = ObjectProperty[String](this, "kind", kind)
+  val measurementProperty = ObjectProperty[Int](this, "measurement", measurement)
+  val measuredProperty = ObjectProperty[String](this, "measured", Instant.ofEpochSecond(measured).toString)
