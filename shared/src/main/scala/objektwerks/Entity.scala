@@ -68,7 +68,7 @@ final case class Drinkable(id: Long = 0,
                            drank: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Expendable(id: Long = 0,
-                            profileId: Long = 0,
+                            profileId: Long,
                             kind: String = "", // Exercise, Sleep
                             from: Long = Instant.now.getEpochSecond,
                             to: Long = Instant.now.getEpochSecond + 1,
