@@ -18,6 +18,7 @@ object Entity:
   given measurableOrdering: Ordering[Measurable] = Ordering.by[Measurable, Long](m => m.measured).reverse
 
   def instantToLocalDateTime(instant: Instant): LocalDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
+  def localDateTimeToInstant(localDateTime: LocalDateTime): Instant = Instant.from(localDateTime)
 
 final case class Account(id: Long = 0,
                          license: String = newLicense,
