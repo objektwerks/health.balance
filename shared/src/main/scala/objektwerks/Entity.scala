@@ -20,6 +20,9 @@ object Entity:
   def instantToLocalDateTime(instant: Instant): LocalDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
   def localDateTimeToInstant(localDateTime: LocalDateTime): Instant = Instant.from(localDateTime)
 
+  def listToString(list: List[String]): String = list.mkString(",")
+  def stringToList(string: String): List[String] = string.split(",").toList
+
 final case class Account(id: Long = 0,
                          license: String = newLicense,
                          emailAddress: String = "",
