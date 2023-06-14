@@ -121,10 +121,16 @@ final case class Expendable(id: Long = 0,
 
 final case class Measurable(id: Long = 0,
                             entryId: Long,
-                            kind: String = "", // Pulse, Glucose, Height, Weight
+                            kind: String = MeasurableType.Pulse.toString(),
                             measurement: Int = 1,
                             measured: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val measurementProperty = ObjectProperty[Int](this, "measurement", measurement)
   val measuredProperty = ObjectProperty[String](this, "measured", Instant.ofEpochSecond(measured).toString)
   val measurable = this
+
+enum MeasurableType:
+  case Height, Weight, Pulse, Glucose
+
+object Colors:
+  def toList: List[String] = MeasurableType.values.map(_.toString).toList
