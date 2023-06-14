@@ -82,7 +82,7 @@ final case class Measurable(id: Long = 0,
                             measured: Long = Instant.now.getEpochSecond) extends Entity
 
 final case class Exposable(id: Long = 0,
-                           profileId: Long = 0,
+                           profileId: Long,
                            kind: String = "", // Sunshine, FreshAir
                            from: Long = Instant.now.getEpochSecond,
                            to: Long = Instant.now.getEpochSecond + 1) extends Entity
