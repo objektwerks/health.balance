@@ -14,7 +14,7 @@ object Entity:
   given entryOrdering: Ordering[Entry] = Ordering.by[Entry, Long](e => e.created).reverse
   given edibleOrdering: Ordering[Edible] = Ordering.by[Edible, Long](e => e.ate).reverse
   given drinkableOrdering: Ordering[Drinkable] = Ordering.by[Drinkable, Long](d => d.drank).reverse
-
+  given expendableOrdering: Ordering[Expendable] = Ordering.by[Expendable, Long](e => e.finish).reverse
   given measurableOrdering: Ordering[Measurable] = Ordering.by[Measurable, Long](m => m.measured).reverse
 
 final case class Account(id: Long = 0,
