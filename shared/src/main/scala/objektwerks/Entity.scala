@@ -65,7 +65,6 @@ final case class Entry(id: Long = 0,
                        created: Long = Instant.now.getEpochSecond) extends Entity:
   val createdProperty = ObjectProperty[String](this, "created", Instant.ofEpochSecond(created).toString)
 
-
 final case class Edible(id: Long = 0,
                         entryId: Long,
                         kind: String = "", // Food
@@ -102,7 +101,6 @@ final case class Expendable(id: Long = 0,
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
   val fromProperty = ObjectProperty[String](this, "from", Instant.ofEpochSecond(from).toString)
   val toProperty = ObjectProperty[String](this, "to", Instant.ofEpochSecond(to).toString)
-
 
 final case class Measurable(id: Long = 0,
                             entryId: Long,
