@@ -83,7 +83,7 @@ final case class Edible(id: Long = 0,
                         entryId: Long,
                         kind: String = "", // Food
                         organic: Boolean = true,
-                        calories: Int = 1,
+                        calories: Int = 0,
                         ate: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val organicProperty = ObjectProperty[Boolean](this, "organic", organic)
@@ -108,7 +108,7 @@ final case class Expendable(id: Long = 0,
                             kind: String = "", // Exercise, Sleep
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
-                            calories: Int = 1,
+                            calories: Int = 0,
                             start: Long = Instant.now.getEpochSecond,
                             finish: Long = Instant.now.getEpochSecond + 1) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
@@ -122,7 +122,7 @@ final case class Expendable(id: Long = 0,
 final case class Measurable(id: Long = 0,
                             entryId: Long,
                             kind: String = MeasurableKind.Pulse.toString,
-                            measurement: Int = 1,
+                            measurement: Int = 0,
                             measured: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val measurementProperty = ObjectProperty[Int](this, "measurement", measurement)
