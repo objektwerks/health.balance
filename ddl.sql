@@ -40,6 +40,7 @@ CREATE TABLE expendable (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES profile(id),
   kind VARCHAR NOT NULL,
+  detail VARCHAR NOT NULL,
   sunshine BOOL NOT NULL,
   freshair BOOL NOT NULL,
   calories INT NOT NULL,
