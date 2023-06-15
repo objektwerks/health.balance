@@ -159,7 +159,7 @@ object MeasurableKind:
   def toList: List[String] = MeasurableKind.values.map(_.toString).toList
 
 enum UnitOfMeasure:
-  case bpm, lb, level, in
+  case bpm, lb, level
 
 object UnitOfMeasure:
   def toList: List[String] = UnitOfMeasure.values.map(_.toString).toList
