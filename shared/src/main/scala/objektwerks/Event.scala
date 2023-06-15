@@ -30,6 +30,10 @@ final case class ExpendablesListed(expendables: List[Expendable]) extends Event
 final case class ExpendableAdded(id: Long) extends Event
 final case class ExpendableUpdated(id: Long) extends Event
 
+final case class MeasurablesListed(measurables: List[Measurable]) extends Event
+final case class MeasurableAdded(id: Long) extends Event
+final case class MeasurableUpdated(id: Long) extends Event
+
 object Fault:
   def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
 
