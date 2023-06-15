@@ -51,6 +51,7 @@ CREATE TABLE measurable (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES profile(id),
   measurement INT NOT NULL,
+  unit VARCHAR NOT NULL,
   measured BIGINT NOT NULL
 );
 
