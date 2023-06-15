@@ -78,3 +78,73 @@ final class Store(config: Config,
           logger.debug(s"*** store cache put: $license")
           true
         else false
+
+  def listAccounts(): List[Account] =
+    DB readOnly { implicit session =>
+      sql"select * from account"
+        .map(rs =>
+          Account(
+            rs.long("id"),
+            rs.string("license"),
+            rs.string("email_address"),
+            rs.string("pin"),
+            rs.long("activated"),
+            rs.long("deactivated")
+          )
+        )
+        .list()
+    }
+
+  def addAccount(account: Account): Account =
+    val id = DB localTx { implicit session =>
+      sql"insert into account(license, email_address, pin, activated, deactivated) values(${account.license}, ${account.emailAddress}, ${account.pin}, ${account.activated}, ${account.deactivated})"
+      .update()
+    }
+    account.copy(id = id)
+
+  def removeAccount(license: String): Unit =
+    DB localTx { implicit session =>
+      sql"delete account where license = $license"
+      .update()
+    }
+    ()
+
+  def deactivateAccount(license: String): Option[Account] =
+    DB localTx { implicit session =>
+      val deactivated = sql"update account set deactivated = ${LocalDate.now.toEpochDay}, activated = 0 where license = $license"
+      .update()
+      if deactivated > 0 then
+        sql"select * from account where license = $license"
+          .map(rs =>
+            Account(
+              rs.long("id"),
+              rs.string("license"),
+              rs.string("email_address"),
+              rs.string("pin"),
+              rs.long("activated"),
+              rs.long("deactivated")
+            )
+          )
+          .single()
+      else None
+    }
+
+  def reactivateAccount(license: String): Option[Account] =
+    DB localTx { implicit session =>
+      val activated = sql"update account set activated = ${LocalDate.now.toEpochDay}, deactivated = 0 where license = $license"
+      .update()
+      if activated > 0 then
+        sql"select * from account where license = $license"
+          .map(rs =>
+            Account(
+              rs.long("id"),
+              rs.string("license"),
+              rs.string("email_address"),
+              rs.string("pin"),
+              rs.long("activated"),
+              rs.long("deactivated")
+            )
+          )
+          .single()
+      else None
+    }
