@@ -35,3 +35,6 @@ final class Store(config: Config,
   )
 
   ConnectionPool.singleton(url, user, password, settings)
+
+  def register(account: Account): Account = addAccount(account)
+
