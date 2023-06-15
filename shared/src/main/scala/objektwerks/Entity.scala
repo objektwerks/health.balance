@@ -76,7 +76,7 @@ final case class Profile(id: Long = 0,
   val profile = this
 
 final case class Edible(id: Long = 0,
-                        entryId: Long,
+                        profileId: Long,
                         kind: String = EdibleKind.Fruit.toString,
                         organic: Boolean = true,
                         calories: Int = 0,
@@ -94,7 +94,7 @@ object EdibleKind:
   def toList: List[String] = EdibleKind.values.map(_.toString).toList
 
 final case class Drinkable(id: Long = 0,
-                           entryId: Long,
+                           profileId: Long,
                            kind: String = DrinkableKind.Nonalcoholic.toString,
                            organic: Boolean = true,
                            count: Int = 1,
@@ -114,7 +114,7 @@ object DrinkableKind:
   def toList: List[String] = DrinkableKind.values.map(_.toString).toList
 
 final case class Expendable(id: Long = 0,
-                            entryId: Long,
+                            profileId: Long,
                             kind: String = ExpendableKind.Aerobic.toString,
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
@@ -136,7 +136,7 @@ object ExpendableKind:
   def toList: List[String] = ExpendableKind.values.map(_.toString).toList
 
 final case class Measurable(id: Long = 0,
-                            entryId: Long,
+                            profileId: Long,
                             kind: String = MeasurableKind.Pulse.toString,
                             measurement: Int = 0,
                             measured: Long = Instant.now.getEpochSecond) extends Entity:
