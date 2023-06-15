@@ -19,7 +19,7 @@ CREATE TABLE profile (
 
 CREATE TABLE edible (
   id BIGSERIAL PRIMARY KEY,
-  entry_id BIGINT REFERENCES entry(id),
+  profile_id BIGINT REFERENCES profile(id),
   kind VARCHAR NOT NULL,
   organic BOOL NOT NULL,
   calories INT NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE edible (
 
 CREATE TABLE drinkable (
   id BIGSERIAL PRIMARY KEY,
-  entry_id BIGINT REFERENCES entry(id),
+  profile_id BIGINT REFERENCES profile(id),
   kind VARCHAR NOT NULL,
   organic BOOL NOT NULL,
   count INT NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE drinkable (
 
 CREATE TABLE expendable (
   id BIGSERIAL PRIMARY KEY,
-  entry_id BIGINT REFERENCES entry(id),
+  profile_id BIGINT REFERENCES profile(id),
   kind VARCHAR NOT NULL,
   sunshine BOOL NOT NULL,
   freshair BOOL NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE expendable (
 
 CREATE TABLE measurable (
   id BIGSERIAL PRIMARY KEY,
-  entry_id BIGINT REFERENCES entry(id),
+  profile_id BIGINT REFERENCES profile(id),
   measurement INT NOT NULL,
   measured BIGINT NOT NULL
 );
