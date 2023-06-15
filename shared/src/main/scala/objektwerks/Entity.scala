@@ -11,7 +11,6 @@ sealed trait Entity:
 
 object Entity:
   given profileOrdering: Ordering[Profile] = Ordering.by[Profile, Long](p => p.created)
-  given entryOrdering: Ordering[Entry] = Ordering.by[Entry, Long](e => e.created).reverse
   given edibleOrdering: Ordering[Edible] = Ordering.by[Edible, Long](e => e.ate).reverse
   given drinkableOrdering: Ordering[Drinkable] = Ordering.by[Drinkable, Long](d => d.drank).reverse
   given expendableOrdering: Ordering[Expendable] = Ordering.by[Expendable, Long](e => e.finish).reverse
@@ -75,12 +74,6 @@ final case class Profile(id: Long = 0,
   val nameProperty = ObjectProperty[String](this, "name", name)
   val createdProperty = ObjectProperty[String](this, "created", Instant.ofEpochSecond(created).toString)
   val profile = this
-
-final case class Entry(id: Long = 0,
-                       profileId: Long = 0,
-                       created: Long = Instant.now.getEpochSecond) extends Entity:
-  val createdProperty = ObjectProperty[String](this, "created", Instant.ofEpochSecond(created).toString)
-  val entry = this
 
 final case class Edible(id: Long = 0,
                         entryId: Long,
