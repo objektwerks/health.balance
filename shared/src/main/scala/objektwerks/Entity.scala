@@ -78,10 +78,12 @@ final case class Profile(id: Long = 0,
 final case class Edible(id: Long = 0,
                         profileId: Long,
                         kind: String = EdibleKind.Fruit.toString,
+                        detail: String = "",
                         organic: Boolean = true,
                         calories: Int = 0,
                         ate: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
+  val detailProperty = ObjectProperty[String](this, "detail", detail)
   val organicProperty = ObjectProperty[Boolean](this, "organic", organic)
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
   val ateProperty = ObjectProperty[String](this, "ate", Instant.ofEpochSecond(ate).toString)
