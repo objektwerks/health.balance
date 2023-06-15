@@ -18,6 +18,10 @@ final case class ProfilesListed(profiles: List[Profile]) extends Event
 final case class ProfileAdded(id: Long) extends Event
 final case class ProfileUpdate(id: Long) extends Event
 
+final case class EdiblesListed(edibles: List[Edible]) extends Event
+final case class EdibleAdded(id: Long) extends Event
+final case class EdibleUpdated(id: Long) extends Event
+
 object Fault:
   def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
 
