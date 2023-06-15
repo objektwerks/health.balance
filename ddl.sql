@@ -30,6 +30,7 @@ CREATE TABLE drinkable (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES profile(id),
   kind VARCHAR NOT NULL,
+  detail VARCHAR NOT NULL,
   organic BOOL NOT NULL,
   count INT NOT NULL,
   calories INT NOT NULL,
