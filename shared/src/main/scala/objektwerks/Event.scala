@@ -22,6 +22,10 @@ final case class EdiblesListed(edibles: List[Edible]) extends Event
 final case class EdibleAdded(id: Long) extends Event
 final case class EdibleUpdated(id: Long) extends Event
 
+final case class DrinkablesListed(drinkables: List[Drinkable]) extends Event
+final case class DrinkableAdded(id: Long) extends Event
+final case class DrinkableUpdated(id: Long) extends Event
+
 object Fault:
   def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
 
