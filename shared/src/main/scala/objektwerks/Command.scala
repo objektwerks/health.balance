@@ -18,3 +18,7 @@ final case class UpdateProfile(license: String, profile: Profile) extends Comman
 final case class ListEdibles(license: String, profileId: Long) extends Command with License
 final case class AddEdible(license: String, edible: Edible) extends Command with License
 final case class UpdateEdible(license: String, edible: Edible) extends Command with License
+
+final case class ListDrinkables(license: String, profileId: Long) extends Command with License
+final case class AddDrinkable(license: String, drinkable: Drinkable) extends Command with License
+final case class UpdateDrinkable(license: String, drinkable: Drinkable) extends Command with License
