@@ -102,8 +102,10 @@ Drop
 Environment
 -----------
 >The following environment variables must be defined:
-* export HEALTH_BALANCE_HOST="127.0.0.1"
-* export HEALTH_BALANCE_PORT=7171
+```
+export HEALTH_BALANCE_HOST="127.0.0.1"
+export HEALTH_BALANCE_PORT=7171
+```
 
 * export HEALTH_BALANCE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/healthbalance"
 * export HEALTH_BALANCE_POSTGRESQL_USER="yourusername"
