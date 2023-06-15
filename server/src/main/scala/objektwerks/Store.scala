@@ -4,7 +4,7 @@ import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
 import com.typesafe.scalalogging.LazyLogging
 
-import java.time.LocalDate
+import java.time.Instant
 
 import scalikejdbc.*
 import scala.concurrent.duration.FiniteDuration
@@ -111,7 +111,7 @@ final class Store(config: Config,
 
   def deactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val deactivated = sql"update account set deactivated = ${LocalDate.now.toEpochDay}, activated = 0 where license = $license"
+      val deactivated = sql"update account set deactivated = ${Instant.now.getEpochSecond}, activated = 0 where license = $license"
       .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
@@ -131,7 +131,7 @@ final class Store(config: Config,
 
   def reactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
-      val activated = sql"update account set activated = ${LocalDate.now.toEpochDay}, deactivated = 0 where license = $license"
+      val activated = sql"update account set activated = ${Instant.now.getEpochSecond}, deactivated = 0 where license = $license"
       .update()
       if activated > 0 then
         sql"select * from account where license = $license"
