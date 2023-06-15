@@ -38,3 +38,19 @@ final class Store(config: Config,
 
   def register(account: Account): Account = addAccount(account)
 
+  def login(email: String, pin: String): Option[Account] =
+    DB readOnly { implicit session =>
+      sql"select * from account where email_address = $email and pin = $pin"
+        .map(rs =>
+          Account(
+            rs.long("id"),
+            rs.string("license"),
+            rs.string("email_address"),
+            rs.string("pin"),
+            rs.long("activated"),
+            rs.long("deactivated")
+          )
+        )
+        .single()
+    }
+
