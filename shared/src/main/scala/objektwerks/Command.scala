@@ -14,3 +14,7 @@ final case class Reactivate(license: String) extends Command with License
 final case class ListProfiles(license: String) extends Command with License
 final case class AddProfile(license: String, profile: Profile) extends Command with License
 final case class UpdateProfile(license: String, profile: Profile) extends Command with License
+
+final case class ListEdibles(license: String, profileId: Long) extends Command with License
+final case class AddEdible(license: String, edible: Edible) extends Command with License
+final case class UpdateEdible(license: String, edible: Edible) extends Command with License
