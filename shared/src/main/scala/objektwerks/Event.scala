@@ -14,6 +14,10 @@ final case class LoggedIn(account: Account) extends Event
 final case class Deactivated(account: Account) extends Event
 final case class Reactivated(account: Account) extends Event
 
+final case class ProfilesListed(profiles: List[Profile]) extends Event
+final case class ProfileAdded(id: Long) extends Event
+final case class ProfileUpdate(id: Long) extends Event
+
 object Fault:
   def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
 
