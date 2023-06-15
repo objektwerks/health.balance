@@ -26,3 +26,7 @@ final case class UpdateDrinkable(license: String, drinkable: Drinkable) extends 
 final case class ListExpendables(license: String, profileId: Long) extends Command with License
 final case class AddExpendable(license: String, expendable: Expendable) extends Command with License
 final case class UpdateExpendable(license: String, expendable: Expendable) extends Command with License
+
+final case class ListMeasurables(license: String, profileId: Long) extends Command with License
+final case class AddMeasurable(license: String, measurable: Measurable) extends Command with License
+final case class UpdateMeasurable(license: String, measurable: Measurable) extends Command with License
