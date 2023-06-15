@@ -153,7 +153,7 @@ final case class Measurable(id: Long = 0,
   val measurable = this
 
 enum MeasurableKind:
-  case Pulse, Weight, Glucose, Height
+  case Pulse, Weight, Glucose
 
 object MeasurableKind:
   def toList: List[String] = MeasurableKind.values.map(_.toString).toList
