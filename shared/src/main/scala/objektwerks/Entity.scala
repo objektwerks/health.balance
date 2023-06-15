@@ -120,12 +120,14 @@ object DrinkableKind:
 final case class Expendable(id: Long = 0,
                             profileId: Long,
                             kind: String = ExpendableKind.Aerobic.toString,
+                            detail: String = "",
                             sunshine: Boolean = true,
                             freshair: Boolean = true,
                             calories: Int = 0,
                             start: Long = Instant.now.getEpochSecond,
                             finish: Long = Instant.now.getEpochSecond + 1) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
+  val detailProperty = ObjectProperty[String](this, "detail", detail)
   val sunshineProperty = ObjectProperty[Boolean](this, "sunshine", sunshine)
   val freshairProperty = ObjectProperty[Boolean](this, "freshair", freshair)
   val caloriesProperty = ObjectProperty[Int](this, "calories", calories)
