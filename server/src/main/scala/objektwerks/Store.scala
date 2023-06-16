@@ -108,14 +108,14 @@ final class Store(config: Config,
   def removeAccount(license: String): Unit =
     DB localTx { implicit session =>
       sql"delete account where license = $license"
-      .update()
+        .update()
     }
     ()
 
   def deactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
       val deactivated = sql"update account set deactivated = ${Instant.now.getEpochSecond}, activated = 0 where license = $license"
-      .update()
+        .update()
       if deactivated > 0 then
         sql"select * from account where license = $license"
           .map(rs =>
@@ -135,7 +135,7 @@ final class Store(config: Config,
   def reactivateAccount(license: String): Option[Account] =
     DB localTx { implicit session =>
       val activated = sql"update account set activated = ${Instant.now.getEpochSecond}, deactivated = 0 where license = $license"
-      .update()
+        .update()
       if activated > 0 then
         sql"select * from account where license = $license"
           .map(rs =>
