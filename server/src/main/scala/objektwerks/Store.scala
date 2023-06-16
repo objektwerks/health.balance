@@ -240,3 +240,21 @@ final class Store(config: Config,
       .update()
     drinkable.id
   }
+
+  def listExpendables(profileId: Long): List[Expendable] = DB readOnly { implicit session =>
+    sql"select * from expendable where profile_id = $profileId order by finish desc"
+      .map(rs =>
+        Expendable(
+          rs.long("id"),
+          rs.long("profile_id"),
+          rs.string("kind"),
+          rs.string("detail"),
+          rs.boolean("sunshine"),
+          rs.boolean("freshair"),
+          rs.int("calories"),
+          rs.long("start"),
+          rs.long("finish")
+        )
+      )
+      .list()
+  }
