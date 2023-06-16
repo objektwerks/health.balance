@@ -178,7 +178,7 @@ final class Store(config: Config,
       .map(rs =>
         Edible(
           rs.long("id"),
-          rs.long("account_id"),
+          rs.long("profile_id"),
           rs.string("kind"),
           rs.string("detail"),
           rs.boolean("organic"),
@@ -211,7 +211,7 @@ final class Store(config: Config,
       .map(rs =>
         Drinkable(
           rs.long("id"),
-          rs.long("account_id"),
+          rs.long("profile_id"),
           rs.string("kind"),
           rs.string("detail"),
           rs.boolean("organic"),
@@ -221,4 +221,13 @@ final class Store(config: Config,
         )
       )
       .list()
+  }
+
+  def addDrinkable(drinkable: Drinkable): Long = DB localTx { implicit session =>
+    sql"""
+       insert into drinkable(profile_id, kind, detail, organic, count, calories, drank)
+       values(${drinkable.profileId}, ${drinkable.kind}, ${drinkable.detail}, ${drinkable.organic},
+       ${drinkable.count}, ${drinkable.calories}, ${drinkable.drank})
+       """
+      .updateAndReturnGeneratedKey()
   }
