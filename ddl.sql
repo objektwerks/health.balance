@@ -60,7 +60,7 @@ CREATE TABLE measurable (
 
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
-  profile_id BIGINT REFERENCES account(id),
+  account_id BIGINT REFERENCES account(id),
   cause VARCHAR NOT NULL,
   occurred BIGINT NOT NULL
 );
