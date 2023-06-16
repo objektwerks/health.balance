@@ -231,3 +231,12 @@ final class Store(config: Config,
        """
       .updateAndReturnGeneratedKey()
   }
+
+  def updateDrinkable(drinkable: Drinkable): Long = DB localTx { implicit session =>
+    sql"""
+      update drinkable set kind = ${drinkable.kind}, detail = ${drinkable.detail}, organic = ${drinkable.organic},
+      count = ${drinkable.count}, calories = ${drinkable.calories}, drank = ${drinkable.drank} where id = ${drinkable.id}
+      """
+      .update()
+    drinkable.id
+  }
