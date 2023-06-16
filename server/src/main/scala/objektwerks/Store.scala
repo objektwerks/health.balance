@@ -196,3 +196,12 @@ final class Store(config: Config,
        """
       .updateAndReturnGeneratedKey()
   }
+
+  def updateEdible(edible: Edible): Long = DB localTx { implicit session =>
+    sql"""
+      update edible set kind = ${edible.kind}, detail = ${edible.detail}, organic = ${edible.organic},
+      calories = ${edible.calories}, ate = ${edible.ate} where id = ${edible.id}
+      """
+      .update()
+    edible.id
+  }
