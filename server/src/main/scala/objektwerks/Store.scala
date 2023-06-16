@@ -258,3 +258,12 @@ final class Store(config: Config,
       )
       .list()
   }
+
+  def addExpendable(expendable: Expendable): Long = DB localTx { implicit session =>
+    sql"""
+       insert into expendable(profile_id, kind, detail, sunshine, freshair, calories, start, finish)
+       values(${expendable.profileId}, ${expendable.kind}, ${expendable.detail}, ${expendable.sunshine},
+       ${expendable.freshair}, ${expendable.calories}, ${expendable.start}, ${expendable.finish})
+       """
+      .updateAndReturnGeneratedKey()
+  }
