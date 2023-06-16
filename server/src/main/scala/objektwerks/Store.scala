@@ -161,3 +161,10 @@ final class Store(config: Config,
       )
       .list()
   }
+
+  def addProfile(profile: Profile): Long = DB localTx { implicit session =>
+    sql"""
+      insert into profile(account_id, name, created) values(${profile.accountId}, ${profile.name}, ${profile.created})
+      """
+      .updateAndReturnGeneratedKey()
+  }
