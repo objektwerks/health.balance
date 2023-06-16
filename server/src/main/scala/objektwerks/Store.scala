@@ -173,8 +173,8 @@ final class Store(config: Config,
     profile.id
   }
 
-  def listEdibles(accountId: Long): List[Edible] = DB readOnly { implicit session =>
-    sql"select * from edible where account_id = $accountId order by ate desc"
+  def listEdibles(profileId: Long): List[Edible] = DB readOnly { implicit session =>
+    sql"select * from edible where profile_id = $profileId order by ate desc"
       .map(rs =>
         Edible(
           rs.long("id"),
@@ -187,4 +187,12 @@ final class Store(config: Config,
         )
       )
       .list()
+  }
+
+  def addEdible(edible: Edible): Long = DB localTx { implicit session =>
+    sql"""
+       insert into edible(profile_id, kind, detail, organic, calories, ate)
+       values(${edible.profileId}, ${edible.kind}, ${edible.detail}, ${edible.organic}, ${edible.calories}, ${edible.ate})
+       """
+      .updateAndReturnGeneratedKey()
   }
