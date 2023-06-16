@@ -10,7 +10,7 @@ sealed trait Entity:
   val id: Long
 
 object Entity:
-  given profileOrdering: Ordering[Profile] = Ordering.by[Profile, Long](p => p.created)
+  given profileOrdering: Ordering[Profile] = Ordering.by[Profile, String](p => p.name)
   given edibleOrdering: Ordering[Edible] = Ordering.by[Edible, Long](e => e.ate).reverse
   given drinkableOrdering: Ordering[Drinkable] = Ordering.by[Drinkable, Long](d => d.drank).reverse
   given expendableOrdering: Ordering[Expendable] = Ordering.by[Expendable, Long](e => e.finish).reverse
