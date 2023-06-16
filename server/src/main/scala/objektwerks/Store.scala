@@ -163,16 +163,28 @@ final class Store(config: Config,
   }
 
   def addProfile(profile: Profile): Long = DB localTx { implicit session =>
-    sql"""
-       insert into profile(account_id, name, created) values(${profile.accountId}, ${profile.name}, ${profile.created})
-       """
+    sql"insert into profile(account_id, name, created) values(${profile.accountId}, ${profile.name}, ${profile.created})"
       .updateAndReturnGeneratedKey()
   }
 
   def updateProfile(profile: Profile): Long = DB localTx { implicit session =>
-    sql"""
-       update profile set name = ${profile.name} where id = ${profile.id}
-       """
+    sql"update profile set name = ${profile.name} where id = ${profile.id}"
       .update()
     profile.id
+  }
+
+  def listEdibles(accountId: Long): List[Edible] = DB readOnly { implicit session =>
+    sql"select * from edible where account_id = $accountId order by ate desc"
+      .map(rs =>
+        Edible(
+          rs.long("id"),
+          rs.long("account_id"),
+          rs.string("kind"),
+          rs.string("detail"),
+          rs.boolean("organic"),
+          rs.int("calories"),
+          rs.long("ate")
+        )
+      )
+      .list()
   }
