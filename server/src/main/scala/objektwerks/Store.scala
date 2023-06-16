@@ -295,3 +295,11 @@ final class Store(config: Config,
       )
       .list()
   }
+
+  def addMeasurable(measurable: Measurable): Long = DB localTx { implicit session =>
+    sql"""
+       insert into measurable(profile_id, kind, measurement, unit, measured)
+       values(${measurable.profileId}, ${measurable.kind}, ${measurable.measurement}, ${measurable.unit}, ${measurable.measured})
+       """
+      .updateAndReturnGeneratedKey()
+  }
