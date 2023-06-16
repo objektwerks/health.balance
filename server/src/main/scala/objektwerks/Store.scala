@@ -199,9 +199,9 @@ final class Store(config: Config,
 
   def updateEdible(edible: Edible): Long = DB localTx { implicit session =>
     sql"""
-      update edible set kind = ${edible.kind}, detail = ${edible.detail}, organic = ${edible.organic},
-      calories = ${edible.calories}, ate = ${edible.ate} where id = ${edible.id}
-      """
+       update edible set kind = ${edible.kind}, detail = ${edible.detail}, organic = ${edible.organic},
+       calories = ${edible.calories}, ate = ${edible.ate} where id = ${edible.id}
+       """
       .update()
     edible.id
   }
@@ -234,9 +234,9 @@ final class Store(config: Config,
 
   def updateDrinkable(drinkable: Drinkable): Long = DB localTx { implicit session =>
     sql"""
-      update drinkable set kind = ${drinkable.kind}, detail = ${drinkable.detail}, organic = ${drinkable.organic},
-      count = ${drinkable.count}, calories = ${drinkable.calories}, drank = ${drinkable.drank} where id = ${drinkable.id}
-      """
+       update drinkable set kind = ${drinkable.kind}, detail = ${drinkable.detail}, organic = ${drinkable.organic},
+       count = ${drinkable.count}, calories = ${drinkable.calories}, drank = ${drinkable.drank} where id = ${drinkable.id}
+       """
       .update()
     drinkable.id
   }
@@ -266,4 +266,14 @@ final class Store(config: Config,
        ${expendable.freshair}, ${expendable.calories}, ${expendable.start}, ${expendable.finish})
        """
       .updateAndReturnGeneratedKey()
+  }
+
+  def updateExpendable(expendable: Expendable): Long = DB localTx { implicit session =>
+    sql"""
+       update expendable set kind = ${expendable.kind}, detail = ${expendable.detail}, sunshine = ${expendable.sunshine},
+       freshair = ${expendable.freshair}, calories = ${expendable.calories}, start = ${expendable.start}, finish = ${expendable.finish} 
+       where id = ${expendable.id}
+       """
+      .update()
+    expendable.id
   }
