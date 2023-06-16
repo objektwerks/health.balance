@@ -280,3 +280,18 @@ final class Store(config: Config,
       .update()
     expendable.id
   }
+
+  def listMeasurables(profileId: Long): List[Measurable] = DB readOnly { implicit session =>
+    sql"select * from measurable where profile_id = $profileId order by measured desc"
+      .map(rs =>
+        Measurable(
+          rs.long("id"),
+          rs.long("profile_id"),
+          rs.string("kind"),
+          rs.int("measurement"),
+          rs.string("unit"),
+          rs.long("measured")
+        )
+      )
+      .list()
+  }
