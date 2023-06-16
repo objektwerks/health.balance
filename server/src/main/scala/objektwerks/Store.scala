@@ -303,3 +303,12 @@ final class Store(config: Config,
        """
       .updateAndReturnGeneratedKey()
   }
+
+  def updateMeasurable(measurable: Measurable): Long = DB localTx { implicit session =>
+    sql"""
+       update measurable set kind = ${measurable.kind}, measurement = ${measurable.measurement}, unit = ${measurable.unit},
+       measured = ${measurable.measured} where id = ${measurable.id}
+       """
+      .update()
+    measurable.id
+  }
