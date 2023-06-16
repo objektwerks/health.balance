@@ -148,3 +148,16 @@ final class Store(config: Config,
           .single()
       else None
     }
+
+  def listProfiles: List[Profile] = DB readOnly { implicit session =>
+    sql"select * from profile order by name"
+      .map(rs =>
+        Profile(
+          rs.long("id"),
+          rs.long("account_id"),
+          rs.string("name"), 
+          rs.long("created"), 
+        )
+      )
+      .list()
+  }
