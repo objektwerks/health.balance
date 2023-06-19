@@ -84,3 +84,12 @@ object Validator:
       expendable.start > 0 &&
       expendable.finish > 0 &&
       expendable.finish > expendable.start
+
+  extension (measurable: Measurable)
+    def isValid =
+      measurable.id >= 0 &&
+      measurable.profileId > 0 &&
+      measurable.kind.nonEmpty &&
+      measurable.measurement > 0 &&
+      measurable.unit.nonEmpty &&
+      measurable.measured > 0
