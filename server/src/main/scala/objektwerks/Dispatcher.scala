@@ -37,3 +37,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
       else Fault(s"Registration failed because: $emailAddress is already registered.")
     }.recover { case NonFatal(error) => Fault(s"Registration failed for: $emailAddress, because: ${error.getMessage}") }
      .get
+
+  private val subject = "Account Registration"
+
+  private def email(emailAddress: String, pin: String): Unit =
+    val recipients = List(emailAddress)
+    val message = s"<p>Save this pin: <b>${pin}</b> in a safe place; then delete this email.</p>"
+    emailer.send(recipients, subject, message)
