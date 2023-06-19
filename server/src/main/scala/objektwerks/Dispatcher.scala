@@ -24,3 +24,13 @@ final class Dispatcher(store: Store, emailer: Emailer):
         }.recover { case NonFatal(error) => Fault(s"Authorization failed: $error") }
          .get
       case Register(_) | Login(_, _) => Authorized(true)
+
+  private def register(emailAddress: String): Event =
+    Try {
+      val account = Account(emailAddress = emailAddress)
+      if store.isEmailAddressUnique(emailAddress) then
+        email(account.emailAddress, account.pin)
+        Registered( store.register(account) )
+      else Fault(s"Registration failed because: $emailAddress is already registered.")
+    }.recover { case NonFatal(error) => Fault(s"Registration failed for: $emailAddress, because: ${error.getMessage}") }
+     .get
