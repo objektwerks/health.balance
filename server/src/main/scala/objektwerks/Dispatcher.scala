@@ -24,6 +24,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case ListEdibles(_, profileId)     => listEdibles(profileId)
       case AddEdible(_, edible)          => addEdible(edible)
       case UpdateEdible(_, edible)       => updateEdible(edible)
+      case ListDrinkables(_, profileId)  => listDrinkables(profileId)
+      case AddDrinkable(_, drinkable)    => addDrinkable(drinkable)
+      case UpdateDrinkable(_, drinkable) => updateDrinkable(drinkable)
       case _ => Fault("", 0) // TODO!
 
   private def isAuthorized(command: Command): Event =
