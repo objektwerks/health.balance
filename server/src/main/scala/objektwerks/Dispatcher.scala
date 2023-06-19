@@ -15,3 +15,12 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case Reactivate(license)             => reactivateAccount(license)
       case ListProfiles(license)           => listProfiles(license)
       case AddProfile(_, profile)          => addProfile(profile)
+
+  private def isAuthorized(command: Command): Event =
+    command match
+      case license: License =>
+        Try {
+          Authorized( store.isAuthorized(license.license) )
+        }.recover { case NonFatal(error) => Fault(s"Authorization failed: $error") }
+         .get
+      case Register(_) | Login(_, _) => Authorized(true)
