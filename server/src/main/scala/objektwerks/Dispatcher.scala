@@ -52,3 +52,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
         if optionalAccount.isDefined then LoggedIn(optionalAccount.get)
         else Fault(s"Login failed for email address: $emailAddress and pin: $pin")
     )
+
+  private def deactivateAccount(license: String): Event =
+    Try { store.deactivateAccount(license) }.fold(
+      error => Fault("Deactivate account failed:", error),
+      optionalAccount =>
+        if optionalAccount.isDefined then Deactivated(optionalAccount.get)
+        else Fault(s"Deactivate account failed for license: $license")
+    )
