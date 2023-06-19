@@ -59,6 +59,15 @@ object Validator:
   extension (updateDrinkable: UpdateDrinkable)
     def isValid: Boolean = updateDrinkable.license.isLicense && updateDrinkable.drinkable.isValid
 
+  extension (listExpendables: ListExpendables)
+    def isValid: Boolean = listExpendables.license.isLicense
+
+  extension (addExpendable: AddExpendable)
+    def isValid: Boolean = addExpendable.license.isLicense && addExpendable.expendable.isValid
+
+  extension (updateExpendable: UpdateExpendable)
+    def isValid: Boolean = updateExpendable.license.isLicense && updateExpendable.expendable.isValid
+
   extension (account: Account)
     def isActivated: Boolean =
       account.id >= 0 &&
