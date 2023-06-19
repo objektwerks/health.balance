@@ -68,6 +68,15 @@ object Validator:
   extension (updateExpendable: UpdateExpendable)
     def isValid: Boolean = updateExpendable.license.isLicense && updateExpendable.expendable.isValid
 
+  extension (listMeasurables: ListMeasurables)
+    def isValid: Boolean = listMeasurables.license.isLicense
+
+  extension (addMeasurable: AddMeasurable)
+    def isValid: Boolean = addMeasurable.license.isLicense && addMeasurable.measurable.isValid
+
+  extension (updateMeasurable: UpdateMeasurable)
+    def isValid: Boolean = updateMeasurable.license.isLicense && updateMeasurable.measurable.isValid
+
   extension (account: Account)
     def isActivated: Boolean =
       account.id >= 0 &&
