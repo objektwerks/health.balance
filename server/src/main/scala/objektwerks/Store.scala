@@ -152,7 +152,7 @@ final class Store(config: Config,
       else None
     }
 
-  def listFaults: List[Fault] = DB readOnly { implicit session =>
+  def listFaults(): List[Fault] = DB readOnly { implicit session =>
     sql"select * from fault order by occurred desc"
       .map(rs =>
         Fault(
@@ -170,7 +170,7 @@ final class Store(config: Config,
       .updateAndReturnGeneratedKey()
   }
 
-  def listProfiles: List[Profile] = DB readOnly { implicit session =>
+  def listProfiles(): List[Profile] = DB readOnly { implicit session =>
     sql"select * from profile order by name"
       .map(rs =>
         Profile(
