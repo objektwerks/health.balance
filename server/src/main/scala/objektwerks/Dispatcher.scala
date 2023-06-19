@@ -14,13 +14,16 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case _ =>
         
     command match
-      case Register(emailAddress)          => register(emailAddress)
-      case Login(emailAddress, pin)        => login(emailAddress, pin)
-      case Deactivate(license)             => deactivateAccount(license)
-      case Reactivate(license)             => reactivateAccount(license)
-      case ListProfiles(license)           => listProfiles()
-      case AddProfile(_, profile)          => addProfile(profile)
-      case UpdateProfile(_, profile)       => updateProfile(profile)
+      case Register(emailAddress)        => register(emailAddress)
+      case Login(emailAddress, pin)      => login(emailAddress, pin)
+      case Deactivate(license)           => deactivateAccount(license)
+      case Reactivate(license)           => reactivateAccount(license)
+      case ListProfiles(license)         => listProfiles()
+      case AddProfile(_, profile)        => addProfile(profile)
+      case UpdateProfile(_, profile)     => updateProfile(profile)
+      case ListEdibles(_, profileId)     => listEdibles(profileId)
+      case AddEdible(_, edible)          => addEdible(edible)
+      case UpdateEdible(_, edible)       => updateEdible(edible)
       case _ => Fault("", 0) // TODO!
 
   private def isAuthorized(command: Command): Event =
