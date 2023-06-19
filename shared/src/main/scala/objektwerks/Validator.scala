@@ -63,3 +63,13 @@ object Validator:
       edible.detail.nonEmpty &&
       edible.calories > 0 &&
       edible.ate > 0
+
+  extension (drinkable: Drinkable)
+    def isValid =
+      drinkable.id >= 0 &&
+      drinkable.profileId > 0 &&
+      drinkable.kind.nonEmpty &&
+      drinkable.detail.nonEmpty &&
+      drinkable.count > 0 &&
+      drinkable.calories >= 0 &&
+      drinkable.drank > 0
