@@ -111,3 +111,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
       EdibleUpdated( store.updateEdible(edible) )
     }.recover { case NonFatal(error) => Fault("Update edible failed:", error) }
      .get
+
+  private def listDrinkables(profileId: Long): Event =
+    Try {
+      DrinkablesListed( store.listDrinkables(profileId) )
+    }.recover { case NonFatal(error) => Fault("List drinkables failed:", error) }
+     .get
