@@ -73,3 +73,14 @@ object Validator:
       drinkable.count > 0 &&
       drinkable.calories >= 0 &&
       drinkable.drank > 0
+
+  extension (expendable: Expendable)
+    def isValid =
+      expendable.id >= 0 &&
+      expendable.profileId > 0 &&
+      expendable.kind.nonEmpty &&
+      expendable.detail.nonEmpty &&
+      expendable.calories > 0 &&
+      expendable.start > 0 &&
+      expendable.finish > 0 &&
+      expendable.finish > expendable.start
