@@ -1,5 +1,8 @@
 package objektwerks
 
+import scala.util.Try
+import scala.util.control.NonFatal
+
 final class Dispatcher(store: Store, emailer: Emailer):
   def dispatch[E <: Event](command: Command): Event =
     if !command.isValid then Fault(s"Command is invalid: $command")
