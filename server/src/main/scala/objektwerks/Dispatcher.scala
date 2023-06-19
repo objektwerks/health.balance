@@ -75,7 +75,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
 
   private def listProfiles(): Event =
     Try {
-      ProfilesListed(store.listProfiles())
+      ProfilesListed( store.listProfiles() )
     }.recover { case NonFatal(error) => Fault("List profiles failed:", error) }
      .get
 
@@ -89,4 +89,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
     Try {
       ProfileAdded( store.updateProfile(profile) )
     }.recover { case NonFatal(error) => Fault("Update profile failed:", error) }
+     .get
+
+  private def listEdibles(profileId: Long): Event =
+    Try {
+      EdiblesListed( store.listEdibles(profileId) )
+    }.recover { case NonFatal(error) => Fault("List edibles failed:", error) }
      .get
