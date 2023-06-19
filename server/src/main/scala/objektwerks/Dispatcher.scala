@@ -156,3 +156,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
       MeasurablesListed( store.listMeasurables(profileId) )
     }.recover { case NonFatal(error) => Fault("List measurables failed:", error) }
      .get
+
+  private def addMeasurable(measurable: Measurable): Event =
+    Try {
+      MeasurableAdded( store.addMeasurable(measurable) )
+    }.recover { case NonFatal(error) => Fault("Add measurable failed:", error) }
+     .get
+
+  private def updateMeasurable(measurable: Measurable): Event =
+    Try {
+      MeasurableUpdated( store.updateMeasurable(measurable) )
+    }.recover { case NonFatal(error) => Fault("Updated measurable failed:", error) }
+     .get
