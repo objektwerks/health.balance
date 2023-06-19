@@ -3,6 +3,8 @@ package objektwerks
 import scala.util.Try
 import scala.util.control.NonFatal
 
+import Validator.*
+
 final class Dispatcher(store: Store, emailer: Emailer):
   def dispatch[E <: Event](command: Command): Event =
     if !command.isValid then Fault(s"Command is invalid: $command")
@@ -16,8 +18,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case Login(emailAddress, pin)        => login(emailAddress, pin)
       case Deactivate(license)             => deactivateAccount(license)
       case Reactivate(license)             => reactivateAccount(license)
-      case ListProfiles(license)           => listProfiles(license)
+      case ListProfiles(license)           => listProfiles()
       case AddProfile(_, profile)          => addProfile(profile)
+      case UpdateProfile(_, profile)       => updateProfile(profile)
+      case _ => Fault("", 0) // TODO!
 
   private def isAuthorized(command: Command): Event =
     command match
@@ -79,4 +83,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
     Try {
       ProfileAdded( store.addProfile(profile) )
     }.recover { case NonFatal(error) => Fault("Add profile failed:", error) }
+     .get
+
+  private def updateProfile(profile: Profile): Event =
+    Try {
+      ProfileAdded( store.updateProfile(profile) )
+    }.recover { case NonFatal(error) => Fault("Update profile failed:", error) }
      .get
