@@ -138,3 +138,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
       ExpendablesListed( store.listExpendables(profileId) )
     }.recover { case NonFatal(error) => Fault("List expendables failed:", error) }
      .get
+
+  private def addExpendable(expendable: Expendable): Event =
+    Try {
+      ExpendableAdded( store.addExpendable(expendable) )
+    }.recover { case NonFatal(error) => Fault("Add expendable failed:", error) }
+     .get
