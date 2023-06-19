@@ -41,6 +41,15 @@ object Validator:
   extension (updateProfile: UpdateProfile)
     def isValid: Boolean = updateProfile.license.isLicense && updateProfile.profile.isValid
 
+  extension (listEdibles: ListEdibles)
+    def isValid: Boolean = listEdibles.license.isLicense
+
+  extension (addEdible: AddEdible)
+    def isValid: Boolean = addEdible.license.isLicense && addEdible.edible.isValid
+
+  extension (updateEdible: UpdateEdible)
+    def isValid: Boolean = updateEdible.license.isLicense && updateEdible.edible.isValid
+
   extension (account: Account)
     def isActivated: Boolean =
       account.id >= 0 &&
