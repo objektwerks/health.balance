@@ -68,3 +68,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
         if optionalAccount.isDefined then Reactivated(optionalAccount.get)
         else Fault(s"Reactivate account failed for license: $license")
     )
+
+  private def listProfiles(): Event =
+    Try {
+      ProfilesListed(store.listProfiles())
+    }.recover { case NonFatal(error) => Fault("List profiles failed:", error) }
+     .get
+
+  private def addProfile(profile: Profile): Event =
+    Try {
+      ProfileAdded( store.addProfile(profile) )
+    }.recover { case NonFatal(error) => Fault("Add profile failed:", error) }
+     .get
