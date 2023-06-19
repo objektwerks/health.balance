@@ -54,3 +54,12 @@ object Validator:
       profile.accountId > 0 &&
       profile.name.nonEmpty &&
       profile.created > 0
+
+  extension (edible: Edible)
+    def isValid =
+      edible.id >= 0 &&
+      edible.profileId > 0 &&
+      edible.kind.nonEmpty &&
+      edible.detail.nonEmpty &&
+      edible.calories > 0 &&
+      edible.ate > 0
