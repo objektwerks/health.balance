@@ -32,6 +32,15 @@ object Validator:
   extension  (license: License)
     def isLicense: Boolean = license.license.isLicense
 
+  extension (listProfiles: ListProfiles)
+    def isValid: Boolean = listProfiles.license.isLicense
+
+  extension (addProfile: AddProfile)
+    def isValid: Boolean = addProfile.license.isLicense && addProfile.profile.isValid
+
+  extension (updateProfile: UpdateProfile)
+    def isValid: Boolean = updateProfile.license.isLicense && updateProfile.profile.isValid
+
   extension (account: Account)
     def isActivated: Boolean =
       account.id >= 0 &&
