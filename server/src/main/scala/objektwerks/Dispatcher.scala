@@ -60,3 +60,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
         if optionalAccount.isDefined then Deactivated(optionalAccount.get)
         else Fault(s"Deactivate account failed for license: $license")
     )
+
+  private def reactivateAccount(license: String): Event =
+    Try { store.reactivateAccount(license) }.fold(
+      error => Fault("Reactivate account failed:", error),
+      optionalAccount =>
+        if optionalAccount.isDefined then Reactivated(optionalAccount.get)
+        else Fault(s"Reactivate account failed for license: $license")
+    )
