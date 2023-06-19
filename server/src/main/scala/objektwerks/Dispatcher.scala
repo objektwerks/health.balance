@@ -30,7 +30,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case ListExpendables(_, profileId)   => listExpendables(profileId)
       case AddExpendable(_, expendable)    => addExpendable(expendable)
       case UpdateExpendable(_, expendable) => updateExpendable(expendable)
-      case _ => Fault("", 0) // TODO!
+      case ListMeasurables(_, profileId)   => listMeasurables(profileId)
+      case AddMeasurable(_, measurable)    => addMeasurable(measurable)
+      case UpdateMeasurable(_, measurable) => updateMeasurable(measurable)
 
   private def isAuthorized(command: Command): Event =
     command match
