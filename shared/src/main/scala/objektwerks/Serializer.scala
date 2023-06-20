@@ -38,3 +38,6 @@ object Serializer:
   given JsonValueCodec[EdiblesListed] = JsonCodecMaker.make[EdiblesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[EdibleAdded] = JsonCodecMaker.make[EdibleAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[EdibleUpdated] = JsonCodecMaker.make[EdibleUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[DrinkablesListed] = JsonCodecMaker.make[DrinkablesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[DrinkableAdded] = JsonCodecMaker.make[DrinkableAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[DrinkableUpdated] = JsonCodecMaker.make[DrinkableUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )
