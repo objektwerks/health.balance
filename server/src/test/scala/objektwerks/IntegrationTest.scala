@@ -20,7 +20,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   val emailer = Emailer(config)
   val dispatcher = Dispatcher(store, emailer)
 
-  var testAccount = Account()
+  var testAccount = Account(emailAddress = "fred.flintstone@email.com")
   var testProfile = Profile(accountId = testAccount.id, name = "Fred Flintstone")
   var testEdible = Edible(profileId = testProfile.id)
   var testDrinkable = Drinkable(profileId = testProfile.id)
