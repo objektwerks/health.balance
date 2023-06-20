@@ -50,3 +50,6 @@ object Serializer:
   given JsonValueCodec[ExpendablesListed] = JsonCodecMaker.make[ExpendablesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[ExpendableAdded] = JsonCodecMaker.make[ExpendableAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[ExpendableUpdated] = JsonCodecMaker.make[ExpendableUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[MeasurablesListed] = JsonCodecMaker.make[MeasurablesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[MeasurableAdded] = JsonCodecMaker.make[MeasurableAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[MeasurableUpdated] = JsonCodecMaker.make[MeasurableUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )
