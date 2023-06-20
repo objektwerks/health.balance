@@ -10,3 +10,4 @@ object Serializer:
   given JsonValueCodec[Edible] = JsonCodecMaker.make[Edible]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[Drinkable] = JsonCodecMaker.make[Drinkable]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[Expendable] = JsonCodecMaker.make[Expendable]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[Measurable] = JsonCodecMaker.make[Measurable]( CodecMakerConfig.withDiscriminatorFieldName(None) )
