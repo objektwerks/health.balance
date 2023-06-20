@@ -32,3 +32,6 @@ object Serializer:
   given JsonValueCodec[ProfilesListed] = JsonCodecMaker.make[ProfilesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[ProfileAdded] = JsonCodecMaker.make[ProfileAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[ProfileUpdated] = JsonCodecMaker.make[ProfileUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[EdiblesListed] = JsonCodecMaker.make[EdiblesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[EdibleAdded] = JsonCodecMaker.make[EdibleAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[EdibleUpdated] = JsonCodecMaker.make[EdibleUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )
