@@ -8,7 +8,7 @@ import org.scalatest.matchers.should.Matchers
 import scala.concurrent.duration.*
 import scala.sys.process.Process
 
-// import Validator.*
+import Validator.*
 
 class IntegrationTest extends AnyFunSuite with Matchers:
   val exitCode = Process("psql -d healthbalance -f ddl.sql").run().exitValue()
@@ -26,3 +26,15 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   var testDrinkable = Drinkable(profileId = testProfile.id)
   var testExpendable = Expendable(profileId = testProfile.id)
   var testMeasurable = Measurable(profileId = testProfile.id)
+
+  test("integration") {
+    register
+  }
+
+  def register: Unit =
+    val register = Register(config.getString("email.sender"))
+    dispatcher.dispatch(register) match
+      case Registered(account) =>
+        assert( account.isActivated )
+        testAccount = account
+      case fault => fail(s"Invalid registered event: $fault")
