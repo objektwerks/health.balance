@@ -8,3 +8,4 @@ object Serializer:
   given JsonValueCodec[Account] = JsonCodecMaker.make[Account]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[Profile] = JsonCodecMaker.make[Profile]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[Edible] = JsonCodecMaker.make[Edible]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[Drinkable] = JsonCodecMaker.make[Drinkable]( CodecMakerConfig.withDiscriminatorFieldName(None) )
