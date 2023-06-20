@@ -24,6 +24,9 @@ object Serializer:
   given JsonValueCodec[ListEdibles] = JsonCodecMaker.make[ListEdibles]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[AddEdible] = JsonCodecMaker.make[AddEdible]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[UpdateEdible] = JsonCodecMaker.make[UpdateEdible]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[ListDrinkables] = JsonCodecMaker.make[ListDrinkables]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[AddDrinkable] = JsonCodecMaker.make[AddDrinkable]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[UpdateDrinkable] = JsonCodecMaker.make[UpdateDrinkable]( CodecMakerConfig.withDiscriminatorFieldName(None) )
 
   given JsonValueCodec[Event] = JsonCodecMaker.make[Event]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[Registered] = JsonCodecMaker.make[Registered]( CodecMakerConfig.withDiscriminatorFieldName(None) )
