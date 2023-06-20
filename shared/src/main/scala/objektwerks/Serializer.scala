@@ -26,3 +26,6 @@ object Serializer:
   given JsonValueCodec[Registered] = JsonCodecMaker.make[Registered]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[LoggedIn] = JsonCodecMaker.make[LoggedIn]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[Fault] = JsonCodecMaker.make[Fault]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[ProfilesListed] = JsonCodecMaker.make[ProfilesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[ProfileAdded] = JsonCodecMaker.make[ProfileAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[ProfileUpdated] = JsonCodecMaker.make[ProfileUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )

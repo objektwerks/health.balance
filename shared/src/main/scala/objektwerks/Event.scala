@@ -16,7 +16,7 @@ final case class Reactivated(account: Account) extends Event
 
 final case class ProfilesListed(profiles: List[Profile]) extends Event
 final case class ProfileAdded(id: Long) extends Event
-final case class ProfileUpdate(id: Long) extends Event
+final case class ProfileUpdated(id: Long) extends Event
 
 final case class EdiblesListed(edibles: List[Edible]) extends Event
 final case class EdibleAdded(id: Long) extends Event
