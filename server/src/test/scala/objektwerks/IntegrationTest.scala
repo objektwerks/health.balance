@@ -32,6 +32,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     login
 
     deactivate
+    reactivate
   }
 
   def register: Unit =
@@ -53,3 +54,9 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     dispatcher.dispatch(deactivate) match
       case Deactivated(account) => assert( account.isDeactivated )
       case fault => fail(s"Invalid deactivated event: $fault")
+
+  def reactivate: Unit =
+    val reactivate = Reactivate(testAccount.license)
+    dispatcher.dispatch(reactivate) match
+      case Reactivated(account) => assert( account.isActivated )
+      case fault => fail(s"Invalid reactivated event: $fault")
