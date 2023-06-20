@@ -23,3 +23,4 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   var testAccount = Account()
   var testProfile = Profile(accountId = testAccount.id, name = "Fred Flintstone")
   var testEdible = Edible(profileId = testProfile.id)
+  var testDrinkable = Drinkable(profileId = testProfile.id)
