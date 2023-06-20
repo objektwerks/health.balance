@@ -29,6 +29,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
 
   test("integration") {
     register
+    login
   }
 
   def register: Unit =
@@ -38,3 +39,9 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         assert( account.isActivated )
         testAccount = account
       case fault => fail(s"Invalid registered event: $fault")
+
+  def login: Unit =
+    val login = Login(testAccount.emailAddress, testAccount.pin)
+    dispatcher.dispatch(login) match
+      case LoggedIn(account) => account shouldBe testAccount
+      case fault => fail(s"Invalid loggedin event: $fault")
