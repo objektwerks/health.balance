@@ -142,6 +142,13 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         testExpendable = testExpendable.copy(id = id)
       case fault => fail(s"Invalid expendable added event: $fault")
 
+  def updateExpendable: Unit =
+    testExpendable = testExpendable.copy(detail = "5 mile walk")
+    val updateExpendable = UpdateExpendable(testAccount.license, testExpendable)
+    dispatcher.dispatch(updateExpendable) match
+      case ExpendableUpdated(id) => id shouldBe testExpendable.id
+      case fault => fail(s"Invalid expendable updated event: $fault")
+
   def listExpendables: Unit =
     val listExpendables = ListExpendables(testAccount.license, testProfile.id)
     dispatcher.dispatch(listExpendables) match
