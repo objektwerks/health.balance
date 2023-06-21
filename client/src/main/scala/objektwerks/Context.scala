@@ -31,6 +31,12 @@ final class Context(config: Config):
   val dialogAccount = config.getString("dialog.account")
   val dialogFaults = config.getString("dialog.faults")
 
+  val labelLicense = config.getString("label.license")
+  val labelEmailAddress = config.getString("label.emailAddress")
+  val labelPin = config.getString("label.pin")
+  val labelActivated = config.getString("label.activated")
+  val labelDeactivated = config.getString("label.deactivated")
+
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
