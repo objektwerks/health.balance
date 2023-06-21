@@ -25,7 +25,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   var testEdible = Edible(profileId = testProfile.id, detail = "apple", calories = 80)
   var testDrinkable = Drinkable(profileId = testProfile.id, detail = "juice", calories = 100)
   var testExpendable = Expendable(profileId = testProfile.id, detail = "walk", calories = 300)
-  var testMeasurable = Measurable(profileId = testProfile.id)
+  var testMeasurable = Measurable(profileId = testProfile.id, measurement = 60)
 
   test("integration") {
     register
@@ -137,7 +137,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   def addExpendable: Unit =
     val addExpendable = AddExpendable(testAccount.license, testExpendable)
     dispatcher.dispatch(addExpendable) match
-      case DrinkableAdded(id) =>
+      case ExpendableAdded(id) =>
         id should not be 0
         testExpendable = testExpendable.copy(id = id)
       case fault => fail(s"Invalid expendable added event: $fault")
@@ -149,6 +149,14 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         expendables.length shouldBe 1
         expendables.head shouldBe testExpendable
       case fault => fail(s"Invalid expendables listed event: $fault")
+
+  def addMeasurable: Unit =
+    val addMeasurable = AddMeasurable(testAccount.license, testMeasurable)
+    dispatcher.dispatch(addMeasurable) match
+      case MeasurableAdded(id) =>
+        id should not be 0
+        testMeasurable = testMeasurable.copy(id = id)
+      case fault => fail(s"Invalid measurable added event: $fault")
 
   def listMeasurables: Unit =
     val listMeasurables = ListMeasurables(testAccount.license, testProfile.id)
