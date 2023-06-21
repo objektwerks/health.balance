@@ -141,3 +141,11 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         expendables.length shouldBe 1
         expendables.head shouldBe testExpendable
       case fault => fail(s"Invalid expendables listed event: $fault")
+
+  def listMeasurables: Unit =
+    val listMeasurables = ListMeasurables(testAccount.license, testProfile.id)
+    dispatcher.dispatch(listMeasurables) match
+      case MeasurablesListed(measurables) =>
+        measurables.length shouldBe 1
+        measurables.head shouldBe testMeasurable
+      case fault => fail(s"Invalid measurables listed event: $fault")
