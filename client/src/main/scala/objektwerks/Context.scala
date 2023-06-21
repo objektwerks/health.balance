@@ -27,6 +27,10 @@ final class Context(config: Config):
   val buttonActivate = config.getString("button.activate")
   val buttonDeactivate = config.getString("button.deactivate")
 
+  val dialogRegisterLogin = config.getString("dialog.registerLogin")
+  val dialogAccount = config.getString("dialog.account")
+  val dialogFaults = config.getString("dialog.faults")
+
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
