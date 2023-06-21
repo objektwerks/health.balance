@@ -87,3 +87,11 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         profiles.length shouldBe 1
         profiles.head shouldBe testProfile
       case fault => fail(s"Invalid profiles listed event: $fault")
+
+  def addEdible: Unit =
+    val addEdible = AddEdible(testAccount.license, testEdible)
+    dispatcher.dispatch(addEdible) match
+      case EdibleAdded(id) =>
+        id should not be 0
+        testEdible = testEdible.copy(id = id)
+      case fault => fail(s"Invalid edible added event: $fault")
