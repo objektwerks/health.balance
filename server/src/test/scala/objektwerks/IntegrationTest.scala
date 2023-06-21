@@ -95,3 +95,10 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         id should not be 0
         testEdible = testEdible.copy(id = id)
       case fault => fail(s"Invalid edible added event: $fault")
+
+  def updateEdible: Unit =
+    testEdible = testEdible.copy(detail = "apple")
+    val updateEdible = UpdateEdible(testAccount.license, testEdible)
+    dispatcher.dispatch(updateEdible) match
+      case EdibleUpdated(id) => id shouldBe testEdible.id
+      case fault => fail(s"Invalid edible updated event: $fault")
