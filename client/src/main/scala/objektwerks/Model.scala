@@ -14,6 +14,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val loggedin = ObjectProperty[Boolean](true)
 
   val observableAccount = ObjectProperty[Account](Account.empty)
+  val observableProfiles = ObservableBuffer[Profile]()
+  val observableEdibles = ObservableBuffer[Edible]()
+  val observableDrinkables = ObservableBuffer[Drinkable]()
+  val observableExpendables = ObservableBuffer[Expendable]()
+  val observableMeasurables = ObservableBuffer[Measurable]()
   val observableFaults = ObservableBuffer[Fault]()
 
   def onFault(cause: String): Unit =
