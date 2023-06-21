@@ -60,3 +60,15 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     dispatcher.dispatch(reactivate) match
       case Reactivated(account) => assert( account.isActivated )
       case fault => fail(s"Invalid reactivated event: $fault")
+
+  def addProfile: Unit =
+    val addProfile = AddProfile(testAccount.license, testProfile)
+    dispatcher.dispatch(addProfile) match
+      case ProfileAdded(id) =>
+        id should not be 0
+        testProfile = testProfile.copy(id = id)
+        testEdible = testEdible.copy(profileId = id)
+        testDrinkable = testDrinkable.copy(profileId = id)
+        testExpendable = testExpendable.copy(profileId = id)
+        testMeasurable = testMeasurable.copy(profileId = id)
+      case fault => fail(s"Invalid pool saved event: $fault")
