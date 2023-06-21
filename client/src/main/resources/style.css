@@ -1,0 +1,28 @@
+.button {
+  -fx-text-fill: navy
+}
+.button .cancel {
+  -fx-text-fill: navy
+}
+.label {
+  -fx-text-fill: navy
+}
+.slider .axis {
+  -fx-tick-label-fill: navy
+}
+.tab-label {
+  -fx-text-fill: navy
+}
+.table-cell {
+  -fx-text-fill: navy
+}
+.text-input {
+  -fx-text-fill: navy
+}
+.titled-pane {
+  -fx-text-fill: navy
+}
+.tooltip {
+  -fx-show-delay: 100ms;
+  -fx-show-duration: 6s
+}
