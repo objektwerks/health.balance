@@ -9,7 +9,6 @@ import scala.concurrent.duration.*
 import scala.sys.process.Process
 
 import Validator.*
-import objektwerks.Measurable.measurement
 
 class IntegrationTest extends AnyFunSuite with Matchers:
   val exitCode = Process("psql -d healthbalance -f ddl.sql").run().exitValue()
