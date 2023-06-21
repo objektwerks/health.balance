@@ -16,6 +16,17 @@ final class Context(config: Config):
   val errorRegister = config.getString("error.register")
   val errorLogin = config.getString("error.login")
 
+  val buttonAdd = config.getString("button.add")
+  val buttonEdit = config.getString("button.edit")
+  val buttonSave = config.getString("button.save")
+  val buttonChart = config.getString("button.chart")
+  val buttonFaults = config.getString("button.faults")
+  val buttonRegister = config.getString("button.register")
+  val buttonLogin = config.getString("button.login")
+  val buttonAccount = config.getString("button.account")
+  val buttonActivate = config.getString("button.activate")
+  val buttonDeactivate = config.getString("button.deactivate")
+
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")
