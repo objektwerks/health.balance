@@ -16,4 +16,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableAccount = ObjectProperty[Account](Account.empty)
   val observableFaults = ObservableBuffer[Fault]()
 
-  println(fetcher)
+  def onFault(cause: String): Unit =
+    observableFaults += Fault(cause)
+    logger.error(cause)
+
+  def onFault(error: Throwable, cause: String): Unit =
+    observableFaults += Fault(cause)
+    logger.error(cause, error)
+
+  def onFault(source: String, fault: Fault): Unit =
+    observableFaults += fault
+    logger.error(s"*** $source - $fault")
+
+  def onFault(source: String, entity: Entity, fault: Fault): Unit =
+    observableFaults += fault
+    logger.error(s"*** $source - $entity - $fault")
