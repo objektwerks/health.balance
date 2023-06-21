@@ -4,6 +4,7 @@ import com.typesafe.scalalogging.LazyLogging
 
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
+import scalafx.collections.ObservableBuffer
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
@@ -11,5 +12,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   val registered = ObjectProperty[Boolean](true)
   val loggedin = ObjectProperty[Boolean](true)
+
+  val observableAccount = ObjectProperty[Account](Account.empty)
+  val observableFaults = ObservableBuffer[Fault]()
 
   println(fetcher)
