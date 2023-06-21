@@ -9,6 +9,7 @@ import scala.concurrent.duration.*
 import scala.sys.process.Process
 
 import Validator.*
+import objektwerks.Measurable.measurement
 
 class IntegrationTest extends AnyFunSuite with Matchers:
   val exitCode = Process("psql -d healthbalance -f ddl.sql").run().exitValue()
@@ -164,6 +165,13 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         id should not be 0
         testMeasurable = testMeasurable.copy(id = id)
       case fault => fail(s"Invalid measurable added event: $fault")
+
+  def updateMeasurable: Unit =
+    testMeasurable = testMeasurable.copy(measurement = 59)
+    val updateMeasurable = UpdateMeasurable(testAccount.license, testMeasurable)
+    dispatcher.dispatch(updateMeasurable) match
+      case MeasurableUpdated(id) => id shouldBe testMeasurable.id
+      case fault => fail(s"Invalid measurable updated event: $fault")
 
   def listMeasurables: Unit =
     val listMeasurables = ListMeasurables(testAccount.license, testProfile.id)
