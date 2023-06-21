@@ -13,6 +13,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val registered = ObjectProperty[Boolean](true)
   val loggedin = ObjectProperty[Boolean](true)
 
+  val selectedProfileId = ObjectProperty[Long](0)
+  val selectedEdibleId = ObjectProperty[Long](0)
+  val selectedDrinkableId = ObjectProperty[Long](0)
+  val selectedExpendableId = ObjectProperty[Long](0)
+  val selectedMeasurableId = ObjectProperty[Long](0)
+
   val observableAccount = ObjectProperty[Account](Account.empty)
   val observableProfiles = ObservableBuffer[Profile]()
   val observableEdibles = ObservableBuffer[Edible]()
