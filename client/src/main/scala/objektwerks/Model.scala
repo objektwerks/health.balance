@@ -89,3 +89,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case Reactivated(account) => observableAccount.set(account)
         case _ => ()
     )
+
+  def profiles(): Unit =
+    fetcher.fetchAsync(
+      ListProfiles(observableAccount.get.license),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.profiles", fault)
+        case ProfilesListed(profiles) =>
+          observableProfiles.clear()
+          observableProfiles ++= profiles
+        case _ => ()
+    )
