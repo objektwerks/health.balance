@@ -133,3 +133,11 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         drinkables.length shouldBe 1
         drinkables.head shouldBe testDrinkable
       case fault => fail(s"Invalid drinkables listed event: $fault")
+
+  def listExpendables: Unit =
+    val listExpendables = ListExpendables(testAccount.license, testProfile.id)
+    dispatcher.dispatch(listExpendables) match
+      case ExpendablesListed(expendables) =>
+        expendables.length shouldBe 1
+        expendables.head shouldBe testExpendable
+      case fault => fail(s"Invalid expendables listed event: $fault")
