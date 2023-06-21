@@ -11,3 +11,5 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   val registered = ObjectProperty[Boolean](true)
   val loggedin = ObjectProperty[Boolean](true)
+
+  println(fetcher)
