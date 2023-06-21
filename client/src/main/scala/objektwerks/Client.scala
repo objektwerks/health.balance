@@ -5,6 +5,8 @@ import com.typesafe.scalalogging.LazyLogging
 
 import scalafx.application.JFXApp3
 
+import dialog.{Alerts, RegisterLoginDialog}
+
 object Client extends JFXApp3 with LazyLogging:
   private val conf = ConfigFactory.load("client.conf")
   private val context = Context(conf)
