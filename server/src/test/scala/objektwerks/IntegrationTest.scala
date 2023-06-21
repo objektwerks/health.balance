@@ -125,3 +125,11 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     dispatcher.dispatch(updateDrinkable) match
       case DrinkableUpdated(id) => id shouldBe testDrinkable.id
       case fault => fail(s"Invalid drinkable updated event: $fault")
+
+  def listDrinkables: Unit =
+    val listDrinkables = ListDrinkables(testAccount.license, testProfile.id)
+    dispatcher.dispatch(listDrinkables) match
+      case EdiblesListed(drinkables) =>
+        drinkables.length shouldBe 1
+        drinkables.head shouldBe testDrinkable
+      case fault => fail(s"Invalid drinkables listed event: $fault")
