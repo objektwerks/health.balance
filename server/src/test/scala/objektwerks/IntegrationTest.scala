@@ -21,7 +21,7 @@ class IntegrationTest extends AnyFunSuite with Matchers:
   val dispatcher = Dispatcher(store, emailer)
 
   var testAccount = Account()
-  var testProfile = Profile(accountId = testAccount.id, name = "Fred Flintstone")
+  var testProfile = Profile(accountId = testAccount.id, name = "Fred")
   var testEdible = Edible(profileId = testProfile.id)
   var testDrinkable = Drinkable(profileId = testProfile.id)
   var testExpendable = Expendable(profileId = testProfile.id)
@@ -71,4 +71,11 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         testDrinkable = testDrinkable.copy(profileId = id)
         testExpendable = testExpendable.copy(profileId = id)
         testMeasurable = testMeasurable.copy(profileId = id)
-      case fault => fail(s"Invalid pool saved event: $fault")
+      case fault => fail(s"Invalid profile added event: $fault")
+
+  def updateProfile: Unit =
+    testProfile = testProfile.copy(name = "Fred Flintstone")
+    val updateProfile = UpdateProfile(testAccount.license, testProfile)
+    dispatcher.dispatch(updateProfile) match
+      case ProfileUpdated(id) => id shouldBe testProfile.id
+      case fault => fail(s"Invalid profile updated event: $fault")
