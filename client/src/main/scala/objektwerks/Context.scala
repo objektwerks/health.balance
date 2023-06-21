@@ -11,6 +11,12 @@ final class Context(config: Config):
   val windowHeight = config.getDouble("window.height")
 
   def logoImage = loadImageView("/image/logo.png")
+  def addImage = loadImageView("/image/add.png")
+  def editImage = loadImageView("/image/edit.png")
+  def chartImage = loadImageView("/image/chart.png")
+  def faultsImage = loadImageView("/image/faults.png")
+  def accountImage = loadImageView("/image/account.png")
+
   def logo = new Image(Image.getClass.getResourceAsStream("/image/logo.png"))
 
   private def loadImageView(path: String): ImageView = new ImageView:
