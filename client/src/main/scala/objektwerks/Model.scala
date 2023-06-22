@@ -219,3 +219,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableMeasurables ++= measurables
         case _ => ()
     )
+
+  def add(measurable: Measurable): Unit =
+    fetcher.fetchAsync(
+      AddMeasurable(observableAccount.get.license, measurable),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add measurable", measurable, fault)
+        case MeasurableAdded(id) =>
+          observableMeasurables += measurable.copy(id = id)
+          observableMeasurables.sort()
+          selectedMeasurableId.set(measurable.id)
+        case _ => ()
+    )
