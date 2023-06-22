@@ -100,3 +100,16 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableProfiles ++= profiles
         case _ => ()
     )
+
+  def add(profile: Profile): Unit =
+    fetcher.fetchAsync(
+      AddProfile(observableAccount.get.license, profile),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add profile", profile, fault)
+        case ProfileAdded(id) =>
+          observableProfiles += profile.copy(id = id)
+          //observablePools.update(observablePools.indexOf(pool), pool)
+          observableProfiles.sort()
+          selectedProfileId.set(profile.id)
+        case _ => ()
+    )
