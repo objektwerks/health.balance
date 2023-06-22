@@ -121,3 +121,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case ProfileAdded(id) => observableProfiles.update(observableProfiles.indexOf(profile), profile)
         case _ => ()
     )
+
+  def edibles(profileId: Long): Unit =
+    fetcher.fetchAsync(
+      ListEdibles(observableAccount.get.license, profileId),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.edibles", fault)
+        case EdiblesListed(edibles) =>
+          observableEdibles.clear()
+          observableEdibles ++= edibles
+        case _ => ()
+    )
