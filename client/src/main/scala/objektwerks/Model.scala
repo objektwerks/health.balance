@@ -117,7 +117,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddProfile(observableAccount.get.license, profile),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFault("Model.add profile", profile, fault)
+        case fault @ Fault(_, _) => onFault("Model.update profile", profile, fault)
         case ProfileAdded(id) => observableProfiles.update(observableProfiles.indexOf(profile), profile)
         case _ => ()
     )
