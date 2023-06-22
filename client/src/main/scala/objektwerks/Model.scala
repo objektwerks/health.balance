@@ -197,6 +197,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
+  def add(expendable: Expendable): Unit =
+    fetcher.fetchAsync(
+      AddExpendable(observableAccount.get.license, expendable),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add expendable", expendable, fault)
+        case ExpendableAdded(id) =>
+          observableExpendables += expendable.copy(id = id)
+          observableExpendables.sort()
+          selectedExpendableId.set(expendable.id)
+        case _ => ()
+    )
+
   def measurables(profileId: Long): Unit =
     fetcher.fetchAsync(
       ListMeasurables(observableAccount.get.license, profileId),
