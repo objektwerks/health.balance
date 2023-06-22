@@ -132,3 +132,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableEdibles ++= edibles
         case _ => ()
     )
+
+  def add(edible: Edible): Unit =
+    fetcher.fetchAsync(
+      AddEdible(observableAccount.get.license, edible),
+      (event: Event) => event match
+        case fault @ Fault(_, _) => onFault("Model.add edible", edible, fault)
+        case EdibleAdded(id) =>
+          observableEdibles += edible.copy(id = id)
+          observableEdibles.sort()
+          selectedEdibleId.set(edible.id)
+        case _ => ()
+    )
