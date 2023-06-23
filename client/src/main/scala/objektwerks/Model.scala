@@ -59,7 +59,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       AddFault(observableAccount.get.license, fault),
       (event: Event) => event match
         case fault @ Fault(cause, _) => logger.error(cause)
-        case FaultAdded() => observableFaults += fault
+        case FaultAdded() =>
+          observableFaults += fault
+          observableFaults.sort()
         case _ => ()
     )
 
