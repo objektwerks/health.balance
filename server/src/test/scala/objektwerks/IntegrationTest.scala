@@ -179,3 +179,8 @@ class IntegrationTest extends AnyFunSuite with Matchers:
         measurables.length shouldBe 1
         measurables.head shouldBe testMeasurable
       case fault => fail(s"Invalid measurables listed event: $fault")
+
+  def fault: Unit =
+    val fault = Fault("error message")
+    store.addFault(fault)
+    store.listFaults().length shouldBe 1
