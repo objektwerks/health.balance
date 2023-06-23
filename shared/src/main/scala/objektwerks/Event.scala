@@ -35,6 +35,8 @@ final case class MeasurableAdded(id: Long) extends Event
 final case class MeasurableUpdated(id: Long) extends Event
 
 object Fault:
+  given faultOrdering: Ordering[Fault] = Ordering.by[Fault, Long](f => f.occurred).reverse
+
   def apply(cause: String, throwable: Throwable): Fault = Fault(cause = s"$cause ${throwable.getMessage}")
 
 final case class Fault(cause: String, occurred: Long = Instant.now.getEpochSecond) extends Event:
