@@ -48,7 +48,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def onFault(source: String, fault: Fault): Unit =
     logger.error(s"*** $source - $fault")
-    add(fault)
 
   def onFault(source: String, entity: Entity, fault: Fault): Unit =
     logger.error(s"*** $source - $entity - $fault")
