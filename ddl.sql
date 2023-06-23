@@ -10,12 +10,6 @@ CREATE TABLE account (
   deactivated BIGINT NOT NULL
 );
 
-CREATE TABLE fault (
-  id BIGSERIAL PRIMARY KEY,
-  cause VARCHAR NOT NULL,
-  occurred BIGINT NOT NULL
-);
-
 CREATE TABLE profile (
   id BIGSERIAL PRIMARY KEY,
   account_id BIGINT REFERENCES account(id),
@@ -62,4 +56,10 @@ CREATE TABLE measurable (
   measurement INT NOT NULL,
   unit VARCHAR NOT NULL,
   measured BIGINT NOT NULL
+);
+
+CREATE TABLE fault (
+  id BIGSERIAL PRIMARY KEY,
+  cause VARCHAR NOT NULL,
+  occurred BIGINT NOT NULL
 );
