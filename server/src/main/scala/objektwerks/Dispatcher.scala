@@ -14,7 +14,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case fault @ Fault(_, _) => store.addFault(fault)
       case _ =>
         
-    command match
+    val event = command match
       case Register(emailAddress)          => register(emailAddress)
       case Login(emailAddress, pin)        => login(emailAddress, pin)
       case Deactivate(license)             => deactivateAccount(license)
@@ -35,6 +35,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case AddMeasurable(_, measurable)    => addMeasurable(measurable)
       case UpdateMeasurable(_, measurable) => updateMeasurable(measurable)
       case AddFault(_, fault)              => addFault(fault)
+
+    event match
+      case fault @ Fault(_, _) => store.addFault(fault)
+      case _ => event
 
   private def isAuthorized(command: Command): Event =
     command match
