@@ -34,6 +34,10 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     deactivate
     reactivate
 
+    addProfile
+    updateProfile
+    listProfiles
+
     fault
   }
 
