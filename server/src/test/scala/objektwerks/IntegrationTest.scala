@@ -50,6 +50,10 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     updateExpendable
     listExpendables
 
+    addMeasurable
+    updateMeasurable
+    listMeasurables
+
     fault
   }
 
