@@ -35,7 +35,7 @@ final case class MeasurableAdded(id: Long) extends Event
 final case class MeasurableUpdated(id: Long) extends Event
 
 object Fault:
-  def apply(message: String, throwable: Throwable): Fault = Fault(s"$message ${throwable.getMessage}")
+  def apply(cause: String, throwable: Throwable): Fault = Fault(cause = s"$cause ${throwable.getMessage}")
 
 final case class Fault(cause: String, occurred: Long = Instant.now.getEpochSecond) extends Event:
   val causeProperty = ObjectProperty[String](this, "cause", cause)
