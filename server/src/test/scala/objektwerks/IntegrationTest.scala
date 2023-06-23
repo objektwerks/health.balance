@@ -38,6 +38,10 @@ class IntegrationTest extends AnyFunSuite with Matchers:
     updateProfile
     listProfiles
 
+    addEdible
+    updateEdible
+    listEdibles
+
     fault
   }
 
