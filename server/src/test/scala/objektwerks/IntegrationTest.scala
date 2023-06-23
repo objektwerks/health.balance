@@ -33,6 +33,8 @@ class IntegrationTest extends AnyFunSuite with Matchers:
 
     deactivate
     reactivate
+
+    fault
   }
 
   def register: Unit =
