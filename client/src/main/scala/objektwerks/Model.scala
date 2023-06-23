@@ -39,29 +39,27 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableFaults = ObservableBuffer[Fault]()
 
   def onFault(cause: String): Unit =
-    observableFaults += Fault(cause)
     logger.error(cause)
+    add( Fault(cause) )
 
   def onFault(cause: String, error: Throwable): Unit =
-    observableFaults += Fault(cause)
     logger.error(cause, error)
+    add( Fault(cause) )
 
   def onFault(source: String, fault: Fault): Unit =
-    observableFaults += fault
     logger.error(s"*** $source - $fault")
+    add(fault)
 
   def onFault(source: String, entity: Entity, fault: Fault): Unit =
-    observableFaults += fault
     logger.error(s"*** $source - $entity - $fault")
+    add(fault)
 
   def add(fault: Fault): Unit =
     fetcher.fetchAsync(
       AddFault(observableAccount.get.license, fault),
       (event: Event) => event match
-        case fault @ Fault(_, _) => logger.error(fault.toString)
-        case FaultAdded(id) =>
-          observableFaults += fault.copy(id = id)
-          observableFaults.sort()
+        case fault @ Fault(cause, _) => logger.error(cause)
+        case FaultAdded() => observableFaults += fault
         case _ => ()
     )
 

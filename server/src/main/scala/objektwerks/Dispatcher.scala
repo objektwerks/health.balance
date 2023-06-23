@@ -177,6 +177,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
 
   private def addFault(fault: Fault): Event =
     Try {
-      FaultAdded( store.addFault(fault) )
+      store.addFault(fault)
+      FaultAdded()
     }.recover { case NonFatal(error) => Fault("Add fault failed:", error) }
      .get
