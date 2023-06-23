@@ -54,3 +54,4 @@ object Serializer:
   given JsonValueCodec[MeasurablesListed] = JsonCodecMaker.make[MeasurablesListed]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[MeasurableAdded] = JsonCodecMaker.make[MeasurableAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
   given JsonValueCodec[MeasurableUpdated] = JsonCodecMaker.make[MeasurableUpdated]( CodecMakerConfig.withDiscriminatorFieldName(None) )
+  given JsonValueCodec[FaultAdded] = JsonCodecMaker.make[FaultAdded]( CodecMakerConfig.withDiscriminatorFieldName(None) )
