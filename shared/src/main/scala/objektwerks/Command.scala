@@ -30,3 +30,5 @@ final case class UpdateExpendable(license: String, expendable: Expendable) exten
 final case class ListMeasurables(license: String, profileId: Long) extends Command with License
 final case class AddMeasurable(license: String, measurable: Measurable) extends Command with License
 final case class UpdateMeasurable(license: String, measurable: Measurable) extends Command with License
+
+final case class AddFault(license: String, fault: Fault) extends Command with License
