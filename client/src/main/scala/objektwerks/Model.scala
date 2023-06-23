@@ -42,7 +42,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += Fault(cause)
     logger.error(cause)
 
-  def onFault(error: Throwable, cause: String): Unit =
+  def onFault(cause: String, error: Throwable): Unit =
     observableFaults += Fault(cause)
     logger.error(cause, error)
 
