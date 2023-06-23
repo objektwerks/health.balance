@@ -163,13 +163,6 @@ final class Store(config: Config,
       .list()
   }
 
-  def addFault(fault: Fault): Long = DB localTx { implicit session =>
-    sql"""
-      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
-      """
-      .updateAndReturnGeneratedKey()
-  }
-
   def listProfiles(): List[Profile] = DB readOnly { implicit session =>
     sql"select * from profile order by name"
       .map(rs =>
@@ -329,4 +322,11 @@ final class Store(config: Config,
        """
       .update()
     measurable.id
+  }
+
+  def addFault(fault: Fault): Long = DB localTx { implicit session =>
+    sql"""
+      insert into fault(cause, occurred) values(${fault.cause}, ${fault.occurred})
+      """
+      .updateAndReturnGeneratedKey()
   }
