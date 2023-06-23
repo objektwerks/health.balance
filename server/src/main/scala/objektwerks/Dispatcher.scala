@@ -10,7 +10,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     if !command.isValid then store.addFault( Fault(s"Command is invalid: $command") )
     
     isAuthorized(command) match
-      case Authorized(isAuthorized) => if !isAuthorized then Fault(s"License is unauthorized: $command")
+      case Authorized(isAuthorized) => if !isAuthorized then store.addFault( Fault(s"License is unauthorized: $command") )
       case fault @ Fault(_, _) => store.addFault(fault)
       case _ =>
         
