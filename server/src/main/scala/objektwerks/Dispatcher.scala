@@ -33,6 +33,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case ListMeasurables(_, profileId)   => listMeasurables(profileId)
       case AddMeasurable(_, measurable)    => addMeasurable(measurable)
       case UpdateMeasurable(_, measurable) => updateMeasurable(measurable)
+      case AddFault(_, fault)              => addFault(fault)
 
   private def isAuthorized(command: Command): Event =
     command match
@@ -172,4 +173,10 @@ final class Dispatcher(store: Store, emailer: Emailer):
     Try {
       MeasurableUpdated( store.updateMeasurable(measurable) )
     }.recover { case NonFatal(error) => Fault("Updated measurable failed:", error) }
+     .get
+
+  private def addFault(fault: Fault): Event =
+    Try {
+      FaultAdded( store.addFault(fault) )
+    }.recover { case NonFatal(error) => Fault("Add fault failed:", error) }
      .get
