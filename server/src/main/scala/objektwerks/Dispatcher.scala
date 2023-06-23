@@ -11,7 +11,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     
     isAuthorized(command) match
       case Authorized(isAuthorized) => if !isAuthorized then Fault(s"License is unauthorized: $command")
-      case fault @ Fault(_, _) => fault
+      case fault @ Fault(_, _) => store.addFault(fault)
       case _ =>
         
     command match
