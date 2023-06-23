@@ -12,7 +12,6 @@ CREATE TABLE account (
 
 CREATE TABLE fault (
   id BIGSERIAL PRIMARY KEY,
-  account_id BIGINT REFERENCES account(id),
   cause VARCHAR NOT NULL,
   occurred BIGINT NOT NULL
 );
