@@ -152,17 +152,6 @@ final class Store(config: Config,
       else None
     }
 
-  def listFaults(): List[Fault] = DB readOnly { implicit session =>
-    sql"select * from fault order by occurred desc"
-      .map(rs =>
-        Fault(
-          rs.string("cause"),
-          rs.long("occurred")
-        )
-      )
-      .list()
-  }
-
   def listProfiles(): List[Profile] = DB readOnly { implicit session =>
     sql"select * from profile order by name"
       .map(rs =>
@@ -322,6 +311,17 @@ final class Store(config: Config,
        """
       .update()
     measurable.id
+  }
+
+  def listFaults(): List[Fault] = DB readOnly { implicit session =>
+    sql"select * from fault order by occurred desc"
+      .map(rs =>
+        Fault(
+          rs.string("cause"),
+          rs.long("occurred")
+        )
+      )
+      .list()
   }
 
   def addFault(fault: Fault): Unit = DB localTx { implicit session =>
