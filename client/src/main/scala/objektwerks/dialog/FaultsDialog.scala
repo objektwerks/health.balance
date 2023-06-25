@@ -14,6 +14,7 @@ final class FaultsDialog(context: Context, model: Model) extends Dialog[Unit]:
   val tableView = new TableView[Fault]():
     columns ++= List(
       new TableColumn[Fault, String]:
+        prefWidth = 125
         text = context.headerOccurred
         cellValueFactory = _.value.occurredProperty
       ,
