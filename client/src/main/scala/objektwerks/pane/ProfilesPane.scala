@@ -36,7 +36,7 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     disable = true
     onAction = { _ => update() }
 
-  val errorsButton = new Button:
+  val faultsButton = new Button:
     graphic = context.faultsImage
     text = context.buttonFaults
     disable = true
@@ -50,7 +50,7 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
 
   val buttonBar = new HBox:
     spacing = 6
-    children = List(addButton, editButton, errorsButton, accountButton)
+    children = List(addButton, editButton, faultsButton, accountButton)
 
   val tab = new Tab:
   	text = context.tabProfiles
@@ -69,7 +69,7 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
   VBox.setVgrow(tabPane, Priority.Always)
 
   model.observableFaults.onChange { (_, _) =>
-    errorsButton.disable = false
+    faultsButton.disable = false
   }
 
   tableView.onMouseClicked = { event =>
@@ -102,7 +102,7 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
       case _ =>
 
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
-    case _ => errorsButton.disable = model.observableFaults.isEmpty
+    case _ => faultsButton.disable = model.observableFaults.isEmpty
 
   def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match
       case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(deactivate)
