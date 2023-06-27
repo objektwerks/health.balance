@@ -75,7 +75,7 @@ final case class Profile(id: Long = 0,
                          name: String,
                          created: Long = Instant.now.getEpochSecond) extends Entity:
   val nameProperty = ObjectProperty[String](this, "name", name)
-  val createdProperty = ObjectProperty[String](this, "created", Instant.ofEpochSecond(created).toString)
+  val createdProperty = ObjectProperty[String](this, "created", Entity.epochSecondToLocalDate(created).toString)
   val profile = this
 
 final case class Edible(id: Long = 0,
