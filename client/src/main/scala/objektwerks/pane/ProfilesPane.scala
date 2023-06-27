@@ -24,12 +24,19 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     )
     items = model.observableProfiles
 
+  def add(): Unit =
+    ProfileDialog(context, Profile(accountId = model.observableAccount.get.id, name = "")).showAndWait() match
+      case Some(profile: Profile) =>
+        model.add(profile)
+        tableView.selectionModel().select(profile)
+      case _ =>
+
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val pool = tableView.selectionModel().getSelectedItem.profile
     ProfileDialog(context, pool).showAndWait() match
       case Some(profile: Profile) =>
-        model.save(profile)
+        model.update(profile)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
