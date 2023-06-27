@@ -24,6 +24,50 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     )
     items = model.observableProfiles
 
+  val addButton = new Button:
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = false
+    onAction = { _ => add() }
+
+  val editButton = new Button:
+    graphic = context.editImage
+    text = context.buttonEdit
+    disable = true
+    onAction = { _ => update() }
+
+  val errorsButton = new Button:
+    graphic = context.faultsImage
+    text = context.buttonFaults
+    disable = true
+    onAction = { _ => faults() }
+
+  val accountButton = new Button:
+    graphic = context.accountImage
+    text = context.buttonAccount
+    disable = false
+    onAction = { _ => account() }
+
+  val buttonBar = new HBox:
+    spacing = 6
+    children = List(addButton, editButton, errorsButton, accountButton)
+
+  val tab = new Tab:
+  	text = "Profiles"
+  	closable = false
+  	content = new VBox {
+      spacing = 6
+      padding = Insets(6)
+      children = List(tableView, buttonBar)
+    }
+
+  val tabPane = new TabPane:
+    tabs = List(tab)
+
+  children = List(tabPane)
+  VBox.setVgrow(tableView, Priority.Always)
+  VBox.setVgrow(tabPane, Priority.Always)
+
   model.observableFaults.onChange { (_, _) =>
     errorsButton.disable = false
   }
