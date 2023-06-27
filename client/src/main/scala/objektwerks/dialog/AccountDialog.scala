@@ -19,8 +19,8 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Dea
     context.labelLicense -> Label( account.license ),
     context.labelEmailAddress -> Label( account.emailAddress ),
     context.labelPin -> Label( account.pin ),
-    context.labelActivated -> Label( Entity.epochSecondToLocalDateTime(account.activated).toLocalDate.toString ),
-    context.labelDeactivated -> Label( Entity.epochSecondToLocalDateTime(account.deactivated).toLocalDate.toString )
+    context.labelActivated -> Label( Entity.epochSecondToLocalDate(account.activated).toString ),
+    context.labelDeactivated -> Label( Entity.epochSecondToLocalDate(account.deactivated).toString )
   )
 
   dialogPane().content = ControlGridPane(controls)
