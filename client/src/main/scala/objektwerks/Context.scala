@@ -40,6 +40,8 @@ final class Context(config: Config):
   val labelActivated = config.getString("label.activated")
   val labelDeactivated = config.getString("label.deactivated")
 
+  val tabProfiles = config.getString("tab.profiles")
+
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
   def editImage = loadImageView("/image/edit.png")

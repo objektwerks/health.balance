@@ -53,7 +53,7 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     children = List(addButton, editButton, errorsButton, accountButton)
 
   val tab = new Tab:
-  	text = "Profiles"
+  	text = context.tabProfiles
   	closable = false
   	content = new VBox {
       spacing = 6
