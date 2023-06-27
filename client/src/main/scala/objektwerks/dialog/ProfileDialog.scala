@@ -1,7 +1,6 @@
 package objektwerks.dialog
 
 import scalafx.Includes.*
-import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
@@ -23,3 +22,11 @@ final class ProfileDialog(context: Context, profile: Profile) extends Dialog[Pro
 
   val saveButtonType = new ButtonType(context.buttonSave, ButtonData.OKDone)
   dialogPane().buttonTypes = List(saveButtonType, ButtonType.Cancel)
+
+  resultConverter = dialogButton => {
+    if dialogButton == saveButtonType then
+      profile.copy(
+        name = nameTextField.text.value
+      )
+    else null
+  }
