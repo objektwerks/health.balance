@@ -1,4 +1,4 @@
-package objektwerks.control
+package objektwerks.dialog
 
 import scalafx.scene.control.{TextField, TextFormatter}
 import scalafx.scene.control.TextFormatter.Change
