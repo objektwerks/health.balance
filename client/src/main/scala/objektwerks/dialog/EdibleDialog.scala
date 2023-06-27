@@ -42,7 +42,10 @@ final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible
   resultConverter = dialogButton => {
     if dialogButton == saveButtonType then
       edible.copy(
-        detail = detailTextField.text.value
+        kind = kindComboBox.value.value,
+        detail = detailTextField.text.value,
+        organic = organicCheckBox.selected.value,
+        calories = caloriesTextField.text.value.toIntOption.getOrElse(edible.calories)
       )
     else null
   }
