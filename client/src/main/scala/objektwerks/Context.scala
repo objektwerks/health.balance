@@ -43,6 +43,7 @@ final class Context(config: Config):
   val labelName = config.getString("label.name")
   val labelKind = config.getString("label.kind")
   val labelDetail = config.getString("label.detail")
+  val labelOrganic = config.getString("label.organic")
   val labelCalories = config.getString("label.calories")
 
   val tabProfiles = config.getString("tab.profiles")
