@@ -11,4 +11,4 @@ import objektwerks.{Client, Context, Profile}
 final class ProfileDialog(context: Context, profile: Profile) extends Dialog[Profile]:
   initOwner(Client.stage)
   title = context.windowTitle
-  headerText = "Profile"
+  headerText = context.dialogProfile

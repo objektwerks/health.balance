@@ -30,6 +30,7 @@ final class Context(config: Config):
   val dialogRegisterLogin = config.getString("dialog.registerLogin")
   val dialogAccount = config.getString("dialog.account")
   val dialogFaults = config.getString("dialog.faults")
+  val dialogProfile = config.getString("dialog.profile")
 
   val headerOccurred = config.getString("header.occurred")
   val headerFault = config.getString("header.fault")
