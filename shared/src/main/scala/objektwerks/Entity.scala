@@ -1,6 +1,6 @@
 package objektwerks
 
-import java.time.{Instant, LocalDateTime, ZoneOffset}
+import java.time.{Instant, LocalDate, LocalDateTime, ZoneOffset}
 import java.util.UUID
 
 import scala.util.Random
@@ -18,6 +18,7 @@ object Entity:
 
   def epochSecondToInstant(epochSecond: Long): Instant = Instant.ofEpochSecond(epochSecond)
   def epochSecondToLocalDateTime(epochSecond: Long): LocalDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC)
+  def epochSecondToLocalDate(epochSecond: Long): LocalDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC).toLocalDate
   def instantToLocalDateTime(instant: Instant): LocalDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
   def localDateTimeToInstant(localDateTime: LocalDateTime): Instant = Instant.from(localDateTime)
 
