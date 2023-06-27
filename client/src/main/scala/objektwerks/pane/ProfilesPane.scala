@@ -24,6 +24,10 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     )
     items = model.observableProfiles
 
+  model.observableFaults.onChange { (_, _) =>
+    errorsButton.disable = false
+  }
+
   tableView.onMouseClicked = { event =>
     if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
   }
