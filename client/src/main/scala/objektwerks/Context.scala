@@ -31,6 +31,7 @@ final class Context(config: Config):
   val dialogAccount = config.getString("dialog.account")
   val dialogFaults = config.getString("dialog.faults")
   val dialogProfile = config.getString("dialog.profile")
+  val dialogEdible = config.getString("dialog.edible")
 
   val headerOccurred = config.getString("header.occurred")
   val headerFault = config.getString("header.fault")
