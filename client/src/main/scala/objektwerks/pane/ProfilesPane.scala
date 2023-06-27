@@ -24,6 +24,9 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     )
     items = model.observableProfiles
 
+  def faults(): Unit = FaultsDialog(context, model).showAndWait() match
+    case _ => errorsButton.disable = model.observableFaults.isEmpty
+
   def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match
       case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(deactivate)
       case Some( DeactivateReactivate( None, Some(reactivate) ) ) => model.reactivate(reactivate)
