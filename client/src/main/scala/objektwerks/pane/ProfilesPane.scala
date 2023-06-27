@@ -24,6 +24,19 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     )
     items = model.observableProfiles
 
+  tableView.onMouseClicked = { event =>
+    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+  }
+
+  tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
+  
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedProfileId.value = selectedItem.id
+      editButton.disable = false
+  }
+
   def add(): Unit =
     ProfileDialog(context, Profile(accountId = model.observableAccount.get.id, name = "")).showAndWait() match
       case Some(profile: Profile) =>
