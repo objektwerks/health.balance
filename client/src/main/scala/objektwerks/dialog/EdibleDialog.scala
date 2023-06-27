@@ -1,12 +1,13 @@
 package objektwerks.dialog
 
 import scalafx.Includes.*
+import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, ComboBox, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Edible, EdibleKind}
-import scalafx.collections.ObservableBuffer
+import objektwerks.control.IntTextField
 
 final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible]:
   initOwner(Client.stage)
@@ -22,10 +23,12 @@ final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible
     text = edible.detail
 
   val caloriesTextField = new IntTextField:
-    text = pool.volume.toString
+    text = edible.calories.toString
 
   val controls = List[(String, Region)](
-    context.labelDetail -> detailTextField
+    context.labelKind -> kindComboBox,
+    context.labelDetail -> detailTextField,
+    context.labelCalories -> caloriesTextField
   )
   dialogPane().content = ControlGridPane(controls)
 
