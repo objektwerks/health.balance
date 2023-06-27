@@ -94,8 +94,8 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
-    val pool = tableView.selectionModel().getSelectedItem.profile
-    ProfileDialog(context, pool).showAndWait() match
+    val profile = tableView.selectionModel().getSelectedItem.profile
+    ProfileDialog(context, profile).showAndWait() match
       case Some(profile: Profile) =>
         model.update(profile)
         tableView.selectionModel().select(selectedIndex)
