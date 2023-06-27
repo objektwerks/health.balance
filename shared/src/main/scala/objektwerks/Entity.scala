@@ -16,6 +16,7 @@ object Entity:
   given expendableOrdering: Ordering[Expendable] = Ordering.by[Expendable, Long](e => e.finish).reverse
   given measurableOrdering: Ordering[Measurable] = Ordering.by[Measurable, Long](m => m.measured).reverse
 
+  def epochSecondToInstant(epochSecond: Long): Instant = Instant.ofEpochSecond(epochSecond)
   def instantToLocalDateTime(instant: Instant): LocalDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
   def localDateTimeToInstant(localDateTime: LocalDateTime): Instant = Instant.from(localDateTime)
 
