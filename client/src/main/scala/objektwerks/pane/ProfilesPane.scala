@@ -24,6 +24,15 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
     )
     items = model.observableProfiles
 
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val pool = tableView.selectionModel().getSelectedItem.profile
+    ProfileDialog(context, pool).showAndWait() match
+      case Some(profile: Profile) =>
+        model.save(profile)
+        tableView.selectionModel().select(selectedIndex)
+      case _ =>
+
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
     case _ => errorsButton.disable = model.observableFaults.isEmpty
 
