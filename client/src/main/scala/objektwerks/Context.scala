@@ -40,6 +40,7 @@ final class Context(config: Config):
   val labelPin = config.getString("label.pin")
   val labelActivated = config.getString("label.activated")
   val labelDeactivated = config.getString("label.deactivated")
+  val labelName = config.getString("label.name")
 
   val tabProfiles = config.getString("tab.profiles")
 

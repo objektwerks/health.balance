@@ -12,3 +12,11 @@ final class ProfileDialog(context: Context, profile: Profile) extends Dialog[Pro
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.dialogProfile
+
+  val nameTextField = new TextField:
+    text = profile.name
+
+  val controls = List[(String, Region)](
+    context.labelName -> nameTextField
+  )
+  dialogPane().content = ControlGridPane(controls)
