@@ -23,3 +23,8 @@ class ProfilesPane(context: Context, model: Model) extends VBox:
         cellValueFactory = _.value.createdProperty
     )
     items = model.observableProfiles
+
+  def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match
+      case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(deactivate)
+      case Some( DeactivateReactivate( None, Some(reactivate) ) ) => model.reactivate(reactivate)
+      case _ =>
