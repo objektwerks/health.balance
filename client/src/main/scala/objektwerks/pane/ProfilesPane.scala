@@ -8,7 +8,7 @@ import scalafx.scene.layout.{HBox, Priority, VBox}
 import objektwerks.{Context, Model, Profile}
 import objektwerks.dialog.{AccountDialog, DeactivateReactivate, FaultsDialog, ProfileDialog}
 
-class ProfilesPane(context: Context, model: Model) extends VBox:
+final class ProfilesPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
