@@ -11,7 +11,7 @@ import objektwerks.{Client, Context, Drinkable, DrinkableKind, Entity}
 final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dialog[Drinkable]:
   initOwner(Client.stage)
   title = context.windowTitle
-  headerText = context.dialogEdible
+  headerText = context.dialogDrinkable
   
   val kindComboBox = new ComboBox[String]:
   	items = ObservableBuffer.from( DrinkableKind.toList )
