@@ -50,7 +50,7 @@ final class Context(config: Config):
   val labelOrganic = config.getString("label.organic")
   val labelCalories = config.getString("label.calories")
   val labelAte = config.getString("label.ate")
-  val labelDrank config.getString("label.drank")
+  val labelDrank = config.getString("label.drank")
 
   val tabProfiles = config.getString("tab.profiles")
 
