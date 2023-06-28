@@ -3,7 +3,7 @@ package objektwerks.dialog
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
-import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog, Label, TextField}
+import scalafx.scene.control.{ButtonType, ComboBox, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Measurable, MeasurableKind, Entity, UnitOfMeasure}
@@ -31,7 +31,7 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
     context.labelMeasurement -> measurementTextField,
-    context.labelUnit -> unitCheckBox,
+    context.labelUnit -> unitComboBox,
     context.labelMeasured -> measuredLabel
   )
   dialogPane().content = ControlGridPane(controls)
