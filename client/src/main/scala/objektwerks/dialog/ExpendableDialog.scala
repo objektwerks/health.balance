@@ -39,7 +39,8 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
     context.labelDetail -> detailTextField,
-    context.labelOrganic -> sunshineCheckBox,
+    context.labelSunshine -> sunshineCheckBox,
+    context.labelFreshair -> freshairCheckBox,
     context.labelCalories -> caloriesTextField,
     context.labelStart -> startLabel,
     context.labelFinish -> finishLabel
