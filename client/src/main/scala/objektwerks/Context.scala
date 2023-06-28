@@ -51,6 +51,10 @@ final class Context(config: Config):
   val labelCalories = config.getString("label.calories")
   val labelAte = config.getString("label.ate")
   val labelDrank = config.getString("label.drank")
+  val labelSunshine = config.getString("label.sunshine")
+  val labelFreshair = config.getString("label.freshair")
+  val labelStart = config.getString("label.start")
+  val labelFinish = config.getString("label.finish")
 
   val tabProfiles = config.getString("tab.profiles")
 
