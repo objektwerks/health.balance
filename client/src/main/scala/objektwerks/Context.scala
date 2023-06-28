@@ -55,6 +55,9 @@ final class Context(config: Config):
   val labelFreshair = config.getString("label.freshair")
   val labelStart = config.getString("label.start")
   val labelFinish = config.getString("label.finish")
+  val labelMeasurement = config.getString("label.measurement")
+  val labelUnit = config.getString("label.unit")
+  val labelMeasured = config.getString("label.measured")
 
   val tabProfiles = config.getString("tab.profiles")
 
