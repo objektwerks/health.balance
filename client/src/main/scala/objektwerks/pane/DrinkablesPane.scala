@@ -85,3 +85,12 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
         model.add(drinkable)
         tableView.selectionModel().select(drinkable)
       case _ =>
+
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val drinkable = tableView.selectionModel().getSelectedItem.drinkable
+    DrinkableDialog(context, drinkable).showAndWait() match
+      case Some(drinkable: Drinkable) =>
+        model.update(drinkable)
+        tableView.selectionModel().select(selectedIndex)
+      case _ =>
