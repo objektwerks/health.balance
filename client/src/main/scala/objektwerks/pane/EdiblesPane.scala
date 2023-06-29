@@ -6,6 +6,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import objektwerks.{Context, Edible, Model}
+import objektwerks.dialog.EdibleDialog
 
 final class EdiblesPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -66,3 +67,10 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
       model.selectedEdibleId.value = selectedItem.id
       editButton.disable = false
   }
+
+  def add(): Unit =
+    EdibleDialog(context, Edible(profileId = model.selectedProfileId.value)).showAndWait() match
+      case Some(edible: Edible) =>
+        model.add(edible)
+        tableView.selectionModel().select(edible)
+      case _ =>
