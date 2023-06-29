@@ -24,6 +24,9 @@ final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dial
   val organicCheckBox = new CheckBox:
     selected = drinkable.organic
 
+  val countTextField = new IntTextField:
+    text = drinkable.count.toString
+
   val caloriesTextField = new IntTextField:
     text = drinkable.calories.toString
 
@@ -34,6 +37,7 @@ final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dial
     context.labelKind -> kindComboBox,
     context.labelDetail -> detailTextField,
     context.labelOrganic -> organicCheckBox,
+    context.labelCount -> countTextField,
     context.labelCalories -> caloriesTextField,
     context.labelDrank -> drankLabel
   )
