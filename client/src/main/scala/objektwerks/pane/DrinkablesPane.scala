@@ -12,6 +12,8 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
+  val yesOrNo = (bool: Boolean) => if bool then context.columnYes else context.columnNo
+
   val tableView = new TableView[Drinkable]():
     columns ++= List(
       new TableColumn[Drinkable, String]:
@@ -21,6 +23,11 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Drinkable, String]:
         text = "Detail"
         cellValueFactory = _.value.detailProperty
+      ,
+      new TableColumn[Drinkable, Boolean]:
+        text = "Organic"
+        cellValueFactory = _.value.organicProperty
+        cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
       ,
       new TableColumn[Drinkable, String]:
         text = "Calories"
