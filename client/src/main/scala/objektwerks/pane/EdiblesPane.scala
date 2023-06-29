@@ -1,5 +1,6 @@
 package objektwerks.pane
 
+import scalafx.Includes.*
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -52,3 +53,16 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
 
   children = List(tableView, buttonBar)
   VBox.setVgrow(tableView, Priority.Always)
+
+  tableView.onMouseClicked = { event =>
+    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+  }
+
+  tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
+
+  tableView.selectionModel().selectedItemProperty().addListener { (_, _, selectedItem) =>
+    // model.update executes a remove and add on items. the remove passes a null selectedItem!
+    if selectedItem != null then
+      model.selectedEdibleId.value = selectedItem.id
+      editButton.disable = false
+  }
