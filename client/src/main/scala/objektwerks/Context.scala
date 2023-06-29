@@ -27,6 +27,9 @@ final class Context(config: Config):
   val buttonActivate = config.getString("button.activate")
   val buttonDeactivate = config.getString("button.deactivate")
 
+  val columnYes = config.getString("column.yes")
+  val columnNo = config.getString("column.no")
+
   val dialogRegisterLogin = config.getString("dialog.registerLogin")
   val dialogAccount = config.getString("dialog.account")
   val dialogFaults = config.getString("dialog.faults")
