@@ -30,6 +30,10 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
       ,
       new TableColumn[Drinkable, String]:
+        text = "Count"
+        cellValueFactory = _.value.countProperty
+      ,
+      new TableColumn[Drinkable, String]:
         text = "Calories"
         cellValueFactory = _.value.caloriesProperty
       ,
