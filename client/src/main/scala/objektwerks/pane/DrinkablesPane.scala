@@ -38,3 +38,19 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
         cellValueFactory = _.value.drankProperty
     )
     items = model.observableDrinkables
+
+  val addButton = new Button:
+    graphic = context.addImage
+    text = context.buttonAdd
+    disable = true
+    onAction = { _ => add() }
+
+  val editButton = new Button:
+    graphic = context.editImage
+    text = context.buttonEdit
+    disable = true
+    onAction = { _ => update() }
+
+  val buttonBar = new HBox:
+    spacing = 6
+    children = List(addButton, editButton)
