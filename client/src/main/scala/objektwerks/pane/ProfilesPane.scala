@@ -73,7 +73,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
   }
 
   tableView.onMouseClicked = { event =>
-    if (event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null) update()
+    if event.getClickCount == 2 && tableView.selectionModel().getSelectedItem != null then update()
   }
 
   tableView.selectionModel().selectionModeProperty.value = SelectionMode.Single
