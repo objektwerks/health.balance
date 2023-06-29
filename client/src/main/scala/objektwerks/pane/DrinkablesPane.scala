@@ -74,3 +74,10 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
       model.selectedDrinkableId.value = selectedItem.id
       editButton.disable = false
   }
+
+  def add(): Unit =
+    DrinkableDialog(context, Drinkable(profileId = model.selectedProfileId.value)).showAndWait() match
+      case Some(drinkable: Drinkable) =>
+        model.add(drinkable)
+        tableView.selectionModel().select(drinkable)
+      case _ =>
