@@ -17,28 +17,28 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Drinkable]():
     columns ++= List(
       new TableColumn[Drinkable, String]:
-        text = "Kind"
+        text = context.headerKind
         cellValueFactory = _.value.kindProperty
       ,
       new TableColumn[Drinkable, String]:
-        text = "Detail"
+        text = context.headerDetail
         cellValueFactory = _.value.detailProperty
       ,
       new TableColumn[Drinkable, Boolean]:
-        text = "Organic"
+        text = context.headerOrganic
         cellValueFactory = _.value.organicProperty
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
       ,
       new TableColumn[Drinkable, String]:
-        text = "Count"
+        text = context.headerCount
         cellValueFactory = _.value.countProperty
       ,
       new TableColumn[Drinkable, String]:
-        text = "Calories"
+        text = context.headerCalories
         cellValueFactory = _.value.caloriesProperty
       ,
       new TableColumn[Drinkable, String]:
-        text = "Drank"
+        text = context.headerDrank
         cellValueFactory = _.value.drankProperty
     )
     items = model.observableDrinkables
