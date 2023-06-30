@@ -47,6 +47,9 @@ final class Context(config: Config):
   val headerDetail = config.getString("header.detail")
   val headerCalories = config.getString("header.calories")
   val headerAte = config.getString("header.ate")
+  val headerOrganic = config.getString("header.organic")
+  val headerCount = config.getString("header.count")
+  val headerDrank = config.getString("header.drank")
 
   val labelLicense = config.getString("label.license")
   val labelEmailAddress = config.getString("label.emailAddress")
