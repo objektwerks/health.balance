@@ -47,3 +47,10 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
   val buttonBar = new HBox:
     spacing = 6
     children = List(addButton, editButton)
+
+  model.selectedProfileId.onChange { (_, _, _) =>
+    addButton.disable = false
+  }
+
+  children = List(tableView, buttonBar)
+  VBox.setVgrow(tableView, Priority.Always)
