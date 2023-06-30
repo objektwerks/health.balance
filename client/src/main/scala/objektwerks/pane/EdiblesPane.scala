@@ -15,19 +15,19 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Edible]():
     columns ++= List(
       new TableColumn[Edible, String]:
-        text = "Kind"
+        text = context.headerKind
         cellValueFactory = _.value.kindProperty
       ,
       new TableColumn[Edible, String]:
-        text = "Detail"
+        text = context.headerDetail
         cellValueFactory = _.value.detailProperty
       ,
       new TableColumn[Edible, String]:
-        text = "Calories"
+        text = context.headerCalories
         cellValueFactory = _.value.caloriesProperty
       ,
       new TableColumn[Edible, String]:
-        text = "Ate"
+        text = context.headerAte
         cellValueFactory = _.value.ateProperty
     )
     items = model.observableEdibles
