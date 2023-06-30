@@ -12,6 +12,8 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
   spacing = 6
   padding = Insets(6)
 
+  val yesOrNo = (bool: Boolean) => if bool then context.columnYes else context.columnNo
+
   val tableView = new TableView[Expendable]():
     columns ++= List(
       new TableColumn[Expendable, String]:
@@ -35,7 +37,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Expendable, String]:
         text = "Calories"
         cellValueFactory = _.value.caloriesProperty
-      ,e
+      ,
       new TableColumn[Expendable, String]:
         text = "Start"
         cellValueFactory = _.value.startProperty
