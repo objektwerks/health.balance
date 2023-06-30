@@ -15,19 +15,19 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Measurable]():
     columns ++= List(
       new TableColumn[Measurable, String]:
-        text = "Kind"
+        text = context.headerKind
         cellValueFactory = _.value.kindProperty
       ,
       new TableColumn[Measurable, String]:
-        text = "Measurement"
+        text = context.headerMeasurement
         cellValueFactory = _.value.measurementProperty
       ,
       new TableColumn[Measurable, String]:
-        text = "Unit"
+        text = context.headerUnit
         cellValueFactory = _.value.unitProperty
       ,
       new TableColumn[Measurable, String]:
-        text = "Measured"
+        text = context.headerMeasured
         cellValueFactory = _.value.measuredProperty
     )
     items = model.observableMeasurables
