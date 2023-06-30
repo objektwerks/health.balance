@@ -90,3 +90,12 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
         model.add(expendable)
         tableView.selectionModel().select(expendable)
       case _ =>
+
+  def update(): Unit =
+    val selectedIndex = tableView.selectionModel().getSelectedIndex
+    val expendable = tableView.selectionModel().getSelectedItem.expendable
+    ExpendableDialog(context, expendable).showAndWait() match
+      case Some(expendable: Expendable) =>
+        model.update(expendable)
+        tableView.selectionModel().select(selectedIndex)
+      case _ =>
