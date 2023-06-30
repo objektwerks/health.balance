@@ -151,7 +151,8 @@ final case class Measurable(id: Long = 0,
                             unit: String = UnitOfMeasure.bpm.toString,
                             measured: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
-  val measurementProperty = ObjectProperty[Int](this, "measurement", measurement)
+  val measurementProperty = ObjectProperty[String](this, "measurement", measurement.toString)
+  val unitProperty = ObjectProperty[String](this, "unit", unit)
   val measuredProperty = ObjectProperty[String](this, "measured", Instant.ofEpochSecond(measured).toString)
   val measurable = this
 
