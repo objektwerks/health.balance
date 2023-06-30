@@ -41,6 +41,8 @@ final class Context(config: Config):
 
   val headerOccurred = config.getString("header.occurred")
   val headerFault = config.getString("header.fault")
+  val headerName = config.getString("header.name")
+  val headerCreated = config.getString("header.created")
 
   val labelLicense = config.getString("label.license")
   val labelEmailAddress = config.getString("label.emailAddress")
