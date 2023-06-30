@@ -17,33 +17,33 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Expendable]():
     columns ++= List(
       new TableColumn[Expendable, String]:
-        text = "Kind"
+        text = context.headerKind
         cellValueFactory = _.value.kindProperty
       ,
       new TableColumn[Expendable, String]:
-        text = "Detail"
+        text = context.headerDetail
         cellValueFactory = _.value.detailProperty
       ,
       new TableColumn[Expendable, Boolean]:
-        text = "Sunshine"
+        text = context.headerSunshine
         cellValueFactory = _.value.sunshineProperty
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
       ,
       new TableColumn[Expendable, Boolean]:
-        text = "Freshair"
+        text = context.headerFreshair
         cellValueFactory = _.value.freshairProperty
         cellFactory = (cell, bool) => cell.text = yesOrNo(bool)
       ,
       new TableColumn[Expendable, String]:
-        text = "Calories"
+        text = context.headerCalories
         cellValueFactory = _.value.caloriesProperty
       ,
       new TableColumn[Expendable, String]:
-        text = "Start"
+        text = context.headerStart
         cellValueFactory = _.value.startProperty
       ,
       new TableColumn[Expendable, String]:
-        text = "Finish"
+        text = context.headerFinish
         cellValueFactory = _.value.finishProperty
     )
     items = model.observableExpendables
