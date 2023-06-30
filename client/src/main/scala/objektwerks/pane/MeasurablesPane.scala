@@ -67,3 +67,10 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
       model.selectedMeasurableId.value = selectedItem.id
       editButton.disable = false
   }
+
+  def add(): Unit =
+    MeasurableDialog(context, Measurable(profileId = model.selectedProfileId.value)).showAndWait() match
+      case Some(measurable: Measurable) =>
+        model.add(measurable)
+        tableView.selectionModel().select(measurable)
+      case _ =>
