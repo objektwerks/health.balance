@@ -43,6 +43,10 @@ final class Context(config: Config):
   val headerFault = config.getString("header.fault")
   val headerName = config.getString("header.name")
   val headerCreated = config.getString("header.created")
+  val headerKind = config.getString("header.kind")
+  val headerDetail = config.getString("header.detail")
+  val headerCalories = config.getString("header.calories")
+  val headerAte = config.getString("header.ate")
 
   val labelLicense = config.getString("label.license")
   val labelEmailAddress = config.getString("label.emailAddress")
