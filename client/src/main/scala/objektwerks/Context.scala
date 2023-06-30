@@ -80,6 +80,10 @@ final class Context(config: Config):
   val labelMeasured = config.getString("label.measured")
 
   val tabProfiles = config.getString("tab.profiles")
+  val tabEdibles = config.getString("tab.edibles")
+  val tabDrinkables = config.getString("tab.drinkables")
+  val tabExpendables = config.getString("tab.expendables")
+  val tabMeasurables = config.getString("tab.measurables")
 
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
