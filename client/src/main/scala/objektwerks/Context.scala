@@ -50,6 +50,10 @@ final class Context(config: Config):
   val headerOrganic = config.getString("header.organic")
   val headerCount = config.getString("header.count")
   val headerDrank = config.getString("header.drank")
+  val headerSunshine = config.getString("header.sunshine")
+  val headerFreshair = config.getString("header.freshair")
+  val headerStart = config.getString("header.start")
+  val headerFinish = config.getString("header.finish")
 
   val labelLicense = config.getString("label.license")
   val labelEmailAddress = config.getString("label.emailAddress")
