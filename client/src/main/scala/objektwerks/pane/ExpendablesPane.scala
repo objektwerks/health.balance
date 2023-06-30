@@ -35,7 +35,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Expendable, String]:
         text = "Calories"
         cellValueFactory = _.value.caloriesProperty
-      ,
+      ,e
       new TableColumn[Expendable, String]:
         text = "Start"
         cellValueFactory = _.value.startProperty
