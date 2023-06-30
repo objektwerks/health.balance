@@ -15,11 +15,11 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Profile]():
     columns ++= List(
       new TableColumn[Profile, String]:
-        text = "Name"
+        text = context.headerName
         cellValueFactory = _.value.nameProperty
       ,
       new TableColumn[Profile, String]:
-        text = "Created"
+        text = context.headerCreated
         cellValueFactory = _.value.createdProperty
     )
     items = model.observableProfiles
