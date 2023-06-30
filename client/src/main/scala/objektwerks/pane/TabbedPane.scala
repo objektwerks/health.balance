@@ -10,22 +10,22 @@ final class TabbedPane(context: Context, model: Model) extends VBox:
   padding = Insets(6)
 
   val ediblesTab = new Tab:
-    text = context.tabCleanings
+    text = context.tabEdibles
     closable = false
     content = EdiblesPane(context, model)
 
   val drinkablesTab = new Tab:
-  	text = context.tabMeasurements
+  	text = context.tabDrinkables
   	closable = false
   	content = DrinkablesPane(context, model)
 
   val expendablesTab = new Tab:
-  	text = context.tabChemicals
+  	text = context.tabExpendables
   	closable = false
   	content = ExpendablesPane(context, model)
 
   val measurablesTab = new Tab:
-  	text = context.tabChemicals
+  	text = context.tabMeasurables
   	closable = false
   	content = MeasurablesPane(context, model)
 
