@@ -9,7 +9,7 @@ Use Cases
 
 Entity
 ------
-* Account 1 --> * Profile, Fault
+* Account 1 --> * Profile
 * Profile 1 --> * Edible, Drinkable, Expendable, Measurable
 
 DateTimePicker
