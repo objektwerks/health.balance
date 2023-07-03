@@ -14,11 +14,7 @@ Entity
 
 DateTimePicker
 --------------
->Required entity support:
-1. Edible
-2. Drinkable
-3. Expendable
-4. Measureable
+>Required entity support: Edible, Drinkable, Expendable and Measurable
 
 Build
 -----
