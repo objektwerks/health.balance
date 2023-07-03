@@ -16,6 +16,12 @@ DateTimePicker
 --------------
 >Required entity support: Edible, Drinkable, Expendable and Measurable
 
+Dashboard
+---------
+>Per Edible, Drinkable, Expendable and Measurable:
+1. Daily Calories
+2. Weekly Calories
+
 Build
 -----
 1. sbt clean compile
