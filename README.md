@@ -21,6 +21,11 @@ Dashboard
 >Per Edible, Drinkable, Expendable and Measurable:
 1. Daily Calories
 2. Weekly Calories
+>Summary:
+1. Daily Calories
+2. Daily Calorie Ratio
+3. Weekly Calories
+4. Weekly Calorie Ratio
 
 Build
 -----
