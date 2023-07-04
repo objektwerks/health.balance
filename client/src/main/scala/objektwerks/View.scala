@@ -5,7 +5,7 @@ import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{BorderPane, HBox, Priority, VBox}
 
-import objektwerks.dashboard.DashboardPane
+import objektwerks.dashboard.Dashboard
 import objektwerks.pane.*
 
 final class View(context: Context, model: Model):
@@ -14,7 +14,7 @@ final class View(context: Context, model: Model):
     prefHeight = context.windowHeight
     padding = Insets(6)
 
-  val dashboardPane = DashboardPane(context, model)
+  val dashboardPane = Dashboard(context, model)
   HBox.setHgrow(dashboardPane, Priority.Always)
 
   val poolsPane = ProfilesPane(context, model)
