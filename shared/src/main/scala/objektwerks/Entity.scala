@@ -148,11 +148,9 @@ final case class Measurable(id: Long = 0,
                             profileId: Long,
                             kind: String = MeasurableKind.Pulse.toString,
                             measurement: Int = 0,
-                            unit: String = UnitOfMeasure.bpm.toString,
                             measured: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val measurementProperty = ObjectProperty[String](this, "measurement", measurement.toString)
-  val unitProperty = ObjectProperty[String](this, "unit", unit)
   val measuredProperty = ObjectProperty[String](this, "measured", Instant.ofEpochSecond(measured).toString)
   val measurable = this
 
@@ -161,9 +159,3 @@ enum MeasurableKind:
 
 object MeasurableKind:
   def toList: List[String] = MeasurableKind.values.map(_.toString).toList
-
-enum UnitOfMeasure:
-  case bpm, lb, level
-
-object UnitOfMeasure:
-  def toList: List[String] = UnitOfMeasure.values.map(_.toString).toList
