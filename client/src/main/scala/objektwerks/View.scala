@@ -12,15 +12,15 @@ final class View(context: Context, model: Model):
   val caloriesDashboardPane = CaloriesDashboard(context, model)
   HBox.setHgrow(caloriesDashboardPane, Priority.Always)
 
-  val poolsPane = ProfilesPane(context, model)
-  VBox.setVgrow(poolsPane, Priority.Always)
+  val profilesPane = ProfilesPane(context, model)
+  VBox.setVgrow(profilesPane, Priority.Always)
 
   val tabbedPane = TabbedPane(context, model)
   VBox.setVgrow(tabbedPane, Priority.Always)
 
   val splitPane = new SplitPane {
     orientation = Orientation.Horizontal
-    items.addAll(poolsPane, tabbedPane)
+    items.addAll(profilesPane, tabbedPane)
   }
   splitPane.setDividerPositions(0.30, 0.70)
   VBox.setVgrow(splitPane, Priority.Always)
