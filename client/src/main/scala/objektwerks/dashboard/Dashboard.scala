@@ -12,4 +12,8 @@ final class Dashboard(context: Context, model: Model) extends HBox:
   val ediblesDashboardPane = EdiblesDashboardPane(context, model)
   HBox.setHgrow(ediblesDashboardPane, Priority.Always)
 
-  children = List(ediblesDashboardPane)
+  val drinkablesDashboardPane = DrinkablesDashboardPane(context, model)
+  HBox.setHgrow(drinkablesDashboardPane, Priority.Always)
+
+  children = List(ediblesDashboardPane,
+                  drinkablesDashboardPane)
