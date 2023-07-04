@@ -5,12 +5,12 @@ import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
-import objektwerks.dashboard.Dashboard
+import objektwerks.dashboard.CaloriesDashboard
 import objektwerks.pane.*
 
 final class View(context: Context, model: Model):
-  val dashboardPane = Dashboard(context, model)
-  HBox.setHgrow(dashboardPane, Priority.Always)
+  val caloriesDashboardPane = CaloriesDashboard(context, model)
+  HBox.setHgrow(caloriesDashboardPane, Priority.Always)
 
   val poolsPane = ProfilesPane(context, model)
   VBox.setVgrow(poolsPane, Priority.Always)
@@ -29,7 +29,7 @@ final class View(context: Context, model: Model):
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     padding = Insets(6)
-    children = List(dashboardPane, splitPane)
+    children = List(caloriesDashboardPane, splitPane)
 
   val scene = new Scene:
     root = viewPane
