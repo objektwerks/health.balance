@@ -27,6 +27,7 @@ Calories Dashboard
 
 Measurables Dashboard
 ---------------------
+>Today, Average
 1. Pulse
 2. Weight
 3. Glucose
