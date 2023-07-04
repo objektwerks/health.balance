@@ -23,10 +23,6 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
         cellValueFactory = _.value.measurementProperty
       ,
       new TableColumn[Measurable, String]:
-        text = context.headerUnit
-        cellValueFactory = _.value.unitProperty
-      ,
-      new TableColumn[Measurable, String]:
         text = context.headerMeasured
         cellValueFactory = _.value.measuredProperty
     )
