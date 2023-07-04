@@ -6,7 +6,7 @@ import scalafx.scene.layout.Region
 import scalafx.scene.control.{ButtonType, ComboBox, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
 
-import objektwerks.{Client, Context, Measurable, MeasurableKind, Entity, UnitOfMeasure}
+import objektwerks.{Client, Context, Measurable, MeasurableKind, Entity}
 
 final class MeasurableDialog(context: Context, measurable: Measurable) extends Dialog[Measurable]:
   initOwner(Client.stage)
@@ -21,17 +21,12 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
   val measurementTextField = new IntTextField:
     text = measurable.measurement.toString
 
-  val unitComboBox = new ComboBox[String]:
-  	items = ObservableBuffer.from( UnitOfMeasure.toList )
-  	value = measurable.unit
-
   val measuredLabel = new Label:
     text = Entity.epochSecondToLocalDateTime(measurable.measured).toString
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
     context.labelMeasurement -> measurementTextField,
-    context.labelUnit -> unitComboBox,
     context.labelMeasured -> measuredLabel
   )
   dialogPane().content = ControlGridPane(controls)
@@ -44,7 +39,6 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
       measurable.copy(
         kind = kindComboBox.value.value,
         measurement = measurementTextField.text.value.toIntOption.getOrElse(measurable.measurement),
-        unit = unitComboBox.value.value
       )
     else null
   }
