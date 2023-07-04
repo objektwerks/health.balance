@@ -21,10 +21,6 @@ Dashboard
 >Edible, Drinkable, Expendable:
 1. Today Total Calories
 2. Week Total Calories
->Measurable:
-1. Pulse
-2. Weight
-3. Glucose
 >Summary:
 1. Today Calorie Ratio
 2. Week Calorie Ratio
