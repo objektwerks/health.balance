@@ -22,8 +22,8 @@ Calories Dashboard
 1. Today Total Calories
 2. Week Total Calories
 >Summary:
-1. Today Calorie Ratio
-2. Week Calorie Ratio
+1. Today Calorie Ratio -> Edibles + Drinkables / Expendables
+2. Week Calorie Ratio  -> Edibles + Drinkables / Expendables
 
 Measurables Dashboard
 ---------------------
