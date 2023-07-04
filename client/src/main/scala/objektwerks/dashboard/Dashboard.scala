@@ -9,8 +9,7 @@ final class Dashboard(context: Context, model: Model) extends HBox:
   spacing = 6
   padding = Insets(6)
 
-  // TODO - panes!
-  // val pane = Pane(context, model)
-  // HBox.setHgrow(pane, Priority.Always)
+  val ediblesDashboardPane = EdiblesDashboardPane(context, model)
+  HBox.setHgrow(ediblesDashboardPane, Priority.Always)
 
-  children = List()
+  children = List(ediblesDashboardPane)
