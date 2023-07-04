@@ -289,7 +289,6 @@ final class Store(config: Config,
           rs.long("profile_id"),
           rs.string("kind"),
           rs.int("measurement"),
-          rs.string("unit"),
           rs.long("measured")
         )
       )
@@ -298,16 +297,16 @@ final class Store(config: Config,
 
   def addMeasurable(measurable: Measurable): Long = DB localTx { implicit session =>
     sql"""
-       insert into measurable(profile_id, kind, measurement, unit, measured)
-       values(${measurable.profileId}, ${measurable.kind}, ${measurable.measurement}, ${measurable.unit}, ${measurable.measured})
+       insert into measurable(profile_id, kind, measurement, measured)
+       values(${measurable.profileId}, ${measurable.kind}, ${measurable.measurement}, ${measurable.measured})
        """
       .updateAndReturnGeneratedKey()
   }
 
   def updateMeasurable(measurable: Measurable): Long = DB localTx { implicit session =>
     sql"""
-       update measurable set kind = ${measurable.kind}, measurement = ${measurable.measurement}, unit = ${measurable.unit},
-       measured = ${measurable.measured} where id = ${measurable.id}
+       update measurable set kind = ${measurable.kind}, measurement = ${measurable.measurement}, measured = ${measurable.measured}
+       where id = ${measurable.id}
        """
       .update()
     measurable.id
