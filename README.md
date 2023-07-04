@@ -18,14 +18,16 @@ DateTimePicker
 
 Dashboard
 ---------
->Per Edible, Drinkable, Expendable and Measurable:
-1. Daily Calories
-2. Weekly Calories
+>Edible, Drinkable, Expendable:
+1. Today Total Calories
+2. Week Total Calories
+>Measurable:
+1. Pulse
+2. Weight
+3. Glucose
 >Summary:
-1. Daily Calories
-2. Daily Calorie Ratio
-3. Weekly Calories
-4. Weekly Calorie Ratio
+1. Today Calorie Ratio
+2. Week Calorie Ratio
 
 Build
 -----
