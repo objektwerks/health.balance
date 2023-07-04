@@ -3,17 +3,12 @@ package objektwerks
 import scalafx.geometry.{Insets, Orientation}
 import scalafx.scene.Scene
 import scalafx.scene.control.SplitPane
-import scalafx.scene.layout.{BorderPane, HBox, Priority, VBox}
+import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import objektwerks.dashboard.Dashboard
 import objektwerks.pane.*
 
 final class View(context: Context, model: Model):
-  val borderPane = new BorderPane:
-    prefWidth = context.windowWidth
-    prefHeight = context.windowHeight
-    padding = Insets(6)
-
   val dashboardPane = Dashboard(context, model)
   HBox.setHgrow(dashboardPane, Priority.Always)
 
@@ -30,9 +25,12 @@ final class View(context: Context, model: Model):
   splitPane.setDividerPositions(0.30, 0.70)
   VBox.setVgrow(splitPane, Priority.Always)
 
-  borderPane.top = dashboardPane
-  borderPane.center = splitPane
+  val viewPane = new VBox:
+    prefWidth = context.windowWidth
+    prefHeight = context.windowHeight
+    padding = Insets(6)
+    children = List(dashboardPane, splitPane)
 
   val scene = new Scene:
-    root = borderPane
+    root = viewPane
     stylesheets = List("/style.css")
