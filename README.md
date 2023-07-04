@@ -25,6 +25,13 @@ Dashboard
 1. Today Calorie Ratio
 2. Week Calorie Ratio
 
+Measurables
+-----------
+>Put where?
+1. Pulse
+2. Weight
+3. Glucose
+
 Build
 -----
 1. sbt clean compile
