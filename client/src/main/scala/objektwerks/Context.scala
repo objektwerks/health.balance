@@ -54,7 +54,6 @@ final class Context(config: Config):
   val headerStart = config.getString("header.start")
   val headerFinish = config.getString("header.finish")
   val headerMeasurement = config.getString("header.measurement")
-  val headerUnit = config.getString("header.unit")
   val headerMeasured = config.getString("header.measured")
 
   val labelLicense = config.getString("label.license")
