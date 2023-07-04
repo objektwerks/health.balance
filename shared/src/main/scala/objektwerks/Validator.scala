@@ -136,5 +136,4 @@ object Validator:
       measurable.profileId > 0 &&
       measurable.kind.nonEmpty &&
       measurable.measurement > 0 &&
-      measurable.unit.nonEmpty &&
       measurable.measured > 0
