@@ -16,8 +16,8 @@ DateTimePicker
 --------------
 >Required entity support: Edible, Drinkable, Expendable and Measurable
 
-Dashboard
----------
+Calories Dashboard
+------------------
 >Edible, Drinkable, Expendable:
 1. Today Total Calories
 2. Week Total Calories
@@ -25,9 +25,8 @@ Dashboard
 1. Today Calorie Ratio
 2. Week Calorie Ratio
 
-Measurables
------------
->Put where?
+Measurables Dashboard
+---------------------
 1. Pulse
 2. Weight
 3. Glucose
