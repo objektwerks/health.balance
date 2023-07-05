@@ -22,12 +22,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   selectedProfileId.onChange { (_, oldProfileId, newProfileId) =>
     shouldBeInFxThread("selected profile id onchange should be in fx thread.")
     logger.info(s"selected profile id onchange event: $oldProfileId -> $newProfileId")
-    /*
     edibles(newProfileId)
     drinkables(newProfileId)
     expendables(newProfileId)
     measurables(newProfileId)
-    */
   }
 
   val observableAccount = ObjectProperty[Account](Account.empty)
