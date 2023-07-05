@@ -2,7 +2,7 @@ package objektwerks.dashboard
 
 import scalafx.scene.control.{Label, TitledPane}
 
-import objektwerks.Context
+import objektwerks.{Context, Model}
 import objektwerks.dialog.ControlGridPane
 
 final class CaloriesInOutDashboardPane(context: Context, model: Model) extends TitledPane:
