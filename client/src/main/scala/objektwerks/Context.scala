@@ -84,6 +84,7 @@ final class Context(config: Config):
   val tabDrinkables = config.getString("tab.drinkables")
   val tabExpendables = config.getString("tab.expendables")
   val tabMeasurables = config.getString("tab.measurables")
+  val tabCaloriesInOut = config.getString("tab.caloriesinout")
 
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
