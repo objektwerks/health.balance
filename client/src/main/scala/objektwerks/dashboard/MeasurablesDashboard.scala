@@ -22,7 +22,7 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
     text = "0"
 
   val controls = new HBox:
-    padding = Insets(6)
+    spacing = 6
     children = List(context.labelWeight, weight, context.labelPulse, pulse, context.labelGlucose, glucose)
 
   content = controls
