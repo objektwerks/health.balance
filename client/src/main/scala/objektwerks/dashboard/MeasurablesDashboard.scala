@@ -1,6 +1,5 @@
 package objektwerks.dashboard
 
-import scalafx.geometry.Insets
 import scalafx.scene.control.{Label, TitledPane}
 import scalafx.scene.layout.HBox
 
@@ -23,7 +22,11 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
 
   val controls = new HBox:
     spacing = 6
-    children = List(context.labelWeight, weight, context.labelPulse, pulse, context.labelGlucose, glucose)
+    children = List(
+      new Label(context.labelWeight), weight,
+      new Label(context.labelPulse), pulse,
+      new Label(context.labelGlucose), glucose
+    )
 
   content = controls
 
