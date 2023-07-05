@@ -23,3 +23,12 @@ final class CaloriesInOutDashboardPane(context: Context, model: Model) extends T
   )
   
   content = ControlGridPane(controls)
+
+  model.observableEdibles.onChange { (_, _) =>
+  }
+
+  model.observableDrinkables.onChange { (_, _) =>
+  }
+
+  model.observableExpendables.onChange { (_, _) =>
+  }
