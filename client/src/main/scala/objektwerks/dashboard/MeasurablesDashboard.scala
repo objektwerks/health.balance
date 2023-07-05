@@ -1,7 +1,7 @@
 package objektwerks.dashboard
 
 import scalafx.scene.control.{Label, TitledPane}
-import scalafx.scene.layout.HBox
+import scalafx.scene.layout.{HBox, Priority}
 
 import objektwerks.{Context, Model}
 
@@ -27,6 +27,7 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
       new Label(context.labelPulse), pulse,
       new Label(context.labelGlucose), glucose
     )
+  HBox.setHgrow(controls, Priority.Always)
 
   content = controls
 
