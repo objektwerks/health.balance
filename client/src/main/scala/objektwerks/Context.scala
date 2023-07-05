@@ -80,6 +80,9 @@ final class Context(config: Config):
   val labelWeek = config.getString("label.week")
   val labelIn = config.getString("label.in")
   val labelOut = config.getString("label.out")
+  val labelWeight = config.getString("label.weight")
+  val labelPulse = config.getString("label.pulse")
+  val labelGlucose = config.getString("label.glucose")
 
   val tabProfiles = config.getString("tab.profiles")
   val tabEdibles = config.getString("tab.edibles")
