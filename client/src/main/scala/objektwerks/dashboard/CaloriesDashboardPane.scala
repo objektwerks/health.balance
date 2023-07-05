@@ -1,6 +1,6 @@
 package objektwerks.dashboard
 
-import scalafx.scene.control.TitledPane
+import scalafx.scene.control.{Label, TitledPane}
 
 import objektwerks.{Context, Model}
 
@@ -8,3 +8,9 @@ final class CaloriesDashboardPane(context: Context, model: Model) extends Titled
   collapsible = false
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
+
+  val today = new Label:
+    text = "0"
+  
+  val week = new Label:
+    text = "0"
