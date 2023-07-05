@@ -77,7 +77,9 @@ final class Context(config: Config):
   val labelUnit = config.getString("label.unit")
   val labelMeasured = config.getString("label.measured")
   val labelToday = config.getString("label.today")
-  val labelWeek = config.getString("lable.week")
+  val labelWeek = config.getString("label.week")
+  val labelIn = config.getString("label.in")
+  val labelOut = config.getString("label.out")
 
   val tabProfiles = config.getString("tab.profiles")
   val tabEdibles = config.getString("tab.edibles")
