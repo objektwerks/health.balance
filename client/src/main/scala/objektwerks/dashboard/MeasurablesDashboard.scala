@@ -23,9 +23,9 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   val controls = new HBox:
     spacing = 6
     children = List(
-      new Label(context.labelWeight), weight,
-      new Label(context.labelPulse), pulse,
-      new Label(context.labelGlucose), glucose
+      Label(context.labelWeight), weight,
+      Label(context.labelPulse), pulse,
+      Label(context.labelGlucose), glucose
     )
   HBox.setHgrow(controls, Priority.Always)
 
