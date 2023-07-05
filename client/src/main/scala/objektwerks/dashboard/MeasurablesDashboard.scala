@@ -9,3 +9,6 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
   text = context.tabMeasurables
+
+  model.observableMeasurables.onChange { (_, _) =>
+  }
