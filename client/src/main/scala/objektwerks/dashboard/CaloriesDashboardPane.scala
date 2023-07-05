@@ -2,10 +2,10 @@ package objektwerks.dashboard
 
 import scalafx.scene.control.{Label, TitledPane}
 
-import objektwerks.{Context, Model}
+import objektwerks.Context
 import objektwerks.dialog.ControlGridPane
 
-final class CaloriesDashboardPane(context: Context, model: Model) extends TitledPane:
+abstract class CaloriesDashboardPane(context: Context) extends TitledPane:
   collapsible = false
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
