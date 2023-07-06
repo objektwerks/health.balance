@@ -11,9 +11,14 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   maxHeight = Double.MaxValue
   text = context.tabMeasurables
 
-  val weightToday = Label("0")
-  val pulseToday = Label("0")
-  val glucoseToday = Label("0")
+  val weightToday = new Label:
+    text <== model.weightToday
+
+  val pulseToday = new Label:
+    text <== model.pulseToday
+
+  val glucoseToday = new Label:
+    text <== model.glucoseToday
 
   val todayControls = new HBox:
     spacing = 6
