@@ -17,6 +17,7 @@ object Entity:
   given measurableOrdering: Ordering[Measurable] = Ordering.by[Measurable, Long](m => m.measured).reverse
 
   def epochSecondToInstant(epochSecond: Long): Instant = Instant.ofEpochSecond(epochSecond)
+  def epochSecondToEpochDay(epochSecond: Long): Long = epochSecondToLocalDate(epochSecond).toEpochDay
   def epochSecondToLocalDateTime(epochSecond: Long): LocalDateTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC)
   def epochSecondToLocalDate(epochSecond: Long): LocalDate = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC).toLocalDate
   def epochSecondToDayOfYear(epochSecond: Long): Int = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC).getDayOfYear

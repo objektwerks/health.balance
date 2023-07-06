@@ -2,7 +2,7 @@ package objektwerks
 
 import com.typesafe.scalalogging.LazyLogging
 
-import java.time.{Instant, LocalDate}
+import java.time.LocalDate
 
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
@@ -47,8 +47,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     ediblesTodayCalories.value = observableEdibles.filter(e => Entity.epochSecondToDayOfYear(e.ate) == today).map(_.calories).sum.toString
 
   def setEdiblesWeekCalories() =
-    val week = Instant.now
-    ediblesWeekCalories.value = observableEdibles.filter(e => Entity.epochSecondToInstant(e.ate).isAfter(week)).map(_.calories).sum.toString
+    val week = LocalDate.now.minusDays(8).toEpochDay
+    ediblesWeekCalories.value = observableEdibles.filter(e => Entity.epochSecondToEpochDay(e.ate) > week).map(_.calories).sum.toString
 
   val drinkablesTodayCalories = ObjectProperty[String]("0")
   val drinkablesWeekCalories = ObjectProperty[String]("0")
