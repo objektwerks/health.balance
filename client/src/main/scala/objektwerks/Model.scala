@@ -26,6 +26,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     drinkables(newProfileId)
     expendables(newProfileId)
     measurables(newProfileId)
+    Platform.runLater( dashboard() )
   }
 
   val observableAccount = ObjectProperty[Account](Account.empty)
@@ -55,6 +56,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val weightWeek = ObjectProperty[String]("0")
   val pulseWeek = ObjectProperty[String]("0")
   val glucoseWeek = ObjectProperty[String]("0")
+
+  def dashboard() = {
+
+  }
 
   def onUIFault(cause: String): Unit =
     logger.error(cause)
