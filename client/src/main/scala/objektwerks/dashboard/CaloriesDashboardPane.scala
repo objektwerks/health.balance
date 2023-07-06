@@ -10,11 +10,8 @@ abstract class CaloriesDashboardPane(context: Context) extends TitledPane:
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
 
-  val today = new Label:
-    text = "0"
-  
-  val week = new Label:
-    text = "0"
+  val today = Label("0")
+  val week = Label("0")
 
   val controls = List[(String, Label)](
     context.labelToday -> today,
