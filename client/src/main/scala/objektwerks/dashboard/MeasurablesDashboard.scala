@@ -38,6 +38,15 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
     )
   HBox.setHgrow(todayControls, Priority.Always)
 
+  val weekControls = new HBox:
+    spacing = 6
+    children = List(
+      Label(context.labelWeight), weightWeek,
+      Label(context.labelPulse), pulseWeek,
+      Label(context.labelGlucose), glucoseWeek
+    )
+  HBox.setHgrow(weekControls, Priority.Always)
+
   val todayTitledPane = new TitledPane:
     collapsible = false
     maxWidth = Double.MaxValue
