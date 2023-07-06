@@ -104,6 +104,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setExpendablesTodayCalories()
     setExpendablesWeekCalories()
 
+    setCaloriesInOutToday()
+    setCaloriesInOutWeek()
+
     // TODO!
   }
 
