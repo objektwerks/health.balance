@@ -25,8 +25,10 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   HBox.setHgrow(todayControls, Priority.Always)
 
   val todayTitledPane = new TitledPane:
+    collapsible = false
+    maxWidth = Double.MaxValue
+    maxHeight = Double.MaxValue
     text = context.tabToday
     content = todayControls
-
 
   content = todayTitledPane
