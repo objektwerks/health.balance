@@ -11,14 +11,9 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   maxHeight = Double.MaxValue
   text = context.tabMeasurables
 
-  val weight = new Label:
-    text = "0"
-
-  val pulse = new Label:
-    text = "0"
-
-  val glucose = new Label:
-    text = "0"
+  val weight = Label("0")
+  val pulse = Label("0")
+  val glucose = Label("0")
 
   val controls = new HBox:
     spacing = 6
@@ -30,6 +25,3 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   HBox.setHgrow(controls, Priority.Always)
 
   content = controls
-
-  model.observableMeasurables.onChange { (_, _) =>
-  }
