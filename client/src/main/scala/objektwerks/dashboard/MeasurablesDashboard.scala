@@ -61,4 +61,9 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
     text = context.tabWeek
     content = weekControls
 
-  content = todayTitledPane
+  val dashboard = new HBox:
+    spacing = 6
+    children = List(todayTitledPane, weekTitledPane)
+  HBox.setHgrow(dashboard, Priority.Always)
+
+  content = dashboard
