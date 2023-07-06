@@ -78,16 +78,13 @@ final case class Profile(id: Long = 0,
   val createdProperty = ObjectProperty[String](this, "created", Entity.epochSecondToLocalDate(created).toString)
   val profile = this
 
-sealed trait Caloric:
-  val calories: Int
-
 final case class Edible(id: Long = 0,
                         profileId: Long,
                         kind: String = EdibleKind.Fruit.toString,
                         detail: String = "",
                         organic: Boolean = true,
                         calories: Int = 1,
-                        ate: Long = Instant.now.getEpochSecond) extends Entity with Caloric:
+                        ate: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val detailProperty = ObjectProperty[String](this, "detail", detail)
   val organicProperty = ObjectProperty[Boolean](this, "organic", organic)
@@ -108,7 +105,7 @@ final case class Drinkable(id: Long = 0,
                            organic: Boolean = true,
                            count: Int = 1,
                            calories: Int = 0,
-                           drank: Long = Instant.now.getEpochSecond) extends Entity with Caloric:
+                           drank: Long = Instant.now.getEpochSecond) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val detailProperty = ObjectProperty[String](this, "detail", detail)
   val organicProperty = ObjectProperty[Boolean](this, "organic", organic)
@@ -131,7 +128,7 @@ final case class Expendable(id: Long = 0,
                             freshair: Boolean = true,
                             calories: Int = 1,
                             start: Long = Instant.now.getEpochSecond,
-                            finish: Long = Instant.now.getEpochSecond + 1) extends Entity with Caloric:
+                            finish: Long = Instant.now.getEpochSecond + 1) extends Entity:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val detailProperty = ObjectProperty[String](this, "detail", detail)
   val sunshineProperty = ObjectProperty[Boolean](this, "sunshine", sunshine)
