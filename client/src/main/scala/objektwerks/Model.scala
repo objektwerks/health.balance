@@ -36,6 +36,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableMeasurables = ObservableBuffer[Measurable]()
   val observableFaults = ObservableBuffer[Fault]()
 
+  val ediblesTodayCalories = ObjectProperty[String]("0")
+
   def onUIFault(cause: String): Unit =
     logger.error(cause)
     add( Fault(cause) )
