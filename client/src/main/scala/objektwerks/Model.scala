@@ -85,6 +85,16 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def dashboard() = {
     shouldBeInFxThread("dashboard should be in fx thread.")
+
+    setEdiblesTodayCalories()
+    setEdiblesWeekCalories()
+
+    setDrinkablesTodayCalories()
+    setDrinkablesWeekCalories()
+
+    setExpendablesTodayCalories()
+    setExpendablesWeekCalories()
+    
     // TODO!
   }
 
