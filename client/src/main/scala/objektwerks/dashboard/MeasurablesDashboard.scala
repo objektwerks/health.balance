@@ -20,6 +20,15 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   val glucoseToday = new Label:
     text <== model.glucoseToday
 
+  val weightWeek = new Label:
+    text <== model.weightWeek
+
+  val pulseWeek = new Label:
+    text <== model.pulseWeek
+
+  val glucoseWeek = new Label:
+    text <== model.glucoseWeek
+
   val todayControls = new HBox:
     spacing = 6
     children = List(
