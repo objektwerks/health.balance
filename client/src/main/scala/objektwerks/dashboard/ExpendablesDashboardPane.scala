@@ -4,6 +4,5 @@ import objektwerks.{Context, Model}
 
 final class ExpendablesDashboardPane(context: Context, model: Model) extends CaloriesDashboardPane(context):
   text = context.tabExpendables
-
-  model.observableExpendables.onChange { (_, _) =>
-  }
+  today.text <== model.expendablesTodayCalories
+  week.text <== model.expendablesWeekCalories
