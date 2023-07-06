@@ -58,7 +58,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val glucoseWeek = ObjectProperty[String]("0")
 
   def dashboard() = {
-
+    shouldBeInFxThread("dashboard should be in fx thread.")
+    // TODO!
   }
 
   def onUIFault(cause: String): Unit =
