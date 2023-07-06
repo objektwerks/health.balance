@@ -4,6 +4,5 @@ import objektwerks.{Context, Model}
 
 final class DrinkablesDashboardPane(context: Context, model: Model) extends CaloriesDashboardPane(context):
   text = context.tabDrinkables
-
-  model.observableDrinkables.onChange { (_, _) =>
-  }
+  today.text <== model.drinkablesTodayCalories
+  week.text <== model.drinkablesWeekCalories
