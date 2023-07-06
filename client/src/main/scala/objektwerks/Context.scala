@@ -88,6 +88,8 @@ final class Context(config: Config):
   val tabExpendables = config.getString("tab.expendables")
   val tabMeasurables = config.getString("tab.measurables")
   val tabCaloriesInOut = config.getString("tab.caloriesinout")
+  val tabToday = config.getString("tab.today")
+  val tabWeek = config.getString("tab.week")
 
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
