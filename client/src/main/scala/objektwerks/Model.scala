@@ -48,6 +48,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val caloriesInOutToday = ObjectProperty[String]("0/0")
   val caloriesInOutWeek = ObjectProperty[String]("0/0")
 
+  val weightToday = ObjectProperty[String]("0")
+  val pulseToday = ObjectProperty[String]("0")
+  val glucoseToday = ObjectProperty[String]("0")
+
   def onUIFault(cause: String): Unit =
     logger.error(cause)
     add( Fault(cause) )
