@@ -26,7 +26,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     drinkables(newProfileId)
     expendables(newProfileId)
     measurables(newProfileId)
-    Platform.runLater( dashboard() )
+    dashboard()
   }
 
   val observableAccount = ObjectProperty[Account](Account.empty)
