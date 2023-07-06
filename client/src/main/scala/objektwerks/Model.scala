@@ -5,6 +5,7 @@ import com.typesafe.scalalogging.LazyLogging
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
+import java.time.LocalDate
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
@@ -39,6 +40,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   val ediblesTodayCalories = ObjectProperty[String]("0")
   val ediblesWeekCalories = ObjectProperty[String]("0")
+  def setEdiblesTodayCalories() =
+    val today = LocalDate.now.getDayOfYear
+    ediblesTodayCalories.value = observableEdibles.filter(e => Entity.epochSecondToLocalDate(e.ate).getDayOfYear == today).map(_.calories).sum.toString
 
   val drinkablesTodayCalories = ObjectProperty[String]("0")
   val drinkablesWeekCalories = ObjectProperty[String]("0")
