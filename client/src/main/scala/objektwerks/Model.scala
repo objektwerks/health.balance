@@ -79,6 +79,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     val caloriesOut = expendablesTodayCalories.value
     caloriesInOutToday.value = s"$caloriesIn/$caloriesOut"
 
+  def setCaloriesInOutWeek() =
+    val caloriesIn = ( ediblesWeekCalories.value.toInt + drinkablesWeekCalories.value.toInt ).toString
+    val caloriesOut = expendablesWeekCalories.value
+    caloriesInOutToday.value = s"$caloriesIn/$caloriesOut"
+
   val weightToday = ObjectProperty[String]("0")
   val pulseToday = ObjectProperty[String]("0")
   val glucoseToday = ObjectProperty[String]("0")
