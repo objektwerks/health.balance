@@ -54,4 +54,11 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
     text = context.tabToday
     content = todayControls
 
+  val weekTitledPane = new TitledPane:
+    collapsible = false
+    maxWidth = Double.MaxValue
+    maxHeight = Double.MaxValue
+    text = context.tabWeek
+    content = weekControls
+
   content = todayTitledPane
