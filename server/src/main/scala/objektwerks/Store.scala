@@ -220,7 +220,7 @@ final class Store(config: Config,
           rs.boolean("organic"),
           rs.int("count"),
           rs.int("calories"),
-          rs.long("ate")
+          rs.long("drank")
         )
       )
       .list()
