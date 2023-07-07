@@ -7,6 +7,7 @@ import java.time.LocalDate
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
+import scalafx.collections.ObservableBuffer.{Add, Update}
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
@@ -111,6 +112,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .map(_.measurement)
       .sum
       .toString
+
+  observableMeasurables.onChange { (_, changes) =>
+    logger.info("observable measurables onchange event...")
+
+    for (change <- changes)
+      val kind = change match {
+        case Add(_, added)    => added.head.kind
+        case Update(from, to) => observableMeasurables(from).kind
+        case _ => ""
+      }
+  }
 
   observableEdibles.onChange { (_, changes) =>
     logger.info("observable edibles onchange event...")
