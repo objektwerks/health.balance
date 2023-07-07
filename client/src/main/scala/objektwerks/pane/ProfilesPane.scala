@@ -86,7 +86,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
   }
 
   def add(): Unit =
-    ProfileDialog(context, Profile(accountId = model.observableAccount.get.id, name = "")).showAndWait() match
+    ProfileDialog(context, Profile(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
       case Some(profile: Profile) =>
         model.add(profile)
         tableView.selectionModel().select(profile)
@@ -104,7 +104,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
     case _ => faultsButton.disable = model.observableFaults.isEmpty
 
-  def account(): Unit = AccountDialog(context, model.observableAccount.get).showAndWait() match
+  def account(): Unit = AccountDialog(context, model.objectAccount.get).showAndWait() match
       case Some( DeactivateReactivate( Some(deactivate), None) ) => model.deactivate(deactivate)
       case Some( DeactivateReactivate( None, Some(reactivate) ) ) => model.reactivate(reactivate)
       case _ =>

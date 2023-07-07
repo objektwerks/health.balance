@@ -32,7 +32,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     Platform.runLater( dashboard() )
   }
 
-  val observableAccount = ObjectProperty[Account](Account.empty)
+  val objectAccount = ObjectProperty[Account](Account.empty)
   val observableProfiles = ObservableBuffer[Profile]()
   val observableEdibles = ObservableBuffer[Edible]()
   val observableDrinkables = ObservableBuffer[Drinkable]()
@@ -40,12 +40,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableMeasurables = ObservableBuffer[Measurable]()
   val observableFaults = ObservableBuffer[Fault]()
 
-  observableAccount.onChange { (_, oldAccount, newAccount) =>
-    logger.info(s"*** Model: selected account onchange event: $oldAccount -> $newAccount")
+  objectAccount.onChange { (_, oldAccount, newAccount) =>
+    logger.info(s"*** object account onchange event: $oldAccount -> $newAccount")
   }
 
   observableProfiles.onChange { (_, changes) =>
-    logger.info(s"*** Model: observable profiles onchange event: $changes")
+    logger.info(s"*** observable profiles onchange event: $changes")
   }
 
   val ediblesTodayCalories = ObjectProperty[String]("0")
@@ -99,7 +99,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setCaloriesInOutWeek()
 
   observableEdibles.onChange { (_, changes) =>
-    logger.info("observable edibles onchange event...")
+    logger.info(s"*** observable edibles onchange event: $changes")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
@@ -108,7 +108,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableDrinkables.onChange { (_, changes) =>
-    logger.info("observable drinkables onchange event...")
+    logger.info(s"*** observable drinkables onchange event: $changes")
 
     setDrinkablesTodayCalories()
     setDrinkablesWeekCalories()
@@ -117,7 +117,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableExpendables.onChange { (_, changes) =>
-    logger.info("observable expendables onchange event...")
+    logger.info(s"*** observable expendables onchange event: $changes")
 
     setExpendablesTodayCalories()
     setExpendablesWeekCalories()
@@ -153,7 +153,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .toString
 
   observableMeasurables.onChange { (_, changes) =>
-    logger.info(s"observable measurables onchange event: $changes")
+    logger.info(s"*** observable measurables onchange event: $changes")
 
     for (change <- changes)
       val kind = change match
@@ -206,7 +206,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def add(fault: Fault): Unit =
     fetcher.fetchAsync(
-      AddFault(observableAccount.get.license, fault),
+      AddFault(objectAccount.get.license, fault),
       (event: Event) => event match
         case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
         case FaultAdded() =>
@@ -220,7 +220,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       register,
       (event: Event) => event match
         case fault @ Fault(_, _) => registered.set(false)
-        case Registered(account) => observableAccount.set(account)
+        case Registered(account) => objectAccount.set(account)
         case _ => ()
     )
 
@@ -229,7 +229,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       login,
       (event: Event) => event match
         case fault @ Fault(_, _) => loggedin.set(false)
-        case LoggedIn(account) => observableAccount.set(account)
+        case LoggedIn(account) => objectAccount.set(account)
         case _ => ()
     )
 
@@ -238,7 +238,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       deactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.deactivate", fault)
-        case Deactivated(account) => observableAccount.set(account)
+        case Deactivated(account) => objectAccount.set(account)
         case _ => ()
     )
 
@@ -247,13 +247,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       reactivate,
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.reactivate", fault)
-        case Reactivated(account) => observableAccount.set(account)
+        case Reactivated(account) => objectAccount.set(account)
         case _ => ()
     )
 
   def profiles(): Unit =
     fetcher.fetchAsync(
-      ListProfiles(observableAccount.get.license),
+      ListProfiles(objectAccount.get.license),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.profiles", fault)
         case ProfilesListed(profiles) =>
@@ -264,7 +264,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def add(profile: Profile): Unit =
     fetcher.fetchAsync(
-      AddProfile(observableAccount.get.license, profile),
+      AddProfile(objectAccount.get.license, profile),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.add profile", profile, fault)
         case ProfileAdded(id) =>
@@ -276,7 +276,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def update(profile: Profile): Unit =
     fetcher.fetchAsync(
-      AddProfile(observableAccount.get.license, profile),
+      AddProfile(objectAccount.get.license, profile),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update profile", profile, fault)
         case ProfileAdded(id) => observableProfiles.update(observableProfiles.indexOf(profile), profile)
@@ -285,7 +285,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def edibles(profileId: Long): Unit =
     fetcher.fetchAsync(
-      ListEdibles(observableAccount.get.license, profileId),
+      ListEdibles(objectAccount.get.license, profileId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.edibles", fault)
         case EdiblesListed(edibles) =>
@@ -296,7 +296,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def add(edible: Edible): Unit =
     fetcher.fetchAsync(
-      AddEdible(observableAccount.get.license, edible),
+      AddEdible(objectAccount.get.license, edible),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.add edible", edible, fault)
         case EdibleAdded(id) =>
@@ -308,7 +308,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def update(edible: Edible): Unit =
     fetcher.fetchAsync(
-      AddEdible(observableAccount.get.license, edible),
+      AddEdible(objectAccount.get.license, edible),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update edible", edible, fault)
         case EdibleAdded(id) => observableEdibles.update(observableEdibles.indexOf(edible), edible)
@@ -317,7 +317,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def drinkables(profileId: Long): Unit =
     fetcher.fetchAsync(
-      ListDrinkables(observableAccount.get.license, profileId),
+      ListDrinkables(objectAccount.get.license, profileId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.drinkables", fault)
         case DrinkablesListed(drinkables) =>
@@ -328,7 +328,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def add(drinkable: Drinkable): Unit =
     fetcher.fetchAsync(
-      AddDrinkable(observableAccount.get.license, drinkable),
+      AddDrinkable(objectAccount.get.license, drinkable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.add drinkable", drinkable, fault)
         case DrinkableAdded(id) =>
@@ -340,7 +340,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def update(drinkable: Drinkable): Unit =
     fetcher.fetchAsync(
-      AddDrinkable(observableAccount.get.license, drinkable),
+      AddDrinkable(objectAccount.get.license, drinkable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update drinkable", drinkable, fault)
         case DrinkableAdded(id) => observableDrinkables.update(observableDrinkables.indexOf(drinkable), drinkable)
@@ -349,7 +349,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def expendables(profileId: Long): Unit =
     fetcher.fetchAsync(
-      ListExpendables(observableAccount.get.license, profileId),
+      ListExpendables(objectAccount.get.license, profileId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.expendables", fault)
         case ExpendablesListed(expendables) =>
@@ -360,7 +360,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def add(expendable: Expendable): Unit =
     fetcher.fetchAsync(
-      AddExpendable(observableAccount.get.license, expendable),
+      AddExpendable(objectAccount.get.license, expendable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.add expendable", expendable, fault)
         case ExpendableAdded(id) =>
@@ -372,7 +372,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def update(expendable: Expendable): Unit =
     fetcher.fetchAsync(
-      AddExpendable(observableAccount.get.license, expendable),
+      AddExpendable(objectAccount.get.license, expendable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update expendable", expendable, fault)
         case ExpendableAdded(id) => observableExpendables.update(observableExpendables.indexOf(expendable), expendable)
@@ -381,7 +381,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def measurables(profileId: Long): Unit =
     fetcher.fetchAsync(
-      ListMeasurables(observableAccount.get.license, profileId),
+      ListMeasurables(objectAccount.get.license, profileId),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.measurables", fault)
         case MeasurablesListed(measurables) =>
@@ -392,7 +392,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def add(measurable: Measurable): Unit =
     fetcher.fetchAsync(
-      AddMeasurable(observableAccount.get.license, measurable),
+      AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.add measurable", measurable, fault)
         case MeasurableAdded(id) =>
@@ -404,7 +404,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def update(measurable: Measurable): Unit =
     fetcher.fetchAsync(
-      AddMeasurable(observableAccount.get.license, measurable),
+      AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update measurable", measurable, fault)
         case MeasurableAdded(id) => observableMeasurables.update(observableMeasurables.indexOf(measurable), measurable)
