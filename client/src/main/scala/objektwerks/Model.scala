@@ -94,6 +94,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val glucoseWeek = ObjectProperty[String]("0")
 
   observableEdibles.onChange { (_, changes) =>
+    logger.info("observable edibles onchange event...")
+
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
 
@@ -102,6 +104,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableDrinkables.onChange { (_, changes) =>
+    logger.info("observable drinkables onchange event...")
+
     setDrinkablesTodayCalories()
     setDrinkablesWeekCalories()
 
@@ -110,6 +114,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableExpendables.onChange { (_, changes) =>
+    logger.info("observable expendables onchange event...")
+
     setExpendablesTodayCalories()
     setExpendablesWeekCalories()
 
@@ -119,6 +125,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def dashboard() = {
     shouldBeInFxThread("dashboard should be in fx thread.")
+    logger.info("dashboard reset...")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
