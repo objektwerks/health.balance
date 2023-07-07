@@ -95,7 +95,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val glucoseToday = ObjectProperty[String]("0")
   val glucoseWeek = ObjectProperty[String]("0")
 
-  def setMeasurableToday(kind: MeasurableKind) =
+  def setMeasurableToday(kind: String) =
     val today = LocalDate.now.getDayOfYear
     weightToday.value = observableMeasurables
       .filter(m => m.kind == kind.toString)
@@ -104,7 +104,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .sum
       .toString
 
-  def setMeasurableWeek(kind: MeasurableKind) =
+  def setMeasurableWeek(kind: String) =
     val week = LocalDate.now.minusDays(8).toEpochDay
     weightToday.value = observableMeasurables
       .filter(m => m.kind == kind.toString)
@@ -122,6 +122,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case Update(from, to) => observableMeasurables(from).kind
         case _ => ""
       }
+      if kind.nonEmpty then
+        setMeasurableToday(kind)
+        setMeasurableWeek(kind)
   }
 
   observableEdibles.onChange { (_, changes) =>
