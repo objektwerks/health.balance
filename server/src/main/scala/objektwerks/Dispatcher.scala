@@ -104,7 +104,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
 
   private def updateProfile(profile: Profile): Event =
     Try {
-      ProfileAdded( store.updateProfile(profile) )
+      ProfileUpdated( store.updateProfile(profile) )
     }.recover { case NonFatal(error) => Fault("Update profile failed:", error) }
      .get
 
