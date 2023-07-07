@@ -147,11 +147,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info(s"observable measurables onchange event: $changes")
 
     for (change <- changes)
-      val kind = change match {
+      val kind = change match
         case Add(_, added)    => added.head.kind
         case Update(from, to) => observableMeasurables(from).kind
         case _ => ""
-      }
+        
       val (today, week) = MeasurableKind.valueOf(kind) match
         case MeasurableKind.Weight => (weightToday, weightWeek)
         case MeasurableKind.Pulse => (pulseToday, pulseWeek)
