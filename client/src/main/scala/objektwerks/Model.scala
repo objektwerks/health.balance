@@ -86,14 +86,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     val caloriesOut = expendablesWeekCalories.value
     caloriesInOutToday.value = s"$caloriesIn/$caloriesOut"
 
+  def setCaloriesInOut() =
+    setCaloriesInOutToday()
+    setCaloriesInOutWeek()
+
   observableEdibles.onChange { (_, changes) =>
     logger.info("observable edibles onchange event...")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
 
-    setCaloriesInOutToday()
-    setCaloriesInOutWeek()
+    setCaloriesInOut()
   }
 
   observableDrinkables.onChange { (_, changes) =>
@@ -102,8 +105,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setDrinkablesTodayCalories()
     setDrinkablesWeekCalories()
 
-    setCaloriesInOutToday()
-    setCaloriesInOutWeek()
+    setCaloriesInOut()
   }
 
   observableExpendables.onChange { (_, changes) =>
@@ -112,8 +114,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setExpendablesTodayCalories()
     setExpendablesWeekCalories()
 
-    setCaloriesInOutToday()
-    setCaloriesInOutWeek()
+    setCaloriesInOut()
   }
 
   val weightToday = ObjectProperty[String]("0")
@@ -151,7 +152,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case Add(_, added)    => added.head.kind
         case Update(from, to) => observableMeasurables(from).kind
         case _ => ""
-        
+
       val (today, week) = MeasurableKind.valueOf(kind) match
         case MeasurableKind.Weight => (weightToday, weightWeek)
         case MeasurableKind.Pulse => (pulseToday, pulseWeek)
@@ -174,8 +175,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setExpendablesTodayCalories()
     setExpendablesWeekCalories()
 
-    setCaloriesInOutToday()
-    setCaloriesInOutWeek()
+    setCaloriesInOut()
   }
 
   def onUIFault(cause: String): Unit =
