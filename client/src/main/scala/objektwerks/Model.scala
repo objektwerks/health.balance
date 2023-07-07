@@ -174,7 +174,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         setMeasurableWeek(week, kind)
   }
 
-  def dashboard() = {
+  def dashboard() =
     logger.info("*** dashboard reset...")
     shouldBeInFxThread("*** dashboard should be in fx thread.")
 
@@ -188,7 +188,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setExpendablesWeekCalories()
 
     setCaloriesInOut()
-  }
 
   def onUIFault(cause: String): Unit =
     logger.error(s"*** Cause: $cause")
