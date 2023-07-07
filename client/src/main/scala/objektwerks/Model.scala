@@ -101,6 +101,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setCaloriesInOutWeek()
   }
 
+  observableDrinkables.onChange { (_, changes) =>
+    setDrinkablesTodayCalories()
+    setDrinkablesWeekCalories()
+
+    setCaloriesInOutToday()
+    setCaloriesInOutWeek()
+  }
+
   def dashboard() = {
     shouldBeInFxThread("dashboard should be in fx thread.")
 
