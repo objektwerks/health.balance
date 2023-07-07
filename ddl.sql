@@ -53,6 +53,7 @@ CREATE TABLE expendable (
 CREATE TABLE measurable (
   id BIGSERIAL PRIMARY KEY,
   profile_id BIGINT REFERENCES profile(id),
+  kind VARCHAR NOT NULL,
   measurement INT NOT NULL,
   measured BIGINT NOT NULL
 );
