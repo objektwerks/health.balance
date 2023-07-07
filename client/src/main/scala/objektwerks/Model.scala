@@ -191,11 +191,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   def onUIFault(cause: String): Unit =
-    logger.error(cause)
+    logger.error(s"*** Cause: $cause")
     add( Fault(cause) )
 
   def onUIFault(cause: String, error: Throwable): Unit =
-    logger.error(cause, error)
+    logger.error(s"*** Cause: $cause", error)
     add( Fault(cause) )
 
   def onFetchFault(source: String, fault: Fault): Unit =
