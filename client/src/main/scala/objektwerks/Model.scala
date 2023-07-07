@@ -86,11 +86,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     caloriesInOutToday.value = s"$caloriesIn/$caloriesOut"
 
   val weightToday = ObjectProperty[String]("0")
-  val pulseToday = ObjectProperty[String]("0")
-  val glucoseToday = ObjectProperty[String]("0")
-
   val weightWeek = ObjectProperty[String]("0")
+
+  val pulseToday = ObjectProperty[String]("0")
   val pulseWeek = ObjectProperty[String]("0")
+
+  val glucoseToday = ObjectProperty[String]("0")
   val glucoseWeek = ObjectProperty[String]("0")
 
   observableEdibles.onChange { (_, changes) =>
