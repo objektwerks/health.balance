@@ -23,8 +23,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val selectedMeasurableId = ObjectProperty[Long](0)
 
   selectedProfileId.onChange { (_, oldProfileId, newProfileId) =>
-    logger.info(s"selected profile id onchange event: $oldProfileId -> $newProfileId")
-    shouldBeInFxThread("selected profile id onchange should be in fx thread.")
+    logger.info(s"*** selected profile id onchange event: $oldProfileId -> $newProfileId")
+    shouldBeInFxThread("*** selected profile id onchange should be in fx thread.")
     edibles(newProfileId)
     drinkables(newProfileId)
     expendables(newProfileId)
@@ -100,7 +100,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   observableEdibles.onChange { (_, changes) =>
     logger.info(s"*** observable edibles onchange event: $changes")
-    shouldNotBeInFxThread("observable edibles onchange should not be in fx thread.")
+    shouldNotBeInFxThread("*** observable edibles onchange should not be in fx thread.")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
@@ -110,7 +110,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   observableDrinkables.onChange { (_, changes) =>
     logger.info(s"*** observable drinkables onchange event: $changes")
-    shouldNotBeInFxThread("observable drinkables onchange should not be in fx thread.")
+    shouldNotBeInFxThread("*** observable drinkables onchange should not be in fx thread.")
 
     setDrinkablesTodayCalories()
     setDrinkablesWeekCalories()
@@ -120,7 +120,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   observableExpendables.onChange { (_, changes) =>
     logger.info(s"*** observable expendables onchange event: $changes")
-    shouldNotBeInFxThread("observable expendables onchange should not be in fx thread.")
+    shouldNotBeInFxThread("*** observable expendables onchange should not be in fx thread.")
 
     setExpendablesTodayCalories()
     setExpendablesWeekCalories()
@@ -157,7 +157,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   observableMeasurables.onChange { (_, changes) =>
     logger.info(s"*** observable measurables onchange event: $changes")
-    shouldNotBeInFxThread("observable measurables onchange should not be in fx thread.")
+    shouldNotBeInFxThread("*** observable measurables onchange should not be in fx thread.")
 
     for (change <- changes)
       val kind = change match
@@ -175,8 +175,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   def dashboard() = {
-    logger.info("dashboard reset...")
-    shouldBeInFxThread("dashboard should be in fx thread.")
+    logger.info("*** dashboard reset...")
+    shouldBeInFxThread("*** dashboard should be in fx thread.")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
