@@ -172,8 +172,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
     setCaloriesInOutToday()
     setCaloriesInOutWeek()
-
-    // TODO!
   }
 
   def onUIFault(cause: String): Unit =
