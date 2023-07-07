@@ -86,6 +86,36 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     val caloriesOut = expendablesWeekCalories.value
     caloriesInOutToday.value = s"$caloriesIn/$caloriesOut"
 
+  observableEdibles.onChange { (_, changes) =>
+    logger.info("observable edibles onchange event...")
+
+    setEdiblesTodayCalories()
+    setEdiblesWeekCalories()
+
+    setCaloriesInOutToday()
+    setCaloriesInOutWeek()
+  }
+
+  observableDrinkables.onChange { (_, changes) =>
+    logger.info("observable drinkables onchange event...")
+
+    setDrinkablesTodayCalories()
+    setDrinkablesWeekCalories()
+
+    setCaloriesInOutToday()
+    setCaloriesInOutWeek()
+  }
+
+  observableExpendables.onChange { (_, changes) =>
+    logger.info("observable expendables onchange event...")
+
+    setExpendablesTodayCalories()
+    setExpendablesWeekCalories()
+
+    setCaloriesInOutToday()
+    setCaloriesInOutWeek()
+  }
+
   val weightToday = ObjectProperty[String]("0")
   val weightWeek = ObjectProperty[String]("0")
 
@@ -125,36 +155,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       if kind.nonEmpty then
         setMeasurableToday(kind)
         setMeasurableWeek(kind)
-  }
-
-  observableEdibles.onChange { (_, changes) =>
-    logger.info("observable edibles onchange event...")
-
-    setEdiblesTodayCalories()
-    setEdiblesWeekCalories()
-
-    setCaloriesInOutToday()
-    setCaloriesInOutWeek()
-  }
-
-  observableDrinkables.onChange { (_, changes) =>
-    logger.info("observable drinkables onchange event...")
-
-    setDrinkablesTodayCalories()
-    setDrinkablesWeekCalories()
-
-    setCaloriesInOutToday()
-    setCaloriesInOutWeek()
-  }
-
-  observableExpendables.onChange { (_, changes) =>
-    logger.info("observable expendables onchange event...")
-
-    setExpendablesTodayCalories()
-    setExpendablesWeekCalories()
-
-    setCaloriesInOutToday()
-    setCaloriesInOutWeek()
   }
 
   def dashboard() = {
