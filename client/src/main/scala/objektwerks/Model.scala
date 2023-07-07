@@ -125,18 +125,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val glucoseToday = ObjectProperty[String]("0")
   val glucoseWeek = ObjectProperty[String]("0")
 
-  def setMeasurableToday(kind: String) =
+  def setMeasurableToday(property: ObjectProperty[String], kind: String) =
     val today = LocalDate.now.getDayOfYear
-    weightToday.value = observableMeasurables
+    property.value = observableMeasurables
       .filter(m => m.kind == kind.toString)
       .filter(m => Entity.epochSecondToDayOfYear(m.measured) == today)
       .map(_.measurement)
       .sum
       .toString
 
-  def setMeasurableWeek(kind: String) =
+  def setMeasurableWeek(property: ObjectProperty[String], kind: String) =
     val week = LocalDate.now.minusDays(8).toEpochDay
-    weightToday.value = observableMeasurables
+    property.value = observableMeasurables
       .filter(m => m.kind == kind.toString)
       .filter(m => Entity.epochSecondToEpochDay(m.measured) > week)
       .map(_.measurement)
@@ -152,9 +152,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case Update(from, to) => observableMeasurables(from).kind
         case _ => ""
       }
-      if kind.nonEmpty then
-        setMeasurableToday(kind)
-        setMeasurableWeek(kind)
+      val (today, week) = MeasurableKind.valueOf(kind) match
+        case MeasurableKind.Weight => (weightToday, weightWeek)
+        case MeasurableKind.Pulse => (pulseToday, pulseWeek)
+        case MeasurableKind.Glucose => (glucoseToday, glucoseWeek)
+
+        setMeasurableToday(today, kind)
+        setMeasurableWeek(week, kind)
   }
 
   def dashboard() = {
