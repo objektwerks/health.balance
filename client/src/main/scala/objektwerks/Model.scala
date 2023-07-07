@@ -144,7 +144,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .toString
 
   observableMeasurables.onChange { (_, changes) =>
-    logger.info("observable measurables onchange event...")
+    logger.info(s"observable measurables onchange event: $changes")
 
     for (change <- changes)
       val kind = change match {
