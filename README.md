@@ -1,6 +1,6 @@
 Health Balance
 --------------
->Health balance distributed app using Scala3, ScalaFX, Jsoniter and PostgreSql.
+>Health balance app using Scala 3, ScalaFX, Jsoniter, Scaffeine, JoddMail, ScalikeJdbc and PostgreSql
 
 Use Cases
 ---------
