@@ -26,6 +26,10 @@ final class Context(config: Config):
   val buttonActivate = config.getString("button.activate")
   val buttonDeactivate = config.getString("button.deactivate")
 
+  val chartMin = config.getString("chart.min")
+  val chartMax = config.getString("chart.max")
+  val chartAvg = config.getString("chart.avg")
+
   val columnYes = config.getString("column.yes")
   val columnNo = config.getString("column.no")
 
