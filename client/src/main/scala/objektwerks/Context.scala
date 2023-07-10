@@ -31,6 +31,7 @@ final class Context(config: Config):
   val chartAvg = config.getString("chart.avg")
   val chartMonthDay = config.getString("chart.monthDay")
   val chartYEdibles = config.getString("chart.yEdibles")
+  val chartYDrinkables = config.getString("chart.yDrinkables")
 
   val columnYes = config.getString("column.yes")
   val columnNo = config.getString("column.no")
