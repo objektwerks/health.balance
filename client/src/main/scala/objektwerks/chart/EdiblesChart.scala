@@ -8,7 +8,7 @@ import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import objektwerks.{Context, Edible, Model}
+import objektwerks.{Context, Model}
 
 final case class EdibleXY(xDate: String, yCount: Int)
 
