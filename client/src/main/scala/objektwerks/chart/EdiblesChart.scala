@@ -20,7 +20,7 @@ final class EdiblesChart(context: Context, model: Model) extends TabPane:
 
   val tab = new Tab:
     closable = false
-    text = context.chartYEdibles
+    text = context.tabEdibles
     content = buildChart()
 
   padding = Insets(6)
@@ -32,7 +32,7 @@ final class EdiblesChart(context: Context, model: Model) extends TabPane:
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
                                                  xMaxDate = maxDate,
-                                                 yLabel = context.chartYEdibles,
+                                                 yLabel = context.tabEdibles,
                                                  yLowerBound = 0,
                                                  yUpperBound = 7,
                                                  yTickUnit = 1,
