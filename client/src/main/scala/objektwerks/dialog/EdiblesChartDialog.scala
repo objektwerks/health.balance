@@ -10,7 +10,7 @@ import objektwerks.chart.EdiblesChart
 final class EdiblessChartDialog(context: Context, model: Model) extends Dialog[Unit]:
   initOwner(Client.stage)
   title = context.windowTitle
-  headerText = context.chartCleanings
+  headerText = context.tabEdibles
   
   dialogPane().buttonTypes = List(ButtonType.Close)
   dialogPane().content = new VBox:
