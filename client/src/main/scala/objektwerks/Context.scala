@@ -95,6 +95,9 @@ final class Context(config: Config):
   val tabCaloriesInOut = config.getString("tab.caloriesinout")
   val tabToday = config.getString("tab.today")
   val tabWeek = config.getString("tab.week")
+  val tabWeight = config.getString("tab.weight")
+  val tabPulse = config.getString("tab.pulse")
+  val tabGlucose = config.getString("tab.glucose")
 
   def logoImage = loadImageView("/image/logo.png")
   def addImage = loadImageView("/image/add.png")
