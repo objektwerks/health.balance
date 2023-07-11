@@ -62,7 +62,7 @@ final class MeasurablesChart(context: Context, model: Model) extends TabPane:
     buildChart(kind = MeasurableKind.Weight.toString, yLabel = context.tabWeight, yLowerBound = 100, yUpperBound = 300, yTickUnit = 10)
 
   def buildPulseChart(): LineChart[String, Number] =
-    buildChart(kind = MeasurableKind.Pulse.toString, yLabel = context.tabPulse, yLowerBound = 40, yUpperBound = 120, yTickUnit = 10)
+    buildChart(kind = MeasurableKind.Pulse.toString, yLabel = context.tabPulse, yLowerBound = 40, yUpperBound = 110, yTickUnit = 10)
 
   def buildGlucoseChart(): LineChart[String, Number] =
     buildChart(kind = MeasurableKind.Glucose.toString, yLabel = context.tabGlucose, yLowerBound = 1, yUpperBound = 300, yTickUnit = 50)
