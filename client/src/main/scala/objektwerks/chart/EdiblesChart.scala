@@ -1,6 +1,5 @@
 package objektwerks.chart
 
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes.*
