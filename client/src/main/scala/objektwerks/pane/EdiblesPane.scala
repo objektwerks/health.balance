@@ -6,7 +6,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import objektwerks.{Context, Edible, Model}
-import objektwerks.dialog.EdibleDialog
+import objektwerks.dialog.{EdibleDialog, EdiblesChartDialog}
 
 final class EdiblesPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -89,3 +89,5 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
         model.update(edible)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
+
+  def chart(): Unit = EdiblesChartDialog(context, model).showAndWait()
