@@ -1,8 +1,5 @@
 package objektwerks.chart
 
-package pool.chart
-
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 import scalafx.Includes._
@@ -22,7 +19,7 @@ final class MeasurablesChart(context: Context, model: Model) extends TabPane:
   val weightTab = new Tab:
     closable = false
     text = context.tabWeight
-    content = buildWeighthart()
+    content = buildWeightChart()
 
   val pulseTab = new Tab:
     closable = false
