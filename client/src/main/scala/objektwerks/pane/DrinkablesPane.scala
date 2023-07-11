@@ -6,7 +6,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import objektwerks.{Context, Drinkable, Model}
-import objektwerks.dialog.DrinkableDialog
+import objektwerks.dialog.{DrinkableDialog, DrinkablesChartDialog}
 
 final class DrinkablesPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -100,3 +100,5 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
         model.update(drinkable)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
+
+  def chart(): Unit = DrinkablesChartDialog(context, model).showAndWait()
