@@ -8,15 +8,15 @@ import scalafx.geometry.Insets
 import scalafx.scene.chart.{LineChart, XYChart}
 import scalafx.scene.control.{Tab, TabPane}
 
-import objektwerks.{Context, Model}
+import objektwerks.{Context, Entity, Model}
 
 final case class EdibleXY(xDate: String, yCount: Int)
 
 final class EdiblesChart(context: Context, model: Model) extends TabPane:
   val edibles = model.observableEdibles.reverse
   val dateFormat = DateTimeFormatter.ofPattern("M.dd")
-  val minDate = LocalDate.ofEpochDay( edibles.map(e => e.ate).min).format(dateFormat)
-  val maxDate = LocalDate.ofEpochDay( edibles.map(e => e.ate).max).format(dateFormat)
+  val minDate = Entity.epochSecondToLocalDate( edibles.map(e => e.ate).min ).format(dateFormat)
+  val maxDate = Entity.epochSecondToLocalDate( edibles.map(e => e.ate).max ).format(dateFormat)
 
   val tab = new Tab:
     closable = false
@@ -27,7 +27,7 @@ final class EdiblesChart(context: Context, model: Model) extends TabPane:
   tabs = List(tab)
 
   def buildChart(): LineChart[String, Number] =
-    val filtered = edibles.map(e => EdibleXY( LocalDate.ofEpochDay(e.ate).format(dateFormat), e.calories))
+    val filtered = edibles.map(e => EdibleXY( Entity.epochSecondToLocalDate(e.ate).format(dateFormat), e.calories) )
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
