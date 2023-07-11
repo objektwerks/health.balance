@@ -35,7 +35,7 @@ final class EdiblesChart(context: Context, model: Model) extends TabPane:
                                                  yLowerBound = 0,
                                                  yUpperBound = 7,
                                                  yTickUnit = 1,
-                                                 yValues = filtered.map(cxy => cxy.yCount))
+                                                 yValues = filtered.map(exy => exy.yCount))
     filtered foreach { cxy =>
       series.data() += XYChart.Data[String, Number](cxy.xDate.format(dateFormat), cxy.yCount)
     }
