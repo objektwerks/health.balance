@@ -7,7 +7,7 @@ import scalafx.scene.layout.VBox
 import objektwerks.{Client, Context, Model}
 import objektwerks.chart.EdiblesChart
 
-final class EdiblessChartDialog(context: Context, model: Model) extends Dialog[Unit]:
+final class EdiblesChartDialog(context: Context, model: Model) extends Dialog[Unit]:
   initOwner(Client.stage)
   title = context.windowTitle
   headerText = context.tabEdibles
