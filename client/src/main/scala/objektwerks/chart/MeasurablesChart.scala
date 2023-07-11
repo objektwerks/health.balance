@@ -38,9 +38,9 @@ final class MeasurablesChart(context: Context, model: Model) extends TabPane:
 
   private def buildChart(kind: String,
                          yLabel: String,
-                         yLowerBound: Int = 0,
-                         yUpperBound: Int = 10,
-                         yTickUnit: Int = 1): LineChart[String, Number] =
+                         yLowerBound: Int,
+                         yUpperBound: Int,
+                         yTickUnit: Int): LineChart[String, Number] =
     val filtered = measurables filter(m => m.kind == kind)
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
@@ -59,10 +59,10 @@ final class MeasurablesChart(context: Context, model: Model) extends TabPane:
     chart
 
   def buildWeightChart(): LineChart[String, Number] =
-    buildChart(kind = MeasurableKind.Weight.toString, yLabel = context.tabWeight)
+    buildChart(kind = MeasurableKind.Weight.toString, yLabel = context.tabWeight, yLowerBound = 100, yUpperBound = 300, yTickUnit = 10)
 
   def buildPulseChart(): LineChart[String, Number] =
-    buildChart(kind = MeasurableKind.Pulse.toString, yLabel = context.tabPulse)
+    buildChart(kind = MeasurableKind.Pulse.toString, yLabel = context.tabPulse, yLowerBound = 40, yUpperBound = 120, yTickUnit = 10)
 
   def buildGlucoseChart(): LineChart[String, Number] =
-    buildChart(kind = MeasurableKind.Glucose.toString, yLabel = context.tabGlucose)
+    buildChart(kind = MeasurableKind.Glucose.toString, yLabel = context.tabGlucose, yLowerBound = 1, yUpperBound = 300, yTickUnit = 50)
