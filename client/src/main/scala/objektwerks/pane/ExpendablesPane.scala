@@ -6,7 +6,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import objektwerks.{Context, Expendable, Model}
-import objektwerks.dialog.ExpendableDialog
+import objektwerks.dialog.{ExpendableDialog, ExpendablesChartDialog}
 
 final class ExpendablesPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -105,3 +105,5 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
         model.update(expendable)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
+
+  def chart(): Unit = ExpendablesChartDialog(context, model).showAndWait()
