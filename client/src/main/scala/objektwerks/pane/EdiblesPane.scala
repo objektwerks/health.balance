@@ -44,9 +44,15 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
     disable = true
     onAction = { _ => update() }
 
+  val chartButton = new Button:
+    graphic = context.chartImage
+    text = context.buttonChart
+    disable = true
+    onAction = { _ => chart() }
+
   val buttonBar = new HBox:
     spacing = 6
-    children = List(addButton, editButton)
+    children = List(addButton, editButton, chartButton)
 
   model.selectedProfileId.onChange { (_, _, _) =>
     addButton.disable = false
