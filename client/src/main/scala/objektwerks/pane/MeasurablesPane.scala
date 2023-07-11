@@ -6,7 +6,7 @@ import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
 
 import objektwerks.{Context, Measurable, Model}
-import objektwerks.dialog.MeasurableDialog
+import objektwerks.dialog.{MeasurableDialog, MeasurablesChartDialog}
 
 final class MeasurablesPane(context: Context, model: Model) extends VBox:
   spacing = 6
@@ -85,3 +85,5 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
         model.update(measurable)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
+
+  def chart(): Unit = MeasurablesChartDialog(context, model).showAndWait()
