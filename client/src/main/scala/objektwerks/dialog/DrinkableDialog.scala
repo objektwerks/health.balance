@@ -7,6 +7,7 @@ import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, DatePicker, Dialog
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Drinkable, DrinkableKind, Entity}
+import objektwerks.layout.ControlGridPane
 
 final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dialog[Drinkable]:
   initOwner(Client.stage)
