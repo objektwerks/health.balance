@@ -31,7 +31,7 @@ final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dial
   val caloriesTextField = new IntTextField:
     text = drinkable.calories.toString
 
-  val drankLabel = DatePicker( Entity.epochSecondToLocalDate(drinkable.drank) )
+  val drankDatePicker = DatePicker( Entity.epochSecondToLocalDate(drinkable.drank) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
@@ -39,7 +39,7 @@ final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dial
     context.labelOrganic -> organicCheckBox,
     context.labelCount -> countTextField,
     context.labelCalories -> caloriesTextField,
-    context.labelDrank -> drankLabel
+    context.labelDrank -> drankDatePicker
   )
   dialogPane().content = ControlGridPane(controls)
 
