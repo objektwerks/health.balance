@@ -7,6 +7,7 @@ import scalafx.scene.control.{ButtonType, ComboBox, Dialog, Label}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Measurable, MeasurableKind, Entity}
+import objektwerks.layout.ControlGridPane
 
 final class MeasurableDialog(context: Context, measurable: Measurable) extends Dialog[Measurable]:
   initOwner(Client.stage)

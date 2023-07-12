@@ -6,6 +6,7 @@ import scalafx.scene.control.{ButtonType, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Profile}
+import objektwerks.layout.ControlGridPane
 
 final class ProfileDialog(context: Context, profile: Profile) extends Dialog[Profile]:
   initOwner(Client.stage)

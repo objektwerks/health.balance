@@ -7,6 +7,7 @@ import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog, Label, Tex
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Edible, EdibleKind, Entity}
+import objektwerks.layout.ControlGridPane
 
 final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible]:
   initOwner(Client.stage)

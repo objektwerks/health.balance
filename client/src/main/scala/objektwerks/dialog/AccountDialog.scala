@@ -6,6 +6,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Account, Client, Context, Deactivate, Entity, Reactivate}
 import objektwerks.Validator.*
+import objektwerks.layout.ControlGridPane
 
 final case class DeactivateReactivate(deactivate: Option[Deactivate] = None,
                                       reactivate: Option[Reactivate] = None)

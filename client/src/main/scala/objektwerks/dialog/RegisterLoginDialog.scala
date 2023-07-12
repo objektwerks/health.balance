@@ -10,6 +10,7 @@ import scalafx.stage.Stage
 
 import objektwerks.{Context, Register, Login}
 import objektwerks.Validator.*
+import objektwerks.layout.ControlGridPane
 
 final case class RegisterLogin(register: Option[Register] = None,
                                login: Option[Login] = None)

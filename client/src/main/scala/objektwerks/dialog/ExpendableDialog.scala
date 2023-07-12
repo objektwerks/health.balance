@@ -7,6 +7,7 @@ import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog, Label, Tex
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Expendable, ExpendableKind, Entity}
+import objektwerks.layout.ControlGridPane
 
 final class ExpendableDialog(context: Context, expendable: Expendable) extends Dialog[Expendable]:
   initOwner(Client.stage)

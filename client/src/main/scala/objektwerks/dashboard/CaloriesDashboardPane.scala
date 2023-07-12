@@ -3,7 +3,7 @@ package objektwerks.dashboard
 import scalafx.scene.control.{Label, TitledPane}
 
 import objektwerks.Context
-import objektwerks.dialog.ControlGridPane
+import objektwerks.layout.ControlGridPane
 
 abstract class CaloriesDashboardPane(context: Context) extends TitledPane:
   collapsible = false

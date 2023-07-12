@@ -1,4 +1,4 @@
-package objektwerks.dialog
+package objektwerks.layout
 
 import scalafx.geometry.{Insets, Pos}
 import scalafx.scene.control.Label
