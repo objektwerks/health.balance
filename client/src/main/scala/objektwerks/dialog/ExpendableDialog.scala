@@ -31,9 +31,9 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
   val caloriesTextField = new IntTextField:
     text = expendable.calories.toString
 
-  val startLabel = DatePicker( Entity.epochSecondToLocalDate(expendable.start) )
+  val startDatePicker = DatePicker( Entity.epochSecondToLocalDate(expendable.start) )
 
-  val finishLabel = DatePicker( Entity.epochSecondToLocalDate(expendable.finish) )
+  val finishDatePicker = DatePicker( Entity.epochSecondToLocalDate(expendable.finish) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
@@ -41,8 +41,8 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
     context.labelSunshine -> sunshineCheckBox,
     context.labelFreshair -> freshairCheckBox,
     context.labelCalories -> caloriesTextField,
-    context.labelStart -> startLabel,
-    context.labelFinish -> finishLabel
+    context.labelStart -> startDatePicker,
+    context.labelFinish -> finishDatePicker
   )
   dialogPane().content = ControlGridPane(controls)
 
