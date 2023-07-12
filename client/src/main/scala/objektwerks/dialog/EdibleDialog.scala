@@ -3,11 +3,10 @@ package objektwerks.dialog
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
-import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog, Label, TextField}
+import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Edible, EdibleKind, Entity}
-import objektwerks.layout.ControlGridPane
 
 final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible]:
   initOwner(Client.stage)
@@ -28,8 +27,7 @@ final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible
   val caloriesTextField = new IntTextField:
     text = edible.calories.toString
 
-  val ateLabel = new Label:
-    text = Entity.epochSecondToLocalDateTime(edible.ate).toString
+  val ateLabel = DatePicker( Entity.epochSecondToLocalDate(edible.ate) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
