@@ -28,14 +28,14 @@ final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible
   val caloriesTextField = new IntTextField:
     text = edible.calories.toString
 
-  val ateLabel = DatePicker( Entity.epochSecondToLocalDate(edible.ate) )
+  val ateDatePicker = DatePicker( Entity.epochSecondToLocalDate(edible.ate) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
     context.labelDetail -> detailTextField,
     context.labelOrganic -> organicCheckBox,
     context.labelCalories -> caloriesTextField,
-    context.labelAte -> ateLabel
+    context.labelAte -> ateDatePicker
   )
   dialogPane().content = ControlGridPane(controls)
 
