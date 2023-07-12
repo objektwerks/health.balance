@@ -22,12 +22,12 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
   val measurementTextField = new IntTextField:
     text = measurable.measurement.toString
 
-  val measuredLabel = DatePicker( Entity.epochSecondToLocalDate(measurable.measured) )
+  val measuredDatePicker = DatePicker( Entity.epochSecondToLocalDate(measurable.measured) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
     context.labelMeasurement -> measurementTextField,
-    context.labelMeasured -> measuredLabel
+    context.labelMeasured -> measuredDatePicker
   )
   dialogPane().content = ControlGridPane(controls)
 
