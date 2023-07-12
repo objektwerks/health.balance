@@ -8,16 +8,7 @@ final class TimePicker extends HBox:
   spacing = 6
   padding = Insets(6)
   
-  val hourSpinner = new Spinner[Int]:
-    min = 0
-    max = 12
-    initialValue = 1
-    amountToStepBy = 1
-
-  val minuteSpinner = new Spinner[Int]:
-    min = 0
-    max = 59
-    initialValue = 1
-    amountToStepBy = 1
+  val hourSpinner = Spinner[Int](min = 0, max = 12, initialValue = 1, amountToStepBy = 1)
+  val minuteSpinner = Spinner[Int](min = 0, max = 59, initialValue = 1, amountToStepBy = 1)
   
   
