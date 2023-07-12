@@ -3,11 +3,10 @@ package objektwerks.dialog
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
-import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, Dialog, Label, TextField}
+import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, DatePicker, Dialog, TextField}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Expendable, ExpendableKind, Entity}
-import objektwerks.layout.ControlGridPane
 
 final class ExpendableDialog(context: Context, expendable: Expendable) extends Dialog[Expendable]:
   initOwner(Client.stage)
@@ -31,11 +30,9 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
   val caloriesTextField = new IntTextField:
     text = expendable.calories.toString
 
-  val startLabel = new Label:
-    text = Entity.epochSecondToLocalDateTime(expendable.start).toString
+  val startLabel = DatePicker( Entity.epochSecondToLocalDate(expendable.start) )
 
-  val finishLabel = new Label:
-    text = Entity.epochSecondToLocalDateTime(expendable.finish).toString
+  val finishLabel = DatePicker( Entity.epochSecondToLocalDate(expendable.finish) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
