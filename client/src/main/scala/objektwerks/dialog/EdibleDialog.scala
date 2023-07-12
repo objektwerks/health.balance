@@ -31,7 +31,7 @@ final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible
 
   val ateDatePicker = DatePicker( Entity.epochSecondToLocalDate(edible.ate) )
 
-  val ateTimePicker = TimePicker(0, 0)
+  val ateTimePicker = TimePicker( Entity.epochSecondToLocalTime(edible.ate) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
