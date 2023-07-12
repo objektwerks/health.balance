@@ -38,7 +38,8 @@ final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible
     context.labelDetail -> detailTextField,
     context.labelOrganic -> organicCheckBox,
     context.labelCalories -> caloriesTextField,
-    context.labelAte -> ateDatePicker
+    context.labelAte -> ateDatePicker,
+    context.labelAte -> ateTimePicker
   )
   dialogPane().content = ControlGridPane(controls)
 
