@@ -1,9 +1,13 @@
 package objektwerks.control
 
+import scalafx.geometry.Insets
 import scalafx.scene.control.Spinner
 import scalafx.scene.layout.HBox
 
 final class TimePicker extends HBox:
+  spacing = 6
+  padding = Insets(6)
+  
   val hourSpinner = new Spinner[Int]:
     min = 0
     max = 12
