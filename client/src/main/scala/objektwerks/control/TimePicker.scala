@@ -2,7 +2,7 @@ package objektwerks.control
 
 import scalafx.geometry.Insets
 import scalafx.scene.control.Spinner
-import scalafx.scene.layout.HBox
+import scalafx.scene.layout.{HBox, Priority}
 
 final class TimePicker extends HBox:
   spacing = 6
@@ -11,4 +11,5 @@ final class TimePicker extends HBox:
   val hourSpinner = Spinner[Int](min = 0, max = 12, initialValue = 1, amountToStepBy = 1)
   val minuteSpinner = Spinner[Int](min = 0, max = 59, initialValue = 1, amountToStepBy = 1)
   
-  
+  children = List(hourSpinner, minuteSpinner)
+  HBox.setHgrow(this, Priority.Always)
