@@ -53,7 +53,7 @@ final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible
         detail = detailTextField.text.value,
         organic = organicCheckBox.selected.value,
         calories = caloriesTextField.text.value.toIntOption.getOrElse(edible.calories),
-        ate = Entity.localDateLocalTimeToInstant( ateDatePicker.value.value, ateTimePicker.value ).getEpochSecond
+        ate = Entity.localDateLocalTimeToEpochSecond( ateDatePicker.value.value, ateTimePicker.value )
       )
     else null
   }
