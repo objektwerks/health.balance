@@ -14,6 +14,7 @@ final class TimePicker extends HBox:
   val hourSpinner = Spinner[Int](min = 0, max = 12, initialValue = 1, amountToStepBy = 1)
   val minuteSpinner = Spinner[Int](min = 0, max = 59, initialValue = 1, amountToStepBy = 1)
   val amPmSpinner = Spinner[String](items = amPm)
+  amPmSpinner.valueFactory.select(amPm.head)
 
   children = List(hourSpinner, minuteSpinner, amPmSpinner)
   HBox.setHgrow(this, Priority.Always)
