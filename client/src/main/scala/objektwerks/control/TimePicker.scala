@@ -10,6 +10,10 @@ final class TimePicker extends HBox:
     initialValue = 1
     amountToStepBy = 1
 
-
+  val minuteSpinner = new Spinner[Int]:
+    min = 0
+    max = 59
+    initialValue = 1
+    amountToStepBy = 1
   
   
