@@ -3,11 +3,10 @@ package objektwerks.dialog
 import scalafx.Includes.*
 import scalafx.collections.ObservableBuffer
 import scalafx.scene.layout.Region
-import scalafx.scene.control.{ButtonType, ComboBox, Dialog, Label}
+import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Measurable, MeasurableKind, Entity}
-import objektwerks.layout.ControlGridPane
 
 final class MeasurableDialog(context: Context, measurable: Measurable) extends Dialog[Measurable]:
   initOwner(Client.stage)
@@ -22,8 +21,7 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
   val measurementTextField = new IntTextField:
     text = measurable.measurement.toString
 
-  val measuredLabel = new Label:
-    text = Entity.epochSecondToLocalDateTime(measurable.measured).toString
+  val measuredLabel = DatePicker( Entity.epochSecondToLocalDate(measurable.measured) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
