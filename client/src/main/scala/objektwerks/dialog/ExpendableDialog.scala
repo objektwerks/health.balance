@@ -38,6 +38,8 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
 
   val finishDatePicker = DatePicker( Entity.epochSecondToLocalDate(expendable.finish) )
 
+  val finishTimePicker = TimePicker( Entity.epochSecondToLocalTime(expendable.finish) )
+
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
     context.labelDetail -> detailTextField,
