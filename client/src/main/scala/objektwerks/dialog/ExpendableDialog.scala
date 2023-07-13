@@ -46,8 +46,10 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
     context.labelSunshine -> sunshineCheckBox,
     context.labelFreshair -> freshairCheckBox,
     context.labelCalories -> caloriesTextField,
-    context.labelStart -> startDatePicker,
-    context.labelFinish -> finishDatePicker
+    context.labelStartDate -> startDatePicker,
+    context.labelStartTime -> startTimePicker,
+    context.labelFinishDate -> finishDatePicker,
+    context.labelFinishTime -> finishTimePicker
   )
   dialogPane().content = ControlGridPane(controls)
 
