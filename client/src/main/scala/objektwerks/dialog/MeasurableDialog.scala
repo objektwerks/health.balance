@@ -7,6 +7,7 @@ import scalafx.scene.control.{ButtonType, ComboBox, DatePicker, Dialog}
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Measurable, MeasurableKind, Entity}
+import objektwerks.control.TimePicker
 import objektwerks.layout.ControlGridPane
 
 final class MeasurableDialog(context: Context, measurable: Measurable) extends Dialog[Measurable]:
@@ -23,6 +24,8 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
     text = measurable.measurement.toString
 
   val measuredDatePicker = DatePicker( Entity.epochSecondToLocalDate(measurable.measured) )
+
+  val measuredTimePicker = TimePicker( Entity.epochSecondToLocalTime(measurable.measured) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
