@@ -30,7 +30,8 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
     context.labelMeasurement -> measurementTextField,
-    context.labelDateMeasured -> measuredDatePicker
+    context.labelDateMeasured -> measuredDatePicker,
+    context.labelTimeMeasured -> measuredTimePicker
   )
   dialogPane().content = ControlGridPane(controls)
 
