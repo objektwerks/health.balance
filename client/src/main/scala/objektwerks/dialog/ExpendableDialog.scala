@@ -7,6 +7,7 @@ import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, DatePicker, Dialog
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Expendable, ExpendableKind, Entity}
+import objektwerks.control.TimePicker
 import objektwerks.layout.ControlGridPane
 
 final class ExpendableDialog(context: Context, expendable: Expendable) extends Dialog[Expendable]:
@@ -32,6 +33,8 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
     text = expendable.calories.toString
 
   val startDatePicker = DatePicker( Entity.epochSecondToLocalDate(expendable.start) )
+
+  val startTimePicker = TimePicker( Entity.epochSecondToLocalTime(expendable.start) )
 
   val finishDatePicker = DatePicker( Entity.epochSecondToLocalDate(expendable.finish) )
 
