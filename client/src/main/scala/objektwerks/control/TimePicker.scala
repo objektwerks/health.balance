@@ -19,4 +19,4 @@ final class TimePicker(localTime: LocalTime) extends HBox:
   children = List(labelHour, hourSpinner, labelMinute, minuteSpinner)
   HBox.setHgrow(this, Priority.Always)
 
-  def value = LocalTime.of( hourSpinner.value.value, minuteSpinner.value.value )
+  def value = localTime.withHour( hourSpinner.value.value ).withMinute( minuteSpinner.value.value )
