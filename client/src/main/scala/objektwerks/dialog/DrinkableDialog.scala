@@ -7,6 +7,7 @@ import scalafx.scene.control.{ButtonType, CheckBox, ComboBox, DatePicker, Dialog
 import scalafx.scene.control.ButtonBar.ButtonData
 
 import objektwerks.{Client, Context, Drinkable, DrinkableKind, Entity}
+import objektwerks.control.TimePicker
 import objektwerks.layout.ControlGridPane
 
 final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dialog[Drinkable]:
@@ -32,6 +33,8 @@ final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dial
     text = drinkable.calories.toString
 
   val drankDatePicker = DatePicker( Entity.epochSecondToLocalDate(drinkable.drank) )
+
+  val drankTimePicker = TimePicker( Entity.epochSecondToLocalTime(drinkable.drank) )
 
   val controls = List[(String, Region)](
     context.labelKind -> kindComboBox,
