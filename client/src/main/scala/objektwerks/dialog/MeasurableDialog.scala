@@ -43,6 +43,7 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
       measurable.copy(
         kind = kindComboBox.value.value,
         measurement = measurementTextField.text.value.toIntOption.getOrElse(measurable.measurement),
+        measured = Entity.localDateAndTimeToEpochSecond( measuredDatePicker.value.value, measuredTimePicker.value )
       )
     else null
   }
