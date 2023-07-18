@@ -50,6 +50,7 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   HBox.setHgrow(weekControls, Priority.Always)
 
   val todayTitledPane = new TitledPane:
+    alignment = Pos.CENTER_LEFT
     collapsible = false
     maxWidth = Double.MaxValue
     maxHeight = Double.MaxValue
@@ -57,6 +58,7 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
     content = todayControls
 
   val weekTitledPane = new TitledPane:
+    alignment = Pos.CENTER_RIGHT
     collapsible = false
     maxWidth = Double.MaxValue
     maxHeight = Double.MaxValue
