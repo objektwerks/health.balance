@@ -1,5 +1,6 @@
 package objektwerks.dashboard
 
+import scalafx.geometry.Pos
 import scalafx.scene.control.{Label, TitledPane}
 import scalafx.scene.layout.{HBox, Priority}
 
@@ -10,6 +11,7 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
   text = context.tabMeasurables
+  alignment = Pos.CENTER
 
   val weightToday = new Label:
     text <== model.weightToday
