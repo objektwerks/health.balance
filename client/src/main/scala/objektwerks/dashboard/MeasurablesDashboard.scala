@@ -2,7 +2,7 @@ package objektwerks.dashboard
 
 import scalafx.geometry.Pos
 import scalafx.scene.control.{Label, TitledPane}
-import scalafx.scene.layout.{HBox, Priority}
+import scalafx.scene.layout.{BorderPane, HBox, Priority}
 
 import objektwerks.{Context, Model}
 
@@ -65,9 +65,8 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
     text = context.tabWeek
     content = weekControls
 
-  val dashboard = new HBox:
-    spacing = 6
-    children = List(todayTitledPane, weekTitledPane)
-  HBox.setHgrow(dashboard, Priority.Always)
+  val dashboard = new BorderPane:
+    left = todayTitledPane
+    right = weekTitledPane
 
   content = dashboard
