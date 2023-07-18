@@ -7,11 +7,11 @@ import scalafx.scene.layout.{HBox, Priority}
 import objektwerks.{Context, Model}
 
 final class MeasurablesDashboard(context: Context, model: Model) extends TitledPane:
+  alignment = Pos.CENTER
   collapsible = false
   maxWidth = Double.MaxValue
   maxHeight = Double.MaxValue
   text = context.tabMeasurables
-  alignment = Pos.CENTER
 
   val weightToday = new Label:
     text <== model.weightToday
