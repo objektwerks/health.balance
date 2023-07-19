@@ -15,8 +15,23 @@ object Validator:
         case login @ Login(_, _)                       => login.isValid
         case deactivate @ Deactivate(_)                => deactivate.isValid
         case reactivate @ Reactivate(_)                => reactivate.isValid
-        case _ => false // TODO!
-
+        case listProfiles @ ListProfiles(_)            => listProfiles.isValid
+        case addProfile @ AddProfile(_, _)             => addProfile.isValid
+        case updateProfile @ UpdateProfile(_, _)       => updateProfile.isValid
+        case listEdibles @ ListEdibles(_, _)           => listEdibles.isValid
+        case addEdible @ AddEdible(_, _)               => addEdible.isValid
+        case updateEdible @ UpdateEdible(_, _)         => updateEdible.isValid
+        case listDrinkables @ ListDrinkables(_, _)     => listDrinkables.isValid
+        case addDrinkable @ AddDrinkable(_, _)         => addDrinkable.isValid
+        case updateDrinkable @ UpdateDrinkable(_, _)   => updateDrinkable.isValid
+        case listExpendables @ ListExpendables(_, _)   => listExpendables.isValid
+        case addExpendable @ AddExpendable(_, _)       => addExpendable.isValid
+        case updateExpendable @ UpdateExpendable(_, _) => updateExpendable.isValid
+        case listMeasurables @ ListMeasurables(_, _)   => listMeasurables.isValid
+        case addMeasurable @ AddMeasurable(_, _)       => addMeasurable.isValid
+        case updateMeasurable @ UpdateMeasurable(_, _) => updateMeasurable.isValid
+        case addFault @ AddFault(_, _)                 => addFault.isValid
+  
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
 
