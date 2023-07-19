@@ -65,8 +65,9 @@ final class MeasurablesDashboard(context: Context, model: Model) extends TitledP
     text = context.tabWeek
     content = weekControls
 
-  val dashboard = new BorderPane:
-    left = todayTitledPane
-    right = weekTitledPane
+  val dashboard = new HBox:
+    spacing = 6
+    children = List(todayTitledPane, weekTitledPane)
 
-  content = dashboard
+  content = new BorderPane:
+    center = dashboard
