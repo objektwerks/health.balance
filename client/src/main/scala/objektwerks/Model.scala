@@ -189,14 +189,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
     setCaloriesInOut()
 
-  def onUIFault(cause: String): Unit =
-    logger.error(s"*** Cause: $cause")
-    add( Fault(cause) )
-
-  def onUIFault(cause: String, error: Throwable): Unit =
-    logger.error(s"*** Cause: $cause", error)
-    add( Fault(cause) )
-
   def onFetchFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
     logger.error(s"*** Cause: $cause")
