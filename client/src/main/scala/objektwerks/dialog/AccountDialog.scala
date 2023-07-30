@@ -31,10 +31,10 @@ final class AccountDialog(context: Context, account: Account) extends Dialog[Dea
   dialogPane().buttonTypes = List(ButtonType.Close, deactivateButtonType, reactivateButtonType)
 
   val deactivateButton = dialogPane().lookupButton(deactivateButtonType)
-  deactivateButton.disable = account.isActivated
+  deactivateButton.disable = !account.isActivated
 
   val reactivateButton = dialogPane().lookupButton(reactivateButtonType)
-  reactivateButton.disable = account.isDeactivated
+  reactivateButton.disable = !account.isDeactivated
 
   resultConverter = dialogButton => {
     if dialogButton == deactivateButtonType then
