@@ -19,7 +19,7 @@ final class ExpendablesChart(context: Context, model: Model) extends TabPane:
 
   val tab = new Tab:
     closable = false
-    text = context.tabDrinkables
+    text = context.tabExpendables
     content = buildChart()
 
   padding = Insets(6)
