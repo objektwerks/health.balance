@@ -51,7 +51,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
   val addButton = new Button:
     graphic = context.addImage
     text = context.buttonAdd
-    disable = false
+    disable = true
     onAction = { _ => add() }
 
   val editButton = new Button:
@@ -72,6 +72,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
 
   model.selectedProfileId.onChange { (_, _, _) =>
     addButton.disable = false
+    chartButton.disable = false
   }
 
   children = List(tableView, buttonBar)
