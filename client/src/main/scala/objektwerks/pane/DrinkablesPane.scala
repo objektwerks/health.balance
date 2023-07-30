@@ -46,7 +46,7 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
   val addButton = new Button:
     graphic = context.addImage
     text = context.buttonAdd
-    disable = true
+    disable = false
     onAction = { _ => add() }
 
   val editButton = new Button:
