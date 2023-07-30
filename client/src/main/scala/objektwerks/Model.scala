@@ -102,30 +102,36 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     logger.info(s"*** observable edibles onchange event: $changes")
     shouldNotBeInFxThread("*** observable edibles onchange should not be in fx thread.")
 
-    setEdiblesTodayCalories()
-    setEdiblesWeekCalories()
+    Platform.runLater {
+      setEdiblesTodayCalories()
+      setEdiblesWeekCalories()
 
-    setCaloriesInOut()
+      setCaloriesInOut()
+    }
   }
 
   observableDrinkables.onChange { (_, changes) =>
     logger.info(s"*** observable drinkables onchange event: $changes")
     shouldNotBeInFxThread("*** observable drinkables onchange should not be in fx thread.")
 
-    setDrinkablesTodayCalories()
-    setDrinkablesWeekCalories()
+    Platform.runLater {
+      setDrinkablesTodayCalories()
+      setDrinkablesWeekCalories()
 
-    setCaloriesInOut()
+      setCaloriesInOut()
+    }
   }
 
   observableExpendables.onChange { (_, changes) =>
     logger.info(s"*** observable expendables onchange event: $changes")
     shouldNotBeInFxThread("*** observable expendables onchange should not be in fx thread.")
 
-    setExpendablesTodayCalories()
-    setExpendablesWeekCalories()
+    Platform.runLater {
+      setExpendablesTodayCalories()
+      setExpendablesWeekCalories()
 
-    setCaloriesInOut()
+      setCaloriesInOut()
+    }
   }
 
   val weightToday = ObjectProperty[String]("0")
@@ -170,8 +176,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case MeasurableKind.Pulse => (pulseToday, pulseWeek)
         case MeasurableKind.Glucose => (glucoseToday, glucoseWeek)
 
+      Platform.runLater {
         setMeasurableToday(today, kind)
         setMeasurableWeek(week, kind)
+      }
   }
 
   def dashboard() =
