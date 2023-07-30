@@ -21,7 +21,7 @@ final class Dashboard(context: Context, model: Model) extends HBox:
   val caloriesInOutDashboardPane = CaloriesInOutDashboardPane(context, model)
   HBox.setHgrow(caloriesInOutDashboardPane, Priority.Always)
 
-  val measurablesDashboardPane = MeasurablesDashboard(context, model)
+  val measurablesDashboardPane = MeasurablesDashboardPane(context, model)
   HBox.setHgrow(measurablesDashboardPane, Priority.Always)
 
   children = List(ediblesDashboardPane,

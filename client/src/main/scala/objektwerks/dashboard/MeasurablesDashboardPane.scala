@@ -6,7 +6,7 @@ import scalafx.scene.layout.{HBox, Priority}
 
 import objektwerks.{Context, Model}
 
-final class MeasurablesDashboard(context: Context, model: Model) extends TitledPane:
+final class MeasurablesDashboardPane(context: Context, model: Model) extends TitledPane:
   alignment = Pos.CENTER
   collapsible = false
   maxWidth = Double.MaxValue
