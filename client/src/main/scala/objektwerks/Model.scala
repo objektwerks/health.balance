@@ -171,15 +171,16 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case Update(from, to) => observableMeasurables(from).kind
         case _ => ""
 
-      val (today, week) = MeasurableKind.valueOf(kind) match
-        case MeasurableKind.Weight => (weightToday, weightWeek)
-        case MeasurableKind.Pulse => (pulseToday, pulseWeek)
-        case MeasurableKind.Glucose => (glucoseToday, glucoseWeek)
+      if kind.nonEmpty then
+        val (today, week) = MeasurableKind.valueOf(kind) match
+          case MeasurableKind.Weight => (weightToday, weightWeek)
+          case MeasurableKind.Pulse => (pulseToday, pulseWeek)
+          case MeasurableKind.Glucose => (glucoseToday, glucoseWeek)
 
-      Platform.runLater {
-        setMeasurableToday(today, kind)
-        setMeasurableWeek(week, kind)
-      }
+        Platform.runLater {
+          setMeasurableToday(today, kind)
+          setMeasurableWeek(week, kind)
+        }
   }
 
   def dashboard() =
