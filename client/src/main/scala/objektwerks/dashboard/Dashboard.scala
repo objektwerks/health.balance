@@ -5,7 +5,7 @@ import scalafx.scene.layout.{HBox, Priority}
 
 import objektwerks.{Context, Model}
 
-final class CaloriesDashboard(context: Context, model: Model) extends HBox:
+final class Dashboard(context: Context, model: Model) extends HBox:
   spacing = 6
   padding = Insets(6)
 
