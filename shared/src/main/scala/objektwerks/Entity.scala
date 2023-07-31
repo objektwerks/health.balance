@@ -22,7 +22,7 @@ object Entity:
   def epochSecondToDayOfYear(epochSecond: Long): Int = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC).getDayOfYear
 
   def instantToLocalDateTime(instant: Instant): LocalDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
-  def localDateAndTimeToEpochSecond(localDate: LocalDate, localTime: LocalTime): Long = Instant.from( LocalDateTime.of(localDate, localTime) ).getEpochSecond
+  def localDateAndTimeToEpochSecond(localDate: LocalDate, localTime: LocalTime): Long = LocalDateTime.of(localDate, localTime).toInstant(ZoneOffset.UTC).getEpochSecond
 
   def listToString(list: List[String]): String = list.mkString(",")
   def stringToList(string: String): List[String] = string.split(",").toList
