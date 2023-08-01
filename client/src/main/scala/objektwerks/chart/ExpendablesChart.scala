@@ -31,7 +31,7 @@ final class ExpendablesChart(context: Context, model: Model) extends TabPane:
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
                                                  xMaxDate = maxDate,
-                                                 yLabel = context.tabExpendables,
+                                                 yLabel = context.headerCalories,
                                                  yLowerBound = 0,
                                                  yUpperBound = 7,
                                                  yTickUnit = 1,
