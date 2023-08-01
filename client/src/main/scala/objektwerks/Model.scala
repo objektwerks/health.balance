@@ -91,7 +91,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   def setCaloriesInOutWeek() =
     val caloriesIn = ( ediblesWeekCalories.value.toInt + drinkablesWeekCalories.value.toInt ).toString
     val caloriesOut = expendablesWeekCalories.value
-    caloriesInOutToday.value = s"$caloriesIn/$caloriesOut"
+    caloriesInOutWeek.value = s"$caloriesIn/$caloriesOut"
 
   def setCaloriesInOut() =
     setCaloriesInOutToday()
