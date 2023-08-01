@@ -25,7 +25,7 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Measurable, String]:
         text = context.headerMeasured
         cellValueFactory = _.value.measuredProperty
-        prefWidth = 120
+        prefWidth = 150
     )
     items = model.observableMeasurables
 
