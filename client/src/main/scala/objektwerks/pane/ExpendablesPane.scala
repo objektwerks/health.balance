@@ -41,10 +41,12 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Expendable, String]:
         text = context.headerStart
         cellValueFactory = _.value.startProperty
+        prefWidth = 120
       ,
       new TableColumn[Expendable, String]:
         text = context.headerFinish
         cellValueFactory = _.value.finishProperty
+        prefWidth = 120
     )
     items = model.observableExpendables
 
