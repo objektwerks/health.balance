@@ -7,7 +7,6 @@ import java.time.LocalDate
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
-import scalafx.collections.ObservableBuffer.{Add, Update}
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
   val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
@@ -161,26 +160,21 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .sum
       .toString
 
+  def setMeasurables() =
+    Platform.runLater {
+      setMeasurableToday(weightToday, MeasurableKind.Weight.toString)
+      setMeasurableWeek(weightWeek, MeasurableKind.Weight.toString)
+      setMeasurableToday(pulseToday, MeasurableKind.Pulse.toString)
+      setMeasurableWeek(pulseWeek, MeasurableKind.Pulse.toString)
+      setMeasurableToday(glucoseToday, MeasurableKind.Glucose.toString)
+      setMeasurableWeek(glucoseWeek, MeasurableKind.Glucose.toString)
+    }
+
   observableMeasurables.onChange { (_, changes) =>
     logger.info(s"*** observable measurables onchange event: $changes")
     shouldNotBeInFxThread("*** observable measurables onchange should not be in fx thread.")
 
-    for (change <- changes)
-      val kind = change match
-        case Add(_, added)    => added.head.kind
-        case Update(from, to) => observableMeasurables(from).kind
-        case _ => ""
-
-      if kind.nonEmpty then
-        val (today, week) = MeasurableKind.valueOf(kind) match
-          case MeasurableKind.Weight => (weightToday, weightWeek)
-          case MeasurableKind.Pulse => (pulseToday, pulseWeek)
-          case MeasurableKind.Glucose => (glucoseToday, glucoseWeek)
-
-        Platform.runLater {
-          setMeasurableToday(today, kind)
-          setMeasurableWeek(week, kind)
-        }
+    setMeasurables()
   }
 
   def dashboard() =
@@ -197,6 +191,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setExpendablesWeekCalories()
 
     setCaloriesInOut()
+
+    setMeasurables()
 
   def onFetchFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
