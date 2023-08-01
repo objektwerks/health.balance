@@ -26,7 +26,7 @@ final class EdiblesChart(context: Context, model: Model) extends TabPane:
   tabs = List(tab)
 
   def buildChart(): LineChart[String, Number] =
-    val filtered = edibles.map(e => DrinkableXY( Entity.epochSecondToLocalDate(e.ate).format(dateFormat), e.calories) )
+    val filtered = edibles.map(e => EdibleXY( Entity.epochSecondToLocalDate(e.ate).format(dateFormat), e.calories) )
     val (chart, series) = LineChartBuilder.build(context = context,
                                                  xLabel = context.chartMonthDay,
                                                  xMinDate = minDate,
