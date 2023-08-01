@@ -32,9 +32,9 @@ final class ExpendablesChart(context: Context, model: Model) extends TabPane:
                                                  xMinDate = minDate,
                                                  xMaxDate = maxDate,
                                                  yLabel = context.headerCalories,
-                                                 yLowerBound = 0,
-                                                 yUpperBound = 7,
-                                                 yTickUnit = 1,
+                                                 yLowerBound = 1,
+                                                 yUpperBound = 1000,
+                                                 yTickUnit = 100,
                                                  yValues = filtered.map(exy => exy.yCount))
     filtered foreach { exy =>
       series.data() += XYChart.Data[String, Number](exy.xDate.format(dateFormat), exy.yCount)
