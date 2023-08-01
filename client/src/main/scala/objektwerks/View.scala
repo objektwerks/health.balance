@@ -22,7 +22,7 @@ final class View(context: Context, model: Model):
     orientation = Orientation.Horizontal
     items.addAll(profilesPane, tabbedPane)
   }
-  splitPane.setDividerPositions(0.35, 0.65)
+  splitPane.setDividerPositions(0.30, 0.70)
   VBox.setVgrow(splitPane, Priority.Always)
 
   val viewPane = new VBox:
