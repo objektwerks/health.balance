@@ -29,7 +29,7 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Edible, String]:
         text = context.headerAte
         cellValueFactory = _.value.ateProperty
-        prefWidth = 120
+        prefWidth = 150
     )
     items = model.observableEdibles
 
