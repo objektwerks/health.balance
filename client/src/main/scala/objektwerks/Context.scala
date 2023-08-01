@@ -30,6 +30,9 @@ final class Context(config: Config):
   val chartMax = config.getString("chart.max")
   val chartAvg = config.getString("chart.avg")
   val chartMonthDay = config.getString("chart.monthDay")
+  val chartWeight = config.getString("chart.weight")
+  val chartPulse = config.getString("chart.pulse")
+  val chartGlucose = config.getString("chart.glucose")
 
   val columnYes = config.getString("column.yes")
   val columnNo = config.getString("column.no")
