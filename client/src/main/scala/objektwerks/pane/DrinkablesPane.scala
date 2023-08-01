@@ -40,7 +40,7 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
       new TableColumn[Drinkable, String]:
         text = context.headerDrank
         cellValueFactory = _.value.drankProperty
-        prefWidth = 120
+        prefWidth = 150
     )
     items = model.observableDrinkables
 
