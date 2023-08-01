@@ -33,8 +33,8 @@ final class DrinkablesChart(context: Context, model: Model) extends TabPane:
                                                  xMaxDate = maxDate,
                                                  yLabel = context.headerCalories,
                                                  yLowerBound = 0,
-                                                 yUpperBound = 7,
-                                                 yTickUnit = 1,
+                                                 yUpperBound = 500,
+                                                 yTickUnit = 50,
                                                  yValues = filtered.map(dxy => dxy.yCount))
     filtered foreach { dxy =>
       series.data() += XYChart.Data[String, Number](dxy.xDate.format(dateFormat), dxy.yCount)
