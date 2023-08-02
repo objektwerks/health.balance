@@ -276,12 +276,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def update(profile: Profile): Unit =
+  def update(selectedIndex: Int, profile: Profile): Unit =
     fetcher.fetchAsync(
       AddProfile(objectAccount.get.license, profile),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update profile", profile, fault)
-        case ProfileAdded(id) => observableProfiles.update(observableProfiles.indexOf(profile), profile)
+        case ProfileAdded(id) => observableProfiles.update(selectedIndex, profile)
         case _ => ()
     )
 
