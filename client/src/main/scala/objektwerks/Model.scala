@@ -372,12 +372,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def update(expendable: Expendable): Unit =
+  def update(selectedIndex: Int, expendable: Expendable): Unit =
     fetcher.fetchAsync(
       AddExpendable(objectAccount.get.license, expendable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update expendable", expendable, fault)
-        case ExpendableAdded(id) => observableExpendables.update(observableExpendables.indexOf(expendable), expendable)
+        case ExpendableAdded(id) => observableExpendables.update(selectedIndex, expendable)
         case _ => ()
     )
 
@@ -404,11 +404,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def update(measurable: Measurable): Unit =
+  def update(selectedIndex: Int, measurable: Measurable): Unit =
     fetcher.fetchAsync(
       AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update measurable", measurable, fault)
-        case MeasurableAdded(id) => observableMeasurables.update(observableMeasurables.indexOf(measurable), measurable)
+        case MeasurableAdded(id) => observableMeasurables.update(selectedIndex, measurable)
         case _ => ()
     )
