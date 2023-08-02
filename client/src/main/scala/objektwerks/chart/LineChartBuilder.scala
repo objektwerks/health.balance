@@ -52,6 +52,6 @@ object LineChartBuilder:
     if numbers.nonEmpty then
       val min = numbers.min
       val max = numbers.max
-      val avg = numbers.sum / numbers.length
+      val avg = "%.2f".format( numbers.sum / numbers.length ).toDouble
       (min, max, avg)
     else (0.0, 0.0, 0.0)
