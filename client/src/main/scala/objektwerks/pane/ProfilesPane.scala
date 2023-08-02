@@ -97,7 +97,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
     val profile = tableView.selectionModel().getSelectedItem.profile
     ProfileDialog(context, profile).showAndWait() match
       case Some(profile: Profile) =>
-        model.update(profile)
+        model.update(selectedIndex, profile)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
