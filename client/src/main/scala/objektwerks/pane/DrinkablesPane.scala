@@ -99,7 +99,7 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
     val drinkable = tableView.selectionModel().getSelectedItem.drinkable
     DrinkableDialog(context, drinkable).showAndWait() match
       case Some(drinkable: Drinkable) =>
-        model.update(drinkable)
+        model.update(selectedIndex, drinkable)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
