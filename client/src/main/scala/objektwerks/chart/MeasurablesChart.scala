@@ -52,7 +52,7 @@ final class MeasurablesChart(context: Context, model: Model) extends TabPane:
                                                  yTickUnit = yTickUnit,
                                                  yValues = filtered.map(m => m.measurement))
     filtered foreach { m =>
-      series.data() += XYChart.Data[String, Number]( Entity.epochSecondToLocalDate(m.measured).format(dateFormat), m.measured)
+      series.data() += XYChart.Data[String, Number]( Entity.epochSecondToLocalDate(m.measured).format(dateFormat), m.measurement)
     }
     chart.data = series
     LineChartBuilder.addTooltip(chart)
