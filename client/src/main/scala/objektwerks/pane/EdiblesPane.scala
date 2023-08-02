@@ -88,7 +88,7 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
     val edible = tableView.selectionModel().getSelectedItem.edible
     EdibleDialog(context, edible).showAndWait() match
       case Some(edible: Edible) =>
-        model.update(edible)
+        model.update(selectedIndex, edible)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
