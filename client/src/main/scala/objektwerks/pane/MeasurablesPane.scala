@@ -84,7 +84,7 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
     val measurable = tableView.selectionModel().getSelectedItem.measurable
     MeasurableDialog(context, measurable).showAndWait() match
       case Some(measurable: Measurable) =>
-        model.update(measurable)
+        model.update(selectedIndex, measurable)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
