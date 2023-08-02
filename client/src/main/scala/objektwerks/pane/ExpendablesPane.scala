@@ -105,7 +105,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
     val expendable = tableView.selectionModel().getSelectedItem.expendable
     ExpendableDialog(context, expendable).showAndWait() match
       case Some(expendable: Expendable) =>
-        model.update(expendable)
+        model.update(selectedIndex, expendable)
         tableView.selectionModel().select(selectedIndex)
       case _ =>
 
