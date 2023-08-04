@@ -76,7 +76,7 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
     MeasurableDialog(context, Measurable(profileId = model.selectedProfileId.value)).showAndWait() match
       case Some(measurable: Measurable) =>
         model.add(measurable)
-        tableView.selectionModel().select(measurable)
+        tableView.selectionModel().select(0)
       case _ =>
 
   def update(): Unit =
