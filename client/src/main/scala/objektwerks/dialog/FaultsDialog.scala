@@ -19,7 +19,7 @@ final class FaultsDialog(context: Context, model: Model) extends Dialog[Unit]:
         cellValueFactory = _.value.occurredProperty
       ,
       new TableColumn[Fault, String]:
-        prefWidth = 425
+        prefWidth = 600
         text = context.headerFault
         cellValueFactory = _.value.causeProperty
     )
