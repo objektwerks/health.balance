@@ -1,7 +1,7 @@
 package objektwerks.pane
 
-import scalafx.application.Platform
 import scalafx.Includes.*
+import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
