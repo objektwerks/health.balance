@@ -48,7 +48,9 @@ final class Fetcher(context: Context) extends LazyLogging:
       .build
 
   private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
-    client.sendAsync( httpRequest, BodyHandlers.ofString ).asScala
+    client
+      .sendAsync( httpRequest, BodyHandlers.ofString )
+      .asScala
 
   def fetchAsync(command: Command,
                  handler: Event => Unit): Unit =
