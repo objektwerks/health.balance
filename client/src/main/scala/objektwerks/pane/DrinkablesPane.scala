@@ -1,5 +1,6 @@
 package objektwerks.pane
 
+import scalafx.application.Platform
 import scalafx.Includes.*
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
@@ -91,7 +92,7 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
     DrinkableDialog(context, Drinkable(profileId = model.selectedProfileId.value)).showAndWait() match
       case Some(drinkable: Drinkable) =>
         model.add(drinkable)
-        tableView.selectionModel().select(0)
+        Platform.runLater(tableView.selectionModel().select(0))
       case _ =>
 
   def update(): Unit =
@@ -100,7 +101,7 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
     DrinkableDialog(context, drinkable).showAndWait() match
       case Some(drinkable: Drinkable) =>
         model.update(selectedIndex, drinkable)
-        tableView.selectionModel().select(selectedIndex)
+        Platform.runLater(tableView.selectionModel().select(selectedIndex))
       case _ =>
 
   def chart(): Unit = DrinkablesChartDialog(context, model).showAndWait()
