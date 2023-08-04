@@ -91,7 +91,7 @@ final class DrinkablesPane(context: Context, model: Model) extends VBox:
     DrinkableDialog(context, Drinkable(profileId = model.selectedProfileId.value)).showAndWait() match
       case Some(drinkable: Drinkable) =>
         model.add(drinkable)
-        tableView.selectionModel().select(drinkable)
+        tableView.selectionModel().select(0)
       case _ =>
 
   def update(): Unit =
