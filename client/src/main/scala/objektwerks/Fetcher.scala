@@ -11,10 +11,8 @@ import java.time.temporal.ChronoUnit.SECONDS
 import java.util.concurrent.Executors
 
 import scalafx.application.Platform
-import scala.concurrent.{blocking, Await, ExecutionContext, Future}
-import scala.concurrent.duration.*
+import scala.concurrent.{ExecutionContext, Future}
 import scala.jdk.FutureConverters.*
-import scala.util.Try
 
 import Serializer.given
 
@@ -52,15 +50,6 @@ final class Fetcher(context: Context) extends LazyLogging:
   private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
     client.sendAsync( httpRequest, BodyHandlers.ofString ).asScala
 
-  private def sendBlockingHttpRequest(httpRequest: HttpRequest): HttpResponse[String] =
-    val future = Future {
-      require(!Platform.isFxApplicationThread, "Http client should not send request in fx thread.")
-      blocking {
-        client.send( httpRequest, BodyHandlers.ofString )
-      }
-    }
-    Await.result(future, 30.seconds)
-
   def fetchAsync(command: Command,
                  handler: Event => Unit): Unit =
     logger.info(s"*** fetch async command: $command")
@@ -73,19 +62,3 @@ final class Fetcher(context: Context) extends LazyLogging:
       logger.info(s"*** fetch async event: $event")
       Platform.runLater(handler(event))
     }.recover { case error: Exception => handler( toFault(error) ) }
-
-  def fetch(command: Command,
-            handler: Event => Unit): Unit =
-    logger.info(s"*** fetch command: $command")
-    val commandJson = fromCommandToJson(command)
-    val httpRequest = buildHttpRequest(commandJson)
-
-    val event = Try {
-      val httpResponse = sendBlockingHttpRequest(httpRequest)
-      val eventJson = httpResponse.body 
-      fromJsonToEvent(eventJson)
-    }.recover { case error: Exception => toFault(error) }
-     .get
-
-    logger.info(s"*** fetch event: $event")
-    handler(event)
