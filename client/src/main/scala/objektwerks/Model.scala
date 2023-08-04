@@ -194,12 +194,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
     setMeasurables()
 
-  def onFetchFault(source: String, fault: Fault): Unit =
+  def onFetchAsyncFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
     logger.error(s"*** Cause: $cause")
     observableFaults += fault.copy(cause = cause)
 
-  def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
+  def onFetchAsyncFault(source: String, entity: Entity, fault: Fault): Unit =
     val cause = s"$source - $entity - $fault"
     logger.error(s"*** Cause: $cause")
     observableFaults += fault.copy(cause = cause)
@@ -208,7 +208,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddFault(objectAccount.get.license, fault),
       (event: Event) => event match
-        case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
+        case fault @ Fault(cause, _) => onFetchAsyncFault("Model.add fault", fault)
         case FaultAdded() =>
           observableFaults += fault
           observableFaults.sort()
@@ -239,7 +239,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       deactivate,
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.deactivate", fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.deactivate", fault)
         case Deactivated(account) => objectAccount.set(account)
         case _ => ()
     )
@@ -248,7 +248,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       reactivate,
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.reactivate", fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.reactivate", fault)
         case Reactivated(account) => objectAccount.set(account)
         case _ => ()
     )
@@ -257,7 +257,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       ListProfiles(objectAccount.get.license),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.profiles", fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.profiles", fault)
         case ProfilesListed(profiles) =>
           observableProfiles.clear()
           observableProfiles ++= profiles
@@ -268,7 +268,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddProfile(objectAccount.get.license, profile),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add profile", profile, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.add profile", profile, fault)
         case ProfileAdded(id) =>
           observableProfiles += profile.copy(id = id)
           observableProfiles.sort()
@@ -280,7 +280,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddProfile(objectAccount.get.license, profile),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.update profile", profile, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.update profile", profile, fault)
         case ProfileAdded(id) => observableProfiles.update(selectedIndex, profile)
         case _ => ()
     )
@@ -289,7 +289,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       ListEdibles(objectAccount.get.license, profileId),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.edibles", fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.edibles", fault)
         case EdiblesListed(edibles) =>
           observableEdibles.clear()
           observableEdibles ++= edibles
@@ -300,7 +300,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddEdible(objectAccount.get.license, edible),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add edible", edible, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.add edible", edible, fault)
         case EdibleAdded(id) =>
           observableEdibles += edible.copy(id = id)
           observableEdibles.sort()
@@ -312,7 +312,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddEdible(objectAccount.get.license, edible),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.update edible", edible, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.update edible", edible, fault)
         case EdibleAdded(id) => observableEdibles.update(selectedIndex, edible)
         case _ => ()
     )
@@ -321,7 +321,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       ListDrinkables(objectAccount.get.license, profileId),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.drinkables", fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.drinkables", fault)
         case DrinkablesListed(drinkables) =>
           observableDrinkables.clear()
           observableDrinkables ++= drinkables
@@ -332,7 +332,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddDrinkable(objectAccount.get.license, drinkable),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add drinkable", drinkable, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.add drinkable", drinkable, fault)
         case DrinkableAdded(id) =>
           observableDrinkables += drinkable.copy(id = id)
           observableDrinkables.sort()
@@ -344,7 +344,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddDrinkable(objectAccount.get.license, drinkable),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.update drinkable", drinkable, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.update drinkable", drinkable, fault)
         case DrinkableAdded(id) => observableDrinkables.update(selectedIndex, drinkable)
         case _ => ()
     )
@@ -353,7 +353,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       ListExpendables(objectAccount.get.license, profileId),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.expendables", fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.expendables", fault)
         case ExpendablesListed(expendables) =>
           observableExpendables.clear()
           observableExpendables ++= expendables
@@ -364,7 +364,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddExpendable(objectAccount.get.license, expendable),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add expendable", expendable, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.add expendable", expendable, fault)
         case ExpendableAdded(id) =>
           observableExpendables += expendable.copy(id = id)
           observableExpendables.sort()
@@ -376,7 +376,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddExpendable(objectAccount.get.license, expendable),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.update expendable", expendable, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.update expendable", expendable, fault)
         case ExpendableAdded(id) => observableExpendables.update(selectedIndex, expendable)
         case _ => ()
     )
@@ -385,7 +385,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       ListMeasurables(objectAccount.get.license, profileId),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.measurables", fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.measurables", fault)
         case MeasurablesListed(measurables) =>
           observableMeasurables.clear()
           observableMeasurables ++= measurables
@@ -396,7 +396,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add measurable", measurable, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.add measurable", measurable, fault)
         case MeasurableAdded(id) =>
           observableMeasurables += measurable.copy(id = id)
           observableMeasurables.sort()
@@ -408,7 +408,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetchAsync(
       AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.update measurable", measurable, fault)
+        case fault @ Fault(_, _) => onFetchAsyncFault("Model.update measurable", measurable, fault)
         case MeasurableAdded(id) => observableMeasurables.update(selectedIndex, measurable)
         case _ => ()
     )
