@@ -1,5 +1,6 @@
 package objektwerks.pane
 
+import scalafx.application.Platform
 import scalafx.Includes.*
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
@@ -89,7 +90,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
     ProfileDialog(context, Profile(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
       case Some(profile: Profile) =>
         model.add(profile)
-        tableView.selectionModel().select(profile)
+        Platform.runLater(tableView.selectionModel().select(profile))
       case _ =>
 
   def update(): Unit =
@@ -98,7 +99,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
     ProfileDialog(context, profile).showAndWait() match
       case Some(profile: Profile) =>
         model.update(selectedIndex, profile)
-        tableView.selectionModel().select(selectedIndex)
+        Platform.runLater(tableView.selectionModel().select(selectedIndex))
       case _ =>
 
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
