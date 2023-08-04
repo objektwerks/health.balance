@@ -216,7 +216,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def register(register: Register): Unit =
-    fetcher.fetch(
+    fetcher.fetchAsync(
       register,
       (event: Event) => event match
         case fault @ Fault(_, _) => registered.set(false)
@@ -225,7 +225,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def login(login: Login): Unit =
-    fetcher.fetch(
+    fetcher.fetchAsync(
       login,
       (event: Event) => event match
         case fault @ Fault(_, _) => loggedin.set(false)
