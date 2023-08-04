@@ -39,13 +39,13 @@ final class Fetcher(context: Context) extends LazyLogging:
 
   private def buildHttpRequest(json: String): HttpRequest =
     HttpRequest
-          .newBuilder
-          .uri(uri)
-          .timeout(Duration.of(30, SECONDS))
-          .version(HttpClient.Version.HTTP_2)
-          .headers("Content-Type", "application/json; charset=UTF-8", "Accept", "application/json")
-          .POST( HttpRequest.BodyPublishers.ofString(json) )
-          .build
+      .newBuilder
+      .uri(uri)
+      .timeout(Duration.of(30, SECONDS))
+      .version(HttpClient.Version.HTTP_2)
+      .headers("Content-Type", "application/json; charset=UTF-8", "Accept", "application/json")
+      .POST( HttpRequest.BodyPublishers.ofString(json) )
+      .build
 
   private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
     client.sendAsync( httpRequest, BodyHandlers.ofString ).asScala
