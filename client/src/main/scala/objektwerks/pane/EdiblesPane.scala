@@ -80,7 +80,7 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
     EdibleDialog(context, Edible(profileId = model.selectedProfileId.value)).showAndWait() match
       case Some(edible: Edible) =>
         model.add(edible)
-        tableView.selectionModel().select(edible)
+        tableView.selectionModel().select(0)
       case _ =>
 
   def update(): Unit =
