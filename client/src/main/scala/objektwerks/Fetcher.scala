@@ -71,7 +71,7 @@ final class Fetcher(context: Context) extends LazyLogging:
       val eventJson = httpResponse.body 
       val event = fromJsonToEvent(eventJson)
       logger.info(s"*** fetch async event: $event")
-      handler(event)
+      Platform.runLater(handler(event))
     }.recover { case error: Exception => handler( toFault(error) ) }
 
   def fetch(command: Command,
