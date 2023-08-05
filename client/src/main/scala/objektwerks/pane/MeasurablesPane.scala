@@ -1,7 +1,6 @@
 package objektwerks.pane
 
 import scalafx.Includes.*
-import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -84,8 +83,7 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
     val measurable = tableView.selectionModel().getSelectedItem.measurable
     MeasurableDialog(context, measurable).showAndWait() match
       case Some(measurable: Measurable) =>
-        model.update(selectedIndex, measurable)
-        Platform.runLater(tableView.selectionModel().select(selectedIndex))
+        model.update(selectedIndex, measurable){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def chart(): Unit = MeasurablesChartDialog(context, model).showAndWait()

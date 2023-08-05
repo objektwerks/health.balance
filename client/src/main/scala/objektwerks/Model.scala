@@ -414,11 +414,13 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def update(selectedIndex: Int, measurable: Measurable): Unit =
+  def update(selectedIndex: Int, measurable: Measurable)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.update measurable", measurable, fault)
-        case MeasurableAdded(id) => observableMeasurables.update(selectedIndex, measurable)
+        case MeasurableAdded(id) =>
+          observableMeasurables.update(selectedIndex, measurable)
+          runLast
         case _ => ()
     )
