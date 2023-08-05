@@ -296,7 +296,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(edible: Edible): Unit =
+  def add(edible: Edible)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       AddEdible(objectAccount.get.license, edible),
       (event: Event) => event match
@@ -305,6 +305,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableEdibles += edible.copy(id = id)
           observableEdibles.sort()
           selectedEdibleId.set(edible.id)
+          runLast
         case _ => ()
     )
 
