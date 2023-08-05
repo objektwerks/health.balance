@@ -264,7 +264,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(profile: Profile): Unit =
+  def add(profile: Profile)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       AddProfile(objectAccount.get.license, profile),
       (event: Event) => event match
@@ -273,6 +273,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableProfiles += profile.copy(id = id)
           observableProfiles.sort()
           selectedProfileId.set(profile.id)
+          runLast
         case _ => ()
     )
 

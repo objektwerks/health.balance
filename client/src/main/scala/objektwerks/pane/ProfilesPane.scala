@@ -89,8 +89,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
   def add(): Unit =
     ProfileDialog(context, Profile(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
       case Some(profile: Profile) =>
-        model.add(profile)
-        Platform.runLater(tableView.selectionModel().select(profile))
+        model.add(profile){ tableView.selectionModel().select(profile) }
       case _ =>
 
   def update(): Unit =
