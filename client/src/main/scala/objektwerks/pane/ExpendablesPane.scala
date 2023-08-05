@@ -1,7 +1,6 @@
 package objektwerks.pane
 
 import scalafx.Includes.*
-import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -105,8 +104,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
     val expendable = tableView.selectionModel().getSelectedItem.expendable
     ExpendableDialog(context, expendable).showAndWait() match
       case Some(expendable: Expendable) =>
-        model.update(selectedIndex, expendable)
-        Platform.runLater(tableView.selectionModel().select(selectedIndex))
+        model.update(selectedIndex, expendable){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def chart(): Unit = ExpendablesChartDialog(context, model).showAndWait()
