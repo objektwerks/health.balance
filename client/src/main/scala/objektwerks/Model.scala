@@ -366,7 +366,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(expendable: Expendable): Unit =
+  def add(expendable: Expendable)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       AddExpendable(objectAccount.get.license, expendable),
       (event: Event) => event match
@@ -375,6 +375,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableExpendables += expendable.copy(id = id)
           observableExpendables.sort()
           selectedExpendableId.set(expendable.id)
+          runLast
         case _ => ()
     )
 

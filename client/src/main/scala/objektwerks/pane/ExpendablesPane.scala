@@ -97,8 +97,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
   def add(): Unit =
     ExpendableDialog(context, Expendable(profileId = model.selectedProfileId.value)).showAndWait() match
       case Some(expendable: Expendable) =>
-        model.add(expendable)
-        Platform.runLater(tableView.selectionModel().select(0))
+        model.add(expendable){ tableView.selectionModel().select(0) }
       case _ =>
 
   def update(): Unit =
