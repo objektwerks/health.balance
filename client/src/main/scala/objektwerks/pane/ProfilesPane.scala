@@ -1,7 +1,6 @@
 package objektwerks.pane
 
 import scalafx.Includes.*
-import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, Tab, TabPane, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -97,8 +96,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
     val profile = tableView.selectionModel().getSelectedItem.profile
     ProfileDialog(context, profile).showAndWait() match
       case Some(profile: Profile) =>
-        model.update(selectedIndex, profile)
-        Platform.runLater(tableView.selectionModel().select(selectedIndex))
+        model.update(selectedIndex, profile){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
