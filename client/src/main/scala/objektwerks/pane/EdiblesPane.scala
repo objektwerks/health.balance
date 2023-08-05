@@ -1,7 +1,6 @@
 package objektwerks.pane
 
 import scalafx.Includes.*
-import scalafx.application.Platform
 import scalafx.geometry.Insets
 import scalafx.scene.control.{Button, SelectionMode, TableColumn, TableView}
 import scalafx.scene.layout.{HBox, Priority, VBox}
@@ -88,8 +87,7 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
     val edible = tableView.selectionModel().getSelectedItem.edible
     EdibleDialog(context, edible).showAndWait() match
       case Some(edible: Edible) =>
-        model.update(selectedIndex, edible)
-        Platform.runLater(tableView.selectionModel().select(selectedIndex))
+        model.update(selectedIndex, edible){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def chart(): Unit = EdiblesChartDialog(context, model).showAndWait()

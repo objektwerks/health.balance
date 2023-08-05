@@ -309,12 +309,14 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def update(selectedIndex: Int, edible: Edible): Unit =
+  def update(selectedIndex: Int, edible: Edible)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       AddEdible(objectAccount.get.license, edible),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchAsyncFault("Model.update edible", edible, fault)
-        case EdibleAdded(id) => observableEdibles.update(selectedIndex, edible)
+        case EdibleAdded(id) =>
+          observableEdibles.update(selectedIndex, edible)
+          runLast
         case _ => ()
     )
 
