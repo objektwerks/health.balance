@@ -401,7 +401,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case _ => ()
     )
 
-  def add(measurable: Measurable): Unit =
+  def add(measurable: Measurable)(runLast: => Unit): Unit =
     fetcher.fetchAsync(
       AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
@@ -410,6 +410,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
           observableMeasurables += measurable.copy(id = id)
           observableMeasurables.sort()
           selectedMeasurableId.set(measurable.id)
+          runLast
         case _ => ()
     )
 
