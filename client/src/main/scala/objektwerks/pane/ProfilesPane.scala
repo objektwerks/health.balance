@@ -87,16 +87,14 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     ProfileDialog(context, Profile(accountId = model.objectAccount.get.id, name = "")).showAndWait() match
-      case Some(profile: Profile) =>
-        model.add(profile){ tableView.selectionModel().select(profile) }
+      case Some(profile: Profile) => model.add(profile){ tableView.selectionModel().select(profile) }
       case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val profile = tableView.selectionModel().getSelectedItem.profile
     ProfileDialog(context, profile).showAndWait() match
-      case Some(profile: Profile) =>
-        model.update(selectedIndex, profile){ tableView.selectionModel().select(selectedIndex) }
+      case Some(profile: Profile) => model.update(selectedIndex, profile){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def faults(): Unit = FaultsDialog(context, model).showAndWait() match
