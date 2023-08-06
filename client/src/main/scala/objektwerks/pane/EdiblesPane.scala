@@ -78,16 +78,14 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
 
   def add(): Unit =
     EdibleDialog(context, Edible(profileId = model.selectedProfileId.value)).showAndWait() match
-      case Some(edible: Edible) =>
-        model.add(edible){ tableView.selectionModel().select(0) }
+      case Some(edible: Edible) => model.add(edible){ tableView.selectionModel().select(0) }
       case _ =>
 
   def update(): Unit =
     val selectedIndex = tableView.selectionModel().getSelectedIndex
     val edible = tableView.selectionModel().getSelectedItem.edible
     EdibleDialog(context, edible).showAndWait() match
-      case Some(edible: Edible) =>
-        model.update(selectedIndex, edible){ tableView.selectionModel().select(selectedIndex) }
+      case Some(edible: Edible) => model.update(selectedIndex, edible){ tableView.selectionModel().select(selectedIndex) }
       case _ =>
 
   def chart(): Unit = EdiblesChartDialog(context, model).showAndWait()
