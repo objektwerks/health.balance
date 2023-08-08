@@ -272,7 +272,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case ProfileAdded(id) =>
           observableProfiles += profile.copy(id = id)
           observableProfiles.sort()
-          selectedProfileId.set(profile.id)
+          selectedProfileId.set(id)
           runLast
         case _ => ()
     )
