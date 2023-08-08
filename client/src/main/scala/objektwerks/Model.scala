@@ -307,7 +307,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case EdibleAdded(id) =>
           observableEdibles += edible.copy(id = id)
           observableEdibles.sort()
-          selectedEdibleId.set(edible.id)
+          selectedEdibleId.set(id)
           runLast
         case _ => ()
     )
