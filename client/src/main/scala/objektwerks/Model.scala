@@ -377,7 +377,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case ExpendableAdded(id) =>
           observableExpendables += expendable.copy(id = id)
           observableExpendables.sort()
-          selectedExpendableId.set(expendable.id)
+          selectedExpendableId.set(id)
           runLast
         case _ => ()
     )
