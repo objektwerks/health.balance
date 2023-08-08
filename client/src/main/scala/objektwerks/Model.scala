@@ -412,7 +412,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         case MeasurableAdded(id) =>
           observableMeasurables += measurable.copy(id = id)
           observableMeasurables.sort()
-          selectedMeasurableId.set(measurable.id)
+          selectedMeasurableId.set(id)
           runLast
         case _ => ()
     )
