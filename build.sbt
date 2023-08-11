@@ -135,7 +135,7 @@ lazy val server = project
         "com.github.blemale" %% "scaffeine" % "5.2.1",
         "org.jodd" % "jodd-mail" % "7.0.0",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
-        "ch.qos.logback" % "logback-classic" % "1.4.7",
+        "ch.qos.logback" % "logback-classic" % "1.4.8",
         "org.scalatest" %% "scalatest" % "3.2.16" % Test
       )
     }
