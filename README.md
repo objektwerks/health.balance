@@ -2,6 +2,10 @@ Health Balance
 --------------
 >Health balance app using Scala 3, ScalaFX, Jsoniter, Scaffeine, JoddMail, ScalikeJdbc and PostgreSql
 
+Todo
+----
+1. Retest edit dialogs.
+   
 Use Cases
 ---------
 1. add | update | list edibles, drinkables, expendables, measurables
