@@ -28,7 +28,7 @@ object Entity:
   def stringToList(string: String): List[String] = string.split(",").toList
 
 final case class Account(id: Long = 0,
-                         license: String = newLicense,
+                         license: String = UUID.randomUUID.toString,
                          emailAddress: String = "",
                          pin: String = newPin,
                          activated: Long = Instant.now.getEpochSecond,
@@ -61,8 +61,6 @@ object Account:
         .prepended(newSpecialChar)
         .appended(newSpecialChar)
     ).mkString
-
-  private def newLicense: String = UUID.randomUUID.toString
 
   val empty = Account(
     license = "",
