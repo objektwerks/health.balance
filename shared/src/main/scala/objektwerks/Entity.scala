@@ -9,6 +9,22 @@ import scalafx.beans.property.ObjectProperty
 sealed trait Entity:
   val id: Long
 
+object Pin:
+  private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
+  private val random = new Random
+
+  private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
+
+  def newInstance: String =
+    Random.shuffle(
+      Random
+        .alphanumeric
+        .take(5)
+        .mkString
+        .prepended(newSpecialChar)
+        .appended(newSpecialChar)
+    ).mkString
+
 object Entity:
   given profileOrdering: Ordering[Profile] = Ordering.by[Profile, String](p => p.name)
   given edibleOrdering: Ordering[Edible] = Ordering.by[Edible, Long](e => e.ate).reverse
@@ -30,7 +46,7 @@ object Entity:
 final case class Account(id: Long = 0,
                          license: String = UUID.randomUUID.toString,
                          emailAddress: String = "",
-                         pin: String = newPin,
+                         pin: String = Pin.newInstance,
                          activated: Long = Instant.now.getEpochSecond,
                          deactivated: Long = 0) extends Entity:
   val licenseProperty = ObjectProperty[String](this, "license", license)
@@ -43,25 +59,6 @@ final case class Account(id: Long = 0,
   def toArray: Array[Any] = Array(id, license, pin, activated, deactivated)
 
 object Account:
-  private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
-  private val random = new Random
-
-  private def newSpecialChar: Char = specialChars(random.nextInt(specialChars.length))
-
-  /**
-   * 26 letters + 10 numbers + 18 special characters = 54 combinations
-   * 7 alphanumeric char pin = 54^7 ( 1,338,925,209,984 )
-   */
-  private def newPin: String =
-    Random.shuffle(
-      Random
-        .alphanumeric
-        .take(5)
-        .mkString
-        .prepended(newSpecialChar)
-        .appended(newSpecialChar)
-    ).mkString
-
   val empty = Account(
     license = "",
     emailAddress = "",
