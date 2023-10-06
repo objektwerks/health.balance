@@ -6,9 +6,6 @@ import java.util.UUID
 import scala.util.Random
 import scalafx.beans.property.ObjectProperty
 
-sealed trait Entity:
-  val id: Long
-
 object Pin:
   private val specialChars = "~!@#$%^&*-+=<>?/:;".toList
   private val random = new Random
@@ -24,6 +21,9 @@ object Pin:
         .prepended(newSpecialChar)
         .appended(newSpecialChar)
     ).mkString
+
+sealed trait Entity:
+  val id: Long
 
 object Entity:
   given profileOrdering: Ordering[Profile] = Ordering.by[Profile, String](p => p.name)
