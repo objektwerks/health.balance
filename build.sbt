@@ -101,7 +101,7 @@ lazy val client = project
   )
   .settings(
     libraryDependencies ++= Seq("base", "controls", "web").map( jfxModule =>
-      "org.openjfx" % s"javafx-$jfxModule" % "20" classifier OS
+      "org.openjfx" % s"javafx-$jfxModule" % "21" classifier OS
     )
   )
 
