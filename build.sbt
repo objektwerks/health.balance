@@ -1,3 +1,5 @@
+val scalatestVersion = "3.2.17"
+
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.10-SNAPSHOT",
@@ -117,7 +119,7 @@ lazy val shared = project
          exclude("org.openjfx", "javafx-media")
          exclude("org.openjfx", "javafx-swing")
          exclude("org.openjfx", "javafx-web"),
-        "org.scalatest" %% "scalatest" % "3.2.16" % Test
+        "org.scalatest" %% "scalatest" % scalatestVersion % Test
       )
     }
   )
@@ -136,7 +138,7 @@ lazy val server = project
         "org.jodd" % "jodd-mail" % "7.0.1",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % "1.4.11",
-        "org.scalatest" %% "scalatest" % "3.2.16" % Test
+        "org.scalatest" %% "scalatest" % scalatestVersion % Test
       )
     }
   )
