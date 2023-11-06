@@ -132,7 +132,7 @@ lazy val server = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+        "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
         "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.6.0",
         "com.github.blemale" %% "scaffeine" % "5.2.1",
