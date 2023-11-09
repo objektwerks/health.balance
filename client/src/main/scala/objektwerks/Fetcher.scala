@@ -17,7 +17,7 @@ import scala.jdk.FutureConverters.*
 import Serializer.given
 
 final class Fetcher(context: Context) extends LazyLogging:
-  implicit private val executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
+  given executionContext: ExecutionContext = ExecutionContext.fromExecutor( Executors.newVirtualThreadPerTaskExecutor() )
   private val uri = URI(context.url)
   private val connectError = context.errorServer
   private val client = HttpClient
@@ -25,17 +25,7 @@ final class Fetcher(context: Context) extends LazyLogging:
                          .executor( Executors.newVirtualThreadPerTaskExecutor() )
                          .build
 
-  logger.info(s"*** Fetcher fetching on: ${context.url}")
-
-  private def fromCommandToJson(command: Command): String = writeToString[Command](command)
-
-  private def fromJsonToEvent(json: String): Event = readFromString[Event](json)
-
-  private def toFault(error: Exception): Fault =
-    Fault(
-      if error.getMessage == null then connectError
-      else error.getMessage
-    )
+  logger.info(s"*** Fetcher url: ${context.url}")
 
   private def buildHttpRequest(json: String): HttpRequest =
     HttpRequest
@@ -47,20 +37,29 @@ final class Fetcher(context: Context) extends LazyLogging:
       .POST( HttpRequest.BodyPublishers.ofString(json) )
       .build
 
-  private def sendAsyncHttpRequest(httpRequest: HttpRequest): Future[HttpResponse[String]] =
+  private def sendAsync(httpRequest: HttpRequest): Future[HttpResponse[String]] =
     client
-      .sendAsync( httpRequest, BodyHandlers.ofString )
+      .sendAsync(httpRequest, BodyHandlers.ofString)
       .asScala
 
   def fetchAsync(command: Command,
                  handler: Event => Unit): Unit =
     logger.info(s"*** fetch async command: $command")
-    val commandJson = fromCommandToJson(command)
+    val commandJson = writeToString[Command](command)
     val httpRequest = buildHttpRequest(commandJson)
+    logger.info(s"*** Fetcher http request: $httpRequest")
 
-    sendAsyncHttpRequest(httpRequest).map { httpResponse =>
+    sendAsync(httpRequest).map { httpResponse =>
       val eventJson = httpResponse.body 
-      val event = fromJsonToEvent(eventJson)
-      logger.info(s"*** fetch async event: $event")
+      val event = readFromString[Event](eventJson)
+      logger.info(s"*** Fetcher event: $event")
       Platform.runLater(handler(event))
-    }.recover { case error: Exception => handler( toFault(error) ) }
+    }.recover {
+      case error: Exception =>
+        val fault = Fault(
+          if error.getMessage == null then connectError
+          else error.getMessage
+        )
+        logger.error(s"Fetcher fault: $fault")
+        handler(fault)
+    }
