@@ -9,15 +9,19 @@ import scala.io.{Codec, Source}
 import Serializer.given
 
 object Handler:
-  def apply(dispatcher: Dispatcher, store: Store, logger: Logger): HttpHandler = new HttpHandler:
+  def apply(dispatcher: Dispatcher,
+            store: Store,
+            logger: Logger): HttpHandler = new HttpHandler:
     override def handle(exchange: HttpExchange): Unit =
       val json = Source.fromInputStream( exchange.getRequestBody )(Codec.UTF8).mkString("")
       val command = readFromString[Command](json)
+      logger.debug(s"*** Handler command: $command")
 
       val event = dispatcher.dispatch(command)
+      logger.debug(s"*** Handler event: $event")
       event match
-        case fault @ Fault(cause, _) =>
-          logger.error(cause)
+        case fault @ Fault(_, _) =>
+          logger.error(s"*** Handler fault: $fault")
           store.addFault(fault)
         case _ =>
       val response = writeToString[Event](event)
