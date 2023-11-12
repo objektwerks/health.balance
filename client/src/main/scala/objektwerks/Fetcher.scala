@@ -11,7 +11,7 @@ import java.time.temporal.ChronoUnit.SECONDS
 import java.util.concurrent.Executors
 
 import scalafx.application.Platform
-import scala.concurrent.{ExecutionContext, Future}
+import scala.concurrent.ExecutionContext
 import scala.jdk.FutureConverters.*
 
 import Serializer.given
@@ -37,11 +37,6 @@ final class Fetcher(context: Context) extends LazyLogging:
       .POST( HttpRequest.BodyPublishers.ofString(json) )
       .build
 
-  private def sendAsync(httpRequest: HttpRequest): Future[HttpResponse[String]] =
-    client
-      .sendAsync(httpRequest, BodyHandlers.ofString)
-      .asScala
-
   def fetchAsync(command: Command,
                  handler: Event => Unit): Unit =
     logger.info(s"*** Fetcher command: $command")
@@ -49,17 +44,20 @@ final class Fetcher(context: Context) extends LazyLogging:
     val httpRequest = buildHttpRequest(commandJson)
     logger.info(s"*** Fetcher http request: $httpRequest")
 
-    sendAsync(httpRequest).map { httpResponse =>
-      val eventJson = httpResponse.body 
-      val event = readFromString[Event](eventJson)
-      logger.info(s"*** Fetcher event: $event")
-      Platform.runLater(handler(event))
-    }.recover {
-      case error: Exception =>
-        val fault = Fault(
-          if error.getMessage == null then connectError
-          else error.getMessage
-        )
-        logger.error(s"Fetcher fault: $fault")
-        handler(fault)
-    }
+    client
+      .sendAsync(httpRequest, BodyHandlers.ofString)
+      .asScala
+      .map { httpResponse =>
+        val eventJson = httpResponse.body 
+        val event = readFromString[Event](eventJson)
+        logger.info(s"*** Fetcher event: $event")
+        Platform.runLater(handler(event))
+      }.recover {
+        case error: Exception =>
+          val fault = Fault(
+            if error.getMessage == null then connectError
+            else error.getMessage
+          )
+          logger.error(s"Fetcher fault: $fault")
+          handler(fault)
+      }
