@@ -1,6 +1,6 @@
 Health Balance
 --------------
->Health balance app using ScalaFX, Jsoniter, Scaffeine, JoddMail, ScalikeJdbc, PostgreSql and Scala 3.
+>Health balance app using ScalaFX, Jsoniter, Scaffeine, JoddMail, ScalikeJdbc, Helidon, PostgreSql and Scala 3.
 
 Todo
 ----
