@@ -4,7 +4,7 @@ Health Balance
 
 Todo
 ----
-1. Retest edit dialogs.
+1. Test edit dialogs
    
 Use Cases
 ---------
@@ -68,10 +68,10 @@ Client Assembly
 Execute Client
 --------------
 >To execute an assembled jar locally:
-1. java -jar .assembly/health-balance-mac-0.12.jar
-2. java -jar .assembly/health-balance-m1-0.12.jar
-3. java -jar .assembly/health-balance-win-0.12.jar
-4. java -jar .assembly/health-balance-linux-0.12.jar
+1. java -jar .assembly/health-balance-mac-0.13.jar
+2. java -jar .assembly/health-balance-m1-0.13.jar
+3. java -jar .assembly/health-balance-win-0.13.jar
+4. java -jar .assembly/health-balance-linux-0.13.jar
 
 Deploy
 ------
@@ -121,6 +121,7 @@ Environment
 ```
 export HEALTH_BALANCE_HOST="127.0.0.1"
 export HEALTH_BALANCE_PORT=7171
+export HEALTH_BALANCE_ENDPOINT="/command"
 
 export HEALTH_BALANCE_POSTGRESQL_URL="jdbc:postgresql://localhost:5432/healthbalance"
 export HEALTH_BALANCE_POSTGRESQL_USER="yourusername"
@@ -141,10 +142,9 @@ export HEALTH_BALANCE_EMAIL_PASSWORD="your-email-password"
 Resources
 ---------
 * [JavaFX](https://openjfx.io/index.html)
+* [JavaFX Tutorial](https://jenkov.com/tutorials/javafx/index.html)
 * [ScalaFX](http://www.scalafx.org/)
 * [ScalikeJdbc](http://scalikejdbc.org/)
-* [jDeploy](https://www.jdeploy.com/)
-* [JavaFX Tutorial](https://jenkov.com/tutorials/javafx/index.html)
 
 License
 -------
