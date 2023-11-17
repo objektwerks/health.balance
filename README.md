@@ -4,7 +4,7 @@ Health Balance
 
 Todo
 ----
-1. Test edit dialogs
+1. Test edit dialogs.
    
 Use Cases
 ---------
