@@ -37,7 +37,7 @@ final class Fetcher(context: Context) extends LazyLogging:
       .POST( HttpRequest.BodyPublishers.ofString(json) )
       .build
 
-  def fetchAsync(command: Command,
+  def fetch(command: Command,
                  handler: Event => Unit): Unit =
     logger.info(s"*** Fetcher command: $command")
     val commandJson = writeToString[Command](command)
