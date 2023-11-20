@@ -10,6 +10,7 @@ final class Context(config: Config):
   val windowHeight = config.getDouble("window.height")
 
   val url = config.getString("url")
+  val endpoint = config.getString("endpoint")
 
   val buttonAdd = config.getString("button.add")
   val buttonEdit = config.getString("button.edit")
