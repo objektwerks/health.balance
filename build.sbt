@@ -1,3 +1,4 @@
+val helidonVersion = "4.0.0"
 val logbackVersion = "1.4.11"
 val scalatestVersion = "3.2.17"
 
@@ -5,14 +6,6 @@ lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.13-SNAPSHOT",
   scalaVersion := "3.3.1",
-  libraryDependencies ++= {
-    val jsoniterVersion = "2.24.4"
-    Seq(
-      "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
-      "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
-      "com.typesafe" % "config" % "1.4.2"
-    )
-  },
   scalacOptions ++= Seq(
     "-Wunused:all"
   )
@@ -97,6 +90,8 @@ lazy val client = project
     libraryDependencies ++= {
       Seq(
         "org.scalafx" %% "scalafx" % "21.0.0-R32",
+        "io.helidon.webclient" % "helidon-webclient" % helidonVersion,
+        "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion
       )
@@ -112,7 +107,10 @@ lazy val shared = project
   .settings(common)
   .settings(
     libraryDependencies ++= {
+      val jsoniterVersion = "2.24.4"
       Seq(
+        "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
+        "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
         "org.scalafx" %% "scalafx" % "20.0.0-R31"
          exclude("org.openjfx", "javafx-controls")
          exclude("org.openjfx", "javafx-fxml")
@@ -131,15 +129,14 @@ lazy val server = project
   .settings(common)
   .settings(
     libraryDependencies ++= {
-      val helidonVersion = "4.0.0"
       Seq(
         "io.helidon.webserver" % "helidon-webserver" % helidonVersion,
-        "io.helidon.webclient" % "helidon-webclient" % helidonVersion,
         "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
         "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.6.0",
         "com.github.blemale" %% "scaffeine" % "5.2.1",
         "org.jodd" % "jodd-mail" % "7.0.1",
+        "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion,
         "org.scalatest" %% "scalatest" % scalatestVersion % Test
