@@ -22,7 +22,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val selectedMeasurableId = ObjectProperty[Long](0)
 
   selectedProfileId.onChange { (_, oldProfileId, newProfileId) =>
-    logger.info(s"*** selected profile id onchange event: $oldProfileId -> $newProfileId")
+    logger.info("*** selected profile id onchange event: {} -> {}", oldProfileId, newProfileId)
     shouldBeInFxThread("*** selected profile id onchange should be in fx thread.")
     edibles(newProfileId)
     drinkables(newProfileId)
@@ -40,11 +40,11 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val observableFaults = ObservableBuffer[Fault]()
 
   objectAccount.onChange { (_, oldAccount, newAccount) =>
-    logger.info(s"*** object account onchange event: $oldAccount -> $newAccount")
+    logger.info("*** object account onchange event: {} -> {}", oldAccount, newAccount)
   }
 
   observableProfiles.onChange { (_, changes) =>
-    logger.info(s"*** observable profiles onchange event: $changes")
+    logger.info("*** observable profiles onchange event: {}", changes)
   }
 
   val ediblesTodayCalories = ObjectProperty[String]("0")
@@ -98,7 +98,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setCaloriesInOutWeek()
 
   observableEdibles.onChange { (_, changes) =>
-    logger.info(s"*** observable edibles onchange event: $changes")
+    logger.info("*** observable edibles onchange event: {}", changes)
     shouldNotBeInFxThread("*** observable edibles onchange should not be in fx thread.")
 
     Platform.runLater {
@@ -110,7 +110,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableDrinkables.onChange { (_, changes) =>
-    logger.info(s"*** observable drinkables onchange event: $changes")
+    logger.info("*** observable drinkables onchange event: {}", changes)
     shouldNotBeInFxThread("*** observable drinkables onchange should not be in fx thread.")
 
     Platform.runLater {
@@ -122,7 +122,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableExpendables.onChange { (_, changes) =>
-    logger.info(s"*** observable expendables onchange event: $changes")
+    logger.info("*** observable expendables onchange event: {}", changes)
     shouldNotBeInFxThread("*** observable expendables onchange should not be in fx thread.")
 
     Platform.runLater {
@@ -171,7 +171,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     }
 
   observableMeasurables.onChange { (_, changes) =>
-    logger.info(s"*** observable measurables onchange event: $changes")
+    logger.info("*** observable measurables onchange event: {}", changes)
     shouldNotBeInFxThread("*** observable measurables onchange should not be in fx thread.")
 
     setMeasurables()
@@ -196,12 +196,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def onFetchFault(source: String, fault: Fault): Unit =
     val cause = s"$source - $fault"
-    logger.error(s"*** Cause: $cause")
+    logger.error("*** Cause: {}", cause)
     observableFaults += fault.copy(cause = cause)
 
   def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
     val cause = s"$source - $entity - $fault"
-    logger.error(s"*** Cause: $cause")
+    logger.error("*** Cause: {}", cause)
     observableFaults += fault.copy(cause = cause)
 
   def add(fault: Fault): Unit =
