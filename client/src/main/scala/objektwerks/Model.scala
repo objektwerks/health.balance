@@ -201,7 +201,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def onFetchFault(source: String, entity: Entity, fault: Fault): Unit =
     val cause = s"$source - $entity - $fault"
-    logger.error("*** Cause: {}", cause)
+    logger.error(s"*** Cause: $cause")
     observableFaults += fault.copy(cause = cause)
 
   def add(fault: Fault): Unit =
