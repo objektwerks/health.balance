@@ -23,11 +23,11 @@ final class Fetcher(context: Context) extends LazyLogging:
     .addHeader("Accept", "application/json")
     .build
 
-  logger.info("*** Fetcher url: {} endpoint: {}", url, endpoint)
+  logger.info("*** fetcher url: {} endpoint: {}", url, endpoint)
 
   def fetch(command: Command,
             handler: Event => Unit): Unit =
-    logger.info("*** Fetcher command: {}", command)
+    logger.info("*** fetcher command: {}", command)
     val commandJson = writeToString[Command](command)
     Try {
       val eventJson = client
@@ -35,7 +35,7 @@ final class Fetcher(context: Context) extends LazyLogging:
         .submit(commandJson, classOf[String])
         .entity
       val event = readFromString[Event](eventJson)
-      logger.info("*** Fetcher event: {}", event)
+      logger.info("*** fetcher event: {}", event)
       Platform.runLater(handler(event))
     }.recover {
       case NonFatal(throwable: Throwable) =>
@@ -43,6 +43,6 @@ final class Fetcher(context: Context) extends LazyLogging:
           if throwable.getMessage == null then connectError
           else throwable.getMessage
         )
-        logger.error("*** Fetcher fault: {}", fault)
+        logger.error("*** fetcher fault: {}", fault)
         Platform.runLater(handler(fault))
     }
