@@ -38,10 +38,10 @@ final class Fetcher(context: Context) extends LazyLogging:
       logger.info("*** fetcher event: {}", event)
       Platform.runLater(handler(event))
     }.recover {
-      case NonFatal(throwable: Throwable) =>
+      case NonFatal(error) =>
         val fault = Fault(
-          if throwable.getMessage == null then connectError
-          else throwable.getMessage
+          if error.getMessage == null then connectError
+          else error.getMessage
         )
         logger.error("*** fetcher fault: {}", fault)
         Platform.runLater(handler(fault))
