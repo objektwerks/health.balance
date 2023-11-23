@@ -1,6 +1,6 @@
 package objektwerks
 
-import java.time.Instant
+import java.time.{Instant, LocalDate}
 
 import scalafx.beans.property.ObjectProperty
 
@@ -35,13 +35,24 @@ final case class MeasurableAdded(id: Long) extends Event
 final case class MeasurableUpdated(id: Long) extends Event
 
 object Fault:
-  def apply(cause: String, throwable: Throwable): Fault = Fault(cause = s"$cause ${throwable.getMessage}")
+  def apply(throwable: Throwable, defaultMessage: String): Fault =
+    val message = throwable.getMessage
+    Fault(
+      if message == null then defaultMessage
+      else message
+    )
 
-  given faultOrdering: Ordering[Fault] = Ordering.by[Fault, Long](f => f.occurred).reverse
+  def apply(prefixMessage: String, throwable: Throwable): Fault =
+    val message = throwable.getMessage
+    Fault(
+      if message == null then prefixMessage
+      else s"$prefixMessage $message"
+    )
 
+  given faultOrdering: Ordering[Fault] = Ordering.by[Fault, Long](f => LocalDate.parse(f.occurred).toEpochDay()).reverse
 
-final case class Fault(cause: String, occurred: Long = Instant.now.getEpochSecond) extends Event:
+final case class Fault (cause: String, occurred: String = Instant.now.toString) extends Event:
   val causeProperty = ObjectProperty[String](this, "cause", cause)
-  val occurredProperty = ObjectProperty[String](this, "occurred", Entity.instantToLocalDateTime(Instant.ofEpochSecond(occurred)).toString())
+  val occurredProperty = ObjectProperty[String](this, "occurred", occurred)
 
 final case class FaultAdded() extends Event
