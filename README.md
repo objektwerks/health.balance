@@ -68,10 +68,10 @@ Client Assembly
 Execute Client
 --------------
 >To execute an assembled jar locally:
-1. java -jar .assembly/health-balance-mac-0.16.jar
-2. java -jar .assembly/health-balance-m1-0.16.jar
-3. java -jar .assembly/health-balance-win-0.16.jar
-4. java -jar .assembly/health-balance-linux-0.16.jar
+1. java -jar .assembly/health-balance-mac-0.17.jar
+2. java -jar .assembly/health-balance-m1-0.17.jar
+3. java -jar .assembly/health-balance-win-0.17.jar
+4. java -jar .assembly/health-balance-linux-0.17.jar
 
 Deploy
 ------
