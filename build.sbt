@@ -1,5 +1,5 @@
 val helidonVersion = "4.0.0"
-val logbackVersion = "1.4.11"
+val logbackVersion = "1.4.13"
 val scalatestVersion = "3.2.17"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
