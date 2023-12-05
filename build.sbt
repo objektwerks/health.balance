@@ -90,7 +90,7 @@ lazy val client = project
   .settings(
     libraryDependencies ++= {
       Seq(
-        "org.scalafx" %% "scalafx" % "21.0.0-R32",
+        "org.scalafx" %% "scalafx" % scalafxVersion,
         "io.helidon.webclient" % "helidon-webclient" % helidonVersion,
         "com.typesafe" % "config" % "1.4.2",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
@@ -112,7 +112,7 @@ lazy val shared = project
       Seq(
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
-        "org.scalafx" %% "scalafx" % "20.0.0-R31"
+        "org.scalafx" %% "scalafx" % scalafxVersion
          exclude("org.openjfx", "javafx-controls")
          exclude("org.openjfx", "javafx-fxml")
          exclude("org.openjfx", "javafx-graphics")
