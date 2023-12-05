@@ -1,4 +1,5 @@
 val helidonVersion = "4.0.0"
+val scalafxVersion = "21.0.0-R32"
 val logbackVersion = "1.4.13"
 val scalatestVersion = "3.2.17"
 
