@@ -137,7 +137,7 @@ lazy val server = project
         "org.postgresql" % "postgresql" % "42.6.0",
         "com.github.blemale" %% "scaffeine" % "5.2.1",
         "org.jodd" % "jodd-mail" % "7.0.1",
-        "com.typesafe" % "config" % "1.4.2",
+        "com.typesafe" % "config" % "1.4.3",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion,
         "org.scalatest" %% "scalatest" % scalatestVersion % Test
