@@ -317,7 +317,7 @@ final class Store(config: Config,
       .map(rs =>
         Fault(
           rs.string("cause"),
-          rs.long("occurred")
+          rs.long("occurred").toString
         )
       )
       .list()
