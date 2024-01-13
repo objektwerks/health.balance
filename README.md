@@ -148,7 +148,7 @@ Resources
 
 License
 -------
->Copyright (c) [2023] [Objektwerks]
+>Copyright (c) [2023, 2024] [Objektwerks]
 
 >Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
