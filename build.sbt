@@ -134,7 +134,7 @@ lazy val server = project
         "io.helidon.webserver" % "helidon-webserver" % helidonVersion,
         "org.scalikejdbc" %% "scalikejdbc" % "4.1.0",
         "com.zaxxer" % "HikariCP" % "5.0.1" exclude("org.slf4j", "slf4j-api"),
-        "org.postgresql" % "postgresql" % "42.6.0",
+        "org.postgresql" % "postgresql" % "42.7.0",
         "com.github.blemale" %% "scaffeine" % "5.2.1",
         "org.jodd" % "jodd-mail" % "7.0.1",
         "com.typesafe" % "config" % "1.4.3",
