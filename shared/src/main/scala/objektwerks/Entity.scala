@@ -20,6 +20,7 @@ object Entity:
   def epochSecondToLocalTime(epochSecond: Long): LocalTime = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC).toLocalTime
   def epochSecondToDayOfYear(epochSecond: Long): Int = LocalDateTime.ofInstant(Instant.ofEpochSecond(epochSecond), ZoneOffset.UTC).getDayOfYear
 
+  def instantAsStringToEpochMilli(instant: String): Long = Instant.parse(instant).toEpochMilli
   def instantToLocalDateTime(instant: Instant): LocalDateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC)
   def localDateAndTimeToEpochSecond(localDate: LocalDate, localTime: LocalTime): Long = LocalDateTime.of(localDate, localTime).toInstant(ZoneOffset.UTC).getEpochSecond
 
