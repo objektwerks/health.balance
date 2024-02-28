@@ -92,7 +92,7 @@ lazy val client = project
       Seq(
         "org.scalafx" %% "scalafx" % scalafxVersion,
         "io.helidon.webclient" % "helidon-webclient" % helidonVersion,
-        "com.typesafe" % "config" % "1.4.2",
+        "com.typesafe" % "config" % "1.4.3",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion
       )
