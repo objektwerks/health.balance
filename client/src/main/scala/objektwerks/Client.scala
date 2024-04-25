@@ -42,6 +42,6 @@ object Client extends JFXApp3 with LazyLogging:
       case _ =>
     
     stage.show()
-    logger.info("*** client started, targeting: {}", context.url)
+    logger.info("*** client started, server url: {} endpoint: {}", context.url, context.endpoint)
 
   override def stopApp(): Unit = logger.info("*** client stopped.")
