@@ -13,17 +13,20 @@ final class Handler(dispatcher: Dispatcher,
   override def handle(request: ServerRequest,
                       response: ServerResponse): Unit =
     val commandJson = request.content.as(classOf[String])
+    logger.info(s"*** Handler command json: $commandJson")
+
     val command = readFromString[Command](commandJson)
-    logger.debug(s"*** Handler command: $command")
+    logger.info(s"*** Handler command: $command")
 
     val event = dispatcher.dispatch(command)
-    logger.debug(s"*** Handler event: $event")
+    logger.info(s"*** Handler event: $event")
     event match
       case fault @ Fault(_, _) =>
         logger.error(s"*** Handler fault: $fault")
         store.addFault(fault)
       case _ =>
     val eventJson = writeToString[Event](event)
+    logger.info(s"*** Handler event json: $eventJson")
 
     response
       .status(200)
