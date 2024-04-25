@@ -23,7 +23,7 @@ object Server extends LazyLogging:
 
     val builder = HttpRouting
       .builder
-      .get(endpoint, handler)
+      .post(endpoint, handler)
 
     WebServer
       .builder
@@ -32,7 +32,7 @@ object Server extends LazyLogging:
       .build
       .start
 
-    println(s"*** Press Control-C to shutdown Health Balance Http Server at: $host:$port")
-    logger.info(s"*** Health Balance Http Server started at: $host:$port")
+    println(s"*** Press Control-C to shutdown Health Balance Http Server at: $host:$port$endpoint")
+    logger.info(s"*** Health Balance Http Server started at: $host:$port$endpoint")
 
     Thread.currentThread().join()
