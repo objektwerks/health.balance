@@ -71,11 +71,11 @@ lazy val healthbalance = (project in file("."))
     case _ => ""
   }
 
-  if (OS == "mac") assemblyJarName := "pool-balance-mac-0.17.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.17.jar"
-  else if (OS == "win") assemblyJarName := "pool-balance-win-0.17.jar"
-  else if (OS == "linux") assemblyJarName := "pool-balance-linux-0.17.jar"
-  else assemblyJarName := "pool-balance-no-valid-target-specified-0.17.jar"
+  if (OS == "mac") assemblyJarName := "pool-balance-mac-0.20.jar"
+  else if (OS == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.20.jar"
+  else if (OS == "win") assemblyJarName := "pool-balance-win-0.20.jar"
+  else if (OS == "linux") assemblyJarName := "pool-balance-linux-0.20.jar"
+  else assemblyJarName := "pool-balance-no-valid-target-specified-0.20.jar"
 
   client / assembly / assemblyMergeStrategy := {
     case PathList("META-INF", xs @ _*) => MergeStrategy.discard
