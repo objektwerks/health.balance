@@ -29,11 +29,13 @@ final class Fetcher(context: Context) extends LazyLogging:
             handler: Event => Unit): Unit =
     logger.info("*** fetcher command: {}", command)
     val commandJson = writeToString[Command](command)
+    logger.info("*** fetcher command json: {}", commandJson)
     Try {
       val eventJson = client
         .post(endpoint)
         .submit(commandJson, classOf[String])
         .entity
+      logger.info("*** fetcher event json: {}", eventJson)
       val event = readFromString[Event](eventJson)
       logger.info("*** fetcher event: {}", event)
       Platform.runLater(handler(event))
