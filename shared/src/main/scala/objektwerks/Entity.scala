@@ -54,7 +54,7 @@ object Account:
 final case class Profile(id: Long = 0,
                          accountId: Long,
                          name: String,
-                         created: Long = Instant.now.getEpochSecond) extends Entity:
+                         created: Long = Instant.now.getEpochSecond) extends Entity derives CanEqual:
   val nameProperty = ObjectProperty[String](this, "name", name)
   val createdProperty = ObjectProperty[String](this, "created", Entity.epochSecondToLocalDate(created).toString)
   val profile = this
