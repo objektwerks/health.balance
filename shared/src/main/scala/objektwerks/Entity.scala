@@ -129,7 +129,7 @@ final case class Measurable(id: Long = 0,
                             profileId: Long,
                             kind: String = MeasurableKind.Pulse.toString,
                             measurement: Int = 0,
-                            measured: Long = Instant.now.getEpochSecond) extends Entity:
+                            measured: Long = Instant.now.getEpochSecond) extends Entity derives CanEqual:
   val kindProperty = ObjectProperty[String](this, "kind", kind)
   val measurementProperty = ObjectProperty[String](this, "measurement", measurement.toString)
   val measuredProperty = ObjectProperty[String](this, "measured", Instant.ofEpochSecond(measured).toString)
