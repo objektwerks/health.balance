@@ -5,6 +5,10 @@ import scala.util.control.NonFatal
 
 import Validator.*
 
+sealed trait Security
+case object Authorized extends Security
+final case class Unauthorized(cause: String) extends Security
+
 final class Dispatcher(store: Store, emailer: Emailer):
   def dispatch[E <: Event](command: Command): Event =
     if !command.isValid then store.addFault( Fault(s"Command is invalid: $command") )
