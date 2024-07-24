@@ -44,14 +44,16 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case fault @ Fault(_, _) => store.addFault(fault)
       case _ => event
 
-  private def isAuthorized(command: Command): Event =
+  def isAuthorized(command: Command): Security =
     command match
       case license: License =>
         Try {
-          Authorized( store.isAuthorized(license.license) )
-        }.recover { case NonFatal(error) => Fault(s"Authorization failed: $error") }
-         .get
-      case Register(_) | Login(_, _) => Authorized(true)
+          if store.isAuthorized(license.license) then Authorized
+          else Unauthorized(s"Unauthorized: $command")
+        }.recover {
+          case NonFatal(error) => Unauthorized(s"Unauthorized: $command, cause: $error")
+        }.get
+      case Register(_) | Login(_, _) => Authorized
 
   private def register(emailAddress: String): Event =
     Try {
