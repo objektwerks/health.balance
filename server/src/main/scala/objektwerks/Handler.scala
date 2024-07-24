@@ -1,15 +1,13 @@
 package objektwerks
 
 import com.github.plokhotnyuk.jsoniter_scala.core.*
-import com.typesafe.scalalogging.Logger
+import com.typesafe.scalalogging.LazyLogging
 
 import io.helidon.webserver.http.{Handler => WebHandler, ServerRequest, ServerResponse}
 
 import Serializer.given
 
-final class Handler(dispatcher: Dispatcher,
-                    store: Store,
-                    logger: Logger) extends WebHandler:
+final class Handler(dispatcher: Dispatcher) extends WebHandler with LazyLogging:
   override def handle(request: ServerRequest,
                       response: ServerResponse): Unit =
     val commandJson = request.content.as(classOf[String])
@@ -20,11 +18,7 @@ final class Handler(dispatcher: Dispatcher,
 
     val event = dispatcher.dispatch(command)
     logger.info(s"*** Handler event: $event")
-    event match
-      case fault @ Fault(_, _) =>
-        logger.error(s"*** Handler fault: $fault")
-        store.addFault(fault)
-      case _ =>
+
     val eventJson = writeToString[Event](event)
     logger.info(s"*** Handler event json: $eventJson")
 
