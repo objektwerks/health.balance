@@ -40,7 +40,7 @@ final class Dispatcher(store: Store,
               case UpdateMeasurable(_, measurable) => updateMeasurable(measurable)
               case AddFault(_, fault)              => addFault(fault)
 
-  def isAuthorized(command: Command): Security =
+  private def isAuthorized(command: Command): Security =
     command match
       case license: License =>
         Try {
