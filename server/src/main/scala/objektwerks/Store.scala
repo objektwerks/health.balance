@@ -145,181 +145,198 @@ final class Store(cache: Cache[String, String],
       else None
     }
 
-  def listProfiles(): List[Profile] = DB readOnly { implicit session =>
-    sql"select * from profile order by name"
-      .map(rs =>
-        Profile(
-          rs.long("id"),
-          rs.long("account_id"),
-          rs.string("name"), 
-          rs.long("created"), 
+  def listProfiles(): List[Profile] =
+    DB readOnly { implicit session =>
+      sql"select * from profile order by name"
+        .map(rs =>
+          Profile(
+            rs.long("id"),
+            rs.long("account_id"),
+            rs.string("name"), 
+            rs.long("created"), 
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addProfile(profile: Profile): Long = DB localTx { implicit session =>
-    sql"insert into profile(account_id, name, created) values(${profile.accountId}, ${profile.name}, ${profile.created})"
-      .updateAndReturnGeneratedKey()
-  }
+  def addProfile(profile: Profile): Long =
+    DB localTx { implicit session =>
+      sql"insert into profile(account_id, name, created) values(${profile.accountId}, ${profile.name}, ${profile.created})"
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateProfile(profile: Profile): Long = DB localTx { implicit session =>
-    sql"update profile set name = ${profile.name} where id = ${profile.id}"
-      .update()
-    profile.id
-  }
+  def updateProfile(profile: Profile): Long =
+    DB localTx { implicit session =>
+      sql"update profile set name = ${profile.name} where id = ${profile.id}"
+        .update()
+      profile.id
+    }
 
-  def listEdibles(profileId: Long): List[Edible] = DB readOnly { implicit session =>
-    sql"select * from edible where profile_id = $profileId order by ate desc"
-      .map(rs =>
-        Edible(
-          rs.long("id"),
-          rs.long("profile_id"),
-          rs.string("kind"),
-          rs.string("detail"),
-          rs.boolean("organic"),
-          rs.int("calories"),
-          rs.long("ate")
+  def listEdibles(profileId: Long): List[Edible] =
+    DB readOnly { implicit session =>
+      sql"select * from edible where profile_id = $profileId order by ate desc"
+        .map(rs =>
+          Edible(
+            rs.long("id"),
+            rs.long("profile_id"),
+            rs.string("kind"),
+            rs.string("detail"),
+            rs.boolean("organic"),
+            rs.int("calories"),
+            rs.long("ate")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addEdible(edible: Edible): Long = DB localTx { implicit session =>
-    sql"""
-       insert into edible(profile_id, kind, detail, organic, calories, ate)
-       values(${edible.profileId}, ${edible.kind}, ${edible.detail}, ${edible.organic}, ${edible.calories}, ${edible.ate})
-       """
-      .updateAndReturnGeneratedKey()
-  }
+  def addEdible(edible: Edible): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into edible(profile_id, kind, detail, organic, calories, ate)
+        values(${edible.profileId}, ${edible.kind}, ${edible.detail}, ${edible.organic}, ${edible.calories}, ${edible.ate})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateEdible(edible: Edible): Long = DB localTx { implicit session =>
-    sql"""
-       update edible set kind = ${edible.kind}, detail = ${edible.detail}, organic = ${edible.organic},
-       calories = ${edible.calories}, ate = ${edible.ate} where id = ${edible.id}
-       """
-      .update()
-    edible.id
-  }
+  def updateEdible(edible: Edible): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update edible set kind = ${edible.kind}, detail = ${edible.detail}, organic = ${edible.organic},
+        calories = ${edible.calories}, ate = ${edible.ate} where id = ${edible.id}
+        """
+        .update()
+      edible.id
+    }
 
-  def listDrinkables(profileId: Long): List[Drinkable] = DB readOnly { implicit session =>
-    sql"select * from drinkable where profile_id = $profileId order by drank desc"
-      .map(rs =>
-        Drinkable(
-          rs.long("id"),
-          rs.long("profile_id"),
-          rs.string("kind"),
-          rs.string("detail"),
-          rs.boolean("organic"),
-          rs.int("count"),
-          rs.int("calories"),
-          rs.long("drank")
+  def listDrinkables(profileId: Long): List[Drinkable] =
+    DB readOnly { implicit session =>
+      sql"select * from drinkable where profile_id = $profileId order by drank desc"
+        .map(rs =>
+          Drinkable(
+            rs.long("id"),
+            rs.long("profile_id"),
+            rs.string("kind"),
+            rs.string("detail"),
+            rs.boolean("organic"),
+            rs.int("count"),
+            rs.int("calories"),
+            rs.long("drank")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addDrinkable(drinkable: Drinkable): Long = DB localTx { implicit session =>
-    sql"""
-       insert into drinkable(profile_id, kind, detail, organic, count, calories, drank)
-       values(${drinkable.profileId}, ${drinkable.kind}, ${drinkable.detail}, ${drinkable.organic},
-       ${drinkable.count}, ${drinkable.calories}, ${drinkable.drank})
-       """
-      .updateAndReturnGeneratedKey()
-  }
+  def addDrinkable(drinkable: Drinkable): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into drinkable(profile_id, kind, detail, organic, count, calories, drank)
+        values(${drinkable.profileId}, ${drinkable.kind}, ${drinkable.detail}, ${drinkable.organic},
+        ${drinkable.count}, ${drinkable.calories}, ${drinkable.drank})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateDrinkable(drinkable: Drinkable): Long = DB localTx { implicit session =>
-    sql"""
-       update drinkable set kind = ${drinkable.kind}, detail = ${drinkable.detail}, organic = ${drinkable.organic},
-       count = ${drinkable.count}, calories = ${drinkable.calories}, drank = ${drinkable.drank} where id = ${drinkable.id}
-       """
-      .update()
-    drinkable.id
-  }
+  def updateDrinkable(drinkable: Drinkable): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update drinkable set kind = ${drinkable.kind}, detail = ${drinkable.detail}, organic = ${drinkable.organic},
+        count = ${drinkable.count}, calories = ${drinkable.calories}, drank = ${drinkable.drank} where id = ${drinkable.id}
+        """
+        .update()
+      drinkable.id
+    }
 
-  def listExpendables(profileId: Long): List[Expendable] = DB readOnly { implicit session =>
-    sql"select * from expendable where profile_id = $profileId order by finish desc"
-      .map(rs =>
-        Expendable(
-          rs.long("id"),
-          rs.long("profile_id"),
-          rs.string("kind"),
-          rs.string("detail"),
-          rs.boolean("sunshine"),
-          rs.boolean("freshair"),
-          rs.int("calories"),
-          rs.long("start"),
-          rs.long("finish")
+  def listExpendables(profileId: Long): List[Expendable] =
+    DB readOnly { implicit session =>
+      sql"select * from expendable where profile_id = $profileId order by finish desc"
+        .map(rs =>
+          Expendable(
+            rs.long("id"),
+            rs.long("profile_id"),
+            rs.string("kind"),
+            rs.string("detail"),
+            rs.boolean("sunshine"),
+            rs.boolean("freshair"),
+            rs.int("calories"),
+            rs.long("start"),
+            rs.long("finish")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addExpendable(expendable: Expendable): Long = DB localTx { implicit session =>
-    sql"""
-       insert into expendable(profile_id, kind, detail, sunshine, freshair, calories, start, finish)
-       values(${expendable.profileId}, ${expendable.kind}, ${expendable.detail}, ${expendable.sunshine},
-       ${expendable.freshair}, ${expendable.calories}, ${expendable.start}, ${expendable.finish})
-       """
-      .updateAndReturnGeneratedKey()
-  }
+  def addExpendable(expendable: Expendable): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into expendable(profile_id, kind, detail, sunshine, freshair, calories, start, finish)
+        values(${expendable.profileId}, ${expendable.kind}, ${expendable.detail}, ${expendable.sunshine},
+        ${expendable.freshair}, ${expendable.calories}, ${expendable.start}, ${expendable.finish})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateExpendable(expendable: Expendable): Long = DB localTx { implicit session =>
-    sql"""
-       update expendable set kind = ${expendable.kind}, detail = ${expendable.detail}, sunshine = ${expendable.sunshine},
-       freshair = ${expendable.freshair}, calories = ${expendable.calories}, start = ${expendable.start}, finish = ${expendable.finish} 
-       where id = ${expendable.id}
-       """
-      .update()
-    expendable.id
-  }
+  def updateExpendable(expendable: Expendable): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update expendable set kind = ${expendable.kind}, detail = ${expendable.detail}, sunshine = ${expendable.sunshine},
+        freshair = ${expendable.freshair}, calories = ${expendable.calories}, start = ${expendable.start}, finish = ${expendable.finish} 
+        where id = ${expendable.id}
+        """
+        .update()
+      expendable.id
+    }
 
-  def listMeasurables(profileId: Long): List[Measurable] = DB readOnly { implicit session =>
-    sql"select * from measurable where profile_id = $profileId order by measured desc"
-      .map(rs =>
-        Measurable(
-          rs.long("id"),
-          rs.long("profile_id"),
-          rs.string("kind"),
-          rs.int("measurement"),
-          rs.long("measured")
+  def listMeasurables(profileId: Long): List[Measurable] =
+    DB readOnly { implicit session =>
+      sql"select * from measurable where profile_id = $profileId order by measured desc"
+        .map(rs =>
+          Measurable(
+            rs.long("id"),
+            rs.long("profile_id"),
+            rs.string("kind"),
+            rs.int("measurement"),
+            rs.long("measured")
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addMeasurable(measurable: Measurable): Long = DB localTx { implicit session =>
-    sql"""
-       insert into measurable(profile_id, kind, measurement, measured)
-       values(${measurable.profileId}, ${measurable.kind}, ${measurable.measurement}, ${measurable.measured})
-       """
-      .updateAndReturnGeneratedKey()
-  }
+  def addMeasurable(measurable: Measurable): Long =
+    DB localTx { implicit session =>
+      sql"""
+        insert into measurable(profile_id, kind, measurement, measured)
+        values(${measurable.profileId}, ${measurable.kind}, ${measurable.measurement}, ${measurable.measured})
+        """
+        .updateAndReturnGeneratedKey()
+    }
 
-  def updateMeasurable(measurable: Measurable): Long = DB localTx { implicit session =>
-    sql"""
-       update measurable set kind = ${measurable.kind}, measurement = ${measurable.measurement}, measured = ${measurable.measured}
-       where id = ${measurable.id}
-       """
-      .update()
-    measurable.id
-  }
+  def updateMeasurable(measurable: Measurable): Long =
+    DB localTx { implicit session =>
+      sql"""
+        update measurable set kind = ${measurable.kind}, measurement = ${measurable.measurement}, measured = ${measurable.measured}
+        where id = ${measurable.id}
+        """
+        .update()
+      measurable.id
+    }
 
-  def listFaults(): List[Fault] = DB readOnly { implicit session =>
-    sql"select * from fault order by occurred desc"
-      .map(rs =>
-        Fault(
-          rs.string("cause"),
-          rs.long("occurred").toString
+  def listFaults(): List[Fault] =
+    DB readOnly { implicit session =>
+      sql"select * from fault order by occurred desc"
+        .map(rs =>
+          Fault(
+            rs.string("cause"),
+            rs.long("occurred").toString
+          )
         )
-      )
-      .list()
-  }
+        .list()
+    }
 
-  def addFault(fault: Fault): Fault = DB localTx { implicit session =>
-    sql"""
-      insert into fault(cause, occurred) values(${fault.cause}, ${Entity.instantAsStringToEpochMilli(fault.occurred)})
-      """
-      .update()
-    fault
-  }
+  def addFault(fault: Fault): Fault =
+    DB localTx { implicit session =>
+      sql"""
+        insert into fault(cause, occurred) values(${fault.cause}, ${Entity.instantAsStringToEpochMilli(fault.occurred)})
+        """
+        .update()
+      fault
+    }
