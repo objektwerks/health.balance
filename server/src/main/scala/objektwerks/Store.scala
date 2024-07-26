@@ -2,7 +2,6 @@ package objektwerks
 
 import com.github.blemale.scaffeine.{Cache, Scaffeine}
 import com.typesafe.config.Config
-import com.typesafe.scalalogging.LazyLogging
 import com.zaxxer.hikari.HikariDataSource
 
 import java.time.Instant
@@ -21,17 +20,17 @@ object Store:
       .expireAfterWrite( FiniteDuration( config.getLong("cache.expireAfter"), TimeUnit.HOURS) )
       .build[String, String]()
 
-final class Store(config: Config,
-                  cache: Cache[String, String]) extends LazyLogging:
-  private val dataSource: DataSource = {
-    val ds = new HikariDataSource()
-    ds.setDataSourceClassName(config.getString("db.driverClassName"))
+  def dataSource(config: Config): DataSource =
+    val ds = HikariDataSource()
+    ds.setDataSourceClassName(config.getString("db.driver"))
     ds.addDataSourceProperty("url", config.getString("db.url"))
     ds.addDataSourceProperty("user", config.getString("db.user"))
     ds.addDataSourceProperty("password", config.getString("db.password"))
     ds
-  }
-  ConnectionPool.singleton(new DataSourceConnectionPool(dataSource))
+
+final class Store(cache: Cache[String, String],
+                  dataSource: DataSource):
+  ConnectionPool.singleton( DataSourceConnectionPool(dataSource) )
 
   def register(account: Account): Account = addAccount(account)
 
@@ -61,9 +60,7 @@ final class Store(config: Config,
 
   def isAuthorized(license: String): Boolean =
     cache.getIfPresent(license) match
-      case Some(_) =>
-        logger.debug(s"*** store cache get: $license")
-        true
+      case Some(_) => true
       case None =>
         val optionalLicense = DB readOnly { implicit session =>
           sql"select license from account where license = $license"
@@ -72,7 +69,6 @@ final class Store(config: Config,
         }
         if optionalLicense.isDefined then
           cache.put(license, license)
-          logger.debug(s"*** store cache put: $license")
           true
         else false
 
