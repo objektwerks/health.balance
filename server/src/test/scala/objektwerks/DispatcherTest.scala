@@ -9,7 +9,7 @@ import scala.sys.process.Process
 
 import Validator.*
 
-final class IntegrationTest extends AnyFunSuite with Matchers:
+final class DispatcherTest extends AnyFunSuite with Matchers:
   val exitCode = Process("psql -d healthbalance -f ddl.sql").run().exitValue()
   exitCode shouldBe 0
 
@@ -28,7 +28,7 @@ final class IntegrationTest extends AnyFunSuite with Matchers:
   var testExpendable = Expendable(profileId = testProfile.id, detail = "walk", calories = 300)
   var testMeasurable = Measurable(profileId = testProfile.id, measurement = 60)
 
-  test("integration"):
+  test("dispatcher"):
     register
     login
 
