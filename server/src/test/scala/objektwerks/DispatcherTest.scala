@@ -15,9 +15,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
 
   val config = ConfigFactory.load("test.conf")
 
-  val cache = Store.cache(config)
-  val dataSource = Store.dataSource(config)
-  val store = Store(cache, dataSource)
+  val store = Store(config)
   val emailer = Emailer(config)
   val dispatcher = Dispatcher(store, emailer)
 
