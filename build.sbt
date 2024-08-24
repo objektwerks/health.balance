@@ -2,6 +2,7 @@ val helidonVersion = "4.1.0"
 val scalafxVersion = "22.0.0-R33"
 val logbackVersion = "1.5.7"
 val scalatestVersion = "3.2.19"
+val oxVersion = "0.3.3"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
@@ -132,6 +133,7 @@ lazy val server = project
     libraryDependencies ++= {
       Seq(
         "io.helidon.webserver" % "helidon-webserver" % helidonVersion,
+        "com.softwaremill.ox" %% "core" % oxVersion,
         "org.scalikejdbc" %% "scalikejdbc" % "4.3.1",
         "com.zaxxer" % "HikariCP" % "5.1.0" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.7.3",
