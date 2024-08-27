@@ -52,14 +52,6 @@ final class Store(cache: Cache[String, String],
         .single()
     }
 
-  def isEmailAddressUnique(emailAddress: String): Boolean =
-    val count = DB readOnly { implicit session =>
-      sql"select id from account where email_address = $emailAddress"
-        .map(rs => rs.long("id"))
-        .single()
-    }
-    if count.isDefined then false else true
-
   def isAuthorized(license: String): Boolean =
     cache.getIfPresent(license) match
       case Some(_) => true
@@ -154,8 +146,8 @@ final class Store(cache: Cache[String, String],
           Profile(
             rs.long("id"),
             rs.long("account_id"),
-            rs.string("name"), 
-            rs.long("created"), 
+            rs.string("name"),
+            rs.long("created"),
           )
         )
         .list()
@@ -281,7 +273,7 @@ final class Store(cache: Cache[String, String],
     DB localTx { implicit session =>
       sql"""
         update expendable set kind = ${expendable.kind}, detail = ${expendable.detail}, sunshine = ${expendable.sunshine},
-        freshair = ${expendable.freshair}, calories = ${expendable.calories}, start = ${expendable.start}, finish = ${expendable.finish} 
+        freshair = ${expendable.freshair}, calories = ${expendable.calories}, start = ${expendable.start}, finish = ${expendable.finish}
         where id = ${expendable.id}
         """
         .update()
