@@ -1,40 +1,43 @@
 package objektwerks
 
+import ox.{IO, supervised}
+import ox.resilience.{retry, RetryConfig}
+
 import scala.util.Try
 import scala.util.control.NonFatal
 
 import Validator.*
 
-final class Dispatcher(store: Store,
-                       emailer: Emailer):
+final class Dispatcher(store: Store, emailer: Emailer):
   def dispatch(command: Command): Event =
-    command.isValid match
-      case false => addFault( Fault(s"Invalid command: $command") )
-      case true =>
-        isAuthorized(command) match
-          case Unauthorized(cause) => addFault( Fault(cause) )
-          case Authorized =>
-            command match
-              case Register(emailAddress)          => register(emailAddress)
-              case Login(emailAddress, pin)        => login(emailAddress, pin)
-              case Deactivate(license)             => deactivateAccount(license)
-              case Reactivate(license)             => reactivateAccount(license)
-              case ListProfiles(license)           => listProfiles()
-              case AddProfile(_, profile)          => addProfile(profile)
-              case UpdateProfile(_, profile)       => updateProfile(profile)
-              case ListEdibles(_, profileId)       => listEdibles(profileId)
-              case AddEdible(_, edible)            => addEdible(edible)
-              case UpdateEdible(_, edible)         => updateEdible(edible)
-              case ListDrinkables(_, profileId)    => listDrinkables(profileId)
-              case AddDrinkable(_, drinkable)      => addDrinkable(drinkable)
-              case UpdateDrinkable(_, drinkable)   => updateDrinkable(drinkable)
-              case ListExpendables(_, profileId)   => listExpendables(profileId)
-              case AddExpendable(_, expendable)    => addExpendable(expendable)
-              case UpdateExpendable(_, expendable) => updateExpendable(expendable)
-              case ListMeasurables(_, profileId)   => listMeasurables(profileId)
-              case AddMeasurable(_, measurable)    => addMeasurable(measurable)
-              case UpdateMeasurable(_, measurable) => updateMeasurable(measurable)
-              case AddFault(_, fault)              => addFault(fault)
+    IO.unsafe:
+      command.isValid match
+        case false => addFault( Fault(s"Invalid command: $command") )
+        case true =>
+          isAuthorized(command) match
+            case Unauthorized(cause) => addFault( Fault(cause) )
+            case Authorized =>
+              command match
+                case Register(emailAddress)          => register(emailAddress)
+                case Login(emailAddress, pin)        => login(emailAddress, pin)
+                case Deactivate(license)             => deactivateAccount(license)
+                case Reactivate(license)             => reactivateAccount(license)
+                case ListProfiles(license)           => listProfiles()
+                case AddProfile(_, profile)          => addProfile(profile)
+                case UpdateProfile(_, profile)       => updateProfile(profile)
+                case ListEdibles(_, profileId)       => listEdibles(profileId)
+                case AddEdible(_, edible)            => addEdible(edible)
+                case UpdateEdible(_, edible)         => updateEdible(edible)
+                case ListDrinkables(_, profileId)    => listDrinkables(profileId)
+                case AddDrinkable(_, drinkable)      => addDrinkable(drinkable)
+                case UpdateDrinkable(_, drinkable)   => updateDrinkable(drinkable)
+                case ListExpendables(_, profileId)   => listExpendables(profileId)
+                case AddExpendable(_, expendable)    => addExpendable(expendable)
+                case UpdateExpendable(_, expendable) => updateExpendable(expendable)
+                case ListMeasurables(_, profileId)   => listMeasurables(profileId)
+                case AddMeasurable(_, measurable)    => addMeasurable(measurable)
+                case UpdateMeasurable(_, measurable) => updateMeasurable(measurable)
+                case AddFault(_, fault)              => addFault(fault)
 
   private def isAuthorized(command: Command): Security =
     command match
