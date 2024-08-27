@@ -182,11 +182,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("Add drinkable failed:", error)
     .get
 
-  private def updateDrinkable(drinkable: Drinkable): Event =
-    Try {
-      DrinkableUpdated( store.updateDrinkable(drinkable) )
-    }.recover { case NonFatal(error) => Fault("Update drinkable failed:", error) }
-     .get
+  private def updateDrinkable(drinkable: Drinkable)(using IO): Event =
+    Try:
+      DrinkableUpdated(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.updateDrinkable(drinkable) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("Update drinkable failed:", error)
+    .get
 
   private def listExpendables(profileId: Long): Event =
     Try {
