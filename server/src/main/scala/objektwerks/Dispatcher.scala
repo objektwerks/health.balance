@@ -232,11 +232,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List measurables failed:", error)
     .get
 
-  private def addMeasurable(measurable: Measurable): Event =
-    Try {
-      MeasurableAdded( store.addMeasurable(measurable) )
-    }.recover { case NonFatal(error) => Fault("Add measurable failed:", error) }
-     .get
+  private def addMeasurable(measurable: Measurable)(using IO): Event =
+    Try:
+      MeasurableAdded(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.addMeasurable(measurable) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("Add measurable failed:", error)
+    .get
 
   private def updateMeasurable(measurable: Measurable): Event =
     Try {
