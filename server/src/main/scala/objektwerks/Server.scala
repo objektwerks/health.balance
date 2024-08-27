@@ -16,9 +16,7 @@ object Server extends LazyLogging:
     val store = Store(config)
     val emailer = Emailer(config)
     val dispatcher = Dispatcher(store, emailer)
-
     val handler = Handler(dispatcher)
-
     val builder = HttpRouting
       .builder
       .post(endpoint, handler)
