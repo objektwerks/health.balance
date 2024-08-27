@@ -222,11 +222,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("Update expendable failed:", error)
     .get
 
-  private def listMeasurables(profileId: Long): Event =
-    Try {
-      MeasurablesListed( store.listMeasurables(profileId) )
-    }.recover { case NonFatal(error) => Fault("List measurables failed:", error) }
-     .get
+  private def listMeasurables(profileId: Long)(using IO): Event =
+    Try:
+      MeasurablesListed(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.listMeasurables(profileId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List measurables failed:", error)
+    .get
 
   private def addMeasurable(measurable: Measurable): Event =
     Try {
