@@ -102,7 +102,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
       case fault => fail(s"Invalid profile updated event: $fault")
 
   def listProfiles: Unit =
-    val listProfiles = ListProfiles(testAccount.license)
+    val listProfiles = ListProfiles(testAccount.license, testAccount.id)
     dispatcher.dispatch(listProfiles) match
       case ProfilesListed(profiles) =>
         profiles.length shouldBe 1
