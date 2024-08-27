@@ -202,11 +202,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List expendables failed:", error)
     .get
 
-  private def addExpendable(expendable: Expendable): Event =
-    Try {
-      ExpendableAdded( store.addExpendable(expendable) )
-    }.recover { case NonFatal(error) => Fault("Add expendable failed:", error) }
-     .get
+  private def addExpendable(expendable: Expendable)(using IO): Event =
+    Try:
+      ExpendableAdded(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.addExpendable(expendable) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("Add expendable failed:", error)
+    .get
 
   private def updateExpendable(expendable: Expendable): Event =
     Try {
