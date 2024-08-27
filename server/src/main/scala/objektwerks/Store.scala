@@ -139,9 +139,9 @@ final class Store(cache: Cache[String, String],
       else None
     }
 
-  def listProfiles(): List[Profile] =
+  def listProfiles(accountId: Long): List[Profile] =
     DB readOnly { implicit session =>
-      sql"select * from profile order by name"
+      sql"select * from profile where account_id = $accountId order by name"
         .map(rs =>
           Profile(
             rs.long("id"),

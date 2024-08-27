@@ -23,7 +23,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
                 case Login(emailAddress, pin)        => login(emailAddress, pin)
                 case Deactivate(license)             => deactivateAccount(license)
                 case Reactivate(license)             => reactivateAccount(license)
-                case ListProfiles(license)           => listProfiles()
+                case ListProfiles(_, accountId)      => listProfiles(accountId)
                 case AddProfile(_, profile)          => addProfile(profile)
                 case UpdateProfile(_, profile)       => updateProfile(profile)
                 case ListEdibles(_, profileId)       => listEdibles(profileId)
@@ -102,11 +102,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
         else Fault(s"Reactivate account failed for license: $license")
     )
 
-  private def listProfiles(): Event =
-    Try {
-      ProfilesListed( store.listProfiles() )
-    }.recover { case NonFatal(error) => Fault("List profiles failed:", error) }
-     .get
+  private def listProfiles(accountId: Long)(using IO): Event =
+    Try:
+      ProfilesListed(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.listProfiles(accountId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List profiles failed:", error)
+    .get
 
   private def addProfile(profile: Profile): Event =
     Try {

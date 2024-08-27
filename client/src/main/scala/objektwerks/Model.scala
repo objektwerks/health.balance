@@ -255,7 +255,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def profiles(): Unit =
     fetcher.fetch(
-      ListProfiles(objectAccount.get.license),
+      ListProfiles(objectAccount.get.license, objectAccount.get.id),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.profiles", fault)
         case ProfilesListed(profiles) =>

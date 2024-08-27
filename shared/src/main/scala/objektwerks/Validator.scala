@@ -15,7 +15,7 @@ object Validator:
         case login @ Login(_, _)                       => login.isValid
         case deactivate @ Deactivate(_)                => deactivate.isValid
         case reactivate @ Reactivate(_)                => reactivate.isValid
-        case listProfiles @ ListProfiles(_)            => listProfiles.isValid
+        case listProfiles @ ListProfiles(_,_)          => listProfiles.isValid
         case addProfile @ AddProfile(_, _)             => addProfile.isValid
         case updateProfile @ UpdateProfile(_, _)       => updateProfile.isValid
         case listEdibles @ ListEdibles(_, _)           => listEdibles.isValid
@@ -34,7 +34,7 @@ object Validator:
 
   extension (addFault: AddFault)
     def isValid: Boolean = addFault.license.isLicense && addFault.fault.cause.nonEmpty
-  
+
   extension (register: Register)
     def isValid: Boolean = register.emailAddress.isEmailAddress
 
@@ -51,7 +51,7 @@ object Validator:
     def isLicense: Boolean = license.license.isLicense
 
   extension (listProfiles: ListProfiles)
-    def isValid: Boolean = listProfiles.license.isLicense
+    def isValid: Boolean = listProfiles.license.isLicense && listProfiles.accountId > 0
 
   extension (addProfile: AddProfile)
     def isValid: Boolean = addProfile.license.isLicense && addProfile.profile.isValid
