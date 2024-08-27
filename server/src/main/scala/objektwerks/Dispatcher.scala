@@ -112,11 +112,14 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List profiles failed:", error)
     .get
 
-  private def addProfile(profile: Profile): Event =
-    Try {
-      ProfileAdded( store.addProfile(profile) )
-    }.recover { case NonFatal(error) => Fault("Add profile failed:", error) }
-     .get
+  private def addProfile(profile: Profile)(using IO): Event =
+    Try:
+      ProfileAdded(
+        retry( RetryConfig.delay(1, 100.millis) )( store.addProfile(profile) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("Add profile failed:", error)
+    .get
 
   private def updateProfile(profile: Profile): Event =
     Try {
