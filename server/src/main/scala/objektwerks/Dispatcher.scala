@@ -142,11 +142,15 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("List edibles failed:", error)
     .get
 
-  private def addEdible(edible: Edible): Event =
-    Try {
-      EdibleAdded( store.addEdible(edible) )
-    }.recover { case NonFatal(error) => Fault("Add edible failed:", error) }
-     .get
+  private def addEdible(edible: Edible)(using IO): Event =
+    Try:
+      EdibleAdded(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.addEdible(edible) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("Add edible failed:", error)
+    .get
 
   private def updateEdible(edible: Edible): Event =
     Try {
