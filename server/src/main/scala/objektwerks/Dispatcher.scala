@@ -115,7 +115,8 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def addProfile(profile: Profile)(using IO): Event =
     Try:
       ProfileAdded(
-        retry( RetryConfig.delay(1, 100.millis) )( store.addProfile(profile) )
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.addProfile(profile) )
       )
     .recover:
       case NonFatal(error) => Fault("Add profile failed:", error)
@@ -124,17 +125,22 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def updateProfile(profile: Profile)(using IO): Event =
     Try:
       ProfileUpdated(
-        retry( RetryConfig.delay(1, 100.millis) )( store.updateProfile(profile) )
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.updateProfile(profile) )
       )
     .recover:
       case NonFatal(error) => Fault("Update profile failed:", error)
     .get
 
-  private def listEdibles(profileId: Long): Event =
-    Try {
-      EdiblesListed( store.listEdibles(profileId) )
-    }.recover { case NonFatal(error) => Fault("List edibles failed:", error) }
-     .get
+  private def listEdibles(profileId: Long)(using IO): Event =
+    Try:
+      EdiblesListed(
+        supervised:
+          retry( RetryConfig.delay(1, 100.millis) )( store.listEdibles(profileId) )
+      )
+    .recover:
+      case NonFatal(error) => Fault("List edibles failed:", error)
+    .get
 
   private def addEdible(edible: Edible): Event =
     Try {
