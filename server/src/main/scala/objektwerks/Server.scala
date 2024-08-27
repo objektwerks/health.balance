@@ -6,8 +6,10 @@ import com.typesafe.scalalogging.LazyLogging
 import io.helidon.webserver.WebServer
 import io.helidon.webserver.http.HttpRouting
 
-object Server extends LazyLogging:
-  @main def main(): Unit =
+import ox.{ExitCode, IO, Ox, OxApp}
+
+object Server extends OxApp with LazyLogging:
+  override def run(args: Vector[String])(using Ox, IO): ExitCode =
     val config = ConfigFactory.load("server.conf")
     val host = config.getString("server.host")
     val port = config.getInt("server.port")
@@ -32,3 +34,5 @@ object Server extends LazyLogging:
     logger.info(s"*** Health Balance Http Server started at: $host:$port$endpoint")
 
     Thread.currentThread().join()
+
+    ExitCode.Success
