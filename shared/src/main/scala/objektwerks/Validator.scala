@@ -60,7 +60,7 @@ object Validator:
     def isValid: Boolean = updateProfile.license.isLicense && updateProfile.profile.isValid
 
   extension (listEdibles: ListEdibles)
-    def isValid: Boolean = listEdibles.license.isLicense
+    def isValid: Boolean = listEdibles.license.isLicense && listEdibles.profileId > 0
 
   extension (addEdible: AddEdible)
     def isValid: Boolean = addEdible.license.isLicense && addEdible.edible.isValid
@@ -69,7 +69,7 @@ object Validator:
     def isValid: Boolean = updateEdible.license.isLicense && updateEdible.edible.isValid
 
   extension (listDrinkables: ListDrinkables)
-    def isValid: Boolean = listDrinkables.license.isLicense
+    def isValid: Boolean = listDrinkables.license.isLicense && listDrinkables.profileId > 0
 
   extension (addDrinkable: AddDrinkable)
     def isValid: Boolean = addDrinkable.license.isLicense && addDrinkable.drinkable.isValid
@@ -78,7 +78,7 @@ object Validator:
     def isValid: Boolean = updateDrinkable.license.isLicense && updateDrinkable.drinkable.isValid
 
   extension (listExpendables: ListExpendables)
-    def isValid: Boolean = listExpendables.license.isLicense
+    def isValid: Boolean = listExpendables.license.isLicense && listExpendables.profileId > 0
 
   extension (addExpendable: AddExpendable)
     def isValid: Boolean = addExpendable.license.isLicense && addExpendable.expendable.isValid
@@ -87,7 +87,7 @@ object Validator:
     def isValid: Boolean = updateExpendable.license.isLicense && updateExpendable.expendable.isValid
 
   extension (listMeasurables: ListMeasurables)
-    def isValid: Boolean = listMeasurables.license.isLicense
+    def isValid: Boolean = listMeasurables.license.isLicense && listMeasurables.profileId > 0
 
   extension (addMeasurable: AddMeasurable)
     def isValid: Boolean = addMeasurable.license.isLicense && addMeasurable.measurable.isValid
