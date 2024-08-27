@@ -3,6 +3,7 @@ package objektwerks
 import ox.{IO, supervised}
 import ox.resilience.{retry, RetryConfig}
 
+import scala.concurrent.duration.*
 import scala.util.Try
 import scala.util.control.NonFatal
 
@@ -39,15 +40,18 @@ final class Dispatcher(store: Store, emailer: Emailer):
                 case UpdateMeasurable(_, measurable) => updateMeasurable(measurable)
                 case AddFault(_, fault)              => addFault(fault)
 
-  private def isAuthorized(command: Command): Security =
+  private def isAuthorized(command: Command)(using IO): Security =
     command match
       case license: License =>
-        Try {
-          if store.isAuthorized(license.license) then Authorized
-          else Unauthorized(s"Unauthorized: $command")
-        }.recover {
+        Try:
+          supervised:
+            retry( RetryConfig.delay(1, 100.millis) )(
+              if store.isAuthorized(license.license) then Authorized
+              else Unauthorized(s"Unauthorized: $command")
+            )
+        .recover:
           case NonFatal(error) => Unauthorized(s"Unauthorized: $command, cause: $error")
-        }.get
+        .get
       case Register(_) | Login(_, _) => Authorized
 
   private def register(emailAddress: String): Event =
