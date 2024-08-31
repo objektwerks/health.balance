@@ -141,7 +141,7 @@ lazy val server = project
         "com.zaxxer" % "HikariCP" % "5.1.0" exclude("org.slf4j", "slf4j-api"),
         "org.postgresql" % "postgresql" % "42.7.3",
         "com.github.blemale" %% "scaffeine" % "5.3.0",
-        "org.jodd" % "jodd-mail" % "7.0.1",
+        "org.jodd" % "jodd-mail" % "7.1.0",
         "com.typesafe" % "config" % "1.4.3",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
         "ch.qos.logback" % "logback-classic" % logbackVersion,
