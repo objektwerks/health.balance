@@ -236,10 +236,9 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("Updated measurable failed:", error)
 
   private def addFault(fault: Fault)(using IO): Event =
-    Try:
+    try
       supervised:
         retry( RetryConfig.delay(1, 100.millis) )( store.addFault(fault) )
         FaultAdded()
-    .recover:
+    catch
       case NonFatal(error) => Fault("Add fault failed:", error)
-    .get
