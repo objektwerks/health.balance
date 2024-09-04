@@ -128,14 +128,13 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case NonFatal(error) => Fault("Update profile failed:", error)
 
   private def listEdibles(profileId: Long)(using IO): Event =
-    Try:
+    try
       EdiblesListed(
         supervised:
           retry( RetryConfig.delay(1, 100.millis) )( store.listEdibles(profileId) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("List edibles failed:", error)
-    .get
 
   private def addEdible(edible: Edible)(using IO): Event =
     Try:
