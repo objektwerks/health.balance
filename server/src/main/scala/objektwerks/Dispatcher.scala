@@ -101,14 +101,13 @@ final class Dispatcher(store: Store, emailer: Emailer):
     )
 
   private def listProfiles(accountId: Long)(using IO): Event =
-    Try:
+    try
       ProfilesListed(
         supervised:
           retry( RetryConfig.delay(1, 100.millis) )( store.listProfiles(accountId) )
       )
-    .recover:
+    catch
       case NonFatal(error) => Fault("List profiles failed:", error)
-    .get
 
   private def addProfile(profile: Profile)(using IO): Event =
     Try:
