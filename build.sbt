@@ -2,7 +2,7 @@ val helidonVersion = "4.1.0"
 val scalafxVersion = "22.0.0-R33"
 val logbackVersion = "1.5.7"
 val scalatestVersion = "3.2.19"
-val oxVersion = "0.3.6"
+val oxVersion = "0.3.7"
 
 autoCompilerPlugins := true
 addCompilerPlugin("com.softwaremill.ox" %% "plugin" % oxVersion)
