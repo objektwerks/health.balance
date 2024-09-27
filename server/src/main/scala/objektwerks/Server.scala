@@ -6,10 +6,10 @@ import com.typesafe.scalalogging.LazyLogging
 import io.helidon.webserver.WebServer
 import io.helidon.webserver.http.HttpRouting
 
-import ox.{ExitCode, IO, Ox, OxApp}
+import ox.{ExitCode, Ox, OxApp}
 
 object Server extends OxApp with LazyLogging:
-  override def run(args: Vector[String])(using Ox, IO): ExitCode =
+  override def run(args: Vector[String])(using Ox): ExitCode =
     val config = ConfigFactory.load("server.conf")
     val host = config.getString("server.host")
     val port = config.getInt("server.port")
