@@ -109,7 +109,7 @@ lazy val shared = project
   .settings(common)
   .settings(
     libraryDependencies ++= {
-      val jsoniterVersion = "2.30.15"
+      val jsoniterVersion = "2.31.0"
       Seq(
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
