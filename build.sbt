@@ -101,7 +101,7 @@ lazy val client = project
   )
   .settings(
     libraryDependencies ++= Seq("base", "controls", "web").map( jfxModule =>
-      "org.openjfx" % s"javafx-$jfxModule" % "21" classifier OS
+      "org.openjfx" % s"javafx-$jfxModule" % "23" classifier OS
     )
   )
 
@@ -109,7 +109,7 @@ lazy val shared = project
   .settings(common)
   .settings(
     libraryDependencies ++= {
-      val jsoniterVersion = "2.31.1"
+      val jsoniterVersion = "2.31.2"
       Seq(
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-core" % jsoniterVersion,
         "com.github.plokhotnyuk.jsoniter-scala" %% "jsoniter-scala-macros" % jsoniterVersion % Provided,
