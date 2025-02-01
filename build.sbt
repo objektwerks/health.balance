@@ -53,35 +53,13 @@ lazy val healthbalance = (project in file("."))
   }
 // End: Assembly Tasks
 
-// Begin: Client Assembly
-
-  /*
-  See assembly section in readme.
-  1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
-  2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
-  3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
-  4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
-  */
-  lazy val OS: String = sys.props.getOrElse("target", "") match {
-    case name if name.startsWith("mac")   => "mac"
-    case name if name.startsWith("m1")    => "mac-aarch64"
-    case name if name.startsWith("win")   => "win"
-    case name if name.startsWith("linux") => "linux"
-    case _ => ""
-  }
-
-  if (OS == "mac") assemblyJarName := "pool-balance-mac-0.30.jar"
-  else if (OS == "mac-aarch64") assemblyJarName := "pool-balance-m1-0.30.jar"
-  else if (OS == "win") assemblyJarName := "pool-balance-win-0.30.jar"
-  else if (OS == "linux") assemblyJarName := "pool-balance-linux-0.30.jar"
-  else assemblyJarName := "pool-balance-no-valid-target-specified-0.30.jar"
-
-  client / assembly / assemblyMergeStrategy := {
-    case PathList("META-INF", xs @ _*) => MergeStrategy.discard
-    case x => MergeStrategy.first
-  }
-
-// End: Client Assembly
+// Begin: Assembly
+assemblyJarName := s"health-balance-${version.value}.jar"
+assembly / assemblyMergeStrategy := {
+  case PathList("META-INF",  xs @ _*) => MergeStrategy.discard
+  case x => MergeStrategy.first
+}
+// End: Assembly
 
 lazy val client = project
   .dependsOn(shared)
