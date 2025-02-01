@@ -54,7 +54,7 @@ lazy val healthbalance = (project in file("."))
 // End: Assembly Tasks
 
 // Begin: Assembly
-assemblyJarName := s"health-balance-${version.value}.jar"
+assemblyJarName := s"health-balance-${common.version.value}.jar"
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF",  xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
