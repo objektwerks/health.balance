@@ -7,10 +7,7 @@ val oxVersion = "0.5.10"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.30-SNAPSHOT",
-  scalaVersion := "3.6.4-RC1",
-  scalacOptions ++= Seq(
-    "-Wall"
-  )
+  scalaVersion := "3.6.4-RC1"
 )
 
 lazy val healthbalance = (project in file("."))
@@ -54,7 +51,7 @@ lazy val healthbalance = (project in file("."))
 // End: Assembly Tasks
 
 // Begin: Assembly
-assemblyJarName := s"health-balance-${common.version.value}.jar"
+assemblyJarName := s"health-balance-${version.value}.jar"
 assembly / assemblyMergeStrategy := {
   case PathList("META-INF",  xs @ _*) => MergeStrategy.discard
   case x => MergeStrategy.first
@@ -74,11 +71,6 @@ lazy val client = project
         "ch.qos.logback" % "logback-classic" % logbackVersion
       )
     }
-  )
-  .settings(
-    libraryDependencies ++= Seq("base", "controls", "web").map( jfxModule =>
-      "org.openjfx" % s"javafx-$jfxModule" % "23" classifier OS
-    )
   )
 
 lazy val shared = project
