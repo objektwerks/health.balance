@@ -22,35 +22,35 @@ lazy val healthbalance = (project in file("."))
   )
 
 // Begin: Assembly Tasks
-  lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
-  createAssemblyDir := {
-    import java.nio.file._
+lazy val createAssemblyDir = taskKey[File]("Create assembly dir.")
+createAssemblyDir := {
+  import java.nio.file.*
 
-    val assemblyDir: File = baseDirectory.value / ".assembly"
-    val assemblyPath: Path = assemblyDir.toPath()
+  val assemblyDir: File = baseDirectory.value / ".assembly"
+  val assemblyPath: Path = assemblyDir.toPath
 
-    if (!Files.exists(assemblyPath)) Files.createDirectory(assemblyPath)
+  if (!Files.exists(assemblyPath)) Files.createDirectory(assemblyPath)
 
-    println(s"[createAssemblyDir] assembly dir: ${assemblyPath} is valid: ${Files.isDirectory(assemblyPath)}")
+  println(s"[createAssemblyDir] assembly dir: $assemblyPath is valid: ${Files.isDirectory(assemblyPath)}")
 
-    assemblyDir
-  }
+  assemblyDir
+}
 
-  lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to assembly dir.")
-  copyAssemblyJar := {
-    import java.nio.file._
+lazy val copyAssemblyJar = taskKey[Unit]("Copy assembly jar to assembly dir.")
+copyAssemblyJar := {
+  import java.nio.file.*
 
-    val assemblyDir: File = createAssemblyDir.value
-    val assemblyPath: String = s"${assemblyDir.toString}/${assemblyJarName.value}"
+  val assemblyDir: String = createAssemblyDir.value.toString
+  val assemblyPath: String = s"${assemblyDir}/${assemblyJarName.value}"
 
-    val source: Path = (assembly / assemblyOutputPath).value.toPath
-    val target: Path = Paths.get(assemblyPath)
+  val source: Path = (assembly / assemblyOutputPath).value.toPath
+  val target: Path = Paths.get(assemblyPath)
 
-    println(s"[copyAssemblyJar] source: ${source}")
-    println(s"[copyAssemblyJar] target: ${target}")
+  println(s"[copyAssemblyJar] source: $source")
+  println(s"[copyAssemblyJar] target: $target")
 
-    Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
-  }
+  Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING)
+}
 // End: Assembly Tasks
 
 // Begin: Assembly
