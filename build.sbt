@@ -7,7 +7,7 @@ val oxVersion = "0.5.13"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.30-SNAPSHOT",
-  scalaVersion := "3.7.0-RC1",
+  scalaVersion := "3.6.4", // 3.7.0-RC1 breaks ScalaFx!
   scalacOptions ++= Seq(
     "-Wunused:all"
   )
