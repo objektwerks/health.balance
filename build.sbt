@@ -1,5 +1,5 @@
 val helidonVersion = "4.2.0"
-val scalafxVersion = "23.0.1-R34"
+val scalafxVersion = "24.0.0-R35"
 val logbackVersion = "1.5.18"
 val scalatestVersion = "3.2.19"
 val oxVersion = "0.5.13"
@@ -7,7 +7,7 @@ val oxVersion = "0.5.13"
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
   version := "0.30-SNAPSHOT",
-  scalaVersion := "3.6.4", // Scala 3.7.0-RC3 breaks ScalaFx!
+  scalaVersion := "3.6.4", // Scala 3.7.0-RC4 breaks ScalaFx!
   scalacOptions ++= Seq(
     "-Wunused:all"
   )
