@@ -52,7 +52,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
           case NonFatal(error) => Unauthorized(s"Unauthorized: $command, cause: $error")
       case Register(_) | Login(_, _) => Authorized
 
-  private def sendEmail(emailAddress: String, message: String): Unit =
+  private def sendEmail(emailAddress: String, message: String): Boolean =
     val recipients = List(emailAddress)
     emailer.send(recipients, message)
 
@@ -61,8 +61,11 @@ final class Dispatcher(store: Store, emailer: Emailer):
       supervised:
         val account = Account(emailAddress = emailAddress)
         val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
-        retry( RetryConfig.delay(1, 600.millis) )( sendEmail(account.emailAddress, message) )
-        Registered( store.register(account) )
+        val result = retry( RetryConfig.delay(1, 600.millis) )( sendEmail(account.emailAddress, message) )
+        if result then
+          Registered( store.register(account) )
+        else
+          throw IllegalArgumentException("Invalid email address.")
     catch
       case NonFatal(error) => Fault(s"Registration failed for: $emailAddress, because: ${error.getMessage}")
 
