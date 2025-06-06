@@ -59,19 +59,11 @@ Package Server
 
 Client Assembly
 ---------------
->To build for a "mac", "m1', "win" or "linux" os target:
-1. sbt -Dtarget="mac" clean test assembly copyAssemblyJar
-2. sbt -Dtarget="m1" clean test assembly copyAssemblyJar
-3. sbt -Dtarget="win" clean test assembly copyAssemblyJar
-4. sbt -Dtarget="linux" clean test assembly copyAssemblyJar
+1. sbt clean test assembly copyAssemblyJar
 
 Execute Client
 --------------
->To execute an assembled jar locally:
-1. java -jar .assembly/health-balance-mac-0.30.jar
-2. java -jar .assembly/health-balance-m1-0.30.jar
-3. java -jar .assembly/health-balance-win-0.30.jar
-4. java -jar .assembly/health-balance-linux-0.30.jar
+1. java -jar .assembly/health-balance-$version.jar ( or double-click executable jar )
 
 Deploy
 ------
