@@ -1,7 +1,8 @@
 package objektwerks
 
 import ox.supervised
-import ox.resilience.{retry, RetryConfig}
+import ox.resilience.retry
+import ox.scheduling.Schedule
 
 import scala.concurrent.duration.*
 import scala.util.Try
@@ -44,7 +45,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case license: License =>
         try
           supervised:
-            retry( RetryConfig.delay(1, 100.millis) )(
+            retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )(
               if store.isAuthorized(license.license) then Authorized
               else Unauthorized(s"Unauthorized: $command")
             )
@@ -61,7 +62,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       supervised:
         val account = Account(emailAddress = emailAddress)
         val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
-        val result = retry( RetryConfig.delay(1, 600.millis) )( sendEmail(account.emailAddress, message) )
+        val result = retry( Schedule.fixedInterval(600.millis).maxRepeats(1) )( sendEmail(account.emailAddress, message) )
         if result then
           Registered( store.register(account) )
         else
@@ -72,7 +73,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def login(emailAddress: String, pin: String): Event =
     Try:
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.login(emailAddress, pin) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.login(emailAddress, pin) )
     .fold(
       error => Fault("Login failed:", error),
       optionalAccount =>
@@ -83,7 +84,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def deactivateAccount(license: String): Event =
     Try:
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.deactivateAccount(license) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.deactivateAccount(license) )
     .fold(
       error => Fault("Deactivate account failed:", error),
       optionalAccount =>
@@ -94,7 +95,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def reactivateAccount(license: String): Event =
     Try:
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.reactivateAccount(license) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.reactivateAccount(license) )
     .fold(
       error => Fault("Reactivate account failed:", error),
       optionalAccount =>
@@ -106,7 +107,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ProfilesListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listProfiles(accountId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listProfiles(accountId) )
       )
     catch
       case NonFatal(error) => Fault("List profiles failed:", error)
@@ -115,7 +116,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ProfileAdded(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.addProfile(profile) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addProfile(profile) )
       )
     catch
       case NonFatal(error) => Fault("Add profile failed:", error)
@@ -124,7 +125,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ProfileUpdated(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.updateProfile(profile) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateProfile(profile) )
       )
     catch
       case NonFatal(error) => Fault("Update profile failed:", error)
@@ -133,7 +134,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       EdiblesListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listEdibles(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listEdibles(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List edibles failed:", error)
@@ -142,7 +143,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       EdibleAdded(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.addEdible(edible) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addEdible(edible) )
       )
     catch
       case NonFatal(error) => Fault("Add edible failed:", error)
@@ -151,7 +152,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       EdibleUpdated(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.updateEdible(edible) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateEdible(edible) )
       )
     catch
       case NonFatal(error) => Fault("Update edible failed:", error)
@@ -160,7 +161,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       DrinkablesListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listDrinkables(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listDrinkables(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List drinkables failed:", error)
@@ -169,7 +170,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       DrinkableAdded(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.addDrinkable(drinkable) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addDrinkable(drinkable) )
       )
     catch
       case NonFatal(error) => Fault("Add drinkable failed:", error)
@@ -178,7 +179,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       DrinkableUpdated(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.updateDrinkable(drinkable) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateDrinkable(drinkable) )
       )
     catch
       case NonFatal(error) => Fault("Update drinkable failed:", error)
@@ -187,7 +188,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ExpendablesListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listExpendables(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listExpendables(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List expendables failed:", error)
@@ -196,7 +197,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ExpendableAdded(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.addExpendable(expendable) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addExpendable(expendable) )
       )
     catch
       case NonFatal(error) => Fault("Add expendable failed:", error)
@@ -205,7 +206,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ExpendableUpdated(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.updateExpendable(expendable) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateExpendable(expendable) )
       )
     catch
       case NonFatal(error) => Fault("Update expendable failed:", error)
@@ -214,7 +215,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurablesListed(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.listMeasurables(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listMeasurables(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List measurables failed:", error)
@@ -223,7 +224,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurableAdded(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.addMeasurable(measurable) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addMeasurable(measurable) )
       )
     catch
       case NonFatal(error) => Fault("Add measurable failed:", error)
@@ -232,7 +233,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurableUpdated(
         supervised:
-          retry( RetryConfig.delay(1, 100.millis) )( store.updateMeasurable(measurable) )
+          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateMeasurable(measurable) )
       )
     catch
       case NonFatal(error) => Fault("Updated measurable failed:", error)
@@ -240,7 +241,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def addFault(fault: Fault): Event =
     try
       supervised:
-        retry( RetryConfig.delay(1, 100.millis) )( store.addFault(fault) )
+        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addFault(fault) )
         FaultAdded()
     catch
       case NonFatal(error) => Fault("Add fault failed:", error)
