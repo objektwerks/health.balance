@@ -65,12 +65,6 @@ Execute Client
 --------------
 1. java -jar .assembly/health-balance-$version.jar ( or double-click executable jar )
 
-Deploy
-------
->Consider these options:
-1. [jDeploy](https://www.npmjs.com/package/jdeploy)
-2. [Conveyor](https://hydraulic.software/index.html)
-
 Postgresql
 ----------
 1. config:
