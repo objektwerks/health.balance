@@ -154,7 +154,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       setMeasurableWeek(glucoseWeek, MeasurableKind.Glucose.toString)
     }
 
-  def dashboard() =
+  def dashboard(): Unit =
     logger.info("*** dashboard reset...")
     shouldBeInFxThread("*** dashboard should be in fx thread.")
 
