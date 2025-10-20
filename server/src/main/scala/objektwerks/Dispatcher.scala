@@ -224,7 +224,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurableAdded(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addMeasurable(measurable) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addMeasurable(measurable) )
       )
     catch
       case NonFatal(error) => Fault("Add measurable failed:", error)
