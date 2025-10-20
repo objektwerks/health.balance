@@ -65,7 +65,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def setDrinkablesTodayCalories() =
     val today = LocalDate.now.getDayOfYear
-    drinkablesTodayCalories.value = observableDrinkables.filter(d => Entity.epochSecondToDayOfYear(d.drank) == today).map(_.calories).sum.toString
+    drinkablesTodayCalories.value =
+      observableDrinkables
+        .filter(d => Entity.epochSecondToDayOfYear(d.drank) == today)
+        .map(_.calories)
+        .sum
+        .toString
 
   def setDrinkablesWeekCalories() =
     val week = LocalDate.now.minusDays(8).toEpochDay
