@@ -169,14 +169,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .toString
 
   def setMeasurables(): Unit =
-    Platform.runLater {
-      setMeasurableToday(weightToday, MeasurableKind.Weight.toString)
-      setMeasurableWeek(weightWeek, MeasurableKind.Weight.toString)
-      setMeasurableToday(pulseToday, MeasurableKind.Pulse.toString)
-      setMeasurableWeek(pulseWeek, MeasurableKind.Pulse.toString)
-      setMeasurableToday(glucoseToday, MeasurableKind.Glucose.toString)
-      setMeasurableWeek(glucoseWeek, MeasurableKind.Glucose.toString)
-    }
+    setMeasurableToday(weightToday, MeasurableKind.Weight.toString)
+    setMeasurableWeek(weightWeek, MeasurableKind.Weight.toString)
+    setMeasurableToday(pulseToday, MeasurableKind.Pulse.toString)
+    setMeasurableWeek(pulseWeek, MeasurableKind.Pulse.toString)
+    setMeasurableToday(glucoseToday, MeasurableKind.Glucose.toString)
+    setMeasurableWeek(glucoseWeek, MeasurableKind.Glucose.toString)
 
   def dashboard(): Unit =
     logger.info("dashboard reset...")
