@@ -129,7 +129,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .sum
       .toString
 
-  def setMeasurableWeek(property: ObjectProperty[String], kind: String) =
+  def setMeasurableWeek(property: ObjectProperty[String], kind: String): Unit =
     val week = LocalDate.now.minusDays(8).toEpochDay
     property.value = observableMeasurables
       .filter(m => m.kind == kind.toString)
