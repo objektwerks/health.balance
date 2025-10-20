@@ -152,7 +152,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       EdibleUpdated(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateEdible(edible) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateEdible(edible) )
       )
     catch
       case NonFatal(error) => Fault("Update edible failed:", error)
