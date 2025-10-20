@@ -241,7 +241,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def addFault(fault: Fault): Event =
     try
       supervised:
-        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addFault(fault) )
+        retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addFault(fault) )
         FaultAdded()
     catch
       case NonFatal(error) => Fault("Add fault failed:", error)
