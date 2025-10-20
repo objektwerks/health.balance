@@ -188,7 +188,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ExpendablesListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listExpendables(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listExpendables(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List expendables failed:", error)
