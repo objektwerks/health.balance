@@ -95,14 +95,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     }
   }
 
-  observableDrinkables.onChange { (_, changes) =>
-    logger.info("*** observable drinkables onchange event: {}", changes)
-    shouldNotBeInFxThread("*** observable drinkables onchange should not be in fx thread.")
-
+  observableDrinkables.onChange { (_, _) =>
     Platform.runLater {
       setDrinkablesTodayCalories()
       setDrinkablesWeekCalories()
-
       setCaloriesInOut()
     }
   }
