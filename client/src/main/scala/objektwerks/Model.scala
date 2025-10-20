@@ -138,7 +138,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       .sum
       .toString
 
-  def setMeasurables() =
+  def setMeasurables(): Unit =
     Platform.runLater {
       setMeasurableToday(weightToday, MeasurableKind.Weight.toString)
       setMeasurableWeek(weightWeek, MeasurableKind.Weight.toString)
