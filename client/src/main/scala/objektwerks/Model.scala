@@ -9,7 +9,6 @@ import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
-  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
   val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
 
   val registered = ObjectProperty[Boolean](true)
