@@ -228,7 +228,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       login,
       (event: Event) => event match
-        case fault @ Fault(_, _) => loggedin.set(false)
+        case _ @ Fault(_, _) => loggedin.set(false)
         case LoggedIn(account) =>
           objectAccount.set(account)
           profiles()
