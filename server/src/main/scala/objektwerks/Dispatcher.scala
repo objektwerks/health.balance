@@ -170,7 +170,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       DrinkableAdded(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addDrinkable(drinkable) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addDrinkable(drinkable) )
       )
     catch
       case NonFatal(error) => Fault("Add drinkable failed:", error)
