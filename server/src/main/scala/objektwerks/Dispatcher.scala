@@ -107,7 +107,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ProfilesListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listProfiles(accountId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listProfiles(accountId) )
       )
     catch
       case NonFatal(error) => Fault("List profiles failed:", error)
