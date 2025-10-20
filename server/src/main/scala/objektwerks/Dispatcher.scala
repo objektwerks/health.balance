@@ -161,7 +161,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       DrinkablesListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listDrinkables(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listDrinkables(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List drinkables failed:", error)
