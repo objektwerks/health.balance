@@ -219,7 +219,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     fetcher.fetch(
       register,
       (event: Event) => event match
-        case fault @ Fault(_, _) => registered.set(false)
+        case _ @ Fault(_, _) => registered.set(false)
         case Registered(account) => objectAccount.set(account)
         case _ => ()
     )
