@@ -87,14 +87,10 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setCaloriesInOutToday()
     setCaloriesInOutWeek()
 
-  observableEdibles.onChange { (_, changes) =>
-    logger.info("*** observable edibles onchange event: {}", changes)
-    shouldNotBeInFxThread("*** observable edibles onchange should not be in fx thread.")
-
+  observableEdibles.onChange { (_, _) =>
     Platform.runLater {
       setEdiblesTodayCalories()
       setEdiblesWeekCalories()
-
       setCaloriesInOut()
     }
   }
