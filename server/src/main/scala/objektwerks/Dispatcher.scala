@@ -95,7 +95,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def reactivateAccount(license: String): Event =
     Try:
       supervised:
-        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.reactivateAccount(license) )
+        retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.reactivateAccount(license) )
     .fold(
       error => Fault("Reactivate account failed:", error),
       optionalAccount =>
