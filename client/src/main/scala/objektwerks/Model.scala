@@ -120,7 +120,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val glucoseToday = ObjectProperty[String]("0")
   val glucoseWeek = ObjectProperty[String]("0")
 
-  def setMeasurableToday(property: ObjectProperty[String], kind: String) =
+  def setMeasurableToday(property: ObjectProperty[String], kind: String): Unit =
     val today = LocalDate.now.getDayOfYear
     property.value = observableMeasurables
       .filter(m => m.kind == kind.toString)
