@@ -9,8 +9,10 @@ import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
 
 final class Model(fetcher: Fetcher) extends LazyLogging:
-  val shouldBeInFxThread = (message: String) => require(Platform.isFxApplicationThread, message)
-  val shouldNotBeInFxThread = (message: String) => require(!Platform.isFxApplicationThread, message)
+  def assertInFxThread(message: String, suffix: String = " should be in fx thread!"): Unit =
+    require(Platform.isFxApplicationThread, message + suffix)
+  def assertNotInFxThread(message: String, suffix: String = " should not be in fx thread!"): Unit =
+    require(!Platform.isFxApplicationThread, message + suffix)
 
   val registered = ObjectProperty[Boolean](true)
   val loggedin = ObjectProperty[Boolean](true)
@@ -155,8 +157,8 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     }
 
   def dashboard(): Unit =
-    logger.info("*** dashboard reset...")
-    shouldBeInFxThread("*** dashboard should be in fx thread.")
+    logger.info("dashboard reset...")
+    assertInFxThread("dashboard reset")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
