@@ -84,7 +84,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
   private def deactivateAccount(license: String): Event =
     Try:
       supervised:
-        retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.deactivateAccount(license) )
+        retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.deactivateAccount(license) )
     .fold(
       error => Fault("Deactivate account failed:", error),
       optionalAccount =>
