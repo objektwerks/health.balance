@@ -215,7 +215,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurablesListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listMeasurables(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listMeasurables(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List measurables failed:", error)
