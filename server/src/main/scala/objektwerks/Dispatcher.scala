@@ -125,7 +125,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ProfileUpdated(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateProfile(profile) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateProfile(profile) )
       )
     catch
       case NonFatal(error) => Fault("Update profile failed:", error)
