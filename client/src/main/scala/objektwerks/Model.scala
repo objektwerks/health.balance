@@ -21,9 +21,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   val selectedExpendableId = ObjectProperty[Long](0)
   val selectedMeasurableId = ObjectProperty[Long](0)
 
-  selectedProfileId.onChange { (_, oldProfileId, newProfileId) =>
-    logger.info("*** selected profile id onchange event: {} -> {}", oldProfileId, newProfileId)
-    shouldBeInFxThread("*** selected profile id onchange should be in fx thread.")
+  selectedProfileId.onChange { (_, _, newProfileId) =>
     edibles(newProfileId)
     drinkables(newProfileId)
     expendables(newProfileId)
