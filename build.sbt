@@ -69,6 +69,7 @@ lazy val client = project
     libraryDependencies ++= {
       Seq(
         "org.scalafx" %% "scalafx" % scalafxVersion,
+        "com.softwaremill.ox" %% "core" % oxVersion,
         "io.helidon.webclient" % "helidon-webclient" % helidonVersion,
         "com.typesafe" % "config" % "1.4.3",
         "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5",
