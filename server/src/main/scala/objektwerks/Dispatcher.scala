@@ -134,7 +134,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       EdiblesListed(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.listEdibles(profileId) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.listEdibles(profileId) )
       )
     catch
       case NonFatal(error) => Fault("List edibles failed:", error)
