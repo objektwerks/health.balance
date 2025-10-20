@@ -206,7 +206,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ExpendableUpdated(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateExpendable(expendable) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateExpendable(expendable) )
       )
     catch
       case NonFatal(error) => Fault("Update expendable failed:", error)
