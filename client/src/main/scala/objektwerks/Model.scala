@@ -86,7 +86,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def setExpendablesTodayCalories() =
     val today = LocalDate.now.getDayOfYear
-    expendablesTodayCalories.value = observableExpendables.filter(e => Entity.epochSecondToDayOfYear(e.start) == today).map(_.calories).sum.toString
+    expendablesTodayCalories.value =
+      observableExpendables
+        .filter(e => Entity.epochSecondToDayOfYear(e.start) == today)
+        .map(_.calories)
+        .sum
+        .toString
 
   def setExpendablesWeekCalories() =
     val week = LocalDate.now.minusDays(8).toEpochDay
