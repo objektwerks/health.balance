@@ -116,7 +116,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       ProfileAdded(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.addProfile(profile) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addProfile(profile) )
       )
     catch
       case NonFatal(error) => Fault("Add profile failed:", error)
