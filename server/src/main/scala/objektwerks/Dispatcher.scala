@@ -45,7 +45,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       case license: License =>
         try
           supervised:
-            retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )(
+            retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )(
               if store.isAuthorized(license.license) then Authorized
               else Unauthorized(s"Unauthorized: $command")
             )
