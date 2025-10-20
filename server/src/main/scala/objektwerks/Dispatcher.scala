@@ -233,7 +233,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       MeasurableUpdated(
         supervised:
-          retry( Schedule.fixedInterval(100.millis).maxRepeats(1) )( store.updateMeasurable(measurable) )
+          retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.updateMeasurable(measurable) )
       )
     catch
       case NonFatal(error) => Fault("Updated measurable failed:", error)
