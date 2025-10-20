@@ -138,9 +138,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableMeasurables.onChange { (_, _) =>
-    Platform.runLater {
-      setMeasurables()
-    }
+    setMeasurables()
   }
 
   val weightToday = ObjectProperty[String]("0")
