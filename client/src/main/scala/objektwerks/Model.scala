@@ -111,6 +111,12 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     }
   }
 
+  observableMeasurables.onChange { (_, _) =>
+    Platform.runLater {
+      setMeasurables()
+    }
+  }
+
   val weightToday = ObjectProperty[String]("0")
   val weightWeek = ObjectProperty[String]("0")
 
@@ -147,13 +153,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       setMeasurableToday(glucoseToday, MeasurableKind.Glucose.toString)
       setMeasurableWeek(glucoseWeek, MeasurableKind.Glucose.toString)
     }
-
-  observableMeasurables.onChange { (_, changes) =>
-    logger.info("*** observable measurables onchange event: {}", changes)
-    shouldNotBeInFxThread("*** observable measurables onchange should not be in fx thread.")
-
-    setMeasurables()
-  }
 
   def dashboard() =
     logger.info("*** dashboard reset...")
