@@ -62,7 +62,7 @@ final class Dispatcher(store: Store, emailer: Emailer):
       supervised:
         val account = Account(emailAddress = emailAddress)
         val message = s"Your new pin is: ${account.pin}\n\nWelcome aboard!"
-        val result = retry( Schedule.fixedInterval(600.millis).maxRepeats(1) )( sendEmail(account.emailAddress, message) )
+        val result = retry( Schedule.fixedInterval(600.millis).maxAttempts(1) )( sendEmail(account.emailAddress, message) )
         if result then
           Registered( store.register(account) )
         else
