@@ -126,11 +126,9 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
   }
 
   observableDrinkables.onChange { (_, _) =>
-    Platform.runLater {
-      setDrinkablesTodayCalories()
-      setDrinkablesWeekCalories()
-      setCaloriesInOut()
-    }
+    setDrinkablesTodayCalories()
+    setDrinkablesWeekCalories()
+    setCaloriesInOut()
   }
 
   observableExpendables.onChange { (_, _) =>
