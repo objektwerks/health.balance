@@ -375,15 +375,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def expendables(profileId: Long): Unit =
-    fetcher.fetch(
-      ListExpendables(objectAccount.get.license, profileId),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.expendables", fault)
-        case ExpendablesListed(expendables) =>
-          observableExpendables.clear()
-          observableExpendables ++= expendables
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread("list expendables")
+      fetcher.fetch(
+        ListExpendables(objectAccount.get.license, profileId),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("expendables", fault)
+          case ExpendablesListed(expendables) =>
+            observableExpendables.clear()
+            observableExpendables ++= expendables
+          case _ => ()
+      )
 
   def add(expendable: Expendable)(runLast: => Unit): Unit =
     fetcher.fetch(
