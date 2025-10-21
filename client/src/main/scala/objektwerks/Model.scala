@@ -460,7 +460,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       AddMeasurable(objectAccount.get.license, measurable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update measurable", measurable, fault)
-        case MeasurableAdded(id) =>
+        case MeasurableUpdated(id) =>
           observableMeasurables.update(selectedIndex, measurable)
           runLast
         case _ => ()
