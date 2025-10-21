@@ -423,7 +423,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       AddExpendable(objectAccount.get.license, expendable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update expendable", expendable, fault)
-        case ExpendableAdded(id) =>
+        case ExpendableUpdated(id) =>
           observableExpendables.update(selectedIndex, expendable)
           runLast
         case _ => ()
