@@ -432,7 +432,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def update(selectedIndex: Int, expendable: Expendable)(runLast: => Unit): Unit =
     supervised:
-      assertNotInFxThread(s"update property from: $selectedIndex to: $expendable")
+      assertNotInFxThread(s"update expendable from: $selectedIndex to: $expendable")
       fetcher.fetch(
         AddExpendable(objectAccount.get.license, expendable),
         (event: Event) => event match
@@ -461,17 +461,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(measurable: Measurable)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      AddMeasurable(objectAccount.get.license, measurable),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add measurable", measurable, fault)
-        case MeasurableAdded(id) =>
-          observableMeasurables += measurable.copy(id = id)
-          observableMeasurables.sort()
-          selectedMeasurableId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add measurable: $measurable")
+      fetcher.fetch(
+        AddMeasurable(objectAccount.get.license, measurable),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add measurable", measurable, fault)
+          case MeasurableAdded(id) =>
+            observableMeasurables.insert(0, measurable.copy(id = id))
+            observableMeasurables.sort()
+            selectedMeasurableId.set(id)
+            logger.info(s"Added measurable: $measurable")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, measurable: Measurable)(runLast: => Unit): Unit =
     fetcher.fetch(
