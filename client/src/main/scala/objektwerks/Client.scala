@@ -25,6 +25,12 @@ object Client extends JFXApp3 with LazyLogging:
       minHeight = context.windowHeight
       icons.add(context.logo)
 
+    if Taskbar.isTaskbarSupported() then
+      val taskbar = Taskbar.getTaskbar()
+      if taskbar.isSupported(Feature.ICON_IMAGE) then
+        val appIcon = Toolkit.getDefaultToolkit.getImage(this.getClass().getResource("/image/logo.png"))
+        taskbar.setIconImage(appIcon)
+
     stage.hide()
 
     model.registered.onChange { (_, _, _) =>
