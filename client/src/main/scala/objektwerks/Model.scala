@@ -477,12 +477,18 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def update(selectedIndex: Int, measurable: Measurable)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      AddMeasurable(objectAccount.get.license, measurable),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.update measurable", measurable, fault)
-        case MeasurableUpdated(id) =>
-          observableMeasurables.update(selectedIndex, measurable)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"update measurable from: $selectedIndex to: $measurable")
+      fetcher.fetch(
+        AddMeasurable(objectAccount.get.license, measurable),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("update measurable", measurable, fault)
+          case MeasurableUpdated(id) =>
+            if selectedIndex > -1 then
+              observableMeasurables.update(selectedIndex, measurable)
+              logger.info(s"Updated measurable from: $selectedIndex to: $measurable")
+              runLast
+            else
+              logger.error(s"Update of measurable: $measurable \nfailed due to invalid index: $selectedIndex")
+          case _ => ()
+      )
