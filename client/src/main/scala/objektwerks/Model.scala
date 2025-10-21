@@ -338,15 +338,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def drinkables(profileId: Long): Unit =
-    fetcher.fetch(
-      ListDrinkables(objectAccount.get.license, profileId),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.drinkables", fault)
-        case DrinkablesListed(drinkables) =>
-          observableDrinkables.clear()
-          observableDrinkables ++= drinkables
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread("list drinkables")
+      fetcher.fetch(
+        ListDrinkables(objectAccount.get.license, profileId),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("drinkables", fault)
+          case DrinkablesListed(drinkables) =>
+            observableDrinkables.clear()
+            observableDrinkables ++= drinkables
+          case _ => ()
+      )
 
   def add(drinkable: Drinkable)(runLast: => Unit): Unit =
     fetcher.fetch(
