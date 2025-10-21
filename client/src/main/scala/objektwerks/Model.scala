@@ -180,7 +180,6 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def dashboard(): Unit =
     logger.info("dashboard reset...")
-    assertInFxThread("dashboard reset")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
