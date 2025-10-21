@@ -229,15 +229,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def login(login: Login): Unit =
-    fetcher.fetch(
-      login,
-      (event: Event) => event match
-        case _ @ Fault(_, _) => loggedin.set(false)
-        case LoggedIn(account) =>
-          objectAccount.set(account)
-          profiles()
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"login: $login")
+      fetcher.fetch(
+        login,
+        (event: Event) => event match
+          case _ @ Fault(_, _) => loggedin.set(false)
+          case LoggedIn(account) =>
+            objectAccount.set(account)
+            profiles()
+          case _ => ()
+      )
 
   def deactivate(deactivate: Deactivate): Unit =
     fetcher.fetch(
