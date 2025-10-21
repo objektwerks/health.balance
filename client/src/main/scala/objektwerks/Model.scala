@@ -412,15 +412,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def measurables(profileId: Long): Unit =
-    fetcher.fetch(
-      ListMeasurables(objectAccount.get.license, profileId),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.measurables", fault)
-        case MeasurablesListed(measurables) =>
-          observableMeasurables.clear()
-          observableMeasurables ++= measurables
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread("list measurables")
+      fetcher.fetch(
+        ListMeasurables(objectAccount.get.license, profileId),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("measurables", fault)
+          case MeasurablesListed(measurables) =>
+            observableMeasurables.clear()
+            observableMeasurables ++= measurables
+          case _ => ()
+      )
 
   def add(measurable: Measurable)(runLast: => Unit): Unit =
     fetcher.fetch(
