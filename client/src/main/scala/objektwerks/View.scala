@@ -9,6 +9,8 @@ import objektwerks.dashboard.Dashboard
 import objektwerks.pane.*
 
 final class View(context: Context, model: Model):
+  val menu = Menu(context)
+
   val dashboard = Dashboard(context, model)
   HBox.setHgrow(dashboard, Priority.Always)
 
@@ -29,7 +31,7 @@ final class View(context: Context, model: Model):
     prefWidth = context.windowWidth
     prefHeight = context.windowHeight
     padding = Insets(6)
-    children = List(dashboard, splitPane)
+    children = List(menu, dashboard, splitPane)
 
   val scene = new Scene:
     root = viewPane
