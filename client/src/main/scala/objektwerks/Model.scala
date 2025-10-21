@@ -301,15 +301,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     )
 
   def edibles(profileId: Long): Unit =
-    fetcher.fetch(
-      ListEdibles(objectAccount.get.license, profileId),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.edibles", fault)
-        case EdiblesListed(edibles) =>
-          observableEdibles.clear()
-          observableEdibles ++= edibles
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread("list edibles")
+      fetcher.fetch(
+        ListEdibles(objectAccount.get.license, profileId),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("edibles", fault)
+          case EdiblesListed(edibles) =>
+            observableEdibles.clear()
+            observableEdibles ++= edibles
+          case _ => ()
+      )
 
   def add(edible: Edible)(runLast: => Unit): Unit =
     fetcher.fetch(
