@@ -218,13 +218,15 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def register(register: Register): Unit =
-    fetcher.fetch(
-      register,
-      (event: Event) => event match
-        case _ @ Fault(_, _) => registered.set(false)
-        case Registered(account) => objectAccount.set(account)
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"register: $register")
+      fetcher.fetch(
+        register,
+        (event: Event) => event match
+          case _ @ Fault(_, _) => registered.set(false)
+          case Registered(account) => objectAccount.set(account)
+          case _ => ()
+      )
 
   def login(login: Login): Unit =
     fetcher.fetch(
