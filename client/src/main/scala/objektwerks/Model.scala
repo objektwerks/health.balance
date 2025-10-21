@@ -369,17 +369,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(drinkable: Drinkable)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      AddDrinkable(objectAccount.get.license, drinkable),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add drinkable", drinkable, fault)
-        case DrinkableAdded(id) =>
-          observableDrinkables += drinkable.copy(id = id)
-          observableDrinkables.sort()
-          selectedDrinkableId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add drinkable: $drinkable")
+      fetcher.fetch(
+        AddDrinkable(objectAccount.get.license, drinkable),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add drinkable", drinkable, fault)
+          case DrinkableAdded(id) =>
+            observableDrinkables.insert(0, drinkable.copy(id = id))
+            observableDrinkables.sort()
+            selectedDrinkableId.set(id)
+            logger.info(s"Added drinkable: $drinkable")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, drinkable: Drinkable)(runLast: => Unit): Unit =
     fetcher.fetch(
