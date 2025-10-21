@@ -415,17 +415,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(expendable: Expendable)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      AddExpendable(objectAccount.get.license, expendable),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add expendable", expendable, fault)
-        case ExpendableAdded(id) =>
-          observableExpendables += expendable.copy(id = id)
-          observableExpendables.sort()
-          selectedExpendableId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add expendable: $expendable")
+      fetcher.fetch(
+        AddExpendable(objectAccount.get.license, expendable),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add expendable", expendable, fault)
+          case ExpendableAdded(id) =>
+            observableExpendables.insert(0, expendable.copy(id = id))
+            observableExpendables.sort()
+            selectedExpendableId.set(id)
+            logger.info(s"Added expendable: $expendable")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, expendable: Expendable)(runLast: => Unit): Unit =
     fetcher.fetch(
