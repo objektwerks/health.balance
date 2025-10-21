@@ -3,6 +3,9 @@ package objektwerks
 import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
 
+import java.awt.{Taskbar, Toolkit}
+import java.awt.Taskbar.Feature
+
 import scalafx.application.JFXApp3
 
 import dialog.{Alerts, RegisterLogin, RegisterLoginDialog}
