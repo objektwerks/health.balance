@@ -323,17 +323,20 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def add(edible: Edible)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      AddEdible(objectAccount.get.license, edible),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.add edible", edible, fault)
-        case EdibleAdded(id) =>
-          observableEdibles += edible.copy(id = id)
-          observableEdibles.sort()
-          selectedEdibleId.set(id)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add edible: $edible")
+      fetcher.fetch(
+        AddEdible(objectAccount.get.license, edible),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("add edible", edible, fault)
+          case EdibleAdded(id) =>
+            observableEdibles.insert(0, edible.copy(id = id))
+            observableEdibles.sort()
+            selectedEdibleId.set(id)
+            logger.info(s"Added edible: $edible")
+            runLast
+          case _ => ()
+      )
 
   def update(selectedIndex: Int, edible: Edible)(runLast: => Unit): Unit =
     fetcher.fetch(
