@@ -299,7 +299,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
         AddProfile(objectAccount.get.license, profile),
         (event: Event) => event match
           case fault @ Fault(_, _) => onFetchFault("update profile", profile, fault)
-          case ProfileAdded(id) =>
+          case ProfileUpdated(id) =>
             if selectedIndex > -1 then
               observableProfiles.update(selectedIndex, profile)
               logger.info(s"Updated profile from: $selectedIndex to: $profile")
