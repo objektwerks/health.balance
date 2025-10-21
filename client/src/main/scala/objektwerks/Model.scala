@@ -205,15 +205,17 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     observableFaults += fault.copy(cause = cause)
 
   def add(fault: Fault): Unit =
-    fetcher.fetch(
-      AddFault(objectAccount.get.license, fault),
-      (event: Event) => event match
-        case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
-        case FaultAdded() =>
-          observableFaults += fault
-          observableFaults.sort()
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"add fault: $fault")
+      fetcher.fetch(
+        AddFault(objectAccount.get.license, fault),
+        (event: Event) => event match
+          case fault @ Fault(cause, _) => onFetchFault("Model.add fault", fault)
+          case FaultAdded() =>
+            observableFaults += fault
+            observableFaults.sort()
+          case _ => ()
+      )
 
   def register(register: Register): Unit =
     fetcher.fetch(
