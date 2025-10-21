@@ -4,6 +4,8 @@ import com.typesafe.scalalogging.LazyLogging
 
 import java.time.LocalDate
 
+import ox.supervised
+
 import scalafx.application.Platform
 import scalafx.beans.property.ObjectProperty
 import scalafx.collections.ObservableBuffer
