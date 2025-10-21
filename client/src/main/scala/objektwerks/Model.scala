@@ -339,15 +339,21 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       )
 
   def update(selectedIndex: Int, edible: Edible)(runLast: => Unit): Unit =
-    fetcher.fetch(
-      AddEdible(objectAccount.get.license, edible),
-      (event: Event) => event match
-        case fault @ Fault(_, _) => onFetchFault("Model.update edible", edible, fault)
-        case EdibleAdded(id) =>
-          observableEdibles.update(selectedIndex, edible)
-          runLast
-        case _ => ()
-    )
+    supervised:
+      assertNotInFxThread(s"update edible from: $selectedIndex to: $edible")
+      fetcher.fetch(
+        AddEdible(objectAccount.get.license, edible),
+        (event: Event) => event match
+          case fault @ Fault(_, _) => onFetchFault("update edible", edible, fault)
+          case EdibleUpdated(id) =>
+            if selectedIndex > -1 then
+              observableEdibles.update(selectedIndex, edible)
+              logger.info(s"Updated edible from: $selectedIndex to: $edible")
+              runLast
+            else
+              logger.error(s"Update of edible: $edible \nfailed due to invalid index: $selectedIndex")
+          case _ => ()
+      )
 
   def drinkables(profileId: Long): Unit =
     supervised:
