@@ -386,7 +386,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
       AddDrinkable(objectAccount.get.license, drinkable),
       (event: Event) => event match
         case fault @ Fault(_, _) => onFetchFault("Model.update drinkable", drinkable, fault)
-        case DrinkableAdded(id) =>
+        case DrinkableUpdated(id) =>
           observableDrinkables.update(selectedIndex, drinkable)
           runLast
         case _ => ()
