@@ -288,7 +288,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             observableProfiles.sort()
             selectedProfileId.set(id)
             logger.info(s"Added profile: $profile")
-            runLast
+            Platform.runLater(runLast)
           case _ => ()
       )
 
@@ -303,7 +303,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             if selectedIndex > -1 then
               observableProfiles.update(selectedIndex, profile)
               logger.info(s"Updated profile from: $selectedIndex to: $profile")
-              runLast
+              Platform.runLater(runLast)
             else
               logger.error(s"Update of profile: $profile \nfailed due to invalid index: $selectedIndex")
           case _ => ()
@@ -334,7 +334,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             observableEdibles.sort()
             selectedEdibleId.set(id)
             logger.info(s"Added edible: $edible")
-            runLast
+            Platform.runLater(runLast)
           case _ => ()
       )
 
@@ -349,7 +349,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             if selectedIndex > -1 then
               observableEdibles.update(selectedIndex, edible)
               logger.info(s"Updated edible from: $selectedIndex to: $edible")
-              runLast
+              Platform.runLater(runLast)
             else
               logger.error(s"Update of edible: $edible \nfailed due to invalid index: $selectedIndex")
           case _ => ()
@@ -380,7 +380,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             observableDrinkables.sort()
             selectedDrinkableId.set(id)
             logger.info(s"Added drinkable: $drinkable")
-            runLast
+            Platform.runLater(runLast)
           case _ => ()
       )
 
@@ -395,7 +395,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             if selectedIndex > -1 then
               observableDrinkables.update(selectedIndex, drinkable)
               logger.info(s"Updated drinkable from: $selectedIndex to: $drinkable")
-              runLast
+              Platform.runLater(runLast)
             else
               logger.error(s"Update of drinkable: $drinkable \nfailed due to invalid index: $selectedIndex")
           case _ => ()
@@ -426,7 +426,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             observableExpendables.sort()
             selectedExpendableId.set(id)
             logger.info(s"Added expendable: $expendable")
-            runLast
+            Platform.runLater(runLast)
           case _ => ()
       )
 
@@ -441,7 +441,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             if selectedIndex > -1 then
               observableExpendables.update(selectedIndex, expendable)
               logger.info(s"Updated expendable from: $selectedIndex to: $expendable")
-              runLast
+              Platform.runLater(runLast)
             else
               logger.error(s"Update of expendable: $expendable \nfailed due to invalid index: $selectedIndex")
           case _ => ()
@@ -472,7 +472,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             observableMeasurables.sort()
             selectedMeasurableId.set(id)
             logger.info(s"Added measurable: $measurable")
-            runLast
+            Platform.runLater(runLast)
           case _ => ()
       )
 
@@ -487,7 +487,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
             if selectedIndex > -1 then
               observableMeasurables.update(selectedIndex, measurable)
               logger.info(s"Updated measurable from: $selectedIndex to: $measurable")
-              runLast
+              Platform.runLater(runLast)
             else
               logger.error(s"Update of measurable: $measurable \nfailed due to invalid index: $selectedIndex")
           case _ => ()
