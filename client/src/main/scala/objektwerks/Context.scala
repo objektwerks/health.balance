@@ -15,6 +15,10 @@ final class Context(config: Config):
   val aboutAlertHeaderText = config.getString("about.alert.headerText")
   val aboutAlertContentText = config.getString("about.alert.contentText")
 
+  val menuMenu = config.getString("menu.menu")
+  val menuAbout = config.getString("menu.about")
+  val menuExit = config.getString("menu.exit")
+
   val buttonAdd = config.getString("button.add")
   val buttonEdit = config.getString("button.edit")
   val buttonSave = config.getString("button.save")
