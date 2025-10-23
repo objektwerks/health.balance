@@ -91,6 +91,7 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
     if selectedItem != null then
       model.selectedExpendableId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
