@@ -74,6 +74,7 @@ final class EdiblesPane(context: Context, model: Model) extends VBox:
     if selectedItem != null then
       model.selectedEdibleId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
