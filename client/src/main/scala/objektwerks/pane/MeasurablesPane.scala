@@ -70,6 +70,7 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
     if selectedItem != null then
       model.selectedMeasurableId.value = selectedItem.id
       editButton.disable = false
+    else editButton.disable = true
   }
 
   def add(): Unit =
