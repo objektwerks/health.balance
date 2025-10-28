@@ -79,10 +79,13 @@ final class MeasurablesPane(context: Context, model: Model) extends VBox:
       case _ =>
 
   def update(): Unit =
-    val selectedIndex = tableView.selectionModel().getSelectedIndex
-    val measurable = tableView.selectionModel().getSelectedItem.measurable
-    MeasurableDialog(context, measurable).showAndWait() match
-      case Some(measurable: Measurable) => model.update(selectedIndex, measurable){ tableView.selectionModel().select(selectedIndex) }
-      case _ =>
+    if tableView.selectionModel().getSelectedItem != null then
+      val selectedIndex = tableView.selectionModel().getSelectedIndex
+      val measurable = tableView.selectionModel().getSelectedItem.measurable
+      MeasurableDialog(context, measurable).showAndWait() match
+        case Some(measurable: Measurable) => model.update(selectedIndex, measurable) {
+          tableView.selectionModel().select(selectedIndex)
+        }
+        case _ =>
 
   def chart(): Unit = MeasurablesChartDialog(context, model).showAndWait()
