@@ -56,7 +56,7 @@ final class DrinkableDialog(context: Context, drinkable: Drinkable) extends Dial
         kind = kindComboBox.value.value,
         detail = detailTextField.text.value,
         organic = organicCheckBox.selected.value,
-        calories = caloriesTextField.text.value.toIntOption.getOrElse(drinkable.calories),
+        calories = caloriesTextField.int(drinkable.calories),
         drank = Entity.localDateAndTimeToEpochSecond( drankDatePicker.value.value, drankTimePicker.time )
       )
     else null
