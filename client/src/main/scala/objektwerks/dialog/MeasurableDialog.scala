@@ -42,7 +42,7 @@ final class MeasurableDialog(context: Context, measurable: Measurable) extends D
     if dialogButton == saveButtonType then
       measurable.copy(
         kind = kindComboBox.value.value,
-        measurement = measurementTextField.text.value.toIntOption.getOrElse(measurable.measurement),
+        measurement = measurementTextField.int(measurable.measurement),
         measured = Entity.localDateAndTimeToEpochSecond( measuredDatePicker.value.value, measuredTimePicker.time )
       )
     else null
