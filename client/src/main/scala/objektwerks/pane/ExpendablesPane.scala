@@ -100,10 +100,13 @@ final class ExpendablesPane(context: Context, model: Model) extends VBox:
       case _ =>
 
   def update(): Unit =
-    val selectedIndex = tableView.selectionModel().getSelectedIndex
-    val expendable = tableView.selectionModel().getSelectedItem.expendable
-    ExpendableDialog(context, expendable).showAndWait() match
-      case Some(expendable: Expendable) => model.update(selectedIndex, expendable){ tableView.selectionModel().select(selectedIndex) }
-      case _ =>
+    if tableView.selectionModel().getSelectedItem != null then
+      val selectedIndex = tableView.selectionModel().getSelectedIndex
+      val expendable = tableView.selectionModel().getSelectedItem.expendable
+      ExpendableDialog(context, expendable).showAndWait() match
+        case Some(expendable: Expendable) => model.update(selectedIndex, expendable) {
+          tableView.selectionModel().select(selectedIndex)
+        }
+        case _ =>
 
   def chart(): Unit = ExpendablesChartDialog(context, model).showAndWait()
