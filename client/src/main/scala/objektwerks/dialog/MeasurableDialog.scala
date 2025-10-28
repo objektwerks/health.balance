@@ -9,6 +9,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import objektwerks.{Client, Context, Measurable, MeasurableKind, Entity}
 import objektwerks.control.TimePicker
 import objektwerks.layout.ControlGridPane
+import objektwerks.control.IntTextField
 
 final class MeasurableDialog(context: Context, measurable: Measurable) extends Dialog[Measurable]:
   initOwner(Client.stage)

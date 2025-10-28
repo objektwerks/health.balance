@@ -9,6 +9,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import objektwerks.{Client, Context, Expendable, ExpendableKind, Entity}
 import objektwerks.control.TimePicker
 import objektwerks.layout.ControlGridPane
+import objektwerks.control.IntTextField
 
 final class ExpendableDialog(context: Context, expendable: Expendable) extends Dialog[Expendable]:
   initOwner(Client.stage)

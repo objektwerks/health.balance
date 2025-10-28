@@ -9,6 +9,7 @@ import scalafx.scene.control.ButtonBar.ButtonData
 import objektwerks.{Client, Context, Edible, EdibleKind, Entity}
 import objektwerks.control.TimePicker
 import objektwerks.layout.ControlGridPane
+import objektwerks.control.IntTextField
 
 final class EdibleDialog(context: Context, edible: Edible) extends Dialog[Edible]:
   initOwner(Client.stage)
