@@ -13,7 +13,7 @@ CREATE TABLE account (
 CREATE TABLE profile (
   id BIGSERIAL PRIMARY KEY,
   account_id BIGINT REFERENCES account(id),
-  name VARCHAR NOT NULL,
+  name VARCHAR UNIQUE NOT NULL,
   created BIGINT NOT NULL
 );
 
