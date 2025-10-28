@@ -9,13 +9,12 @@ object IntTextField:
 
 class IntTextField extends TextField:
   val converter = IntStringConverter()
-  val filter: Change => Change = { (change: Change) =>
-    if IntTextField.regex.matches(change.text) then
-      change // if integer, make change
-    else
-      change.setText("") // else make no change
-      change
-  }
-  val formatter = new TextFormatter[Int](converter, 0, filter)
 
-  textFormatter = formatter
+  val filter: Change => Change = { (change: Change) =>
+    if IntTextField.regex.matches(change.controlNewText) then change
+    else null
+  }
+
+  textFormatter = TextFormatter[Int](converter, 0, filter)
+
+  def int(default: Int): Int = text.value.toIntOption.getOrElse(default)
