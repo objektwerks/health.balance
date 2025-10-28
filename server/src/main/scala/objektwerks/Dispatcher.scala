@@ -242,6 +242,6 @@ final class Dispatcher(store: Store, emailer: Emailer):
     try
       supervised:
         retry( Schedule.fixedInterval(100.millis).maxAttempts(1) )( store.addFault(fault) )
-        FaultAdded()
+        FaultAdded(fault.occurred)
     catch
       case NonFatal(error) => Fault("Add fault failed:", error)
