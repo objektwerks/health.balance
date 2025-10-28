@@ -63,7 +63,7 @@ final class ExpendableDialog(context: Context, expendable: Expendable) extends D
         detail = detailTextField.text.value,
         sunshine = sunshineCheckBox.selected.value,
         freshair = freshairCheckBox.selected.value,
-        calories = caloriesTextField.text.value.toIntOption.getOrElse(expendable.calories),
+        calories = caloriesTextField.int(expendable.calories),
         start = Entity.localDateAndTimeToEpochSecond( startDatePicker.value.value, startTimePicker.time ),
         finish = Entity.localDateAndTimeToEpochSecond( finishDatePicker.value.value, finishTimePicker.time )
       )
