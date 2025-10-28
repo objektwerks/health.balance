@@ -30,7 +30,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     drinkables(newProfileId)
     expendables(newProfileId)
     measurables(newProfileId)
-    dashboard()
+    Platform.runLater( dashboard() )
   }
 
   val objectAccount = ObjectProperty[Account](Account.empty)
@@ -122,25 +122,31 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     setCaloriesInOutWeek()
 
   observableEdibles.onChange { (_, _) =>
-    setEdiblesTodayCalories()
-    setEdiblesWeekCalories()
-    setCaloriesInOut()
+    Platform.runLater {
+      setEdiblesTodayCalories()
+      setEdiblesWeekCalories()
+      setCaloriesInOut()
+    }
   }
 
   observableDrinkables.onChange { (_, _) =>
-    setDrinkablesTodayCalories()
-    setDrinkablesWeekCalories()
-    setCaloriesInOut()
+    Platform.runLater {
+      setDrinkablesTodayCalories()
+      setDrinkablesWeekCalories()
+      setCaloriesInOut()
+    }
   }
 
   observableExpendables.onChange { (_, _) =>
-    setExpendablesTodayCalories()
-    setExpendablesWeekCalories()
-    setCaloriesInOut()
+    Platform.runLater {
+      setExpendablesTodayCalories()
+      setExpendablesWeekCalories()
+      setCaloriesInOut()
+    }
   }
 
   observableMeasurables.onChange { (_, _) =>
-    setMeasurables()
+    Platform.runLater( setMeasurables() )
   }
 
   val weightToday = ObjectProperty[String]("0")
@@ -180,6 +186,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
 
   def dashboard(): Unit =
     logger.info("dashboard reset...")
+    assertInFxThread("dashboard reset ...")
 
     setEdiblesTodayCalories()
     setEdiblesWeekCalories()
