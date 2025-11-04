@@ -487,7 +487,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     supervised:
       assertNotInFxThread(s"update measurable from: $selectedIndex to: $measurable")
       fetcher.fetch(
-        AddMeasurable(objectAccount.get.license, measurable),
+        UpdateMeasurable(objectAccount.get.license, measurable),
         (event: Event) => event match
           case fault @ Fault(_, _) => onFetchFault("update measurable", measurable, fault)
           case MeasurableUpdated(id) =>
