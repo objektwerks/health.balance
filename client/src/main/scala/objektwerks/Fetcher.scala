@@ -43,5 +43,5 @@ final class Fetcher(context: Context) extends LazyLogging:
       case NonFatal(error) =>
         val fault = Fault(error, defaultError)
         logger.error("*** fetcher fault: {}", fault)
-        handler(fault)
+        Platform.runLater(handler(fault))
     }
