@@ -187,7 +187,7 @@ final class DispatcherTest extends AnyFunSuite with Matchers:
       case fault => fail(s"Invalid measurable added event: $fault")
 
   def updateMeasurable: Unit =
-    testMeasurable = testMeasurable.copy(measurement = 59)
+    testMeasurable = testMeasurable.copy(measurement = 50)
     val updateMeasurable = UpdateMeasurable(testAccount.license, testMeasurable)
     dispatcher.dispatch(updateMeasurable) match
       case MeasurableUpdated(id) => id shouldBe testMeasurable.id
