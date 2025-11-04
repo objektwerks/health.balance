@@ -5,6 +5,8 @@ import com.typesafe.scalalogging.LazyLogging
 
 import io.helidon.webclient.api.WebClient
 
+import scalafx.application.Platform
+
 import scala.util.Try
 import scala.util.control.NonFatal
 
@@ -36,7 +38,7 @@ final class Fetcher(context: Context) extends LazyLogging:
       logger.info("*** fetcher event json: {}", eventJson)
       val event = readFromString[Event](eventJson)
       logger.info("*** fetcher event: {}", event)
-      handler(event)
+      Platform.runLater(handler(event))
     }.recover {
       case NonFatal(error) =>
         val fault = Fault(error, defaultError)
