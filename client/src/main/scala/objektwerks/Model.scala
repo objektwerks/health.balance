@@ -395,7 +395,7 @@ final class Model(fetcher: Fetcher) extends LazyLogging:
     supervised:
       assertNotInFxThread(s"update drinkable from: $selectedIndex to: $drinkable")
       fetcher.fetch(
-        AddDrinkable(objectAccount.get.license, drinkable),
+        UpdateDrinkable(objectAccount.get.license, drinkable),
         (event: Event) => event match
           case fault @ Fault(_, _) => onFetchFault("update drinkable", drinkable, fault)
           case DrinkableUpdated(id) =>
