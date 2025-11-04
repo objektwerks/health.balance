@@ -1,10 +1,6 @@
 Health Balance
 --------------
 >Health balance app using ScalaFx, Jsoniter, Scaffeine, JoddMail, ScalikeJdbc, PostgreSql, HikariCP, Helidon, Ox and Scala 3.
-
-Todo
-----
-1. Test client.
    
 Use Cases
 ---------
