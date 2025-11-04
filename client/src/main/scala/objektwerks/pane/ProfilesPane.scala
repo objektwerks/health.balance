@@ -15,7 +15,7 @@ final class ProfilesPane(context: Context, model: Model) extends VBox:
   val tableView = new TableView[Profile]():
     columns ++= List(
       new TableColumn[Profile, String]:
-        prefWidth = 200
+        prefWidth = 250
         text = context.headerName
         cellValueFactory = _.value.nameProperty
       ,
