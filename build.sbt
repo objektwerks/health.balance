@@ -2,7 +2,7 @@ val helidonVersion = "4.5.1"
 val scalafxVersion = "26.0.0-R38"
 val logbackVersion = "1.5.38"
 val scalatestVersion = "3.2.19"
-val oxVersion = "1.0.7"
+val oxVersion = "1.0.8"
 
 lazy val common = Defaults.coreDefaultSettings ++ Seq(
   organization := "objektwerks",
